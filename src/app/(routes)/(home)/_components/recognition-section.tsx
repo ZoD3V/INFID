@@ -47,7 +47,7 @@ const RecognitionSection = () => {
                         <div
                             key={index}
                             className='rounded-3xl bg-[#F7F5F2] px-5 py-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-teal-500/20'>
-                            <div className='flex items-center gap-8'>
+                            <div className='flex items-center gap-5 md:gap-8'>
                                 {/* Logo */}
                                 <div className='shrink-0'>
                                     <Image src={item.logo} alt={item.alt} width={42} height={42} />
@@ -56,12 +56,14 @@ const RecognitionSection = () => {
                                 {/* Content */}
                                 <div className='flex-1'>
                                     <div>
-                                        <h3 className='mb-1 text-2xl font-bold'>{item.title}</h3>
-                                        <p className='mb-3 text-sm font-medium tracking-wide text-slate-900 uppercase'>
+                                        <h3 className='mb-1 text-xl font-bold md:text-2xl'>{item.title}</h3>
+                                        <p className='mb-3 text-xs font-medium tracking-wide text-slate-900 uppercase md:text-sm'>
                                             {item.organization}
                                         </p>
                                     </div>
-                                    <p className='text-sm leading-relaxed text-slate-700'>{item.description}</p>
+                                    <p className='text-xs leading-relaxed text-slate-700 md:text-sm'>
+                                        {item.description}
+                                    </p>
                                 </div>
                             </div>
                         </div>
