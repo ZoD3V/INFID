@@ -27,7 +27,7 @@ const ProgramSection = () => {
     ];
 
     return (
-        <section className='relative overflow-hidden bg-gray-50 py-16'>
+        <section className='relative bg-gray-50 py-16'>
             <Image
                 src='/images/decoration-program.png'
                 alt='decoration'
