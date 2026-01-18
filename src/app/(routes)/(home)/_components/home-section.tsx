@@ -94,9 +94,6 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Decorative Elements */}
-            {/* <div className='absolute bottom-0 left-0 z-10 h-32 w-full bg-linear-to-t from-slate-950 to-transparent'></div> */}
         </section>
     );
 };
