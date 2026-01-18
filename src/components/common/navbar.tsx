@@ -1,0 +1,213 @@
+'use client';
+
+import React from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
+
+import { ChevronDown, ChevronRight, ExternalLink, Menu } from 'lucide-react';
+
+const navItems = [
+    { title: 'Beranda', href: '/' },
+    {
+        title: 'Tentang Kami',
+        href: '',
+        children: [
+            { title: 'Profil INFID', href: '/about/infid' },
+            { title: 'Struktur Organisasi', href: '/about/structure-organization' },
+            { title: 'Anggota INFID', href: '/about/member-infid' },
+            { title: 'Mitra INFID', href: '/about/mitra-infid' }
+        ]
+    },
+    {
+        title: 'Ayo Terlibat',
+        href: '',
+        children: [
+            { title: 'Karir', href: '/involved/karrer' },
+            { title: 'Menjadi Anggota', href: '/involved/become-member' }
+        ]
+    },
+    {
+        title: 'Pengetahuan',
+        href: '',
+        children: [
+            { title: 'Riset', href: '/knowledge/research' },
+            { title: 'Kertas Kebijakan', href: '/knowledge/terms-condition' },
+            { title: 'Modul & Panduan', href: '/knowledge/module' },
+            { title: 'Infografis', href: '/knowledge/infografis' },
+            { title: 'Artikel', href: '/knowledge/article' }
+        ]
+    },
+    {
+        title: 'Kabar Dari Kami',
+        href: '',
+        children: [
+            { title: 'Kegiatan', href: '/news/activity' },
+            { title: 'Cerita Perubahan', href: '/news/story' },
+            { title: 'Siaran Pers', href: '/news/broadcast' },
+            { title: 'Laporan Tahunan', href: '/news/report-yearly' }
+        ]
+    },
+    { title: 'Kontak', href: '/contact' }
+];
+
+export function Navbar() {
+    const pathname = usePathname();
+    const isMobile = useIsMobile();
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    React.useEffect(() => {
+        if (!isMobile && isOpen) {
+            setIsOpen(false);
+        }
+    }, [isMobile, isOpen]);
+
+    return (
+        <header className='absolute top-0 z-50 w-full'>
+            <nav className='container flex h-16 items-center justify-between'>
+                {/* Logo/Brand */}
+                <Link href='/' className='text-2xl font-bold text-gray-900'>
+                    <Image
+                        src='/logo/logo.png'
+                        loading='eager'
+                        alt=''
+                        width={100}
+                        height={100}
+                        className='h-8 w-19.75'
+                    />
+                </Link>
+
+                {/* Desktop Navigation (Hidden on mobile) */}
+                {!isMobile && (
+                    <div className='flex items-center space-x-6 rounded-full border border-white/10 px-4 py-3 backdrop-blur-sm'>
+                        {navItems.map((item) => (
+                            <div key={item.title} className='group relative'>
+                                <Link
+                                    href={item.href}
+                                    className={cn(
+                                        'text-brand-100 flex cursor-pointer items-center gap-1 text-sm font-medium transition-colors',
+                                        pathname === item.href ? 'font-semibold' : ''
+                                    )}>
+                                    {item.title}
+                                    {item.children && (
+                                        <ChevronDown className='h-4 w-4 transition-transform duration-400 group-hover:rotate-180' />
+                                    )}
+                                </Link>
+
+                                {/* Dropdown Desktop */}
+                                {item.children && (
+                                    <div className='invisible absolute top-full left-1/2 w-48 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100'>
+                                        <div className='relative overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-2xl'>
+                                            {item.children.map((child) => (
+                                                <Link
+                                                    key={child.title}
+                                                    href={child.href}
+                                                    className={cn(
+                                                        'block px-3 py-2 text-sm transition-all duration-200',
+                                                        pathname === child.href
+                                                            ? 'bg-brand-50 text-brand-900 font-semibold'
+                                                            : 'hover:bg-gray-50'
+                                                    )}>
+                                                    {child.title}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
+                <div className='flex items-center gap-2'>
+                    <Button className='hidden rounded-full font-semibold lg:block'>Bergabung</Button>
+
+                    {/* Mobile Sidebar */}
+                    {isMobile && (
+                        <div className='lg:hidden'>
+                            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                                <SheetTrigger asChild>
+                                    <Button variant='outline' size='icon'>
+                                        <Menu className='h-6 w-6' />
+                                    </Button>
+                                </SheetTrigger>
+                                <SheetContent side='left' className='flex w-75 flex-col p-0'>
+                                    {/* Header Sidebar Logo */}
+                                    <SheetHeader className='border-b p-6 text-left'>
+                                        <SheetTitle className='flex items-center gap-2'>
+                                            {/* <Image src='/logo/logo.png' alt='Logo' width={40} height={40} />
+                                        <span className='font-bold'>Nama Brand</span> */}
+                                        </SheetTitle>
+                                        <SheetDescription></SheetDescription>
+                                    </SheetHeader>
+
+                                    {/* Area Scrollable Navigasi */}
+                                    <div className='flex-1 overflow-y-auto px-4 py-2'>
+                                        <Accordion type='single' collapsible className='w-full'>
+                                            {navItems.map((item) => (
+                                                <AccordionItem
+                                                    value={item.title}
+                                                    key={item.title}
+                                                    className='border-none'>
+                                                    {item.children ? (
+                                                        <>
+                                                            <AccordionTrigger className='flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-start text-sm text-black hover:no-underline [&[data-state=open]>svg]:rotate-90'>
+                                                                {item.title}
+                                                                {item.children && (
+                                                                    <ChevronRight className='h-4 w-4 transition-transform' />
+                                                                )}
+                                                            </AccordionTrigger>
+                                                            <AccordionContent className='flex flex-col gap-1 border-l py-1 pl-3'>
+                                                                {item.children.map((child) => (
+                                                                    <Link
+                                                                        key={child.title}
+                                                                        href={child.href}
+                                                                        onClick={() => setIsOpen(false)}
+                                                                        className={cn(
+                                                                            'rounded-md px-3 py-1 text-sm transition-colors hover:bg-gray-100',
+                                                                            pathname === child.href
+                                                                                ? 'font-semibold'
+                                                                                : ''
+                                                                        )}>
+                                                                        {child.title}
+                                                                    </Link>
+                                                                ))}
+                                                            </AccordionContent>
+                                                        </>
+                                                    ) : (
+                                                        <Link
+                                                            href={item.href}
+                                                            onClick={() => setIsOpen(false)}
+                                                            className={cn(
+                                                                'block py-2 text-sm text-black transition-colors',
+                                                                pathname === item.href ? 'font-semibold' : ''
+                                                            )}>
+                                                            {item.title}
+                                                        </Link>
+                                                    )}
+                                                </AccordionItem>
+                                            ))}
+                                        </Accordion>
+                                    </div>
+
+                                    {/* Footer Sidebar */}
+                                    <div className='border-t p-5'>
+                                        <Button className='w-full gap-2'>
+                                            Bergabung <ExternalLink className='h-4 w-4' />
+                                        </Button>
+                                    </div>
+                                </SheetContent>
+                            </Sheet>
+                        </div>
+                    )}
+                </div>
+            </nav>
+        </header>
+    );
+}
