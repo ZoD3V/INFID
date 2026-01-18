@@ -20,7 +20,7 @@ const RealImpactSection = () => {
             <div className='container'>
                 {/* Header */}
                 <div className='mb-12'>
-                    <h1 className='mb-4 text-4xl font-bold text-white'>DAMPAK NYATA</h1>
+                    <h1 className='mb-4 text-4xl font-bold text-white lg:text-5xl'>DAMPAK NYATA</h1>
                     <p className='max-w-3xl text-sm text-slate-200'>
                         Bukan sekadar angka, tapi jejak perubahan yang kami perjuangkan bersama.
                     </p>
