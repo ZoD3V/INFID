@@ -76,8 +76,10 @@ const ProgramSection = () => {
 
                                     <div className='absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent' />
 
-                                    <div className='absolute right-0 bottom-0 left-0 p-8 text-white'>
-                                        <h3 className='mb-3 text-2xl leading-tight font-bold'>{program.title}</h3>
+                                    <div className='absolute right-0 bottom-0 left-0 p-5 text-white lg:p-8'>
+                                        <h3 className='mb-3 text-xl leading-tight font-bold lg:text-2xl'>
+                                            {program.title}
+                                        </h3>
                                         <p className='mb-4 text-sm leading-relaxed text-gray-200'>
                                             {program.description}
                                         </p>

@@ -1,5 +1,7 @@
 'use client';
 
+import CommunitySection from '@/app/(routes)/(home)/_components/community-section';
+
 import { ChevronUp, Mail, MapPin, Phone } from 'lucide-react';
 import { BsWhatsapp } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
@@ -37,8 +39,10 @@ const Footer = () => {
     };
 
     return (
-        <footer className='bg-[#12272C]'>
-            <div className='container px-4 py-16 md:px-6 xl:px-0'>
+        <footer className='relative bg-[#12272C]'>
+            <CommunitySection />
+
+            <div className='container px-4 py-16 md:px-6 lg:pt-45 xl:px-0'>
                 <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-12'>
                     {/* Brand Column */}
                     <div className='lg:col-span-4'>
