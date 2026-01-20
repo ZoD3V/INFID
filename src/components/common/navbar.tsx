@@ -13,55 +13,57 @@ import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 
 import { ChevronDown, ChevronRight, ExternalLink, Menu } from 'lucide-react';
-
-const navItems = [
-    { title: 'Beranda', href: '/' },
-    {
-        title: 'Tentang Kami',
-        href: '',
-        children: [
-            { title: 'Profil INFID', href: '/about/infid' },
-            { title: 'Struktur Organisasi', href: '/about/structure-organization' },
-            { title: 'Anggota INFID', href: '/about/member-infid' },
-            { title: 'Mitra INFID', href: '/about/mitra-infid' }
-        ]
-    },
-    {
-        title: 'Ayo Terlibat',
-        href: '',
-        children: [
-            { title: 'Karir', href: '/involved/karrer' },
-            { title: 'Menjadi Anggota', href: '/involved/become-member' }
-        ]
-    },
-    {
-        title: 'Pengetahuan',
-        href: '',
-        children: [
-            { title: 'Riset', href: '/knowledge/research' },
-            { title: 'Kertas Kebijakan', href: '/knowledge/terms-condition' },
-            { title: 'Modul & Panduan', href: '/knowledge/module' },
-            { title: 'Infografis', href: '/knowledge/infografis' },
-            { title: 'Artikel', href: '/knowledge/article' }
-        ]
-    },
-    {
-        title: 'Kabar Dari Kami',
-        href: '',
-        children: [
-            { title: 'Kegiatan', href: '/news/activity' },
-            { title: 'Cerita Perubahan', href: '/news/story' },
-            { title: 'Siaran Pers', href: '/news/broadcast' },
-            { title: 'Laporan Tahunan', href: '/news/report-yearly' }
-        ]
-    },
-    { title: 'Kontak', href: '/contact' }
-];
+import { useTranslations } from 'next-intl';
 
 export function Navbar() {
     const pathname = usePathname();
     const isMobile = useIsMobile();
     const [isOpen, setIsOpen] = React.useState(false);
+    const t = useTranslations('Navbar');
+
+    const navItems = [
+        { title: t('home'), href: '/' },
+        {
+            title: t('about'),
+            href: '',
+            children: [
+                { title: t('about_profile'), href: '/about/infid' },
+                { title: t('about_structure'), href: '/about/structure-organization' },
+                { title: t('about_member'), href: '/about/member-infid' },
+                { title: t('about_mitra'), href: '/about/mitra-infid' }
+            ]
+        },
+        {
+            title: t('involved'),
+            href: '',
+            children: [
+                { title: t('involved_career'), href: '/involved/karrer' },
+                { title: t('involved_member'), href: '/involved/become-member' }
+            ]
+        },
+        {
+            title: t('knowledge'),
+            href: '',
+            children: [
+                { title: t('knowledge_research'), href: '/knowledge/research' },
+                { title: t('knowledge_policy'), href: '/knowledge/terms-condition' },
+                { title: t('knowledge_module'), href: '/knowledge/module' },
+                { title: t('knowledge_infographic'), href: '/knowledge/infografis' },
+                { title: t('knowledge_article'), href: '/knowledge/article' }
+            ]
+        },
+        {
+            title: t('news'),
+            href: '',
+            children: [
+                { title: t('news_activity'), href: '/news/activity' },
+                { title: t('news_story'), href: '/news/story' },
+                { title: t('news_press'), href: '/news/broadcast' },
+                { title: t('news_report'), href: '/news/report-yearly' }
+            ]
+        },
+        { title: t('contact'), href: '/contact' }
+    ];
 
     React.useEffect(() => {
         if (!isMobile && isOpen) {

@@ -1,6 +1,6 @@
 'use client';
 
-import CommunitySection from '@/app/(routes)/(home)/_components/community-section';
+import CommunitySection from '@/app/[locale]/(routes)/(home)/_components/community-section';
 
 import { ChevronUp, Mail, MapPin, Phone } from 'lucide-react';
 import { BsWhatsapp } from 'react-icons/bs';

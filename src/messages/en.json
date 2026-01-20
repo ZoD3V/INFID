@@ -1,0 +1,25 @@
+{
+    "Navbar": {
+        "home": "Home",
+        "about": "About Us",
+        "about_profile": "INFID Profile",
+        "about_structure": "Organizational Structure",
+        "about_member": "INFID Members",
+        "about_mitra": "INFID Partners",
+        "involved": "Get Involved",
+        "involved_career": "Career",
+        "involved_member": "Become a Member",
+        "knowledge": "Knowledge",
+        "knowledge_research": "Research",
+        "knowledge_policy": "Policy Paper",
+        "knowledge_module": "Modules & Guides",
+        "knowledge_infographic": "Infographics",
+        "knowledge_article": "Articles",
+        "news": "Our News",
+        "news_activity": "Activities",
+        "news_story": "Stories of Change",
+        "news_press": "Press Release",
+        "news_report": "Annual Report",
+        "contact": "Contact"
+    }
+}
