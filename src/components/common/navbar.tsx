@@ -3,12 +3,12 @@
 import React from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 
@@ -62,7 +62,7 @@ export function Navbar() {
                 { title: t('news_report'), href: '/news/report-yearly' }
             ]
         },
-        { title: t('contact'), href: '/contact' }
+        { title: t('contact'), href: '/contact-us' }
     ];
 
     React.useEffect(() => {
