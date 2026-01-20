@@ -4,7 +4,7 @@ import { ArrowRight, Users } from 'lucide-react';
 
 const AboutUsSection = () => {
     return (
-        <section className='bg-white py-16 lg:py-24'>
+        <section className='bg-white py-16 lg:py-24' id='about-us'>
             <div className='container'>
                 <div className='grid items-center gap-10 md:grid-cols-2 lg:gap-12'>
                     {/* Left Side - Images */}

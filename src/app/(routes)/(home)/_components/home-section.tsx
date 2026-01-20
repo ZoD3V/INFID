@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
@@ -5,13 +6,22 @@ import { Button } from '@/components/ui/button';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 
 const Home = () => {
+    const scrollToAbout = () => {
+        console.log('click');
+        const element = document.getElementById('about-us');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section
             className='relative min-h-screen overflow-x-hidden bg-cover bg-center bg-no-repeat'
             style={{ backgroundImage: "url('/images/background-home.webp')" }}>
             <div className='absolute inset-0 bg-black/60'></div>
-
-            <div className='absolute bottom-5 left-1/2 -translate-x-1/2 -translate-y-1/2 transform animate-bounce'>
+            <div
+                onClick={scrollToAbout}
+                className='absolute bottom-5 left-1/2 z-100 -translate-x-1/2 -translate-y-1/2 transform animate-bounce cursor-pointer'>
                 <Image src='/icons/ic-arrow-down.png' alt='icon' width={15} height={15} />
             </div>
 
