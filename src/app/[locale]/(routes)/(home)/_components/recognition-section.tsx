@@ -23,11 +23,9 @@ const RecognitionSection = () => {
     ];
 
     return (
-        <section className='bg-secondary-300 relative overflow-hidden py-24'>
-            <div
-                className='pointer-events-none absolute top-0 left-0 h-64 w-full bg-top bg-no-repeat brightness-70'
-                style={{ backgroundImage: 'url(/images/bg-futuristic.png)', backgroundSize: 'cover' }}
-            />
+        <section
+            className='bg-secondary-300 relative overflow-hidden py-24'
+            style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
             <div className='relative container'>
                 {/* Header */}
                 <div className='mb-16 text-center'>

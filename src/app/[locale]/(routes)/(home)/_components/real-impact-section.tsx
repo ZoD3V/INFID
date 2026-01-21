@@ -4,19 +4,9 @@ import { FileCheck, Globe, PieChart, Users } from 'lucide-react';
 
 const RealImpactSection = () => {
     return (
-        <section className='bg-primary relative overflow-hidden py-16'>
-            {/* Background Pattern Top */}
-            {/* <div
-                className='pointer-events-none absolute top-0 left-0 h-64 w-full bg-top bg-no-repeat opacity-20 brightness-50'
-                style={{ backgroundImage: 'url(/images/bg-pattern-top.png)', backgroundSize: 'cover' }}
-            /> */}
-
-            {/* Background Pattern Bottom */}
-            {/* <div
-                className='pointer-events-none absolute bottom-0 left-0 h-64 w-full bg-bottom bg-no-repeat opacity-20 brightness-50'
-                style={{ backgroundImage: 'url(/images/bg-pattern-bottom.png)', backgroundSize: 'cover' }}
-            /> */}
-
+        <section
+            className='bg-primary relative overflow-hidden py-16'
+            style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
             <div className='container'>
                 {/* Header */}
                 <div className='mb-12'>

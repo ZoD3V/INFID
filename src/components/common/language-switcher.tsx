@@ -27,8 +27,8 @@ export default function LanguageSwitcher() {
                         src='/icons/ic-id.png'
                         alt='id'
                         className={`rounded-full ${locale === 'id' ? 'border-3 border-slate-500' : ''}`}
-                        width={32}
-                        height={32}
+                        width={28}
+                        height={28}
                     />
                 </button>
 
@@ -39,8 +39,8 @@ export default function LanguageSwitcher() {
                         src='/icons/ic-en.png'
                         alt='id'
                         className={`rounded-full ${locale === 'en' ? 'border-3 border-slate-500' : ''}`}
-                        width={32}
-                        height={32}
+                        width={28}
+                        height={28}
                     />
                 </button>
             </div>

@@ -96,7 +96,7 @@ export function Navbar() {
                 {/* Logo/Brand */}
                 <Link href='/' className='text-2xl font-bold text-gray-900'>
                     <Image
-                        src='/logo/logo.png'
+                        src={isScrolled ? '/logo/logo-infid-black.png' : '/logo/logo.png'}
                         loading='eager'
                         alt=''
                         width={100}
@@ -176,10 +176,9 @@ export function Navbar() {
                                 </SheetTrigger>
                                 <SheetContent side='left' className='flex w-75 flex-col p-0'>
                                     {/* Header Sidebar Logo */}
-                                    <SheetHeader className='border-b p-6 text-left'>
+                                    <SheetHeader className='border-b text-left'>
                                         <SheetTitle className='flex items-center gap-2'>
-                                            {/* <Image src='/logo/logo.png' alt='Logo' width={40} height={40} />
-                                        <span className='font-bold'>Nama Brand</span> */}
+                                            <Image src='/logo/logo-infid-black.png' alt='Logo' width={70} height={70} />
                                         </SheetTitle>
                                         <SheetDescription></SheetDescription>
                                     </SheetHeader>
