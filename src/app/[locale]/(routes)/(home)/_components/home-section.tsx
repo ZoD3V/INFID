@@ -7,7 +7,6 @@ import { ArrowDown, ArrowRight } from 'lucide-react';
 
 const Home = () => {
     const scrollToAbout = () => {
-        console.log('click');
         const element = document.getElementById('about-us');
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
@@ -18,13 +17,12 @@ const Home = () => {
         <section
             className='relative min-h-screen overflow-x-hidden bg-cover bg-center bg-no-repeat'
             style={{ backgroundImage: "url('/images/background-home.webp')" }}>
-            <div className='absolute inset-0 bg-black/60'></div>
+            <div className='absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(16,123,134,0)_0%,rgba(16,123,134,0.8)_100%)]'></div>{' '}
             <div
                 onClick={scrollToAbout}
                 className='absolute bottom-5 left-1/2 z-100 -translate-x-1/2 -translate-y-1/2 transform animate-bounce cursor-pointer'>
                 <Image src='/icons/ic-arrow-down.png' alt='icon' width={15} height={15} />
             </div>
-
             <div className='relative z-20 container flex min-h-screen items-center pt-12'>
                 <div className='grid w-full gap-12 py-20 lg:grid-cols-2'>
                     {/* Left Content */}
@@ -49,7 +47,7 @@ const Home = () => {
                         </div>
 
                         {/* Description */}
-                        <p className='max-w-xl text-sm leading-relaxed text-slate-200'>
+                        <p className='max-w-xl border-l border-white pl-4 text-sm leading-relaxed text-slate-200'>
                             Sejak 1985, kami menghubungkan aspirasi masyarakat sipil dengan kebijakan negara. Membangun{' '}
                             <span className='font-semibold text-white'>Indonesia</span> yang demokratis, inklusif, dan
                             berkelanjutan.
@@ -57,13 +55,13 @@ const Home = () => {
 
                         {/* CTA Buttons */}
                         <div className='flex flex-wrap gap-4'>
-                            <Button className='rounded-full font-semibold'>
+                            <Button variant='secondary' className='rounded-full font-semibold'>
                                 Jelajahi Program
                                 <ArrowRight />
                             </Button>
                             <Button
                                 variant='outline'
-                                className='rounded-full border-white/30 bg-white/10 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:text-slate-100'>
+                                className='rounded-full border-white/30 bg-slate-500/10 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:text-slate-100'>
                                 Pelajari Sejarah
                             </Button>
                         </div>
@@ -71,7 +69,7 @@ const Home = () => {
 
                     {/* Right Stats Card */}
                     <div className='flex w-full items-end lg:justify-end'>
-                        <div className='w-full space-y-8 rounded-3xl border border-white/10 bg-slate-900/60 p-6 shadow-2xl backdrop-blur-md lg:w-xs'>
+                        <div className='w-full space-y-8 rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-md lg:w-xs'>
                             {/* Header */}
                             <div className='flex items-center justify-between gap-2 border-b border-white/10 pb-8 lg:pb-4'>
                                 <h3 className='text-sm font-semibold tracking-wide text-white lg:text-xs'>

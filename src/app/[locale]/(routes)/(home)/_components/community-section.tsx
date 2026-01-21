@@ -7,13 +7,13 @@ import { Button } from '@/components/ui/button';
 const CommunitySection = () => {
     return (
         <div className='absolute top-0 left-1/2 hidden w-full -translate-x-1/2 -translate-y-1/2 transform items-center justify-center px-4 lg:flex'>
-            <div className='relative container w-full overflow-hidden rounded-xl border bg-[#F7F5F2]'>
+            <div className='bg-secondary-100 relative container w-full overflow-hidden rounded-xl border'>
                 <Image
-                    src='/images/decoration-footer-2.png'
+                    src='/images/decoration-program-2.png'
                     alt='decoration'
-                    width={70}
-                    height={70}
-                    className='absolute right-0 bottom-0 hidden xl:block'
+                    width={90}
+                    height={90}
+                    className='absolute -bottom-5 left-100 hidden rotate-120 xl:block'
                 />
                 <Image
                     src='/images/decoration-footer-1.png'
@@ -25,12 +25,12 @@ const CommunitySection = () => {
                 {/* Content */}
                 <div className='grid grid-cols-2 py-12'>
                     <div className='mb-6 w-full'>
-                        <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
-                            <span className='h-px w-4 bg-slate-400'></span>
+                        <div className='text-primary-500 mb-4 flex items-center gap-2 text-xs font-medium tracking-wider'>
+                            <span className='bg-primary-500 h-px w-4'></span>
                             KINI SAATNYA
-                            <span className='h-px w-4 bg-slate-400'></span>
+                            <span className='bg-primary-500 h-px w-4'></span>
                         </div>
-                        <h1 className='text-4xl font-bold tracking-tight text-slate-900 lg:text-5xl'>
+                        <h1 className='text-primary-500 text-4xl font-bold tracking-tight lg:text-5xl'>
                             MARI
                             <br />
                             BERGERAK

@@ -27,18 +27,32 @@ const ProgramSection = () => {
     ];
 
     return (
-        <section className='relative bg-gray-50 py-16'>
+        <section className='bg-secondary-100 relative py-16'>
             <Image
-                src='/images/decoration-program.png'
+                src='/images/decoration-program-1.png'
                 alt='decoration'
-                width={150}
-                height={150}
+                width={200}
+                height={200}
                 className='absolute top-0 left-0 hidden xl:block'
+            />
+            <Image
+                src='/images/decoration-about.png'
+                alt='images'
+                width={180}
+                height={180}
+                className='absolute -bottom-10 -left-10 hidden xl:block'
+            />
+            <Image
+                src='/images/decoration-program-2.png'
+                alt='images'
+                width={100}
+                height={100}
+                className='absolute right-20 bottom-5 z-30 hidden xl:block'
             />
             <div className='container'>
                 <div className='grid gap-8 lg:grid-cols-2 lg:gap-16'>
                     {/* Sticky Text Section */}
-                    <div className='h-fit lg:sticky lg:top-8'>
+                    <div className='h-fit lg:sticky lg:top-25'>
                         <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
                             <span className='h-px w-4 bg-slate-400'></span>
                             FOKUS KERJA
@@ -73,17 +87,15 @@ const ProgramSection = () => {
                                         height={500}
                                         className='h-full w-full object-cover'
                                     />
-
-                                    <div className='absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent' />
-
-                                    <div className='absolute right-0 bottom-0 left-0 p-5 text-white lg:p-8'>
+                                    <div className='from-primary-500/80 via-primary-500/40 absolute inset-0 bg-linear-to-t to-transparent' />
+                                    <div className='absolute right-0 bottom-0 left-0 p-5 text-white lg:p-6'>
                                         <h3 className='mb-3 text-xl leading-tight font-bold lg:text-2xl'>
                                             {program.title}
                                         </h3>
                                         <p className='mb-4 text-sm leading-relaxed text-gray-200'>
                                             {program.description}
                                         </p>
-                                        <Button className='rounded-full font-semibold'>
+                                        <Button variant='secondary' size='sm' className='rounded-full'>
                                             Jelajahi Program
                                             <ArrowRight />
                                         </Button>

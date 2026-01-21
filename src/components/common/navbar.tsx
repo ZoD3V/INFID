@@ -20,6 +20,20 @@ export function Navbar() {
     const isMobile = useIsMobile();
     const [isOpen, setIsOpen] = React.useState(false);
     const t = useTranslations('Navbar');
+    const [isScrolled, setIsScrolled] = React.useState(false);
+
+    React.useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 20) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const navItems = [
         { title: t('home'), href: '/' },
@@ -72,7 +86,12 @@ export function Navbar() {
     }, [isMobile, isOpen]);
 
     return (
-        <header className='absolute top-0 z-50 w-full'>
+        <header
+            className={cn(
+                'fixed top-0 z-50 w-full transition-all duration-300',
+                isScrolled ? 'bg-white shadow' : 'bg-transparent'
+            )}>
+            {' '}
             <nav className='container flex h-16 items-center justify-between'>
                 {/* Logo/Brand */}
                 <Link href='/' className='text-2xl font-bold text-gray-900'>
@@ -88,18 +107,32 @@ export function Navbar() {
 
                 {/* Desktop Navigation (Hidden on mobile) */}
                 {!isMobile && (
-                    <div className='flex items-center space-x-6 rounded-full border border-white/10 px-4 py-3 backdrop-blur-sm'>
+                    <div
+                        className={cn(
+                            'flex items-center space-x-6 rounded-full transition-all duration-300',
+                            isScrolled ? '' : 'border border-white/10 px-4 py-3 shadow-sm backdrop-blur-sm'
+                        )}>
                         {navItems.map((item) => (
                             <div key={item.title} className='group relative'>
                                 <Link
                                     href={item.href}
                                     className={cn(
-                                        'text-brand-100 flex cursor-pointer items-center gap-1 text-sm font-medium transition-colors',
-                                        pathname === item.href ? 'font-semibold' : ''
+                                        'flex cursor-pointer items-center gap-1 text-sm font-medium transition-colors duration-300',
+                                        isScrolled
+                                            ? 'hover:text-brand-600 text-slate-900'
+                                            : 'text-brand-100 hover:text-white',
+
+                                        pathname === item.href ? 'font-extrabold' : ''
                                     )}>
                                     {item.title}
                                     {item.children && (
-                                        <ChevronDown className='h-4 w-4 transition-transform duration-400 group-hover:rotate-180' />
+                                        <ChevronDown
+                                            className={cn(
+                                                'h-4 w-4 transition-transform duration-400 group-hover:rotate-180',
+                                                // Pastikan icon chevron juga mengikuti warna teks
+                                                isScrolled ? 'text-slate-900' : 'text-brand-100'
+                                            )}
+                                        />
                                     )}
                                 </Link>
 
@@ -112,10 +145,10 @@ export function Navbar() {
                                                     key={child.title}
                                                     href={child.href}
                                                     className={cn(
-                                                        'block px-3 py-2 text-sm transition-all duration-200',
+                                                        'block px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-200',
                                                         pathname === child.href
                                                             ? 'bg-brand-50 text-brand-900 font-semibold'
-                                                            : 'hover:bg-gray-50'
+                                                            : 'hover:text-brand-600 hover:bg-gray-50'
                                                     )}>
                                                     {child.title}
                                                 </Link>
@@ -128,7 +161,9 @@ export function Navbar() {
                     </div>
                 )}
                 <div className='flex items-center gap-2'>
-                    <Button className='hidden rounded-full font-semibold lg:block'>Bergabung</Button>
+                    <Button variant='secondary' className='hidden rounded-full font-semibold lg:block'>
+                        Bergabung
+                    </Button>
 
                     {/* Mobile Sidebar */}
                     {isMobile && (

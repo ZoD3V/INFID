@@ -23,7 +23,7 @@ const RecognitionSection = () => {
     ];
 
     return (
-        <section className='relative overflow-hidden bg-slate-900 py-24'>
+        <section className='bg-secondary-300 relative overflow-hidden py-24'>
             <div
                 className='pointer-events-none absolute top-0 left-0 h-64 w-full bg-top bg-no-repeat brightness-70'
                 style={{ backgroundImage: 'url(/images/bg-futuristic.png)', backgroundSize: 'cover' }}
@@ -32,13 +32,13 @@ const RecognitionSection = () => {
                 {/* Header */}
                 <div className='mb-16 text-center'>
                     <div className='flex items-center justify-center gap-4'>
-                        <div className='mb-4 flex items-center gap-2 text-sm font-medium tracking-widest text-amber-500'>
-                            <span className='h-px w-4 bg-amber-400'></span>
+                        <div className='mb-4 flex items-center gap-2 text-sm font-medium tracking-widest text-white'>
+                            <span className='h-px w-4 bg-white'></span>
                             Pengakuan Nasional & Internasional
-                            <span className='h-px w-4 bg-amber-400'></span>
+                            <span className='h-px w-4 bg-white'></span>
                         </div>
                     </div>
-                    <h2 className='text-5xl font-bold tracking-wide text-white'>REKOGNISI</h2>
+                    <h2 className='text-5xl font-bold tracking-wide text-white'>Pengakuan dan Kolaborasi Global</h2>
                 </div>
 
                 {/* Recognition Cards */}
@@ -46,7 +46,7 @@ const RecognitionSection = () => {
                     {recognitions.map((item, index) => (
                         <div
                             key={index}
-                            className='rounded-3xl bg-[#F7F5F2] px-5 py-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-teal-500/20'>
+                            className='rounded-3xl bg-[#F7F5F2] px-5 py-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-teal-500/20'>
                             <div className='flex items-center gap-5 md:gap-8'>
                                 {/* Logo */}
                                 <div className='shrink-0'>

@@ -4,12 +4,26 @@ import { ArrowRight, Users } from 'lucide-react';
 
 const AboutUsSection = () => {
     return (
-        <section className='bg-white py-16 lg:py-24' id='about-us'>
+        <section className='bg-secondary-100 relative py-16 lg:py-24' id='about-us'>
+            <Image
+                src='/images/decoration-about-us-2.png'
+                alt='images'
+                width={90}
+                height={90}
+                className='absolute top-10 right-10 hidden xl:block'
+            />
             <div className='container'>
                 <div className='grid items-center gap-10 md:grid-cols-2 lg:gap-12'>
                     {/* Left Side - Images */}
                     <div className='relative'>
                         {/* Main Image */}
+                        <Image
+                            src='/images/decoration-program-2.png'
+                            alt='images'
+                            width={100}
+                            height={100}
+                            className='absolute -top-10 left-10 hidden xl:block'
+                        />
                         <Image
                             src='/images/about-us.webp'
                             alt='images'
@@ -32,34 +46,35 @@ const AboutUsSection = () => {
 
                     {/* Right Side - Content */}
                     <div>
-                        <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
-                            <span className='h-px w-4 bg-slate-400'></span>
+                        <div className='text-primary mb-4 flex items-center gap-2 text-xs font-medium tracking-wider'>
+                            <span className='bg-primary h-px w-4'></span>
                             TENTANG KAMI
-                            <span className='h-px w-4 bg-slate-400'></span>
+                            <span className='bg-primary h-px w-4'></span>
                         </div>
 
-                        <h2 className='mb-6 text-4xl leading-tight font-bold text-gray-900 lg:text-5xl'>
-                            DARI INGIN
+                        <h2 className='text-primary mb-6 text-4xl leading-tight font-bold lg:text-5xl'>
+                            Ketahui lebih dalam
                             <br />
-                            MENJADI INFID
+                            tentang INFID
                         </h2>
 
                         <div className='space-y-4 text-justify text-sm leading-relaxed text-slate-600'>
                             <p>
-                                Didirikan pada tahun 1985 sebagai INGI (Inter-NGO Conference on IGGI Matters), kami
-                                lahir dari kebutuhan mendesak untuk menyuarakan dampak kebijakan utang luar negeri
-                                terhadap masyarakat miskin di Indonesia.
+                                International NGO Forum on Indonesian Development (INFID) adalah jaringan organisasi
+                                masyarakat sipil yang berdiri sejak 1985 dan berkomitmen untuk memperjuangkan
+                                pembangunan berkeadilan, demokrasi, kesetaraan, dan penghormatan terhadap hak asasi
+                                manusia di Indonesia.
                             </p>
 
                             <p>
-                                Bertransformasi menjadi INFID, kami memperluas mandat untuk mencakup demokratisasi, hak
-                                asasi manusia, dan pembangunan berkelanjutan.
+                                INFID bekerja melalui pendekatan advokasi inklusif berbasis bukti, dengan fokus pada
+                                isu-isu strategis seperti penurunan ketimpangan, pelaksanaan Tujuan Pembangunan
+                                Berkelanjutan (SDGs), serta penguatan ruang sipil dan demokrasi.
                             </p>
 
                             <p>
-                                Hari ini, INFID adalah rumah bagi lebih dari 80 organisasi anggota yang tersebar di
-                                seluruh nusantara, bekerja bersama untuk memastikan kebijakan publik berpihak pada
-                                keadilan sosial.
+                                INFID memiliki 80 anggota di seluruh Indonesia dan terakreditasi oleh Perserikatan
+                                Bangsa-Bangsa (PBB) dan menyandang Special Consultative Status untuk ECOSOC di PBB.
                             </p>
                         </div>
 

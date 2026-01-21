@@ -18,7 +18,7 @@ export default function LanguageSwitcher() {
     };
 
     return (
-        <div className='fixed right-6 bottom-6 z-50'>
+        <div className='fixed right-6 bottom-6 z-99999999'>
             <div className='flex items-center rounded-full border border-gray-200 bg-white p-1 shadow-lg'>
                 <button
                     onClick={() => toggleLanguage('id')}
