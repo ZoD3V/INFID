@@ -3,11 +3,11 @@
 import React from 'react';
 
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { usePathname } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
