@@ -20,7 +20,7 @@ const Home = () => {
             <div className='absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(16,123,134,0)_0%,rgba(16,123,134,0.8)_100%)]'></div>{' '}
             <div
                 onClick={scrollToAbout}
-                className='absolute bottom-5 left-1/2 z-100 -translate-x-1/2 -translate-y-1/2 transform animate-bounce cursor-pointer'>
+                className='absolute bottom-5 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 transform animate-bounce cursor-pointer'>
                 <Image src='/icons/ic-arrow-down.png' alt='icon' width={15} height={15} />
             </div>
             <div className='relative z-20 container flex min-h-screen items-center pt-12'>

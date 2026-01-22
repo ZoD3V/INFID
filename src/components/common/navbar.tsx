@@ -106,60 +106,58 @@ export function Navbar() {
                 </Link>
 
                 {/* Desktop Navigation (Hidden on mobile) */}
-                {!isMobile && (
-                    <div
-                        className={cn(
-                            'flex items-center space-x-6 rounded-full transition-all duration-300',
-                            isScrolled ? '' : 'border border-white/10 px-4 py-3 shadow-sm backdrop-blur-sm'
-                        )}>
-                        {navItems.map((item) => (
-                            <div key={item.title} className='group relative'>
-                                <Link
-                                    href={item.href}
-                                    className={cn(
-                                        'flex cursor-pointer items-center gap-1 text-sm font-medium transition-colors duration-300',
-                                        isScrolled
-                                            ? 'hover:text-brand-600 text-slate-900'
-                                            : 'text-brand-100 hover:text-white',
+                <div
+                    className={cn(
+                        'hidden items-center space-x-6 rounded-full lg:flex',
+                        isScrolled ? '' : 'border border-white/10 px-4 py-3 shadow-sm backdrop-blur-sm'
+                    )}>
+                    {navItems.map((item) => (
+                        <div key={item.title} className='group relative'>
+                            <Link
+                                href={item.href}
+                                className={cn(
+                                    'flex cursor-pointer items-center gap-1 text-sm font-medium transition-colors duration-300',
+                                    isScrolled
+                                        ? 'hover:text-brand-600 text-slate-900'
+                                        : 'text-brand-100 hover:text-white',
 
-                                        pathname === item.href ? 'font-extrabold' : ''
-                                    )}>
-                                    {item.title}
-                                    {item.children && (
-                                        <ChevronDown
-                                            className={cn(
-                                                'h-4 w-4 transition-transform duration-400 group-hover:rotate-180',
-                                                // Pastikan icon chevron juga mengikuti warna teks
-                                                isScrolled ? 'text-slate-900' : 'text-brand-100'
-                                            )}
-                                        />
-                                    )}
-                                </Link>
-
-                                {/* Dropdown Desktop */}
+                                    pathname === item.href ? 'font-extrabold' : ''
+                                )}>
+                                {item.title}
                                 {item.children && (
-                                    <div className='invisible absolute top-full left-1/2 w-48 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100'>
-                                        <div className='relative overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-2xl'>
-                                            {item.children.map((child) => (
-                                                <Link
-                                                    key={child.title}
-                                                    href={child.href}
-                                                    className={cn(
-                                                        'block px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-200',
-                                                        pathname === child.href
-                                                            ? 'bg-brand-50 text-brand-900 font-semibold'
-                                                            : 'hover:text-brand-600 hover:bg-gray-50'
-                                                    )}>
-                                                    {child.title}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    </div>
+                                    <ChevronDown
+                                        className={cn(
+                                            'h-4 w-4 transition-transform duration-400 group-hover:rotate-180',
+                                            // Pastikan icon chevron juga mengikuti warna teks
+                                            isScrolled ? 'text-slate-900' : 'text-brand-100'
+                                        )}
+                                    />
                                 )}
-                            </div>
-                        ))}
-                    </div>
-                )}
+                            </Link>
+
+                            {/* Dropdown Desktop */}
+                            {item.children && (
+                                <div className='invisible absolute top-full left-1/2 w-48 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100'>
+                                    <div className='relative overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-2xl'>
+                                        {item.children.map((child) => (
+                                            <Link
+                                                key={child.title}
+                                                href={child.href}
+                                                className={cn(
+                                                    'block px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-200',
+                                                    pathname === child.href
+                                                        ? 'bg-brand-50 text-brand-900 font-semibold'
+                                                        : 'hover:text-brand-600 hover:bg-gray-50'
+                                                )}>
+                                                {child.title}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
                 <div className='flex items-center gap-2'>
                     <Button variant='secondary' className='hidden rounded-full font-semibold lg:block'>
                         Bergabung
