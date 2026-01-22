@@ -52,7 +52,7 @@ const AboutInfid = () => {
                             SIAPA KAMI
                         </div>
 
-                        <h1 className='text-secondary-200 text-2xl leading-tight font-bold sm:text-3xl md:text-4xl'>
+                        <h1 className='text-secondary-200 text-3xl leading-tight font-bold md:text-4xl'>
                             Lembaga Advokasi Kebijakan <br /> Berbasis Bukti
                         </h1>
 
