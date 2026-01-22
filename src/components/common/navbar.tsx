@@ -41,7 +41,7 @@ export function Navbar() {
             title: t('about'),
             href: '',
             children: [
-                { title: t('about_profile'), href: '/about/infid' },
+                { title: t('about_profile'), href: '/about/profile-infid' },
                 { title: t('about_structure'), href: '/about/structure-organization' },
                 { title: t('about_member'), href: '/about/member-infid' },
                 { title: t('about_mitra'), href: '/about/mitra-infid' }
@@ -170,7 +170,10 @@ export function Navbar() {
                         <div className='lg:hidden'>
                             <Sheet open={isOpen} onOpenChange={setIsOpen}>
                                 <SheetTrigger asChild>
-                                    <Button variant='outline' size='icon'>
+                                    <Button
+                                        variant='outline'
+                                        size='icon'
+                                        className='hover:text-primary-900 bg-white hover:bg-white'>
                                         <Menu className='h-6 w-6' />
                                     </Button>
                                 </SheetTrigger>
