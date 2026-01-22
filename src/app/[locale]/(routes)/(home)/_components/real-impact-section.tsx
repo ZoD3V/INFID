@@ -58,7 +58,7 @@ const RealImpactSection = () => {
                     </div>
 
                     {/* Organisasi Anggota */}
-                    <div className='bg-transparentlur-sm rounded-xl border border-white transition-all duration-300 hover:opacity-90 md:p-8'>
+                    <div className='bg-transparentlur-sm rounded-xl border border-white p-6 transition-all duration-300 hover:opacity-90 md:p-8'>
                         <Image src='/icons/ic-people.png' alt='icons' width={80} height={80} />
 
                         <h2 className='text-secondary-200 my-4 text-4xl font-extrabold'>80+</h2>

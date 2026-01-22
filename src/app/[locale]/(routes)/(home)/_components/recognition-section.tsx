@@ -36,7 +36,9 @@ const RecognitionSection = () => {
                             <span className='h-px w-4 bg-white'></span>
                         </div>
                     </div>
-                    <h2 className='text-5xl font-bold tracking-wide text-white'>Pengakuan dan Kolaborasi Global</h2>
+                    <h2 className='text-4xl font-bold tracking-wide text-white lg:text-5xl'>
+                        Pengakuan dan Kolaborasi Global
+                    </h2>
                 </div>
 
                 {/* Recognition Cards */}
