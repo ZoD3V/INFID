@@ -42,7 +42,7 @@ export default function ProgramINFIDSection() {
                         <span className='h-px w-4 bg-slate-400'></span>
                     </div>
                     <h2 className='mb-4 text-4xl font-bold text-gray-900 lg:text-5xl'>Program INFID</h2>
-                    <p className='mb-6 max-w-md text-sm text-slate-600'>
+                    <p className='mb-6 max-w-md text-sm text-slate-600 md:text-base'>
                         Program INFID dirancang untuk memperkuat demokrasi, keadilan sosial, dan perlindungan hak asasi
                         manusia melalui advokasi kebijakan berbasis bukti.
                     </p>

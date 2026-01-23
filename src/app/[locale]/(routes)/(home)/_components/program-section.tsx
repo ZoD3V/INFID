@@ -27,7 +27,7 @@ const ProgramSection = () => {
     ];
 
     return (
-        <section className='bg-secondary-100 relative overflow-hidden py-16'>
+        <section className='bg-secondary-100 relative py-16'>
             <Image
                 src='/images/decoration-program-1.png'
                 alt='decoration'
@@ -63,7 +63,7 @@ const ProgramSection = () => {
                             <br />
                             KAMI
                         </h2>
-                        <p className='mb-6 max-w-md text-sm text-slate-600'>
+                        <p className='mb-6 max-w-md text-sm text-slate-600 md:text-base'>
                             Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan.
                         </p>
                         {/* CTA Button */}
