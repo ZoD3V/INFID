@@ -78,7 +78,7 @@ const ProgramSection = () => {
                         {programs.map((program, index) => (
                             <div
                                 key={index}
-                                className='group relative overflow-hidden rounded-2xl border bg-[#F7F5F2] p-2'>
+                                className='group relative overflow-hidden rounded-2xl border bg-slate-100 p-2'>
                                 <div className='relative h-100 overflow-hidden rounded-xl bg-slate-900'>
                                     <Image
                                         src={program.image}

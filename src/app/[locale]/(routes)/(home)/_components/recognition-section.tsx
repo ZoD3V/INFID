@@ -46,7 +46,7 @@ const RecognitionSection = () => {
                     {recognitions.map((item, index) => (
                         <div
                             key={index}
-                            className='rounded-3xl bg-[#F7F5F2] px-5 py-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-teal-500/20'>
+                            className='rounded-3xl bg-slate-100 px-5 py-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-teal-500/20'>
                             <div className='flex items-center gap-5 md:gap-8'>
                                 {/* Logo */}
                                 <div className='shrink-0'>

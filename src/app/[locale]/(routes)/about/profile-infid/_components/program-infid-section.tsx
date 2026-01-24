@@ -1,8 +1,6 @@
-import React from 'react';
-
 import Image from 'next/image';
 
-export default function ProgramINFIDSection() {
+export const ProgramINFIDSection = () => {
     const programs = [
         {
             title: 'Tata Kelola Iklim yang Demokratis dan Berkeadilan Gender',
@@ -25,7 +23,7 @@ export default function ProgramINFIDSection() {
     ];
 
     return (
-        <div className='bg-secondary-100 relative min-h-screen py-16'>
+        <div className='bg-secondary-100 relative min-h-screen py-24'>
             <Image
                 src='/images/decoration-program-1.png'
                 alt='decoration'
@@ -59,7 +57,7 @@ export default function ProgramINFIDSection() {
                         className='absolute -right-10 bottom-0 z-30 hidden xl:block'
                     />
                     {programs.map((program, index) => (
-                        <div key={index} className='group relative overflow-hidden rounded-2xl border bg-[#F7F5F2] p-2'>
+                        <div key={index} className='group relative overflow-hidden rounded-2xl border bg-slate-100 p-2'>
                             <div className='relative h-125 overflow-hidden rounded-xl md:h-139.5'>
                                 <Image
                                     src={program.image}
@@ -82,4 +80,4 @@ export default function ProgramINFIDSection() {
             </div>
         </div>
     );
-}
+};

@@ -1,6 +1,7 @@
 import AboutInfid from './_components/about-infid-section';
 import GlobalRecognitionSection from './_components/global-recognition-section';
-import ProgramINFIDSection from './_components/program-infid-section';
+import { InfidTimeline } from './_components/history-infid-section';
+import { ProgramINFIDSection } from './_components/program-infid-section';
 import VisiMisiInfidSection from './_components/visi-misi-section';
 
 const ProfileInfid = () => {
@@ -12,6 +13,7 @@ const ProfileInfid = () => {
             </div>
             <ProgramINFIDSection />
             <VisiMisiInfidSection />
+            <InfidTimeline />
         </>
     );
 };
