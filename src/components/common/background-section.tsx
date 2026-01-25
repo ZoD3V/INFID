@@ -1,40 +1,72 @@
-import { ArrowLeft } from 'lucide-react';
+import React from 'react';
 
-const HeroAuth = ({ title = 'Login Anggota', useBack = false, className = '' }) => {
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbSeparator
+} from '@/components/ui/breadcrumb';
+
+interface BreadcrumbItemType {
+    label: string;
+    href?: string;
+    active?: boolean;
+}
+
+interface PageHeaderProps {
+    title: string;
+    backgroundImage: string;
+    breadcrumbs: BreadcrumbItemType[];
+}
+
+const PageHeader: React.FC<PageHeaderProps> = ({ title, backgroundImage, breadcrumbs }) => {
     return (
-        <section
-            className={`bg-hero relative z-20 h-[180px] bg-cover bg-fixed bg-center bg-no-repeat lg:h-[220px] xl:h-[280px] ${className}`}
-            style={{
-                backgroundImage: `url('/images/background-home.webp')`
-            }}>
+        <div
+            className='relative z-20 h-42 bg-cover bg-center bg-no-repeat pt-8 md:h-52 lg:h-67'
+            style={{ backgroundImage: `url('${backgroundImage}')` }}>
             {/* Overlay */}
-            <div className='from-primary-500/80 via-primary-500/40 absolute inset-0 bg-linear-to-t to-transparent' />
+            <div className='from-primary-500/80 via-primary-500/80 to-primary-500/20 absolute inset-0 bg-linear-to-b' />
 
-            <div className='container flex h-full max-w-[1200px] items-end justify-center px-4 md:px-6 xl:px-0'>
+            <div className='container flex h-full items-center justify-center'>
                 <div className='z-10 flex w-full flex-col items-start justify-end gap-8'>
-                    <div className='mb-8 flex items-center gap-4 xl:mb-12'>
-                        {/* Tombol Back (Tanpa Motion) */}
-                        {useBack && (
-                            <div
-                                onClick={() => window.history.back()}
-                                className='flex h-9 w-9 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-white transition-colors hover:bg-gray-100 md:h-10 md:w-10'>
-                                <ArrowLeft className='text-primary h-5 w-5 md:h-6 md:w-6' />
-                            </div>
-                        )}
+                    <div className='flex flex-col items-start gap-1'>
+                        {/* Breadcrumb */}
+                        <Breadcrumb className='text-secondary-200'>
+                            <BreadcrumbList>
+                                {breadcrumbs.map((item, index) => (
+                                    <React.Fragment key={index}>
+                                        <BreadcrumbItem>
+                                            {item.href && !item.active ? (
+                                                <BreadcrumbLink
+                                                    href={item.href}
+                                                    className='text-secondary-200 hover:text-secondary-300'>
+                                                    {item.label}
+                                                </BreadcrumbLink>
+                                            ) : (
+                                                <BreadcrumbLink className='text-secondary-200 font-bold'>
+                                                    {item.label}
+                                                </BreadcrumbLink>
+                                            )}
+                                        </BreadcrumbItem>
 
-                        {/* Title (Tanpa Motion) */}
-                        <h1
-                            className='line-clamp-1 text-3xl leading-3 font-bold tracking-wide text-white md:text-4xl'
-                            style={{
-                                lineHeight: 1.3
-                            }}>
-                            {/* {title} */}
+                                        {index < breadcrumbs.length - 1 && (
+                                            <BreadcrumbSeparator className='text-secondary-200' />
+                                        )}
+                                    </React.Fragment>
+                                ))}
+                            </BreadcrumbList>
+                        </Breadcrumb>
+
+                        {/* Title */}
+                        <h1 className='line-clamp-1 text-3xl font-bold tracking-wide text-white md:text-4xl'>
+                            {title}
                         </h1>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 
-export default HeroAuth;
+export default PageHeader;
