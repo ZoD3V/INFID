@@ -25,7 +25,7 @@ const ContactUs = () => {
         alert('Pesan berhasil dikirim!');
     };
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: any) => {
         const { name, value, type, checked } = e.target;
         setFormData((prev) => ({
             ...prev,
@@ -128,7 +128,7 @@ const ContactUs = () => {
 
                 {/* Right Section - Contact Form */}
                 <div className='rounded-xl border border-slate-200 bg-white p-8'>
-                    <h2 className='lg:text-xl00 mb-8 text-lg font-bold text-gray-800'>Kirim Pesan</h2>
+                    <h2 className='mb-8 text-lg font-bold text-gray-800 lg:text-xl'>Kirim Pesan</h2>
 
                     <div>
                         {/* Switch Button */}
@@ -244,6 +244,15 @@ const ContactUs = () => {
                     </div>
                 </div>
             </div>
+            <iframe
+                className='col-span-2 w-full'
+                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126912.93829569164!2d106.97410210163002!3d-6.259867982243107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698bfc218780ad%3A0x1b77c8726545aab5!2sLMP%20NETWORKS%20-%20HARAPAN%20INDAH!5e0!3m2!1sid!2sid!4v1702192197729!5m2!1sid!2sid'
+                width='600'
+                height='450'
+                style={{ border: '0' }}
+                allowFullScreen
+                loading='lazy'
+                referrerPolicy='no-referrer-when-downgrade'></iframe>
         </section>
     );
 };

@@ -35,7 +35,7 @@ const PartnersSection = () => {
     ];
 
     const PartnerCard = ({ partner }: { partner: Partner }) => (
-        <div className='flex items-center justify-center rounded-xl border border-slate-200 p-8'>
+        <div className='flex items-center justify-center rounded-xl border border-slate-200 bg-white p-8'>
             <div className='flex h-24 w-full items-center justify-center'>
                 <Image
                     width={250}

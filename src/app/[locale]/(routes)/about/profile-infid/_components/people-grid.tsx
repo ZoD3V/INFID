@@ -14,7 +14,7 @@ export const PeopleGrid = ({ title, data, onItemClick }: PeopleGridProps) => (
             {data.map((person) => (
                 <div
                     key={person.id}
-                    className='group cursor-pointer rounded-lg border border-slate-200 bg-slate-100 p-3'
+                    className='group cursor-pointer rounded-lg border border-slate-200 bg-slate-100/50 p-3'
                     onClick={() => onItemClick(person)}>
                     <div className='relative mb-4 aspect-square h-70 w-full overflow-hidden rounded-lg'>
                         <img src={person.image} alt={person.name} className='h-full w-full object-cover' />
