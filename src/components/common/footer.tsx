@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { ArrowRight, ChevronUp, Mail, MailIcon, MapPin, Phone, PhoneCall } from 'lucide-react';
+import { ArrowRight, ChevronUp, MailIcon, PhoneCall } from 'lucide-react';
 import { BsWhatsapp } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
 
@@ -31,7 +31,7 @@ const Footer = () => {
             <div className={cn('container px-4 py-16 md:px-6 xl:px-0', pathname == '/' && 'lg:pt-45')}>
                 <div className='border-primary-400 grid grid-cols-1 gap-8 border-b pb-9 md:grid-cols-2 lg:grid-cols-12 lg:gap-12'>
                     {/* Brand Column */}
-                    <div className='lg:col-span-4'>
+                    <div className='lg:col-span-5'>
                         <div className='mb-6 flex items-center gap-2'>
                             <img
                                 width={100}
@@ -89,9 +89,9 @@ const Footer = () => {
 
                     {/* Links Columns */}
                     <div className='lg:col-span-7'>
-                        <div className='grid grid-cols-2 gap-4 lg:grid-cols-3'>
+                        <div className='grid grid-cols-2 gap-5 lg:flex'>
                             {Object.entries(footerLinks).map(([category, links]) => (
-                                <div key={category}>
+                                <div key={category} className='lg:w-1/2'>
                                     <h6 className='mb-4 text-base font-bold text-white'>
                                         {category
                                             .split('_')
@@ -149,21 +149,31 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col gap-2 pt-8'>
-                    <h6 className='text-base font-bold text-white'>Sekretariat INFD</h6>
-                    <p className='text-sm font-normal text-slate-200'>
-                        Jl. Sebret No.4 C, Jati Padang, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
-                    </p>
-                    <div className='flex items-center gap-3'>
-                        <div className='flex items-center gap-2 text-sm text-white'>
-                            <MailIcon className='h-4 w-4' />
-                            office@infid.org
-                        </div>
-                        <div className='flex items-center gap-2 text-sm text-white'>
-                            <PhoneCall className='h-4 w-4' />
-                            021-7819734
+                <div className='flex w-full flex-col items-start justify-between gap-5 md:flex-row md:items-end'>
+                    <div className='flex flex-col gap-2 pt-8'>
+                        <h6 className='text-base font-bold text-white'>Sekretariat INFD</h6>
+                        <p className='text-sm font-normal text-slate-200'>
+                            Jl. Sebret No.4 C, Jati Padang, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
+                        </p>
+                        <div className='flex items-center gap-3'>
+                            <div className='flex items-center gap-2 text-sm text-white'>
+                                <MailIcon className='h-4 w-4' />
+                                office@infid.org
+                            </div>
+                            <div className='flex items-center gap-2 text-sm text-white'>
+                                <PhoneCall className='h-4 w-4' />
+                                021-7819734
+                            </div>
                         </div>
                     </div>
+                    <button
+                        type='button'
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        className='flex cursor-pointer items-center gap-1 text-white transition hover:opacity-80'
+                        aria-label='Kembali ke atas'>
+                        <p className='text-sm font-semibold'>Kembali ke Atas</p>
+                        <ChevronUp size={20} />
+                    </button>
                 </div>
             </div>
 
@@ -174,15 +184,6 @@ const Footer = () => {
                         Copyright © {new Date().getFullYear()} by International NGO Forum on Indonesian Development –
                         INFID
                     </p>
-
-                    <button
-                        type='button'
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                        className='flex cursor-pointer items-center gap-1 text-sm text-white transition hover:opacity-80'
-                        aria-label='Kembali ke atas'>
-                        <span>Kembali ke Atas</span>
-                        <ChevronUp size={20} />
-                    </button>
                 </div>
             </div>
         </footer>
