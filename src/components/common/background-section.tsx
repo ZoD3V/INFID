@@ -44,7 +44,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, backgroundImage, breadcr
                                                     {item.label}
                                                 </BreadcrumbLink>
                                             ) : (
-                                                <BreadcrumbLink className='text-secondary-200 font-bold'>
+                                                <BreadcrumbLink className='text-secondary-200 hover:text-secondary-300 cursor-default font-bold'>
                                                     {item.label}
                                                 </BreadcrumbLink>
                                             )}

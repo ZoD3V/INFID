@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
-import { PeopleGrid } from './people-grid';
+import { Founder, PeopleGrid } from './people-grid';
 
 type ContentType = 'timeline' | 'founders' | 'leaders';
 
@@ -17,15 +17,6 @@ export interface TimelineItem {
     active: boolean;
     isFounder?: boolean;
     isLeader?: boolean;
-}
-
-// Founder item
-export interface Founder {
-    id: number;
-    name: string;
-    image: string;
-    role: string;
-    description: string;
 }
 
 export interface Person {

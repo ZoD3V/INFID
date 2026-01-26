@@ -1,4 +1,11 @@
-import { Founder } from './history-infid-section';
+// Founder item
+export interface Founder {
+    id: number;
+    name: string;
+    image: string;
+    role: string;
+    description: string;
+}
 
 interface PeopleGridProps {
     title: string;

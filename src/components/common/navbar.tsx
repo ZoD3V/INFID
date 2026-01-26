@@ -44,6 +44,7 @@ export function Navbar() {
                 { title: t('about_profile'), href: '/about/profile-infid' },
                 { title: t('about_structure'), href: '/about/structure-organization' },
                 { title: t('about_member'), href: '/about/member-infid' },
+                { title: t('about_research'), href: '/about/research' },
                 { title: t('about_mitra'), href: '/about/partner' }
             ]
         },
