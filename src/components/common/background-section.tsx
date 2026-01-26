@@ -23,7 +23,7 @@ interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({ title, backgroundImage, breadcrumbs }) => {
     return (
         <div
-            className='relative z-20 h-42 bg-cover bg-center bg-no-repeat pt-8 md:h-52 lg:h-67'
+            className='relative z-20 h-48 bg-cover bg-center bg-no-repeat pt-8 md:h-52 lg:h-67'
             style={{ backgroundImage: `url('${backgroundImage}')` }}>
             {/* Overlay */}
             <div className='from-primary-500/80 via-primary-500/80 to-primary-500/20 absolute inset-0 bg-linear-to-b' />

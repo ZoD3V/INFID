@@ -23,7 +23,7 @@ const CommunitySection = () => {
                     className='absolute top-0 left-35 hidden xl:block'
                 />
                 {/* Content */}
-                <div className='grid grid-cols-2 py-12'>
+                <div className='grid grid-cols-2 p-12'>
                     <div className='mb-6 w-full'>
                         <div className='text-primary-500 mb-4 flex items-center gap-2 text-xs font-medium tracking-wider'>
                             <span className='bg-primary-500 h-px w-4'></span>

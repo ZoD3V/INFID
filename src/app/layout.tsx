@@ -8,7 +8,11 @@ import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
     title: 'INFID',
-    description: 'INFID'
+    description: 'INFID',
+    openGraph: {
+        title: 'Acme',
+        description: 'Acme is a...'
+    }
 };
 
 const montserrat = Montserrat({

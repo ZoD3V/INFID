@@ -120,7 +120,7 @@ export function Navbar() {
                                     'flex cursor-pointer items-center gap-1 text-sm font-medium transition-colors duration-300',
                                     isScrolled
                                         ? 'hover:text-brand-600 text-slate-900'
-                                        : 'text-brand-100 hover:text-white',
+                                        : 'text-gray-100 hover:text-white',
 
                                     pathname === item.href ? 'font-extrabold' : ''
                                 )}>

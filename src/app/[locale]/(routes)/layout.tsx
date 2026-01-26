@@ -2,6 +2,7 @@ import Footer from '@/components/common/footer';
 import LanguageSwitcher from '@/components/common/language-switcher';
 import { Navbar } from '@/components/common/navbar';
 
+import ClientLayout from './ClientLayout';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
@@ -10,17 +11,15 @@ export default async function HomeLayout({
     params
 }: {
     children: React.ReactNode;
-    params: Promise<{ locale: string }>;
+    params: { locale: string };
 }) {
-    const { locale } = await params;
-
     const messages = await getMessages();
     return (
-        <div lang={locale}>
+        <div lang={params.locale}>
             <NextIntlClientProvider messages={messages}>
                 <Navbar />
                 <LanguageSwitcher />
-                {children}
+                <ClientLayout>{children}</ClientLayout>
                 <Footer />
             </NextIntlClientProvider>
         </div>
