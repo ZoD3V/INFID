@@ -89,7 +89,7 @@ const Footer = () => {
 
                     {/* Links Columns */}
                     <div className='lg:col-span-7'>
-                        <div className='grid grid-cols-2 gap-5 lg:flex'>
+                        <div className='grid grid-cols-2 gap-8 lg:flex'>
                             {Object.entries(footerLinks).map(([category, links]) => (
                                 <div key={category} className='lg:w-1/2'>
                                     <h6 className='mb-4 text-base font-bold text-white'>
@@ -99,7 +99,7 @@ const Footer = () => {
                                             .join(' ')}
                                     </h6>
 
-                                    <ul className='flex flex-col gap-2'>
+                                    <ul className='flex flex-col gap-4'>
                                         {links.map((link, index) => (
                                             <li key={index} className='flex items-start gap-2'>
                                                 {link.name === 'whatsapp' ? (
@@ -124,7 +124,7 @@ const Footer = () => {
                                 </div>
                             ))}
                             <div className='col-span-2 flex w-full flex-col gap-4 lg:col-span-1 lg:w-fit'>
-                                <div className='flex flex-col gap-2'>
+                                <div className='flex flex-col gap-4'>
                                     <h6 className='text-base font-bold text-white'>Berlangganan Newsletter</h6>
                                     <p className='text-sm font-normal text-slate-200'>
                                         Dapatkan update terbaru tentang program, riset, dan berita seputar advokasi
@@ -133,7 +133,7 @@ const Footer = () => {
                                 </div>
 
                                 <form
-                                    className='flex w-full max-w-sm flex-col items-center gap-3'
+                                    className='flex w-full max-w-sm flex-col items-center gap-4'
                                     onSubmit={(e) => e.preventDefault()}>
                                     <Input
                                         type='email'

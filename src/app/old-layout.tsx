@@ -7,10 +7,13 @@ import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
     title: 'INFID',
-    description: 'INFID',
+    description:
+        'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
     openGraph: {
-        title: 'Acme',
-        description: 'Acme is a...'
+        title: 'INFID',
+        description:
+            'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
+        images: '/images/background-home.webp'
     }
 };
 

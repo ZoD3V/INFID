@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 
+import Marquee from 'react-fast-marquee';
+
 const LogoSection = () => {
     const logos = [
         { name: 'Partner 1', icon: '/images/patner-1.png' },
@@ -16,22 +18,22 @@ const LogoSection = () => {
 
     return (
         <section className='w-full overflow-hidden bg-slate-900 py-8'>
-            <div className='mx-auto pl-4 md:px-4'>
-                <div className='flex snap-x snap-mandatory gap-8 overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch] md:grid md:grid-cols-8 md:overflow-visible'>
+            <div className='xl:px-4'>
+                <Marquee pauseOnHover={true} autoFill={true}>
                     {logos.map((logo, index) => (
                         <div
                             key={`logo-${index}`}
-                            className='flex shrink-0 snap-start items-center justify-center grayscale transition-all duration-300 hover:grayscale-0'>
+                            className='mx-10 flex shrink-0 items-center justify-center grayscale transition-all duration-300 hover:grayscale-0'>
                             <Image
                                 src={logo.icon}
                                 alt={logo.name ?? 'logo'}
                                 width={120}
                                 height={60}
-                                className='h-7 w-auto object-contain opacity-90'
+                                className='h-8 w-auto object-contain opacity-90'
                             />
                         </div>
                     ))}
-                </div>
+                </Marquee>
             </div>
         </section>
     );

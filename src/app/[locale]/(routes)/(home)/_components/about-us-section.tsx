@@ -58,7 +58,7 @@ const AboutUsSection = () => {
                             tentang INFID
                         </h2>
 
-                        <div className='space-y-4 text-justify text-sm leading-relaxed text-slate-600'>
+                        <div className='space-y-4 text-justify text-base leading-relaxed text-slate-600'>
                             <p>
                                 International NGO Forum on Indonesian Development (INFID) adalah jaringan organisasi
                                 masyarakat sipil yang berdiri sejak 1985 dan berkomitmen untuk memperjuangkan

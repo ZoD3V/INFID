@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 
 const CommunitySection = () => {
     return (
-        <div className='absolute -bottom-60 left-1/2 z-30 hidden w-full -translate-x-1/2 -translate-y-1/2 transform items-center justify-center px-4 lg:flex'>
-            <div className='bg-secondary-100 relative container w-full overflow-hidden rounded-xl border'>
+        <div className='static -bottom-60 left-1/2 z-30 w-full items-center justify-center px-4 lg:absolute lg:flex lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform'>
+            <div className='bg-secondary-100 relative w-full overflow-hidden rounded-xl border'>
                 <Image
                     src='/images/decoration-program-2.png'
                     alt='decoration'
@@ -23,7 +23,7 @@ const CommunitySection = () => {
                     className='absolute top-0 left-35 hidden xl:block'
                 />
                 {/* Content */}
-                <div className='grid grid-cols-2 p-12'>
+                <div className='grid grid-cols-1 p-5 md:grid-cols-2 md:p-12'>
                     <div className='mb-6 w-full'>
                         <div className='text-primary-500 mb-4 flex items-center gap-2 text-xs font-medium tracking-wider'>
                             <span className='bg-primary-500 h-px w-4'></span>
@@ -37,7 +37,7 @@ const CommunitySection = () => {
                         </h1>
                     </div>
 
-                    <div className='flex w-full items-start justify-between gap-8'>
+                    <div className='flex w-full items-start justify-between gap-4 md:gap-8'>
                         <div className='flex-1 space-y-6'>
                             <p className='text-base leading-relaxed text-gray-700'>
                                 Bergabunglah dengan jaringan masyarakat sipil terbesar di Indonesia. Suara Anda penting.

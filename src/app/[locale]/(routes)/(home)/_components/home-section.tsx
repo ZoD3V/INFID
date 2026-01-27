@@ -54,7 +54,7 @@ const Home = () => {
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className='flex flex-wrap gap-4'>
+                        <div className='grid grid-cols-2 gap-4 md:flex'>
                             <Button variant='secondary' className='rounded-full font-semibold'>
                                 Jelajahi Program
                                 <ArrowRight />
