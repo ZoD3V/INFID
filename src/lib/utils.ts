@@ -8,3 +8,10 @@ export function cn(...inputs: ClassValue[]) {
 export function absoluteUrl(path: string) {
     return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
 }
+
+export function formatLabel(key: string) {
+    return key
+        .split('_')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}

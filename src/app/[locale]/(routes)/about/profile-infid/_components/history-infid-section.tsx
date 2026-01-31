@@ -166,36 +166,33 @@ export const InfidTimeline = () => {
                 {/* Timeline */}
                 <div className='mb-16'>
                     <div className='relative'>
-                        {/* Timeline Line */}
-                        <div className='absolute top-6 right-0 left-0 hidden h-0.5 bg-gray-300 md:block' />
+                        {/* Timeline line */}
+                        <div className='absolute top-6 right-0 left-0 h-0.5 bg-gray-300' />
 
-                        {/* Timeline Items */}
-                        <div className='relative grid grid-cols-2 gap-4 md:grid-cols-7 md:gap-2'>
+                        <div className='flex justify-between gap-6 overflow-x-auto px-2'>
                             {timelineData.map((item) => {
                                 const isActive = item.id === activeTimelineId;
 
                                 return (
                                     <div
                                         key={item.id}
-                                        className='group flex cursor-pointer flex-col items-center'
+                                        className='flex w-32 shrink-0 cursor-pointer flex-col items-center'
                                         onClick={() => handleTimelineClick(item)}>
-                                        {/* Circle */}
-                                        <div
-                                            className={`z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 font-bold transition-colors ${
-                                                isActive
-                                                    ? 'text-primary-600 border-teal-600 bg-white'
-                                                    : 'text-primary-400 border-gray-300 bg-white'
-                                            } group-hover:border-primary-500 group-hover:text-primary-500`}>
-                                            {item.id}
+                                        <div className='relative z-10 flex h-12 items-center'>
+                                            <div
+                                                className={`flex h-12 w-12 items-center justify-center rounded-full border-2 bg-white font-bold ${
+                                                    isActive
+                                                        ? 'text-primary-600 border-teal-600'
+                                                        : 'text-primary-400 border-gray-300'
+                                                }`}>
+                                                {item.id}
+                                            </div>
                                         </div>
 
-                                        {/* Year */}
                                         <p
-                                            className={`mt-4 text-center text-sm font-normal transition-all ${
-                                                isActive
-                                                    ? 'text-primary-500 font-semibold'
-                                                    : 'group-hover:text-primary-500 text-slate-900 group-hover:font-semibold'
-                                            } `}>
+                                            className={`mt-4 text-center text-sm leading-snug ${
+                                                isActive ? 'text-primary-500 font-semibold' : 'text-slate-900'
+                                            }`}>
                                             {item.year}
                                         </p>
                                     </div>

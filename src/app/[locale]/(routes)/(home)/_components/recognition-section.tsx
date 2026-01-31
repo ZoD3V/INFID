@@ -42,11 +42,11 @@ const RecognitionSection = () => {
                 </div>
 
                 {/* Recognition Cards */}
-                <div className='mx-auto grid gap-8 md:grid-cols-2'>
+                <div className='mx-auto flex flex-nowrap gap-6 overflow-x-auto pb-4'>
                     {recognitions.map((item, index) => (
                         <div
                             key={index}
-                            className='rounded-3xl bg-slate-100 px-5 py-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-teal-500/20'>
+                            className='w-145 shrink-0 rounded-3xl bg-slate-100 px-5 py-6 transition-all duration-300 hover:shadow-teal-500/20'>
                             <div className='flex items-center gap-5 md:gap-8'>
                                 {/* Logo */}
                                 <div className='shrink-0'>
@@ -55,15 +55,11 @@ const RecognitionSection = () => {
 
                                 {/* Content */}
                                 <div className='flex-1'>
-                                    <div>
-                                        <h3 className='mb-1 text-xl font-bold md:text-2xl'>{item.title}</h3>
-                                        <p className='mb-3 text-xs font-medium tracking-wide text-slate-900 uppercase md:text-sm'>
-                                            {item.organization}
-                                        </p>
-                                    </div>
-                                    <p className='text-xs leading-relaxed text-slate-700 md:text-sm'>
-                                        {item.description}
+                                    <h3 className='mb-1 text-xl font-bold md:text-2xl'>{item.title}</h3>
+                                    <p className='mb-3 text-xs font-medium tracking-wide text-slate-900 uppercase md:text-sm'>
+                                        {item.organization}
                                     </p>
+                                    <p className='text-sm leading-relaxed text-slate-700'>{item.description}</p>
                                 </div>
                             </div>
                         </div>

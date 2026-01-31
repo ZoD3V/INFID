@@ -24,12 +24,11 @@ export function Navbar() {
 
     React.useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
+            setIsScrolled(window.scrollY > 20);
         };
+
+        // ⬇️ trigger awal
+        handleScroll();
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
