@@ -12,6 +12,7 @@ import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 
+import SearchModal from './search-modal';
 import { ChevronDown, ChevronRight, ExternalLink, Menu } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
@@ -27,7 +28,6 @@ export function Navbar() {
             setIsScrolled(window.scrollY > 20);
         };
 
-        // ⬇️ trigger awal
         handleScroll();
 
         window.addEventListener('scroll', handleScroll);
@@ -42,7 +42,7 @@ export function Navbar() {
             children: [
                 { title: t('about_profile'), href: '/about/profile-infid' },
                 { title: t('about_structure'), href: '/about/structure-organization' },
-                { title: t('about_member'), href: '/about/member-infid' },
+                // { title: t('about_member'), href: '/about/member-infid' },
                 { title: t('about_research'), href: '/about/research' },
                 { title: t('about_mitra'), href: '/about/partner' }
             ]
@@ -51,8 +51,8 @@ export function Navbar() {
             title: t('involved'),
             href: '',
             children: [
-                { title: t('involved_career'), href: '/involved/karrer' },
-                { title: t('involved_member'), href: '/involved/become-member' }
+                { title: t('involved_career'), href: '/involved/career' }
+                // { title: t('involved_member'), href: '/involved/become-member' }
             ]
         },
         {
@@ -91,7 +91,6 @@ export function Navbar() {
                 'fixed top-0 z-50 w-full transition-all duration-300',
                 isScrolled ? 'bg-white shadow' : 'bg-transparent'
             )}>
-            {' '}
             <nav className='container flex h-16 items-center justify-between'>
                 {/* Logo/Brand */}
                 <Link href='/' className='text-2xl font-bold text-gray-900'>
@@ -159,6 +158,7 @@ export function Navbar() {
                     ))}
                 </div>
                 <div className='flex items-center gap-2'>
+                    <SearchModal />
                     <Button variant='secondary' className='hidden rounded-full font-semibold lg:block'>
                         Bergabung
                     </Button>

@@ -45,7 +45,7 @@ const CommunitySection = () => {
 
                             <div className='flex gap-4'>
                                 <Button className='w-full rounded-full'>Daftar Anggota</Button>
-                                <Button variant='outline' className='w-full rounded-full'>
+                                <Button variant='outline' className='border-primary-500 w-full rounded-full'>
                                     Hubungi Kami
                                 </Button>
                             </div>
