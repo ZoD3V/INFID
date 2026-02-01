@@ -70,10 +70,10 @@ export function Navbar() {
             title: t('news'),
             href: '',
             children: [
-                { title: t('news_activity'), href: '/news/activity' },
-                { title: t('news_story'), href: '/news/story' },
-                { title: t('news_press'), href: '/news/broadcast' },
-                { title: t('news_report'), href: '/news/report-yearly' }
+                { title: t('news_activity'), href: '/news-from-us' }
+                // { title: t('news_story'), href: '/news/story' },
+                // { title: t('news_press'), href: '/news/broadcast' },
+                // { title: t('news_report'), href: '/news/report-yearly' }
             ]
         },
         { title: t('contact'), href: '/contact-us' }

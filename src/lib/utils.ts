@@ -15,3 +15,13 @@ export function formatLabel(key: string) {
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
 }
+
+export const formatDateShort = (date: string | Date) => {
+    const d = new Date(date);
+
+    return d.toLocaleDateString('id-ID', {
+        day: '2-digit',
+        month: 'short',
+        year: '2-digit'
+    });
+};
