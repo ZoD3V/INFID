@@ -11,11 +11,11 @@ interface FeaturedNewsProps {
 
 export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
     return (
-        <section className='mb-8 grid gap-4 md:grid-cols-2'>
+        <div className='mb-8 grid gap-4 md:grid-cols-2'>
             {items.slice(0, 2).map((item) => (
-                <div key={item.id} className='group cursor-pointer rounded-lg border border-slate-200 bg-white p-2'>
+                <div key={item.id} className='group cursor-pointer rounded-xl border border-slate-200 bg-white p-3'>
                     {/* Image */}
-                    <div className='relative mb-6 h-80 overflow-hidden rounded-lg lg:h-88'>
+                    <div className='relative mb-6 h-70 overflow-hidden rounded-lg lg:h-80 xl:h-88'>
                         <Image
                             src={item.image}
                             alt={item.title}
@@ -25,7 +25,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                         {/* Badge */}
                         <div className='absolute top-3 left-3'>
-                            <span className='rounded-full bg-orange-500 px-3 py-1.5 text-xs font-medium text-white'>
+                            <span className='bg-secondary-300 rounded-full px-3 py-1.5 text-xs font-medium text-white'>
                                 {item.badge}
                             </span>
                         </div>
@@ -45,7 +45,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                         {/* Text */}
                         <div className='flex flex-col pb-2 lg:pb-0'>
-                            <h2 className='text-primary-900 group-hover:text-primary-500 mb-2 text-xl font-bold lg:text-2xl'>
+                            <h2 className='text-primary-900 group-hover:text-primary-500 mb-2 line-clamp-2 text-xl font-bold lg:text-2xl'>
                                 {item.title}
                             </h2>
 
@@ -78,6 +78,6 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                     </div>
                 </div>
             ))}
-        </section>
+        </div>
     );
 };

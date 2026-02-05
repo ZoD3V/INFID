@@ -7,6 +7,7 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
+import { cn } from '@/lib/utils';
 
 interface BreadcrumbItemType {
     label: string;
@@ -18,12 +19,20 @@ interface PageHeaderProps {
     title: string;
     backgroundImage: string;
     breadcrumbs: BreadcrumbItemType[];
+    showTitle?: boolean;
+    containerClassName?: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title, backgroundImage, breadcrumbs }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({
+    title,
+    backgroundImage,
+    breadcrumbs,
+    showTitle = true,
+    containerClassName = 'h-48 md:h-52 lg:h-67 pt-8'
+}) => {
     return (
         <div
-            className='relative z-20 h-48 bg-cover bg-center bg-no-repeat pt-8 md:h-52 lg:h-67'
+            className={cn('relative z-20 bg-cover bg-center bg-no-repeat', containerClassName)}
             style={{ backgroundImage: `url('${backgroundImage}')` }}>
             {/* Overlay */}
             <div className='from-primary-500/80 via-primary-500/80 to-primary-500/20 absolute inset-0 bg-linear-to-b' />
@@ -59,9 +68,11 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, backgroundImage, breadcr
                         </Breadcrumb>
 
                         {/* Title */}
-                        <h1 className='line-clamp-1 text-3xl font-bold tracking-wide text-white md:text-4xl'>
-                            {title}
-                        </h1>
+                        {showTitle && (
+                            <h1 className='line-clamp-1 text-3xl font-bold tracking-wide text-white md:text-4xl'>
+                                {title}
+                            </h1>
+                        )}
                     </div>
                 </div>
             </div>

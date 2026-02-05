@@ -10,9 +10,12 @@ const RealImpactSection = () => {
             <div className='container'>
                 {/* Header */}
                 <div className='mb-12'>
-                    <h1 className='text-secondary-200 mb-4 text-4xl font-bold lg:text-5xl'>DAMPAK NYATA</h1>
+                    <h1 className='text-secondary-200 mb-4 text-4xl font-bold lg:text-5xl'>
+                        Cerita perubahan dari kerja bersama di lapangan
+                    </h1>
                     <p className='max-w-3xl text-sm text-slate-200'>
-                        Bukan sekadar angka, tapi jejak perubahan yang kami perjuangkan bersama.
+                        Setiap program menghadirkan cerita nyata. Baca ringkasan dampak, lalu telusuri kisah lengkapnya
+                        seperti membaca blog.
                     </p>
                 </div>
 

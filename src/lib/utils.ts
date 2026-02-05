@@ -1,4 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
+import { format, isValid, parseISO } from 'date-fns';
+import { id } from 'date-fns/locale/id';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
@@ -25,3 +27,15 @@ export const formatDateShort = (date: string | Date) => {
         year: '2-digit'
     });
 };
+
+export function formatArticleDate(date: string | Date | null | undefined): string {
+    if (!date) return '';
+
+    const parsedDate = typeof date === 'string' ? parseISO(date) : date;
+
+    if (!isValid(parsedDate)) {
+        return 'Tanggal tidak valid';
+    }
+
+    return format(parsedDate, 'dd MMM yy', { locale: id });
+}

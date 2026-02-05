@@ -41,7 +41,6 @@ export default async function HomeLayout({
             <body className={`${montserrat.className} text-foreground overscroll-none bg-white antialiased`}>
                 <NextIntlClientProvider messages={messages}>
                     <Navbar />
-                    <LanguageSwitcher />
                     <ClientLayout>{children}</ClientLayout>
                     <Toaster />
 

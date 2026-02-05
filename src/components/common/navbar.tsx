@@ -12,6 +12,7 @@ import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 
+import LanguageSwitcher from './language-switcher';
 import SearchModal from './search-modal';
 import { ChevronDown, ChevronRight, ExternalLink, Menu } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -158,10 +159,8 @@ export function Navbar() {
                     ))}
                 </div>
                 <div className='flex items-center gap-2'>
+                    <LanguageSwitcher />
                     <SearchModal />
-                    <Button variant='secondary' className='hidden rounded-full font-semibold lg:block'>
-                        Bergabung
-                    </Button>
 
                     {/* Mobile Sidebar */}
                     {isMobile && (

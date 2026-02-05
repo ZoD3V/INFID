@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 
 const CommunitySection = () => {
     return (
-        <div className='static -bottom-60 left-1/2 z-30 w-full items-center justify-center px-4 lg:absolute lg:flex lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform'>
-            <div className='bg-secondary-100 relative w-full overflow-hidden rounded-xl border'>
+        <div className='static -bottom-60 left-1/2 z-30 container w-full items-center justify-center lg:absolute lg:flex lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform'>
+            <div className='bg-secondary-100 relative overflow-hidden rounded-xl border'>
                 <Image
                     src='/images/decoration-program-2.png'
                     alt='decoration'

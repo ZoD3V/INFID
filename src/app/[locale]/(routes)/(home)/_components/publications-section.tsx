@@ -62,7 +62,7 @@ const PublicationsSection = () => {
     ];
 
     return (
-        <section className='relative bg-slate-50 pt-16 pb-24 lg:pt-24 lg:pb-58'>
+        <section className='relative bg-slate-50 py-16'>
             <div className='container pb-16 lg:pb-0'>
                 {/* Header */}
                 <div className='mb-8'>
@@ -212,7 +212,6 @@ const PublicationsSection = () => {
                     </div>
                 </div>
             </div>
-            <CommunitySection />
         </section>
     );
 };

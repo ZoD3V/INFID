@@ -2,6 +2,8 @@ import React from 'react';
 
 import Image from 'next/image';
 
+import CommunitySection from './community-section';
+
 const RecognitionSection = () => {
     const recognitions = [
         {
@@ -24,7 +26,7 @@ const RecognitionSection = () => {
 
     return (
         <section
-            className='bg-secondary-300 relative overflow-hidden py-24'
+            className='bg-secondary-300 relative pt-16 pb-24 lg:pt-24 lg:pb-58'
             style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
             <div className='relative container'>
                 {/* Header */}
@@ -46,7 +48,7 @@ const RecognitionSection = () => {
                     {recognitions.map((item, index) => (
                         <div
                             key={index}
-                            className='w-145 shrink-0 rounded-3xl bg-slate-100 px-5 py-6 transition-all duration-300 hover:shadow-teal-500/20'>
+                            className='w-full rounded-3xl bg-slate-100 px-5 py-6 transition-all duration-300 hover:shadow-teal-500/20'>
                             <div className='flex items-center gap-5 md:gap-8'>
                                 {/* Logo */}
                                 <div className='shrink-0'>
@@ -66,6 +68,7 @@ const RecognitionSection = () => {
                     ))}
                 </div>
             </div>
+            <CommunitySection />
         </section>
     );
 };

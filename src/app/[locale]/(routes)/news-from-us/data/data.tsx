@@ -2,10 +2,16 @@ export type Article = {
     id: number;
     title: string;
     category: 'Kegiatan' | 'Cerita Perubahan' | 'Siaran Pers';
-    date: string; // ISO format
+    date: string;
+    onClick?: () => void;
     author: string;
     image: string;
 };
+
+export interface ArticleCardProps {
+    article: Article;
+    onClick?: (id: number) => void;
+}
 
 export interface FeaturedNewsItem {
     id: string;

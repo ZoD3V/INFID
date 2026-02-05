@@ -1,9 +1,14 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
+import { ArticleCardSkeleton } from '@/components/common/article-card-skeleton';
 import { PageHeaderSearch } from '@/components/common/background-news-section';
+import { FeaturedNewsSkeleton } from '@/components/common/featured-news-skeleton';
 import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/navigation';
 
 import { ArticleCard } from './_components/article-card';
 import { ArticleFilters } from './_components/article-filters';
@@ -12,77 +17,124 @@ import { articles } from './data/data';
 import { featuredNews } from './data/featured-news';
 
 const PAGE_SIZE = 8;
+const MAX_PAGES = 3;
 
 export default function NewsFromUsPage() {
-    const [category, setCategory] = useState('Semua');
-    const [year, setYear] = useState('all');
-    const [author, setAuthor] = useState('all');
-    const [visible, setVisible] = useState(PAGE_SIZE);
+    const [filters, setFilters] = useState({
+        category: 'Semua',
+        year: 'all',
+        author: 'all',
+        search: ''
+    });
+    const router = useRouter();
+    const [isMounted, setIsMounted] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setFilters({
+            category: params.get('category') || 'Semua',
+            year: params.get('year') || 'all',
+            author: params.get('author') || 'all',
+            search: params.get('search') || ''
+        });
+        setIsMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!isMounted) return;
+
+        const params = new URLSearchParams();
+        if (filters.category !== 'Semua') params.set('category', filters.category);
+        if (filters.year !== 'all') params.set('year', filters.year);
+        if (filters.author !== 'all') params.set('author', filters.author);
+        if (filters.search) params.set('search', filters.search);
+
+        window.history.replaceState(null, '', `?${params.toString()}`);
+
+        setIsLoading(true);
+        setCurrentPage(1);
+        const timer = setTimeout(() => setIsLoading(false), 600);
+        return () => clearTimeout(timer);
+    }, [filters, isMounted]);
+
+    const handleCardClick = (id: number | string) => {
+        router.push(`/news-from-us/${id}`);
+    };
 
     const filteredArticles = useMemo(() => {
         return articles.filter((a) => {
-            const matchCategory = category === 'Semua' || a.category === category;
-            const matchYear = year === 'all' || new Date(a.date).getFullYear().toString() === year;
-            const matchAuthor = author === 'all' || a.author === author;
-
-            return matchCategory && matchYear && matchAuthor;
+            const matchSearch = a.title.toLowerCase().includes(filters.search.toLowerCase());
+            const matchCategory = filters.category === 'Semua' || a.category === filters.category;
+            const matchYear = filters.year === 'all' || a.date.startsWith(filters.year);
+            const matchAuthor = filters.author === 'all' || a.author === filters.author;
+            return matchSearch && matchCategory && matchYear && matchAuthor;
         });
-    }, [category, year, author]);
+    }, [filters]);
 
-    const visibleArticles = useMemo(() => articles.slice(0, visible), [visible]);
+    const visibleArticles = filteredArticles.slice(0, currentPage * PAGE_SIZE);
+
+    const handleLoadMore = () => {
+        if (currentPage < MAX_PAGES) {
+            setIsLoading(true);
+            setTimeout(() => {
+                setCurrentPage((prev) => prev + 1);
+                setIsLoading(false);
+            }, 500);
+        }
+    };
 
     return (
         <section className='w-full bg-slate-50'>
             <PageHeaderSearch
+                defaultValue={filters.search}
+                onSearch={(val) => setFilters((f) => ({ ...f, search: val }))}
                 badge='Berita Terhangat'
                 title='Dapatkan kabar'
                 highlight='terbaru'
                 description='Temukan artikel blog terkini, analisis mendalam, dan wawasan ahli tentang pembangunan Indonesia yang berkelanjutan.'
-                onSearch={(value) => {
-                    console.log('Search:', value);
-                }}
             />
-            <div className='w-full bg-white py-5'>
+
+            <div className='w-full border-b bg-white py-5'>
                 <ArticleFilters
-                    category={category}
-                    setCategory={(v) => {
-                        setCategory(v);
-                        setVisible(PAGE_SIZE);
-                    }}
-                    year={year}
-                    setYear={(v) => {
-                        setYear(v);
-                        setVisible(PAGE_SIZE);
-                    }}
-                    author={author}
-                    setAuthor={(v) => {
-                        setAuthor(v);
-                        setVisible(PAGE_SIZE);
-                    }}
+                    category={filters.category}
+                    setCategory={(v) => setFilters((f) => ({ ...f, category: v }))}
+                    year={filters.year}
+                    setYear={(v) => setFilters((f) => ({ ...f, year: v }))}
+                    author={filters.author}
+                    setAuthor={(v) => setFilters((f) => ({ ...f, author: v }))}
                 />
             </div>
+
             <div className='container pt-12 pb-16'>
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Artikel Terbaru</h3>
 
                 {/* Featured */}
-                <FeaturedNews items={featuredNews} />
+                {isLoading && currentPage === 1 ? <FeaturedNewsSkeleton /> : <FeaturedNews items={featuredNews} />}
 
                 {/* Grid Artikel */}
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Semua Artikel</h3>
-
-                <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-                    {visibleArticles.map((article) => (
-                        <ArticleCard key={article.id} article={article} />
-                    ))}
+                <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
+                    {isLoading && currentPage === 1 ? (
+                        Array.from({ length: PAGE_SIZE }).map((_, i) => <ArticleCardSkeleton key={i} />)
+                    ) : (
+                        <>
+                            {visibleArticles.map((article) => (
+                                <Link key={article.id} href={`/news-from-us/${article.id}`}>
+                                    <ArticleCard key={article.id} article={article} />
+                                </Link>
+                            ))}
+                            {isLoading &&
+                                currentPage > 1 &&
+                                Array.from({ length: PAGE_SIZE }).map((_, i) => <ArticleCardSkeleton key={i} />)}
+                        </>
+                    )}
                 </div>
 
-                {/* Load More */}
-                {visible < filteredArticles.length && (
+                {!isLoading && currentPage < MAX_PAGES && visibleArticles.length < filteredArticles.length && (
                     <div className='mt-6 flex justify-center'>
-                        <Button
-                            variant='outline'
-                            className='rounded-full px-8'
-                            onClick={() => setVisible((v) => Math.min(v + PAGE_SIZE, filteredArticles.length))}>
+                        <Button variant='outline' className='rounded-full bg-white px-8' onClick={handleLoadMore}>
                             Muat Lebih Banyak
                         </Button>
                     </div>

@@ -13,9 +13,9 @@ const Page = () => {
             <LogoSection />
             <AboutUsSection />
             <RealImpactSection />
+            <PublicationsSection />
             <ProgramSection />
             <RecognitionSection />
-            <PublicationsSection />
         </>
     );
 };

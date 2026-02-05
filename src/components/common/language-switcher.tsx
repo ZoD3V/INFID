@@ -18,8 +18,8 @@ export default function LanguageSwitcher() {
     };
 
     return (
-        <div className='fixed right-6 bottom-6 z-99999999'>
-            <div className='flex items-center rounded-full border border-gray-200 bg-white p-1 shadow-lg'>
+        <div className='static'>
+            <div className='flex items-center rounded-full border border-gray-200 bg-white p-1'>
                 <button
                     onClick={() => toggleLanguage('id')}
                     className={`mr-2 cursor-pointer rounded-full font-bold transition-all`}>

@@ -1,14 +1,13 @@
 import Image from 'next/image';
 
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { formatArticleDate } from '@/lib/utils';
 
 import { Article } from '../data/data';
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
 
 export function ArticleCard({ article }: { article: Article }) {
     return (
-        <div className='group cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-white p-2 transition-shadow duration-200 hover:shadow-md'>
+        <div className='group cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-white p-3 transition-shadow duration-200 hover:shadow-md'>
             <Image
                 src={article.image}
                 alt={article.title}
@@ -20,7 +19,7 @@ export function ArticleCard({ article }: { article: Article }) {
                 <div className='flex items-center gap-2 py-4'>
                     <span className='text-secondary-300 text-xs font-medium uppercase'>{article.category}</span>
                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-                    <span className='text-xs text-slate-500'>{article.date}</span>
+                    <span className='text-xs text-slate-500'>{formatArticleDate(article.date)}</span>
                 </div>
 
                 <div className='space-y-2'>

@@ -14,6 +14,7 @@ export interface PageHeaderSearchProps {
     placeholder?: string;
     onSearch?: (value: string) => void;
     className?: string;
+    defaultValue?: string;
 }
 
 export const PageHeaderSearch: React.FC<PageHeaderSearchProps> = ({
@@ -55,21 +56,28 @@ export const PageHeaderSearch: React.FC<PageHeaderSearchProps> = ({
                 )}
 
                 {/* Search */}
-                <div className='mx-auto mt-10 flex w-full max-w-xl items-center gap-2 rounded-full border border-gray-400 bg-white/10 p-1.5 backdrop-blur-sm'>
-                    <div className='flex flex-1 items-center gap-2 pl-3'>
-                        <Search className='h-5 w-5 text-white' />
-                        <Input
-                            value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            placeholder={placeholder}
-                            className='rounded-full border-none bg-transparent text-sm text-white focus-visible:ring-0 focus-visible:ring-offset-0'
-                        />
-                    </div>
+                <form
+                    className='w-full'
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        onSearch?.(value);
+                    }}>
+                    <div className='mx-auto mt-10 flex w-full max-w-xl items-center gap-2 rounded-full border border-gray-400 bg-white/10 p-1.5 backdrop-blur-sm'>
+                        <div className='flex flex-1 items-center gap-2 pl-3'>
+                            <Search className='h-5 w-5 text-white' />
+                            <Input
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)}
+                                placeholder={placeholder}
+                                className='rounded-full border-none bg-transparent text-sm text-white focus-visible:ring-0 focus-visible:ring-offset-0'
+                            />
+                        </div>
 
-                    <Button variant='secondary' className='rounded-full px-6' onClick={() => onSearch?.(value)}>
-                        Cari
-                    </Button>
-                </div>
+                        <Button type='submit' variant='secondary' className='rounded-full px-6'>
+                            Cari
+                        </Button>
+                    </div>
+                </form>
             </div>
         </section>
     );
