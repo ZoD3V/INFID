@@ -15,7 +15,7 @@ const StructureOrganizationPage = () => {
 
     return (
         <section
-            className='relative overflow-hidden bg-slate-100 py-16'
+            className='relative overflow-hidden bg-slate-100'
             style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
             <PageHeader
                 title='Struktur Organisasi'
