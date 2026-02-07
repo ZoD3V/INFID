@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import PageHeader from '@/components/common/background-section';
 import { Partner, PartnerCard } from '@/components/common/partner-card';
+import SectionBadge from '@/components/common/section-badge';
 
 const PartnersSection = () => {
     const nationalPartners: Partner[] = [
@@ -50,11 +51,10 @@ const PartnersSection = () => {
                     className='absolute top-10 right-0 z-20 hidden xl:block'
                 />
                 {/* Header */}
-                <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
-                    <span className='h-px w-4 bg-slate-400'></span>
+
+                <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
                     JARINGAN & KOLABORASI
-                    <span className='h-px w-4 bg-slate-400'></span>
-                </div>
+                </SectionBadge>
 
                 <h1 className='mb-4 text-4xl leading-tight font-bold text-slate-900 lg:text-5xl'>Mitra Kami</h1>
 

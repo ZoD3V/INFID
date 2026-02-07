@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import SectionBadge from '@/components/common/section-badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 export default function GlobalRecognitionSection() {
@@ -40,11 +41,9 @@ export default function GlobalRecognitionSection() {
                 <div className='grid items-start gap-12 lg:grid-cols-2 lg:gap-16'>
                     {/* Left Section */}
                     <div className='space-y-6'>
-                        <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
-                            <span className='h-px w-4 bg-slate-400'></span>
+                        <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
                             RINGKASAN
-                            <span className='h-px w-4 bg-slate-400'></span>
-                        </div>
+                        </SectionBadge>
 
                         <h1 className='text-4xl leading-tight font-bold text-slate-900 lg:text-5xl'>
                             Pengakuan & Peran Global

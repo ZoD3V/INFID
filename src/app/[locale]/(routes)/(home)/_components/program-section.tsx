@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import SectionBadge from '@/components/common/section-badge';
 import { Button } from '@/components/ui/button';
 
 import { ArrowRight } from 'lucide-react';
@@ -53,11 +54,9 @@ const ProgramSection = () => {
                 <div className='grid gap-8 lg:grid-cols-2 lg:gap-16'>
                     {/* Sticky Text Section */}
                     <div className='h-fit lg:sticky lg:top-25'>
-                        <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
-                            <span className='h-px w-4 bg-slate-400'></span>
-                            FOKUS KERJA
-                            <span className='h-px w-4 bg-slate-400'></span>
-                        </div>
+                        <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
+                            IMPACT STORY
+                        </SectionBadge>{' '}
                         <h2 className='mb-4 text-4xl font-bold text-gray-900 lg:text-5xl'>PROGRAM KAMI</h2>
                         <p className='mb-6 max-w-md text-sm text-slate-600 md:text-base'>
                             Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan.

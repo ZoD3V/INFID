@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import SectionBadge from '@/components/common/section-badge';
+
 export const ProgramINFIDSection = () => {
     const programs = [
         {
@@ -34,11 +36,9 @@ export const ProgramINFIDSection = () => {
             <div className='container'>
                 {/* Header */}
                 <div className='mb-12'>
-                    <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
-                        <span className='h-px w-4 bg-slate-400'></span>
+                    <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
                         FOKUS UTAMA
-                        <span className='h-px w-4 bg-slate-400'></span>
-                    </div>
+                    </SectionBadge>
                     <h2 className='mb-4 text-4xl font-bold text-gray-900 lg:text-5xl'>Program INFID</h2>
                     <p className='mb-6 max-w-md text-sm text-slate-600 md:text-base'>
                         Program INFID dirancang untuk memperkuat demokrasi, keadilan sosial, dan perlindungan hak asasi

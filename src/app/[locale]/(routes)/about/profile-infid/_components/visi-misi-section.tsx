@@ -1,3 +1,5 @@
+import SectionBadge from '@/components/common/section-badge';
+
 export default function VisiMisiInfidSection() {
     const misiItems = [
         {
@@ -27,11 +29,9 @@ export default function VisiMisiInfidSection() {
             <div className='container'>
                 {/* Header */}
                 <div className='mb-12'>
-                    <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
-                        <span className='h-px w-4 bg-slate-400'></span>
+                    <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
                         NILAI & ARAH GERAK
-                        <span className='h-px w-4 bg-slate-400'></span>
-                    </div>
+                    </SectionBadge>
                     <h2 className='text-4xl font-bold text-gray-900 lg:text-5xl'>Visi & Misi</h2>
                 </div>
 

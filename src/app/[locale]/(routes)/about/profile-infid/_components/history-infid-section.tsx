@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import SectionBadge from '@/components/common/section-badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 import { Founder, PeopleGrid } from './people-grid';
@@ -149,11 +150,9 @@ export const InfidTimeline = () => {
             <div className='container'>
                 {/* Header */}
                 <div className='mb-16'>
-                    <div className='mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-gray-500'>
-                        <span className='h-px w-4 bg-slate-400'></span>
+                    <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
                         JEJAK PERJALANAN
-                        <span className='h-px w-4 bg-slate-400'></span>
-                    </div>
+                    </SectionBadge>
 
                     <h1 className='text-4xl leading-tight font-bold text-slate-900 lg:text-5xl'>Perjalanan INFID</h1>
 

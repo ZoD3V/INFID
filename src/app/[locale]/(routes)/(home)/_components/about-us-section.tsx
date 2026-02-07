@@ -13,7 +13,7 @@ const AboutUsSection = () => {
                 className='absolute top-10 right-10 hidden xl:block'
             />
             <div className='container'>
-                <div className='grid items-center gap-10 md:grid-cols-2 lg:gap-12'>
+                <div className='grid items-center gap-10 lg:grid-cols-2 lg:gap-12'>
                     {/* Left Side - Images */}
                     <div className='relative'>
                         {/* Main Image */}
@@ -29,7 +29,7 @@ const AboutUsSection = () => {
                             alt='images'
                             width={500}
                             height={500}
-                            className='z-1 h-auto w-125'
+                            className='z-1 h-auto w-full'
                         />
 
                         {/* Decorative Logo */}
