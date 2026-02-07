@@ -58,24 +58,24 @@ export function Navbar() {
         },
         {
             title: t('knowledge'),
-            href: '',
-            children: [
-                { title: t('knowledge_research'), href: '/knowledge/research' },
-                { title: t('knowledge_policy'), href: '/knowledge/terms-condition' },
-                { title: t('knowledge_module'), href: '/knowledge/module' },
-                { title: t('knowledge_infographic'), href: '/knowledge/infografis' },
-                { title: t('knowledge_article'), href: '/knowledge/article' }
-            ]
+            href: '/knowledge'
+            // children: [
+            //     { title: t('knowledge_research'), href: '/knowledge/research' },
+            //     { title: t('knowledge_policy'), href: '/knowledge/terms-condition' },
+            //     { title: t('knowledge_module'), href: '/knowledge/module' },
+            //     { title: t('knowledge_infographic'), href: '/knowledge/infografis' },
+            //     { title: t('knowledge_article'), href: '/knowledge/article' }
+            // ]
         },
         {
             title: t('news'),
-            href: '',
-            children: [
-                { title: t('news_activity'), href: '/news-from-us' }
-                // { title: t('news_story'), href: '/news/story' },
-                // { title: t('news_press'), href: '/news/broadcast' },
-                // { title: t('news_report'), href: '/news/report-yearly' }
-            ]
+            href: '/news-from-us'
+            // children: [
+            //     { title: t('news_activity'), href: '/news-from-us' }
+            //     { title: t('news_story'), href: '/news/story' },
+            //     { title: t('news_press'), href: '/news/broadcast' },
+            //     { title: t('news_report'), href: '/news/report-yearly' }
+            // ]
         },
         { title: t('contact'), href: '/contact-us' }
     ];

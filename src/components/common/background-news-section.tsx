@@ -9,6 +9,7 @@ import { Search } from 'lucide-react';
 export interface PageHeaderSearchProps {
     badge?: string;
     title: string;
+    endTitle: string;
     highlight?: string;
     description?: string;
     placeholder?: string;
@@ -20,6 +21,7 @@ export interface PageHeaderSearchProps {
 export const PageHeaderSearch: React.FC<PageHeaderSearchProps> = ({
     badge = 'Berita Terhangat',
     title,
+    endTitle,
     highlight,
     description,
     placeholder = 'Cari topik, judul atau kata kunci',
@@ -45,7 +47,7 @@ export const PageHeaderSearch: React.FC<PageHeaderSearchProps> = ({
 
                 {/* Title */}
                 <h1 className='mt-4 max-w-xl text-4xl leading-tight font-bold tracking-tight text-white lg:text-5xl'>
-                    {title} {highlight && <span className='text-secondary-300'>{highlight}</span>} dari kami
+                    {title} {highlight && <span className='text-secondary-300'>{highlight}</span>} {endTitle}
                 </h1>
 
                 {/* Description */}

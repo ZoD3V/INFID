@@ -14,9 +14,7 @@ const StructureOrganizationPage = () => {
     const [active, setActive] = useState<keyof typeof organizationStructures>('sekretariat_infid');
 
     return (
-        <section
-            className='relative overflow-hidden bg-slate-100'
-            style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
+        <section className='overflow-hidden bg-slate-100' style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
             <PageHeader
                 title='Struktur Organisasi'
                 backgroundImage='/images/background-about-us.webp'

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 
 import '@/app/globals.css';
+import DarkModeSwitch from '@/components/common/dark-mode-switch';
 import Footer from '@/components/common/footer';
 import LanguageSwitcher from '@/components/common/language-switcher';
 import { Navbar } from '@/components/common/navbar';
@@ -41,6 +42,7 @@ export default async function HomeLayout({
             <body className={`${montserrat.className} text-foreground overscroll-none bg-white antialiased`}>
                 <NextIntlClientProvider messages={messages}>
                     <Navbar />
+                    {/* <DarkModeSwitch /> */}
                     <ClientLayout>{children}</ClientLayout>
                     <Toaster />
 

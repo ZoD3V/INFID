@@ -6,7 +6,7 @@ import { ArticleCard } from '@/components/common/article-card';
 import PageHeader from '@/components/common/background-section';
 import { Button } from '@/components/ui/button';
 
-import { articles } from '../data/data';
+import { articles } from '../../news-from-us/data/data';
 import { Calendar, Eye, Link, MessageSquareMore, Pencil } from 'lucide-react';
 import {
     FacebookIcon,
@@ -23,7 +23,7 @@ import {
     XIcon
 } from 'react-share';
 
-const DetailNewsFromUs = () => {
+const DetailKnowledgeResearch = () => {
     const handleCopy = () => {
         navigator.clipboard.writeText(window.location.href);
     };
@@ -296,4 +296,4 @@ const DetailNewsFromUs = () => {
     );
 };
 
-export default DetailNewsFromUs;
+export default DetailKnowledgeResearch;

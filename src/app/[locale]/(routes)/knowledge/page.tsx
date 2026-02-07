@@ -12,14 +12,14 @@ import { FeaturedNewsSkeleton } from '@/components/common/featured-news-skeleton
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 
-import { FeaturedNews } from './_components/featured-news';
-import { articles, authorsNews, categoriesNews, yearsNews } from './data/data';
-import { featuredNews } from './data/featured-news';
+import { FeaturedNews } from '../news-from-us/_components/featured-news';
+import { featuredNews } from '../news-from-us/data/featured-news';
+import { articlesKnowledge, authorsKnowledge, categoriesKnowledge, yearsKnowledge } from './data/data';
 
 const PAGE_SIZE = 8;
 const MAX_PAGES = 3;
 
-export default function NewsFromUsPage() {
+export default function KnowledgePage() {
     const [filters, setFilters] = useState({
         category: 'Semua',
         year: 'all',
@@ -64,7 +64,7 @@ export default function NewsFromUsPage() {
     };
 
     const filteredArticles = useMemo(() => {
-        return articles.filter((a) => {
+        return articlesKnowledge.filter((a) => {
             const matchSearch = a.title.toLowerCase().includes(filters.search.toLowerCase());
             const matchCategory = filters.category === 'Semua' || a.category === filters.category;
             const matchYear = filters.year === 'all' || a.date.startsWith(filters.year);
@@ -90,18 +90,18 @@ export default function NewsFromUsPage() {
             <PageHeaderSearch
                 defaultValue={filters.search}
                 onSearch={(val) => setFilters((f) => ({ ...f, search: val }))}
-                badge='Berita Terhangat'
-                title='Dapatkan kabar'
-                highlight='terbaru'
-                endTitle='dari kami'
-                description='Temukan artikel blog terkini, analisis mendalam, dan wawasan ahli tentang pembangunan Indonesia yang berkelanjutan.'
+                badge='knowledge center'
+                title='Jelajahi'
+                highlight='gagasan'
+                endTitle='masa depan'
+                description='Kumpulan riset, data, dan perspektif terkini untuk pembangunan Indonesia yang inklusif dan berkelanjutan.'
             />
 
             <div className='w-full border-b bg-white py-5'>
                 <ArticleFilters
-                    categories={categoriesNews}
-                    years={yearsNews}
-                    authors={authorsNews}
+                    categories={categoriesKnowledge}
+                    years={yearsKnowledge}
+                    authors={authorsKnowledge}
                     selectedCategory={filters.category}
                     onCategoryChange={(v) => setFilters((f) => ({ ...f, category: v }))}
                     selectedYear={filters.year}
@@ -112,21 +112,21 @@ export default function NewsFromUsPage() {
             </div>
 
             <div className='container pt-12 pb-16'>
-                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Artikel Terbaru</h3>
+                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Feature Riset</h3>
 
                 {/* Featured */}
                 {isLoading && currentPage === 1 ? <FeaturedNewsSkeleton /> : <FeaturedNews items={featuredNews} />}
 
                 {/* Grid Artikel */}
-                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Semua Artikel</h3>
+                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Semua Riset</h3>
                 <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                     {isLoading && currentPage === 1 ? (
                         Array.from({ length: PAGE_SIZE }).map((_, i) => <ArticleCardSkeleton key={i} />)
                     ) : (
                         <>
                             {visibleArticles.map((article) => (
-                                <Link key={article.id} href={`/news-from-us/${article.id}`}>
-                                    <ArticleCard key={article.id} article={article} />
+                                <Link key={article.id} href={`/knowledge/${article.id}`}>
+                                    <ArticleCard key={article.id} article={article} imageClassName='h-67' />
                                 </Link>
                             ))}
                             {isLoading &&
