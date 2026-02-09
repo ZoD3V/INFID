@@ -37,7 +37,7 @@ export function ArticleFilters({
 }: ArticleFiltersProps) {
     return (
         <div className={cn('container flex flex-col gap-4 md:justify-between lg:flex-row lg:items-center', className)}>
-            <div className='flex flex-wrap gap-2'>
+            <div className='flex items-center gap-2 overflow-x-scroll'>
                 {categories.map((item) => (
                     <Button
                         key={item}

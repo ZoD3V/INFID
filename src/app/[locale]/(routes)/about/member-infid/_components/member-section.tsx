@@ -37,7 +37,7 @@ const MemberSection = () => {
     ];
 
     return (
-        <section className='w-full'>
+        <div>
             <PageHeader
                 title='Anggota INFID'
                 backgroundImage='/images/background-about-us.webp'
@@ -48,7 +48,7 @@ const MemberSection = () => {
                 ]}
             />
 
-            <div className='bg-secondary-100 flex flex-col items-center justify-center px-4 py-24'>
+            <section className='bg-secondary-100 flex flex-col items-center justify-center px-4 py-24'>
                 <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
                     KEANGGOTAAN
                 </SectionBadge>
@@ -65,9 +65,9 @@ const MemberSection = () => {
                         Alur Pendaftaran
                     </Button>
                 </div>
-            </div>
+            </section>
 
-            <div className='container flex flex-col items-center gap-18 py-24'>
+            <section className='container flex flex-col items-center gap-18 py-24'>
                 <div className='space-y-4'>
                     <h2 className='max-w-3xl text-center text-4xl font-bold text-gray-900 lg:text-5xl'>
                         Persyaratan Anggota
@@ -97,10 +97,10 @@ const MemberSection = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </section>
 
             <RegistrationProcess />
-        </section>
+        </div>
     );
 };
 
