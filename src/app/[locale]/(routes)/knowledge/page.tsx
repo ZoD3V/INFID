@@ -98,7 +98,7 @@ export default function KnowledgePage() {
                 description='Kumpulan riset, data, dan perspektif terkini untuk pembangunan Indonesia yang inklusif dan berkelanjutan.'
             />
 
-            <div className='sticky top-16 z-50 w-full border bg-white py-5'>
+            <div className='sticky top-16 z-20 w-full border bg-white py-5'>
                 <ArticleFilters
                     categories={categoriesKnowledge}
                     years={yearsKnowledge}

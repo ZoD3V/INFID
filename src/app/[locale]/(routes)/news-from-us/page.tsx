@@ -97,7 +97,7 @@ export default function NewsFromUsPage() {
                 description='Temukan artikel blog terkini, analisis mendalam, dan wawasan ahli tentang pembangunan Indonesia yang berkelanjutan.'
             />
 
-            <div className='sticky top-16 z-50 w-full border bg-white py-5'>
+            <div className='sticky top-16 z-20 w-full border bg-white py-5'>
                 <ArticleFilters
                     categories={categoriesNews}
                     years={yearsNews}
