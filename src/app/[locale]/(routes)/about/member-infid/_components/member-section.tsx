@@ -6,6 +6,7 @@ import PageHeader from '@/components/common/background-section';
 import SectionBadge from '@/components/common/section-badge';
 import { Button } from '@/components/ui/button';
 
+import RegistrationProcess from './registration-process';
 import { ArrowRight, Landmark, UserSearch } from 'lucide-react';
 
 const MemberSection = () => {
@@ -97,6 +98,8 @@ const MemberSection = () => {
                     ))}
                 </div>
             </div>
+
+            <RegistrationProcess />
         </section>
     );
 };
