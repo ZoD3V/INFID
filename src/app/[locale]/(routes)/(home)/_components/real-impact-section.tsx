@@ -44,7 +44,7 @@ const RealImpactSection = () => {
                                         className='object-cover transition-all duration-300'
                                     />
 
-                                    <div className='absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-all group-hover:opacity-300'>
+                                    <div className='absolute inset-0 flex items-center justify-center bg-black/20 transition-all'>
                                         <div className='rounded-full bg-white/90 p-3 shadow-lg'>
                                             <Play />
                                         </div>

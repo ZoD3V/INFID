@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         title: 'About INFID',
         description:
             'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
-        images: 'https://photos.sphereshowcase.com/tBJczsgyzUAP3woETDr31.jpg'
+        images: '/images/background-home.webp'
     }
 };
 

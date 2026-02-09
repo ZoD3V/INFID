@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
+import { Metadata } from 'next';
 import { useRouter } from 'next/navigation';
 
 import { ArticleCard } from '@/components/common/article-card';
@@ -18,6 +19,18 @@ import { articlesKnowledge, authorsKnowledge, categoriesKnowledge, yearsKnowledg
 
 const PAGE_SIZE = 8;
 const MAX_PAGES = 3;
+
+export const metadata: Metadata = {
+    title: 'Knowledge INFID',
+    description:
+        'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
+    openGraph: {
+        title: 'Knowledge INFID',
+        description:
+            'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
+        images: '/images/background-home.webp'
+    }
+};
 
 export default function KnowledgePage() {
     const [filters, setFilters] = useState({
@@ -86,7 +99,7 @@ export default function KnowledgePage() {
     };
 
     return (
-        <section className='w-full bg-slate-50'>
+        <section className='relative w-full bg-slate-50'>
             <PageHeaderSearch
                 defaultValue={filters.search}
                 onSearch={(val) => setFilters((f) => ({ ...f, search: val }))}
@@ -97,7 +110,7 @@ export default function KnowledgePage() {
                 description='Kumpulan riset, data, dan perspektif terkini untuk pembangunan Indonesia yang inklusif dan berkelanjutan.'
             />
 
-            <div className='w-full border-b bg-white py-5'>
+            <div className='sticky top-16 z-50 w-full border bg-white py-5'>
                 <ArticleFilters
                     categories={categoriesKnowledge}
                     years={yearsKnowledge}

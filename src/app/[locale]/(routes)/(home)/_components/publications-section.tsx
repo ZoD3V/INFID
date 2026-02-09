@@ -63,7 +63,7 @@ const PublicationsSection = () => {
 
     return (
         <section className='relative bg-slate-50 py-16'>
-            <div className='container pb-16 lg:pb-0'>
+            <div className='container'>
                 {/* Header */}
                 <div className='mb-8'>
                     <h1 className='text-primary-900 mb-8 text-4xl font-bold lg:text-5xl'>

@@ -56,7 +56,7 @@ const ProgramSection = () => {
                     <div className='h-fit lg:sticky lg:top-25'>
                         <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
                             IMPACT STORY
-                        </SectionBadge>{' '}
+                        </SectionBadge>
                         <h2 className='mb-4 text-4xl font-bold text-gray-900 lg:text-5xl'>PROGRAM KAMI</h2>
                         <p className='mb-6 max-w-md text-sm text-slate-600 md:text-base'>
                             Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan.

@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 
+import { Metadata } from 'next';
 import Image from 'next/image';
 
 import PageHeader from '@/components/common/background-section';
@@ -9,6 +10,18 @@ import { formatLabel } from '@/lib/utils';
 
 import OrganizationStructure from './_components/organization-section';
 import { organizationStructures } from './data/organization-data';
+
+export const metadata: Metadata = {
+    title: 'Structure organization INFID',
+    description:
+        'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
+    openGraph: {
+        title: 'About INFID',
+        description:
+            'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
+        images: '/images/background-home.webp'
+    }
+};
 
 const StructureOrganizationPage = () => {
     const [active, setActive] = useState<keyof typeof organizationStructures>('sekretariat_infid');

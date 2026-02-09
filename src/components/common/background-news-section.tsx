@@ -32,7 +32,7 @@ export const PageHeaderSearch: React.FC<PageHeaderSearchProps> = ({
 
     return (
         <section
-            className={cn('bg-primary-500 relative overflow-hidden pt-24 pb-12 md:pt-26 md:pb-16', className)}
+            className={cn('bg-primary-500 relative pt-24 pb-12 md:pt-26 md:pb-16', className)}
             style={{
                 backgroundImage: "url('/images/bg-pattern.png')"
             }}>
