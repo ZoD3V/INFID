@@ -5,6 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+    /* --- PALET (STONE) --- */
+    --color-stone-50: #f7f5f2;
+    /* --- PALET (STONE) --- */
+
     /* --- PALET BRAND (TEAL) --- */
     --color-brand-50: #f0f8ff;
     --color-brand-100: #e0f0fe;
@@ -57,6 +61,7 @@
     --color-slate-900: #0f172a;
     --color-slate-950: #020617;
 
+    --bg-color: var(--color-50);
     /* --- SHADCN UI --- */
     --background: var(--color-slate-50);
     --foreground: var(--color-slate-950);

@@ -14,6 +14,7 @@ import { Link } from '@/i18n/navigation';
 
 import { FeaturedNews } from '../news-from-us/_components/featured-news';
 import { featuredNews } from '../news-from-us/data/featured-news';
+import { ArticleCarousel } from './_components/carousel-knowledge';
 import { articlesKnowledge, authorsKnowledge, categoriesKnowledge, yearsKnowledge } from './data/data';
 
 const PAGE_SIZE = 8;
@@ -86,7 +87,7 @@ export default function KnowledgePage() {
     };
 
     return (
-        <section className='relative w-full bg-slate-50'>
+        <section className='relative w-full bg-stone-50'>
             <PageHeaderSearch
                 defaultValue={filters.search}
                 onSearch={(val) => setFilters((f) => ({ ...f, search: val }))}
@@ -115,7 +116,8 @@ export default function KnowledgePage() {
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Feature Riset</h3>
 
                 {/* Featured */}
-                {isLoading && currentPage === 1 ? <FeaturedNewsSkeleton /> : <FeaturedNews items={featuredNews} />}
+                {isLoading && currentPage === 1 ? <FeaturedNewsSkeleton /> : <ArticleCarousel />}
+                {/* <ArticleCarousel /> */}
 
                 {/* Grid Artikel */}
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Semua Riset</h3>
