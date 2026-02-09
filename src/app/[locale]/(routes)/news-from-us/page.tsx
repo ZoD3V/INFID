@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { Metadata } from 'next';
 import { useRouter } from 'next/navigation';
 
 import { ArticleCard } from '@/components/common/article-card';
@@ -19,18 +18,6 @@ import { featuredNews } from './data/featured-news';
 
 const PAGE_SIZE = 8;
 const MAX_PAGES = 3;
-
-export const metadata: Metadata = {
-    title: 'News From Us INFID',
-    description:
-        'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
-    openGraph: {
-        title: 'News From Us INFID',
-        description:
-            'INFID (International NGO Forum on Indonesian Development) adalah jaringan masyarakat sipil yang mendorong demokrasi, keadilan sosial, dan HAM melalui advokasi inklusif berbasis bukti.',
-        images: '/images/background-home.webp'
-    }
-};
 
 export default function NewsFromUsPage() {
     const [filters, setFilters] = useState({
