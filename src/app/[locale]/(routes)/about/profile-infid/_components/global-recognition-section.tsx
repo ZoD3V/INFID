@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import SectionBadge from '@/components/common/section-badge';
+import { SectionHeader } from '@/components/common/section-header';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 export default function GlobalRecognitionSection() {
@@ -40,20 +41,20 @@ export default function GlobalRecognitionSection() {
             <div className='container'>
                 <div className='grid items-start gap-12 lg:grid-cols-2 lg:gap-16'>
                     {/* Left Section */}
-                    <div className='space-y-6'>
-                        <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
-                            RINGKASAN
-                        </SectionBadge>
 
-                        <h1 className='text-4xl leading-tight font-bold text-slate-900 lg:text-5xl'>
-                            Pengakuan & Peran Global
-                        </h1>
-
-                        <p className='max-w-md text-sm text-slate-600 md:text-base'>
-                            Tiga pilar yang memperkuat posisi INFID dalam advokasi kebijakan dan kolaborasi
-                            internasional.
-                        </p>
-                    </div>
+                    <SectionHeader
+                        badge='RINGKASAN'
+                        badgeProps={{
+                            textColor: 'text-slate-500',
+                            lineColor: 'bg-primary-400'
+                        }}
+                        title=' Pengakuan & Peran Global'
+                        description='Tiga pilar yang memperkuat posisi INFID dalam advokasi kebijakan dan kolaborasi
+                            internasional.'
+                        titleClassName='text-primary-900'
+                        descriptionClassName='text-primary-700'
+                        className='mb-0'
+                    />
 
                     {/* Right Section - Custom Accordion */}
                     <div className='space-y-4'>

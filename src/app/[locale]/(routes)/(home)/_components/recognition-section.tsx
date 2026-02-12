@@ -36,7 +36,7 @@ const RecognitionSection = () => {
 
     return (
         <section
-            className='bg-secondary-300 relative pt-16 pb-24 lg:pt-24 lg:pb-58'
+            className='bg-secondary-300 relative pt-16 lg:pt-24 lg:pb-58'
             style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
             <div className='relative container'>
                 {/* Header */}

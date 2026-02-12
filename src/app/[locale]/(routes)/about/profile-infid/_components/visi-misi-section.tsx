@@ -22,9 +22,9 @@ export default function VisiMisiInfidSection() {
 
     return (
         <section
-            className='w-full bg-gray-50 py-16'
+            className='w-full bg-gray-50 bg-repeat py-24'
             style={{
-                backgroundImage: "url('/images/bg-pattern.png')"
+                backgroundImage: "url('/logo/bg-pattern-word.png')"
             }}>
             <div className='container'>
                 {/* Header */}

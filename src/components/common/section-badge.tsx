@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 
-interface SectionBadgeProps {
+export interface SectionBadgeProps {
     children: React.ReactNode;
     className?: string;
     textColor?: string;

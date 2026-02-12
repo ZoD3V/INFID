@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import SectionBadge from '@/components/common/section-badge';
+import { SectionHeader } from '@/components/common/section-header';
 import { Button } from '@/components/ui/button';
 
 import { ArrowRight } from 'lucide-react';
@@ -28,7 +28,7 @@ const ProgramSection = () => {
     ];
 
     return (
-        <section className='bg-secondary-100 relative py-16'>
+        <section className='bg-secondary-100 relative py-24'>
             <Image
                 src='/images/decoration-program-1.png'
                 alt='decoration'
@@ -54,13 +54,19 @@ const ProgramSection = () => {
                 <div className='grid gap-8 lg:grid-cols-2 lg:gap-16'>
                     {/* Sticky Text Section */}
                     <div className='h-fit lg:sticky lg:top-25'>
-                        <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
-                            IMPACT STORY
-                        </SectionBadge>
-                        <h2 className='mb-4 text-4xl font-bold text-gray-900 lg:text-5xl'>PROGRAM KAMI</h2>
-                        <p className='mb-6 max-w-md text-sm text-slate-600 md:text-base'>
-                            Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan.
-                        </p>
+                        <SectionHeader
+                            badge='IMPACT STORY'
+                            badgeProps={{
+                                textColor: 'text-slate-500',
+                                lineColor: 'bg-primary-400'
+                            }}
+                            title='PROGRAM KAMI'
+                            description='Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan.'
+                            titleClassName='text-primary-900'
+                            descriptionClassName='text-primary-700'
+                            className='mb-20'
+                        />
+
                         {/* CTA Button */}
                         <button className='group inline-flex cursor-pointer items-center gap-2 border-b border-slate-900 pb-2 text-sm font-semibold lg:mt-8'>
                             Baca Selengkapnya

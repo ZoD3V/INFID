@@ -4,7 +4,7 @@ import { ArrowRight, Users } from 'lucide-react';
 
 const AboutUsSection = () => {
     return (
-        <section className='bg-secondary-100 relative py-16 lg:py-24' id='about-us'>
+        <section className='bg-secondary-100 relative py-24' id='about-us'>
             <Image
                 src='/images/decoration-about-us-2.png'
                 alt='images'
@@ -86,7 +86,7 @@ const AboutUsSection = () => {
                                     <h3 className='mb-1 text-base font-bold text-gray-900 lg:mb-2 lg:text-lg'>
                                         Lebih dari 80 organisasi anggota
                                     </h3>
-                                    <p className='text-sm leading-relaxed text-gray-600'>
+                                    <p className='text-sm leading-relaxed text-gray-600 md:text-base'>
                                         Tersebar di seluruh nusantara, bekerja bersama untuk memastikan kebijakan publik
                                         berpihak pada keadilan sosial.
                                     </p>

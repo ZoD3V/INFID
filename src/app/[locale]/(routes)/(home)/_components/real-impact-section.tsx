@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import SectionBadge from '@/components/common/section-badge';
+import { SectionHeader } from '@/components/common/section-header';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
@@ -14,20 +14,16 @@ const RealImpactSection = () => {
 
     return (
         <section
-            className='bg-primary relative overflow-hidden py-16'
+            className='bg-primary relative overflow-hidden py-24'
             style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
             <div className='container'>
                 {/* Header */}
-                <div className='mb-12'>
-                    <SectionBadge>IMPACT STORY</SectionBadge>
-                    <h1 className='text-secondary-200 mb-4 text-4xl font-bold lg:text-5xl'>
-                        Cerita perubahan dari kerja bersama di lapangan
-                    </h1>
-                    <p className='max-w-3xl text-sm text-slate-200'>
-                        Setiap program menghadirkan cerita nyata. Baca ringkasan dampak, lalu telusuri kisah lengkapnya
-                        seperti membaca blog.
-                    </p>
-                </div>
+                <SectionHeader
+                    badge='IMPACT STORY'
+                    title='Cerita perubahan dari kerja bersama di lapangan'
+                    description='Setiap program menghadirkan cerita nyata. Baca ringkasan dampak, lalu telusuri kisah lengkapnya
+                        seperti membaca blog.'
+                />
 
                 {/* Bento Grid */}
                 <div className='grid grid-cols-1 gap-5 md:grid-cols-12'>

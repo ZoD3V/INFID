@@ -58,7 +58,7 @@ const ResearchFellowSection = () => {
                     { label: 'INFID Research Fellow', active: true }
                 ]}
             />
-            <div className='relative container py-16'>
+            <div className='relative container py-24'>
                 <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                     {profiles.map((profile, index) => (
                         <ProfileCard key={index} name={profile.name} title={profile.title} image={profile.image} />

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import SectionBadge from '@/components/common/section-badge';
+import { SectionHeader } from '@/components/common/section-header';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 import { Founder, PeopleGrid } from './people-grid';
@@ -149,18 +150,18 @@ export const InfidTimeline = () => {
         <div className='bg-secondary-100 min-h-screen py-24'>
             <div className='container'>
                 {/* Header */}
-                <div className='mb-16'>
-                    <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
-                        JEJAK PERJALANAN
-                    </SectionBadge>
-
-                    <h1 className='text-4xl leading-tight font-bold text-slate-900 lg:text-5xl'>Perjalanan INFID</h1>
-
-                    <p className='max-w-md text-sm text-slate-600 md:text-base'>
-                        Tonggak perjalanan INFID dalam memperjuangkan demokrasi, keadilan sosial, dan hak asasi manusia
-                        di tingkat nasional dan global.
-                    </p>
-                </div>
+                <SectionHeader
+                    badge='JEJAK PERJALANAN'
+                    badgeProps={{
+                        textColor: 'text-slate-500',
+                        lineColor: 'bg-primary-400'
+                    }}
+                    title='Perjalanan INFID'
+                    description='Tonggak perjalanan INFID dalam memperjuangkan demokrasi, keadilan sosial, dan hak asasi manusia
+                        di tingkat nasional dan global.'
+                    titleClassName='text-primary-900'
+                    descriptionClassName='text-primary-700'
+                />
 
                 {/* Timeline */}
                 <div className='mb-16'>

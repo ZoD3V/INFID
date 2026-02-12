@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import SectionBadge from '@/components/common/section-badge';
+import { SectionHeader } from '@/components/common/section-header';
 
 export const ProgramINFIDSection = () => {
     const programs = [
@@ -35,16 +36,18 @@ export const ProgramINFIDSection = () => {
             />
             <div className='container'>
                 {/* Header */}
-                <div className='mb-12'>
-                    <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
-                        FOKUS UTAMA
-                    </SectionBadge>
-                    <h2 className='mb-4 text-4xl font-bold text-gray-900 lg:text-5xl'>Program INFID</h2>
-                    <p className='mb-6 max-w-md text-sm text-slate-600 md:text-base'>
-                        Program INFID dirancang untuk memperkuat demokrasi, keadilan sosial, dan perlindungan hak asasi
-                        manusia melalui advokasi kebijakan berbasis bukti.
-                    </p>
-                </div>
+                <SectionHeader
+                    badge='FOKUS UTAMA'
+                    badgeProps={{
+                        textColor: 'text-slate-500',
+                        lineColor: 'bg-primary-400'
+                    }}
+                    title='Program INFID'
+                    description='Program INFID dirancang untuk memperkuat demokrasi, keadilan sosial, dan perlindungan hak asasi
+                        manusia melalui advokasi kebijakan berbasis bukti.'
+                    titleClassName='text-primary-900'
+                    descriptionClassName='text-primary-700'
+                />
 
                 {/* Program Cards */}
 

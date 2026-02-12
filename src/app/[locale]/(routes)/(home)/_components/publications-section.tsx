@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 
-import CommunitySection from './community-section';
 import { ArrowRight, Eye, MessageSquareMore, Pencil } from 'lucide-react';
 
 const PublicationsSection = () => {
@@ -62,7 +61,7 @@ const PublicationsSection = () => {
     ];
 
     return (
-        <section className='relative bg-slate-50 py-16'>
+        <section className='relative bg-slate-50 py-24'>
             <div className='container'>
                 {/* Header */}
                 <div className='mb-8'>

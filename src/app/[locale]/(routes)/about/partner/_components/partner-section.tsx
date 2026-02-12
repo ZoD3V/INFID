@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import PageHeader from '@/components/common/background-section';
 import { Partner, PartnerCard } from '@/components/common/partner-card';
-import SectionBadge from '@/components/common/section-badge';
+import { SectionHeader } from '@/components/common/section-header';
 
 const PartnersSection = () => {
     const nationalPartners: Partner[] = [
@@ -42,7 +42,7 @@ const PartnersSection = () => {
                     { label: 'Mitra INFID', active: true }
                 ]}
             />
-            <div className='relative container py-16'>
+            <div className='relative container py-24'>
                 <Image
                     src='/images/decoration-about-us-2.png'
                     alt='images'
@@ -52,20 +52,23 @@ const PartnersSection = () => {
                 />
                 {/* Header */}
 
-                <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
-                    JARINGAN & KOLABORASI
-                </SectionBadge>
-
-                <h1 className='mb-4 text-4xl leading-tight font-bold text-slate-900 lg:text-5xl'>Mitra Kami</h1>
-
-                <p className='max-w-3xl text-sm text-slate-900 md:text-base'>
-                    Kami bekerja sama dengan berbagai organisasi nasional dan internasional untuk mewujudkan pembangunan
-                    yang inklusif dan berkelanjutan.
-                </p>
+                <SectionHeader
+                    badge='JARINGAN & KOLABORASI'
+                    badgeProps={{
+                        textColor: 'text-slate-500',
+                        lineColor: 'bg-primary-400'
+                    }}
+                    title='Mitra Kami'
+                    description='Kami bekerja sama dengan berbagai organisasi nasional dan internasional untuk mewujudkan pembangunan
+                    yang inklusif dan berkelanjutan.'
+                    titleClassName='text-primary-900'
+                    descriptionClassName='text-primary-700 max-w-3xl'
+                    className='mb-0'
+                />
 
                 {/* National Partners */}
                 <div>
-                    <div className='flex items-center py-16'>
+                    <div className='flex items-center py-24'>
                         <div className='grow border-t border-gray-200'></div>
 
                         <h3 className='text-primary-500 mx-4 text-center text-xl font-semibold md:text-2xl'>
@@ -84,7 +87,7 @@ const PartnersSection = () => {
 
                 {/* International Partners */}
                 <div>
-                    <div className='flex items-center py-16'>
+                    <div className='flex items-center py-24'>
                         <div className='grow border-t border-gray-200'></div>
 
                         <h3 className='text-primary-500 mx-4 text-center text-xl font-semibold md:text-2xl'>

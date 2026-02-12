@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import PageHeader from '@/components/common/background-section';
-import SectionBadge from '@/components/common/section-badge';
+import { SectionHeader } from '@/components/common/section-header';
 import { formatLabel } from '@/lib/utils';
 
 import OrganizationStructure from './_components/organization-section';
@@ -24,7 +24,7 @@ const StructureOrganizationPage = () => {
                     { label: 'Struktur Organisasi', active: true }
                 ]}
             />
-            <div className='relative container py-16'>
+            <div className='relative container py-24'>
                 <Image
                     src='/images/decoration-about-us-2.png'
                     alt='images'
@@ -34,18 +34,19 @@ const StructureOrganizationPage = () => {
                 />
                 {/* Header */}
 
-                <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
-                    ORGANISASI
-                </SectionBadge>
-
-                <h1 className='mb-4 text-4xl leading-tight font-bold text-slate-900 lg:text-5xl'>
-                    Struktur Organisasi
-                </h1>
-
-                <p className='max-w-3xl text-sm text-slate-900 md:text-base'>
-                    Struktur organisasi INFID mencerminkan tata kelola yang kolektif, akuntabel, dan berbasis kolaborasi
-                    untuk mendukung advokasi kebijakan dan penguatan masyarakat sipil.
-                </p>
+                <SectionHeader
+                    badge='ORGANISASI'
+                    badgeProps={{
+                        textColor: 'text-slate-500',
+                        lineColor: 'bg-primary-400'
+                    }}
+                    title=' Struktur Organisasi'
+                    description='Struktur organisasi INFID mencerminkan tata kelola yang kolektif, akuntabel, dan berbasis kolaborasi
+                    untuk mendukung advokasi kebijakan dan penguatan masyarakat sipil.'
+                    titleClassName='text-primary-900'
+                    descriptionClassName='text-primary-700 max-w-3xl'
+                    className='mb-0'
+                />
 
                 <div className='mt-12 flex justify-start gap-4 overflow-x-auto'>
                     {Object.keys(organizationStructures).map((key) => (
