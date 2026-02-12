@@ -64,7 +64,7 @@ const CareerPage = () => {
                 ]}
             />
 
-            <div className='w-full border-b bg-white py-5'>
+            <div className='sticky top-16 z-20 w-full border bg-white py-4'>
                 <div className='container flex flex-wrap items-center justify-between gap-4'>
                     {/* CATEGORY FILTERS */}
                     <div className='flex flex-wrap gap-2'>

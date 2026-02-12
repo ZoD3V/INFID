@@ -61,11 +61,12 @@ export function SingleDatePicker({ value, onChange, className }: Props) {
                 <PopoverTrigger asChild>
                     <Button
                         variant='outline'
+                        size='sm'
                         className={cn(
                             'w-full justify-start text-left font-normal lg:w-50',
                             !value && 'text-muted-foreground'
                         )}>
-                        <CalendarIcon className='mr-2 h-4 w-4' />
+                        <CalendarIcon className='mr-4 h-4 w-4' />
                         <span className='truncate'>{label}</span>
                     </Button>
                 </PopoverTrigger>
