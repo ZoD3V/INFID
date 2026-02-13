@@ -36,14 +36,14 @@ const Home = () => {
                         </div>
 
                         {/* Main Heading */}
-                        <div className='space-y-0 leading-[0.95]'>
-                            <h1 className='text-6xl font-extrabold text-white lg:text-7xl'>SUARA</h1>
-
-                            <h1 className='bg-linear-to-r from-[#F4C75C] to-[#F59D41] bg-clip-text text-6xl font-extrabold text-transparent lg:text-7xl'>
-                                KEADILAN
+                        <div className='space-y-5 leading-[0.95]'>
+                            <h1 className='text-3xl font-extrabold text-white lg:text-4xl'>
+                                Saatnya Pembangunan yang Mengangkat Semua, Bukan Meninggalkan Sebagian
                             </h1>
 
-                            <h1 className='text-6xl font-extrabold text-white lg:text-7xl'>SOSIAL</h1>
+                            <h1 className='text-xl font-extrabold text-white lg:text-2xl'>
+                                Ketimpangan adalah hasil dari pilihan kebijakan.
+                            </h1>
                         </div>
 
                         {/* Description */}
@@ -82,13 +82,13 @@ const Home = () => {
                             <div className='space-y-6'>
                                 {/* Stat 1 */}
                                 <div className='space-y-2'>
-                                    <div className='text-3xl font-bold text-white'>80+</div>
+                                    <div className='text-3xl font-bold text-white'>80</div>
                                     <div className='text-sm text-gray-400 lg:text-base'>Organisasi Anggota</div>
                                 </div>
 
                                 {/* Stat 2 */}
                                 <div className='space-y-2'>
-                                    <div className='text-3xl font-bold text-white'>120+</div>
+                                    <div className='text-3xl font-bold text-white'>200+</div>
                                     <div className='text-sm text-gray-400 lg:text-base'>Rekomendasi Kebijakan</div>
                                 </div>
 

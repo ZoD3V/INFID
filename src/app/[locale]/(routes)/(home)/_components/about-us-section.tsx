@@ -53,9 +53,7 @@ const AboutUsSection = () => {
                         </div>
 
                         <h2 className='text-primary mb-6 text-4xl leading-tight font-bold lg:text-5xl'>
-                            Ketahui lebih dalam
-                            <br />
-                            tentang INFID
+                            Mengawal Pembangunan Berkeadilan
                         </h2>
 
                         <div className='space-y-4 text-left text-base leading-relaxed text-slate-600'>
@@ -84,11 +82,11 @@ const AboutUsSection = () => {
                                 <Image src='/icons/ic-user-signal.png' alt='icon' width={50} height={50} />
                                 <div>
                                     <h3 className='mb-1 text-base font-bold text-gray-900 lg:mb-2 lg:text-lg'>
-                                        Lebih dari 80 organisasi anggota
+                                        Memiliki 80 organisasi anggota
                                     </h3>
                                     <p className='text-sm leading-relaxed text-gray-600 md:text-base'>
-                                        Tersebar di seluruh nusantara, bekerja bersama untuk memastikan kebijakan publik
-                                        berpihak pada keadilan sosial.
+                                        Tersebar di seluruh nusantara, bekerja bersama untuk mengenal lebih dalam
+                                        kebijakan publik berpihak pada keadilan sosial.
                                     </p>
                                 </div>
                             </div>

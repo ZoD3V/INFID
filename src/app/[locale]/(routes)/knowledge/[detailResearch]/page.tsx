@@ -130,7 +130,7 @@ const DetailKnowledgeResearch = () => {
                         <div className='flex items-center justify-between gap-4'>
                             <h3 className='text-secondary-300 font-bold uppercase'>Kegiatan</h3>
 
-                            <Button className='rounded-full'>
+                            <Button className='rounded-full' size={'sm'}>
                                 <Link />
                                 Unduh Lampiran
                             </Button>
@@ -170,7 +170,7 @@ const DetailKnowledgeResearch = () => {
                             }}
                         />
                         <div className='flex w-full flex-col items-start justify-between gap-4 border-y border-dashed py-5 md:flex-row md:items-center'>
-                            <h3 className='text-secondary-300 font-bold uppercase'>Kegiatan</h3>
+                            <h3 className='text-secondary-300 font-bold uppercase'>Riset</h3>
                             <div className='flex items-center gap-2'>
                                 <FacebookShareButton url={'/'} title={'title'}>
                                     <FacebookIcon size={32} round />

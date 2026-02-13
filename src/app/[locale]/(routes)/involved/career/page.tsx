@@ -55,13 +55,15 @@ const CareerPage = () => {
     return (
         <section className='w-full bg-slate-50'>
             <PageHeader
-                title='Karir'
+                title='Bertumbuh Bersama Kami'
+                showDescription={true}
+                description='INFID bekerja berlandaskan keberagaman, tanpa memandang suku, agama, ras, warna kulit, kewarganegaraan, dan kemampuan fisik. Fokus pada kompetensi dan semangat beradvokasi, serta berkolaborasi.'
                 backgroundImage='/images/background-about-us.webp'
                 breadcrumbs={[
                     { label: 'Beranda', href: '/' },
-                    { label: 'Ayo Terlibat', href: '/news-from-us' },
                     { label: 'Karir', active: true }
                 ]}
+                containerClassName='h-[300px] pt-8'
             />
 
             <div className='sticky top-16 z-20 w-full border bg-white py-4'>

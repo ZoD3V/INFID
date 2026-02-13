@@ -19,10 +19,9 @@ const RealImpactSection = () => {
             <div className='container'>
                 {/* Header */}
                 <SectionHeader
-                    badge='IMPACT STORY'
-                    title='Cerita perubahan dari kerja bersama di lapangan'
-                    description='Setiap program menghadirkan cerita nyata. Baca ringkasan dampak, lalu telusuri kisah lengkapnya
-                        seperti membaca blog.'
+                    badge='Bergerak, Berdampak'
+                    title='Dampak perubahan dari kerja bersama di lapangan'
+                    description='Setiap program menghadirkan cerita nyata. Simak ringkasan dampak, lalu telusuri kisah lengkapnya seperti membaca blog.'
                 />
 
                 {/* Bento Grid */}
@@ -213,13 +212,14 @@ const RealImpactSection = () => {
                         <div className='px-5 pb-5 lg:pt-0'>
                             <div className='space-y-2 lg:space-y-4'>
                                 <h3 className='group-hover:text-primary-500 line-clamp-2 text-xl leading-snug font-bold transition-colors lg:text-2xl'>
-                                    Jelajahi semua Impact Stories
+                                    Jelajahi semua kisah{' '}
+                                    <span className='font-extrabold italic'>Bergerak, Berdampak</span>
                                 </h3>
                                 <p className='max-w-3xl text-base'>
                                     Temukan lebih banyak cerita perubahan, pembelajaran, dan dokumentasi program dalam
                                     format artikel.
                                 </p>
-                                <Button className='w-full rounded-full'>Lihat Semua Cerita</Button>
+                                <Button className='w-full rounded-full'>Simak Semua Cerita</Button>
                             </div>
                         </div>
                     </div>

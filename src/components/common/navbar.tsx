@@ -90,7 +90,7 @@ export function Navbar() {
         <header
             className={cn(
                 'fixed top-0 z-50 w-full transition-all duration-300',
-                isScrolled ? 'bg-white' : 'bg-transparent'
+                isScrolled ? 'bg-white shadow' : 'bg-transparent'
             )}>
             <nav className='container flex h-16 items-center justify-between'>
                 {/* Logo/Brand */}

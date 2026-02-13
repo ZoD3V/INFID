@@ -17,17 +17,21 @@ interface BreadcrumbItemType {
 
 interface PageHeaderProps {
     title: string;
+    description?: string;
     backgroundImage: string;
     breadcrumbs: BreadcrumbItemType[];
     showTitle?: boolean;
+    showDescription?: boolean;
     containerClassName?: string;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({
     title,
+    description,
     backgroundImage,
     breadcrumbs,
     showTitle = true,
+    showDescription = false,
     containerClassName = 'h-48 md:h-52 lg:h-67 pt-8'
 }) => {
     return (
@@ -73,6 +77,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({
                                 {title}
                             </h1>
                         )}
+
+                        {showDescription && <p className='text-start text-sm text-white md:text-base'>{description}</p>}
                     </div>
                 </div>
             </div>

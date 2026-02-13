@@ -43,10 +43,9 @@ export const ProgramINFIDSection = () => {
                         lineColor: 'bg-primary-400'
                     }}
                     title='Program INFID'
-                    description='Program INFID dirancang untuk memperkuat demokrasi, keadilan sosial, dan perlindungan hak asasi
-                        manusia melalui advokasi kebijakan berbasis bukti.'
+                    description='Program INFID dirancang untuk memperkuat ekosistem organisasi masyarakat sipil, demokrasi, keadilan sosial, dan perlindungan hak asasi manusia melalui advokasi kebijakan berbasis bukti.'
                     titleClassName='text-primary-900'
-                    descriptionClassName='text-primary-700'
+                    descriptionClassName='text-primary-700 max-w-3xl'
                 />
 
                 {/* Program Cards */}

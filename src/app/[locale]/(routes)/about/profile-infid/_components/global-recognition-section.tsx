@@ -10,21 +10,21 @@ export default function GlobalRecognitionSection() {
             id: '01',
             title: 'Terakreditasi oleh Perserikatan Bangsa-Bangsa (PBB) dengan UN Special Consultative Status with the Economic and Social Council (ECOSOC).',
             content:
-                'INFID berperan dalam mengawal pembangunan di daerah-daerah di Indonesia dengan memberikan masukan-masukan strategis, serta berbagi pengalaman dengan sesama komite dari berbagai negara. INFID juga mewakili OGP dalam berbagai forum tingkat tinggi untuk berbagi pengalaman praktik baik dalam membangun agenda pemerintahan terbuka.',
+                'Menyandang status ini sejak 2004, INFID memiliki akses untuk terlibat dalam berbagai konferensi internasional yang diselenggarakan oleh PBB, seperti High Level Political Forum untuk membahas agenda pembangunan berkelanjutan yang diadakan setiap bulan Juli, serta Sidang Umum setiap bulan September.',
             defaultOpen: true
         },
         {
             id: '02',
-            title: 'Berpartisipasi aktif dalam berbagai forum internasional.',
+            title: 'Anggota aktif sejumlah forum organisasi masyarakat sipil global.',
             content:
-                'INFID aktif dalam forum-forum internasional untuk memperjuangkan isu-isu pembangunan dan kebijakan global yang berdampak pada masyarakat Indonesia.',
+                'INFID merupakan anggota aktif di FORUS sejak 2009, sebuah jaringan NGO global yang mewadahi forum-forum NGO nasional di seluruh dunia yang berbasis di Paris, Prancis. INFID juga bagian dari Beyond 2015, TAP Network, dan SDSN, yaitu inisiatif-inisiatif global yang bertujuan untuk mendorong pelaksanaan dan pencapaian Sustainable Development Goals (SDGs) pada 2022.',
             defaultOpen: false
         },
         {
             id: '03',
-            title: 'Terpilih menjadi Envoy dan Steering Committee dalam Open Government Partnership (OGP Global).',
+            title: 'Memimpin berbagai advokasi global.',
             content:
-                'Sebagai Envoy dan anggota Steering Committee OGP Global, INFID berperan dalam memimpin dan mengarahkan agenda transparansi dan akuntabilitas pemerintahan di tingkat global.',
+                'INFID berperan dalam mengawal pembangunan di daerah-daerah di Indonesia dengan memberikan masukan-masukan strategis, serta berkolaborasi bersama organisasi masyarakat sipil dunia untuk mengangkat agenda pembangunan berkeadilan ke tingkat global. INFID ditunjuk sebagai Envoy dan Steering Committee dalam Open Government Partnership (OGP Global) dalam agenda membangun pemerintahan terbuka. Pada 2022, INFID dipercaya menjadi Chair Civil20 (C20) dalam G20 Indonesia dan membangun solidaritas bersama ratusan civil society organisations (CSOs) global di forum G20.',
             defaultOpen: false
         }
     ];

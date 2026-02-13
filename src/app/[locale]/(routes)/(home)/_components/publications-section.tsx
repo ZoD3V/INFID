@@ -90,7 +90,7 @@ const PublicationsSection = () => {
                         {/* Link */}
                         <div className='flex justify-end'>
                             <button className='group mt-6 inline-flex cursor-pointer items-center gap-2 border-b border-slate-900 pb-2 text-sm font-semibold lg:mt-8'>
-                                Lihat Semua Publikasi
+                                Telusuri Semua Publikasi
                                 <ArrowRight className='h-5 w-5 transition-transform group-hover:translate-x-1' />
                             </button>
                         </div>

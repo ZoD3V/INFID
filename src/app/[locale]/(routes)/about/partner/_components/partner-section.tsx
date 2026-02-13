@@ -34,12 +34,12 @@ const PartnersSection = () => {
     return (
         <section className='bg-gray-50'>
             <PageHeader
-                title='Mitra INFID'
+                title='Mitra Pembangunan'
                 backgroundImage='/images/background-about-us.webp'
                 breadcrumbs={[
                     { label: 'Beranda', href: '/' },
                     { label: 'Tentang Kami', href: '/' },
-                    { label: 'Mitra INFID', active: true }
+                    { label: 'Mitra Pembangunan', active: true }
                 ]}
             />
             <div className='relative container py-24'>
@@ -58,7 +58,7 @@ const PartnersSection = () => {
                         textColor: 'text-slate-500',
                         lineColor: 'bg-primary-400'
                     }}
-                    title='Mitra Kami'
+                    title='Mitra Pembangunan'
                     description='Kami bekerja sama dengan berbagai organisasi nasional dan internasional untuk mewujudkan pembangunan
                     yang inklusif dan berkelanjutan.'
                     titleClassName='text-primary-900'

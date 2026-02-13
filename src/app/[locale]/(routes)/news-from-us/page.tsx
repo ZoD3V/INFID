@@ -90,11 +90,11 @@ export default function NewsFromUsPage() {
             <PageHeaderSearch
                 defaultValue={filters.search}
                 onSearch={(val) => setFilters((f) => ({ ...f, search: val }))}
-                badge='Berita Terhangat'
+                badge='Ikuti Perkembangan'
                 title='Dapatkan kabar'
                 highlight='terbaru'
                 endTitle='dari kami'
-                description='Temukan artikel blog terkini, analisis mendalam, dan wawasan ahli tentang pembangunan Indonesia yang berkelanjutan.'
+                description='Temukan artikel blog terkini, analisis mendalam, dan wawasan ahli tentang pembangunan Indonesia yang berkeadilan.'
             />
 
             <div className='sticky top-16 z-20 w-full border bg-white py-5'>

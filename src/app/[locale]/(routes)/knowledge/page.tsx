@@ -12,8 +12,6 @@ import { FeaturedNewsSkeleton } from '@/components/common/featured-news-skeleton
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 
-import { FeaturedNews } from '../news-from-us/_components/featured-news';
-import { featuredNews } from '../news-from-us/data/featured-news';
 import { ArticleCarousel } from './_components/carousel-knowledge';
 import { articlesKnowledge, authorsKnowledge, categoriesKnowledge, yearsKnowledge } from './data/data';
 
@@ -91,11 +89,11 @@ export default function KnowledgePage() {
             <PageHeaderSearch
                 defaultValue={filters.search}
                 onSearch={(val) => setFilters((f) => ({ ...f, search: val }))}
-                badge='knowledge center'
+                badge='PUSAT PENGETAHUAN'
                 title='Jelajahi'
                 highlight='gagasan'
                 endTitle='masa depan'
-                description='Kumpulan riset, data, dan perspektif terkini untuk pembangunan Indonesia yang inklusif dan berkelanjutan.'
+                description='Kumpulan riset, data, dan perspektif terkini untuk pembangunan Indonesia yang berkeadilan, inklusif, dan berkelanjutan.'
             />
 
             <div className='sticky top-16 z-20 w-full border bg-white py-5'>

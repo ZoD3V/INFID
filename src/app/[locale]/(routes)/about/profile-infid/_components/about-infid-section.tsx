@@ -39,7 +39,7 @@ const AboutInfid = () => {
                         <BreadcrumbSeparator className='text-secondary-200 hover:text-secondary-300' />
                         <BreadcrumbItem>
                             <BreadcrumbLink className='text-secondary-200 hover:text-secondary-300 font-bold'>
-                                Profil INFID
+                                Perjuangan INFID
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                     </BreadcrumbList>

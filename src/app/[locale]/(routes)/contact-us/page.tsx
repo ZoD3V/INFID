@@ -45,7 +45,7 @@ const ContactUs = () => {
                     <div className='z-10 flex flex-col items-center justify-center gap-4 lg:gap-6'>
                         <div className='inline-flex w-fit items-center gap-2 rounded-full border border-white/20 px-3 py-2 backdrop-blur-sm'>
                             <span className='h-2 w-2 animate-pulse rounded-full bg-orange-500'></span>
-                            <p className='text-xs font-medium tracking-wide text-white'>GET IN TOUCH</p>
+                            <p className='text-xs font-medium tracking-wide text-white'>Mari Berkontak</p>
                         </div>
                         {/* Title */}
                         <h2 className='text-3xl font-bold tracking-wide text-white md:text-4xl lg:text-5xl'>
@@ -82,7 +82,7 @@ const ContactUs = () => {
                         </div>
                         <div>
                             <h3 className='text-base font-semibold text-gray-800'>Kontak</h3>
-                            <p className='text-primary-900 text-sm'>Telpon : +62 21 781 9734</p>
+                            <p className='text-primary-900 text-sm'>Telepon : +62 21 781 9734</p>
                             <p className='text-primary-900 text-sm'>Whatsapp : +628119277507</p>
                         </div>
                     </div>
