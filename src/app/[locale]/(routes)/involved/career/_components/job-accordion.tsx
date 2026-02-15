@@ -48,7 +48,7 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                             {item.status}
                                         </Badge>
                                         <span className='text-sm text-slate-500'>
-                                            Deadline: {format(new Date(item.deadline), 'dd MMM yyyy')}
+                                            Batas Waktu: {format(new Date(item.deadline), 'dd MMM yyyy')}
                                         </span>
                                     </div>
 
