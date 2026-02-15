@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { ArrowRight, ChevronUp, MailIcon, PhoneCall } from 'lucide-react';
-import { BsWhatsapp } from 'react-icons/bs';
-import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';
+import { BsTwitterX, BsWhatsapp } from 'react-icons/bs';
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
     const pathname = usePathname();
@@ -60,20 +60,11 @@ const Footer = () => {
 
                             <a
                                 href='https://www.facebook.com/DppPartaiRakyat/'
-                                aria-label='Facebook'
+                                aria-label='Linkedin'
                                 target='_blank'
                                 rel='noreferrer'
                                 className='flex items-center justify-center text-white transition-transform hover:scale-110'>
-                                <FaFacebook className='text-xl' />
-                            </a>
-
-                            <a
-                                href='https://www.tiktok.com/@dpp.pri'
-                                aria-label='TikTok'
-                                target='_blank'
-                                rel='noreferrer'
-                                className='flex items-center justify-center text-white transition-transform hover:scale-110'>
-                                <FaTiktok className='text-xl' />
+                                <FaLinkedin className='text-xl' />
                             </a>
 
                             <a
@@ -83,6 +74,22 @@ const Footer = () => {
                                 rel='noreferrer'
                                 className='flex items-center justify-center text-white transition-transform hover:scale-110'>
                                 <FaYoutube className='text-xl' />
+                            </a>
+                            <a
+                                href='https://www.tiktok.com/@dpp.pri'
+                                aria-label='Facebook'
+                                target='_blank'
+                                rel='noreferrer'
+                                className='flex items-center justify-center text-white transition-transform hover:scale-110'>
+                                <FaFacebook className='text-xl' />
+                            </a>
+                            <a
+                                href='https://www.tiktok.com/@dpp.pri'
+                                aria-label='X'
+                                target='_blank'
+                                rel='noreferrer'
+                                className='flex items-center justify-center text-white transition-transform hover:scale-110'>
+                                <BsTwitterX className='text-xl' />
                             </a>
                         </div>
                     </div>

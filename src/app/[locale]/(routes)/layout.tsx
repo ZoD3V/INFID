@@ -5,7 +5,6 @@ import '@/app/globals.css';
 import DarkModeSwitch from '@/components/common/dark-mode-switch';
 import Footer from '@/components/common/footer';
 import HomeFloatingCard from '@/components/common/home-floating-card';
-import LanguageSwitcher from '@/components/common/language-switcher';
 import { Navbar } from '@/components/common/navbar';
 import { Toaster } from '@/components/ui/sonner';
 
@@ -38,6 +37,7 @@ export default async function HomeLayout({
 }) {
     const { locale } = await params;
     const messages = await getMessages();
+
     return (
         <html suppressHydrationWarning lang={locale} data-scroll-behavior='smooth'>
             <body className={`${montserrat.className} text-foreground overscroll-none bg-white antialiased`}>

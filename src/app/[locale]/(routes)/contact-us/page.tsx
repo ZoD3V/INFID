@@ -108,19 +108,19 @@ const ContactUs = () => {
                         <h3 className='mb-4 text-lg font-bold text-gray-800'>Ikuti Kami</h3>
                         <div className='flex gap-4'>
                             <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <FaFacebook className='h-6 w-6' />
-                            </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
                                 <FaInstagram className='h-6 w-6' />
                             </button>
                             <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
                                 <FaLinkedin className='h-6 w-6' />
                             </button>
                             <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <FaTwitter className='h-6 w-6' />
+                                <FaYoutube className='h-6 w-6' />
                             </button>
                             <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <FaYoutube className='h-6 w-6' />
+                                <FaFacebook className='h-6 w-6' />
+                            </button>
+                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                                <FaTwitter className='h-6 w-6' />
                             </button>
                         </div>
                     </div>

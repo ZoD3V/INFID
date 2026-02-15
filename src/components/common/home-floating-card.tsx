@@ -9,12 +9,14 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
 import { ArrowRight, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const STORAGE_KEY = 'home-floating-card-closed';
 
 export default function HomeFloatingCard() {
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
+    const t = useTranslations('Home-Floating');
 
     useEffect(() => {
         if (!pathname) return;
@@ -59,9 +61,7 @@ export default function HomeFloatingCard() {
                 <img src='/logo/logo-floating-card.png' alt='Logo' className='h-10 w-auto object-contain' />
             </div>
 
-            <p className='text-primary-900 mb-4 text-center text-sm font-semibold'>
-                Stay update with our latest news and get involved!
-            </p>
+            <p className='text-primary-900 mb-4 text-center text-sm font-semibold'>{t('home')}</p>
 
             <form className='flex w-full flex-col items-center gap-3' onSubmit={(e) => e.preventDefault()}>
                 <Input

@@ -22,5 +22,8 @@
         "news_press": "Press Release",
         "news_report": "Annual Report",
         "contact": "Contact"
+    },
+    "Home-Floating": {
+        "home": "Stay connected. Be part of the change."
     }
 }

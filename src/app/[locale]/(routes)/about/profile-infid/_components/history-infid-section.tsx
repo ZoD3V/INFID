@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import Image from 'next/image';
+
 import SectionBadge from '@/components/common/section-badge';
 import { SectionHeader } from '@/components/common/section-header';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -147,7 +149,7 @@ export const InfidTimeline = () => {
     };
 
     return (
-        <div className='bg-secondary-100 min-h-screen py-24'>
+        <div className='from-secondary-100 min-h-screen bg-linear-to-b to-transparent pt-24'>
             <div className='container'>
                 {/* Header */}
                 <SectionHeader
@@ -263,6 +265,23 @@ export const InfidTimeline = () => {
                         )}
                     </DialogContent>
                 </Dialog>
+            </div>
+
+            <div
+                className='from-secondary-100 relative mt-12 h-115.5 bg-linear-to-t to-transparent'
+                style={{
+                    backgroundImage: `url('/images/bg-garden.webp'), linear-gradient(180deg, #FAF5E3 0%, rgba(250, 245, 227, 0) 100%)`,
+                    backgroundBlendMode: 'overlay',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                }}>
+                <Image
+                    src='/images/decoration-about.png'
+                    alt='decoration'
+                    width={180}
+                    height={180}
+                    className='absolute top-0 right-0 hidden rotate-265 xl:block'
+                />
             </div>
         </div>
     );
