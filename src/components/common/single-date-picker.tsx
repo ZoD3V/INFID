@@ -52,7 +52,7 @@ export function SingleDatePicker({ value, onChange, className }: Props) {
 
     const label = React.useMemo(() => {
         const dateObj = parseYMD(value);
-        return dateObj ? format(dateObj, 'MMMM d, yyyy', { locale: id }) : 'Pilih tanggal';
+        return dateObj ? format(dateObj, 'MMMM d, yyyy', { locale: id }) : 'dd/mm/yyyy';
     }, [value]);
 
     return (
@@ -63,11 +63,11 @@ export function SingleDatePicker({ value, onChange, className }: Props) {
                         variant='outline'
                         size='sm'
                         className={cn(
-                            'w-full justify-start text-left font-normal lg:w-50',
+                            'w-full justify-start text-left font-normal lg:w-fit',
                             !value && 'text-muted-foreground'
                         )}>
-                        <CalendarIcon className='mr-4 h-4 w-4' />
                         <span className='truncate'>{label}</span>
+                        <CalendarIcon className='mr-2 h-4 w-4' />
                     </Button>
                 </PopoverTrigger>
 

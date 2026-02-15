@@ -84,7 +84,7 @@ const CareerPage = () => {
 
                     {/* DEADLINE FILTER */}
                     <div className='flex items-center gap-2 text-sm'>
-                        Deadline
+                        Batas Waktu
                         <SingleDatePicker value={deadline} onChange={(val) => setDeadline(val)} />
                         {deadline && (
                             <button
