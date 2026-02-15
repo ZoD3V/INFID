@@ -48,9 +48,9 @@ const Home = () => {
 
                         {/* Description */}
                         <p className='max-w-xl border-l border-white pl-4 text-sm leading-relaxed text-slate-200'>
-                            Sejak 1985, kami menghubungkan aspirasi masyarakat sipil dengan kebijakan negara. Membangun{' '}
-                            <span className='font-semibold text-white'>Indonesia</span> yang demokratis, inklusif, dan
-                            berkelanjutan.
+                            Sejak 1985, kami menghubungkan suara masyarakat sipil dengan kebijakan negara.
+                            Memperjuangkan pembangunan yang adil, inklusif, dan kebijakan publik yang berpihak pada
+                            keadilan sosial, khususnya kelompok rentan.
                         </p>
 
                         {/* CTA Buttons */}

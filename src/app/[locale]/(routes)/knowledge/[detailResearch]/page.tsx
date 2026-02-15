@@ -1,22 +1,19 @@
 'use client';
 
+import React from 'react';
+
 import Image from 'next/image';
 
 import { ArticleCard } from '@/components/common/article-card';
 import PageHeader from '@/components/common/background-section';
+import CommentSection, { CommentFormValues, CommentType } from '@/components/common/comment-article';
 import { Button } from '@/components/ui/button';
 
 import { articles } from '../../news-from-us/data/data';
 import { Calendar, Eye, Link, MessageSquareMore, Pencil } from 'lucide-react';
 import {
     FacebookIcon,
-    FacebookMessengerIcon,
-    FacebookMessengerShareButton,
     FacebookShareButton,
-    LinkedinIcon,
-    LinkedinShareButton,
-    TelegramIcon,
-    TelegramShareButton,
     TwitterShareButton,
     WhatsappIcon,
     WhatsappShareButton,
@@ -24,6 +21,32 @@ import {
 } from 'react-share';
 
 const DetailKnowledgeResearch = () => {
+    const [dummyComments, setDummyComments] = React.useState<CommentType[]>([
+        {
+            id: 1,
+            nama: 'Budi Santoso',
+            waktu: '2 Jam yang lalu',
+            isi: 'Artikel yang sangat mencerahkan. Saya setuju bahwa literasi digital adalah kunci utama.'
+        },
+        {
+            id: 2,
+            nama: 'Rina Wati',
+            waktu: '5 Jam yang lalu',
+            isi: 'Apakah ada data spesifik mengenai dampak polarisasi terhadap partisipasi pemilih?'
+        }
+    ]);
+
+    const handleAddComment = (values: CommentFormValues) => {
+        const newComment: CommentType = {
+            id: Date.now(),
+            nama: values.nama,
+            waktu: 'Baru saja',
+            isi: values.komentar
+        };
+
+        setDummyComments([...dummyComments, newComment]);
+    };
+
     const handleCopy = () => {
         navigator.clipboard.writeText(window.location.href);
     };
@@ -166,42 +189,34 @@ const DetailKnowledgeResearch = () => {
                         <p>C20 Indonesia juga memperkuat jejaring dengan organisasi masyarakat sipil dari negara-negara G20 lainnya untuk membangun konsensus dan mendorong agenda-agenda yang berpihak pada masyarakat rentan.</p>
                         
                         <p>Pertemuan koordinasi berikutnya direncanakan akan dilaksanakan di Washington DC pada Maret 2026 untuk menyelaraskan strategi advokasi menjelang KTT G20 2026.</p>
-                    `
+                        `
                             }}
                         />
                         <div className='flex w-full flex-col items-start justify-between gap-4 border-y border-dashed py-5 md:flex-row md:items-center'>
-                            <h3 className='text-secondary-300 font-bold uppercase'>Riset</h3>
-                            <div className='flex items-center gap-2'>
-                                <FacebookShareButton url={'/'} title={'title'}>
-                                    <FacebookIcon size={32} round />
-                                </FacebookShareButton>
+                            <h3 className='text-secondary-300 font-bold uppercase'>Kegiatan</h3>
+                            <div className='flex items-center gap-4'>
+                                <p className='text-primary-900 text-sm md:text-base'>Dukung gagasan kami dan bagikan</p>
+                                <div className='flex items-center gap-2'>
+                                    <FacebookShareButton url={'/'} title={'title'}>
+                                        <FacebookIcon size={32} round />
+                                    </FacebookShareButton>
 
-                                <FacebookMessengerShareButton url={'/'} title={'title'} appId='521270401588372'>
-                                    <FacebookMessengerIcon size={32} round />
-                                </FacebookMessengerShareButton>
+                                    <TwitterShareButton url={'/'} title={'title'}>
+                                        <XIcon size={32} round />
+                                    </TwitterShareButton>
 
-                                <TwitterShareButton url={'/'} title={'title'}>
-                                    <XIcon size={32} round />
-                                </TwitterShareButton>
-
-                                <TelegramShareButton url={'/'} title={'title'}>
-                                    <TelegramIcon size={32} round />
-                                </TelegramShareButton>
-
-                                <WhatsappShareButton url={'/'} title={'title'}>
-                                    <WhatsappIcon size={32} round />
-                                </WhatsappShareButton>
-
-                                <LinkedinShareButton url={'/'}>
-                                    <LinkedinIcon size={32} round />
-                                </LinkedinShareButton>
-                                <div
-                                    className='cursor-pointer rounded-full bg-gray-200 p-2'
-                                    onClick={() => handleCopy()}>
-                                    <Link className='h-4 w-4 text-sm' />
+                                    <WhatsappShareButton url={'/'} title={'title'}>
+                                        <WhatsappIcon size={32} round />
+                                    </WhatsappShareButton>
+                                    <div
+                                        className='cursor-pointer rounded-full bg-gray-200 p-2'
+                                        onClick={() => handleCopy()}>
+                                        <Link className='h-4 w-4 text-sm' />
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <CommentSection comments={dummyComments} onSubmit={handleAddComment} />
                     </div>
 
                     <div className='w-full space-y-5 xl:w-[60%]'>

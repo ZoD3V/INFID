@@ -60,7 +60,10 @@
     --color-slate-800: #1e293b;
     --color-slate-900: #0f172a;
     --color-slate-950: #020617;
-
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
     --bg-color: var(--color-50);
     /* --- SHADCN UI --- */
     --background: var(--color-slate-50);
@@ -87,9 +90,8 @@
     /* Border & Input */
     --border: var(--color-slate-200);
     --input: var(--color-slate-200);
-    --ring: var(--color-brand-600);
+    --ring: var(--color-slate-200);
 
-    /* Sidebar tetap menggunakan Navy dari Slate 950 atau Brand 950 */
     --sidebar: var(--color-slate-950);
     --sidebar-foreground: #ffffff;
     --sidebar-primary: var(--color-brand-500);
@@ -121,7 +123,7 @@
     --muted-foreground: oklch(0.708 0 0);
     --accent: oklch(0.269 0 0);
     --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.396 0.141 25.723);
+    --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: oklch(0.637 0.237 25.331);
     --border: oklch(0.269 0 0);
     --input: oklch(0.269 0 0);

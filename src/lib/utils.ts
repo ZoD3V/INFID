@@ -39,3 +39,11 @@ export function formatArticleDate(date: string | Date | null | undefined): strin
 
     return format(parsedDate, 'dd MMM yy', { locale: id });
 }
+
+export const getInitials = (name: string) => {
+    const names = name.trim().split(' ');
+    if (names.length >= 2) {
+        return `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+};

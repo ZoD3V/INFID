@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { JobAccordion } from './_components/job-accordion';
 import { accordionData } from './data/data';
 
-const categories = ['Semua', 'Teknologi', 'Finance', 'Admin'];
+const categories = ['Semua', 'Program', 'Kelembagaan', 'Konsultan'];
 
 const CareerPage = () => {
     const [activeCategory, setActiveCategory] = useState('Semua');
