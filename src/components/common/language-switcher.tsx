@@ -13,7 +13,11 @@ export default function LanguageSwitcher() {
 
     const toggleLanguage = (newLocale: string) => {
         if (newLocale !== locale) {
-            router.replace(pathname, { locale: newLocale });
+            router.replace(pathname, { locale: newLocale, scroll: false });
+
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 50);
         }
     };
 

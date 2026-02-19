@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { Maps } from '@/components/common/maps';
 import { SectionHeader } from '@/components/common/section-header';
 import { Button } from '@/components/ui/button';
 
@@ -28,7 +29,7 @@ const ProgramSection = () => {
     ];
 
     return (
-        <section className='bg-secondary-100 relative py-24'>
+        <section className='bg-secondary-100 relative overflow-hidden py-24'>
             <Image
                 src='/images/decoration-program-1.png'
                 alt='decoration'

@@ -16,7 +16,7 @@ const STORAGE_KEY = 'home-floating-card-closed';
 export default function HomeFloatingCard() {
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
-    const t = useTranslations('Home-Floating');
+    const t = useTranslations('home-floating');
 
     useEffect(() => {
         if (!pathname) return;

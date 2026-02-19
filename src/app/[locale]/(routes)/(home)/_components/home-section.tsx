@@ -4,8 +4,11 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 import { ArrowDown, ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const Home = () => {
+    const t = useTranslations('hero');
+
     const scrollToAbout = () => {
         const element = document.getElementById('about-us');
         if (element) {
@@ -30,27 +33,19 @@ const Home = () => {
                         {/* Tag */}
                         <div className='inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 backdrop-blur-sm'>
                             <span className='h-2 w-2 animate-pulse rounded-full bg-orange-500'></span>
-                            <p className='text-xs font-medium tracking-wide text-white'>
-                                MENGGERAKKAN PERUBAHAN BERSAMA
-                            </p>
+                            <p className='text-xs font-medium tracking-wide text-white'>{t('tagline')}</p>
                         </div>
 
                         {/* Main Heading */}
                         <div className='space-y-5 leading-[0.95]'>
-                            <h1 className='text-3xl font-extrabold text-white lg:text-4xl'>
-                                Saatnya Pembangunan yang Mengangkat Semua, Bukan Meninggalkan Sebagian
-                            </h1>
+                            <h1 className='text-3xl font-extrabold text-white lg:text-4xl'>{t('title')}</h1>
 
-                            <h1 className='text-xl font-extrabold text-white lg:text-2xl'>
-                                Ketimpangan adalah hasil dari pilihan kebijakan.
-                            </h1>
+                            <h1 className='text-xl font-extrabold text-white lg:text-2xl'>{t('subtitle')}</h1>
                         </div>
 
                         {/* Description */}
                         <p className='max-w-xl border-l border-white pl-4 text-sm leading-relaxed text-slate-200'>
-                            Sejak 1985, kami menghubungkan suara masyarakat sipil dengan kebijakan negara.
-                            Memperjuangkan pembangunan yang adil, inklusif, dan kebijakan publik yang berpihak pada
-                            keadilan sosial, khususnya kelompok rentan.
+                            {t('description')}
                         </p>
 
                         {/* CTA Buttons */}
@@ -73,7 +68,7 @@ const Home = () => {
                             {/* Header */}
                             <div className='flex items-center justify-between gap-2 border-b border-white/10 pb-8 lg:pb-4'>
                                 <h3 className='text-sm font-semibold tracking-wide text-white lg:text-xs'>
-                                    DAMPAK KAMI
+                                    {t('titleImpact')}
                                 </h3>
                                 <span className='h-2 w-2 rounded-full bg-orange-500'></span>
                             </div>
@@ -83,19 +78,21 @@ const Home = () => {
                                 {/* Stat 1 */}
                                 <div className='space-y-2'>
                                     <div className='text-3xl font-bold text-white'>80</div>
-                                    <div className='text-sm text-gray-400 lg:text-base'>Organisasi Anggota</div>
+                                    <div className='text-sm text-gray-400 lg:text-base'>{t('memberOrganizations')}</div>
                                 </div>
 
                                 {/* Stat 2 */}
                                 <div className='space-y-2'>
                                     <div className='text-3xl font-bold text-white'>200+</div>
-                                    <div className='text-sm text-gray-400 lg:text-base'>Rekomendasi Kebijakan</div>
+                                    <div className='text-sm text-gray-400 lg:text-base'>
+                                        {t('policyRecommendations')}
+                                    </div>
                                 </div>
 
                                 {/* Stat 3 */}
                                 <div className='space-y-2'>
                                     <div className='text-3xl font-bold text-white'>ECOSOC</div>
-                                    <div className='text-sm text-gray-400 lg:text-base'>Status Konsultatif PBB</div>
+                                    <div className='text-sm text-gray-400 lg:text-base'>{t('consultativeStatus')}</div>
                                 </div>
                             </div>
                         </div>

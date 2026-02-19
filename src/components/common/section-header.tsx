@@ -28,7 +28,7 @@ export function SectionHeader({
     descriptionClassName
 }: SectionHeaderProps) {
     return (
-        <div className={cn('mb-12', align === 'center' && 'mx-auto text-center', className)}>
+        <div className={cn('mb-12', align === 'center' && 'mx-auto flex flex-col items-center text-center', className)}>
             {badge && <SectionBadge {...badgeProps}>{badge}</SectionBadge>}
 
             <h2 className={cn('text-secondary-200 mb-4 text-4xl font-bold lg:text-5xl', titleClassName)}>{title}</h2>

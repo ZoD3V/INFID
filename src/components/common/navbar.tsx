@@ -21,7 +21,7 @@ export function Navbar() {
     const pathname = usePathname();
     const isMobile = useIsMobile();
     const [isOpen, setIsOpen] = React.useState(false);
-    const t = useTranslations('Navbar');
+    const t = useTranslations('navigation');
     const [isScrolled, setIsScrolled] = React.useState(false);
 
     React.useEffect(() => {
