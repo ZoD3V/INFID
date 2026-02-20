@@ -71,7 +71,7 @@ export const PageHeaderSearch: React.FC<PageHeaderSearchProps> = ({
                                 value={value}
                                 onChange={(e) => setValue(e.target.value)}
                                 placeholder={placeholder}
-                                className='rounded-full border-none bg-transparent text-sm text-white focus-visible:ring-0 focus-visible:ring-offset-0'
+                                className='rounded-full border-none bg-transparent text-sm text-white shadow-none placeholder:text-white focus-visible:ring-0 focus-visible:ring-offset-0'
                             />
                         </div>
 
