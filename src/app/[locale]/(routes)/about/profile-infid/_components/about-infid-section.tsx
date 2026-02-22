@@ -1,4 +1,4 @@
-import React from 'react';
+'use client';
 
 import Image from 'next/image';
 
@@ -14,6 +14,20 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, CheckCircle2 } from 'lucide-react';
 
 const AboutInfid = () => {
+    const scrollToProgram = () => {
+        const element = document.getElementById('program-infid');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    const scrollToHistory = () => {
+        const element = document.getElementById('history-infid');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section
             className='bg-hero relative z-20 h-127.5 bg-cover bg-center bg-no-repeat py-24'
@@ -102,8 +116,10 @@ const AboutInfid = () => {
                             </div>
 
                             <div className='grid grid-cols-2 gap-2 sm:flex sm:items-center'>
-                                <Button className='rounded-full font-semibold'>Jelajahi Program</Button>
-                                <Button variant='outline' className='rounded-full'>
+                                <Button className='rounded-full font-semibold' onClick={scrollToProgram}>
+                                    Jelajahi Program
+                                </Button>
+                                <Button variant='outline' className='rounded-full' onClick={scrollToHistory}>
                                     Pelajari Sejarah
                                 </Button>
                             </div>

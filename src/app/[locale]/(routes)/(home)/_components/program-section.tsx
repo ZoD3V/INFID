@@ -29,7 +29,7 @@ const ProgramSection = () => {
     ];
 
     return (
-        <section className='bg-secondary-100 relative overflow-hidden py-24'>
+        <section className='bg-secondary-100 relative py-24'>
             <Image
                 src='/images/decoration-program-1.png'
                 alt='decoration'
@@ -49,7 +49,7 @@ const ProgramSection = () => {
                 alt='images'
                 width={100}
                 height={100}
-                className='absolute right-20 bottom-5 z-30 hidden xl:block'
+                className='absolute right-20 bottom-5 hidden xl:block'
             />
             <div className='container'>
                 <div className='grid gap-8 lg:grid-cols-2 lg:gap-16'>

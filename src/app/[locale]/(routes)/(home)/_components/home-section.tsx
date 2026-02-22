@@ -44,7 +44,7 @@ const Home = () => {
                         </div>
 
                         {/* Description */}
-                        <p className='max-w-xl border-l border-white pl-4 text-sm leading-relaxed text-slate-200'>
+                        <p className='max-w-xl border-l border-white pl-4 text-base leading-relaxed text-slate-200'>
                             {t('description')}
                         </p>
 

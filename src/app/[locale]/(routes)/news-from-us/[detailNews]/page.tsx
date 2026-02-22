@@ -8,6 +8,7 @@ import { ArticleCard } from '@/components/common/article-card';
 import PageHeader from '@/components/common/background-section';
 import CommentSection, { CommentFormValues, CommentType } from '@/components/common/comment-article';
 import { Button } from '@/components/ui/button';
+import { Link as Navigate } from '@/i18n/navigation';
 
 import { articles } from '../data/data';
 import { Calendar, Eye, Link, MessageSquareMore, Pencil } from 'lucide-react';
@@ -279,21 +280,17 @@ const DetailNewsFromUs = () => {
                         <div className='flex flex-col'>
                             <h3 className='pb-5 text-xl font-bold'>Tag</h3>
                             <div className='flex flex-wrap gap-2'>
-                                <div className='text-primary-500 cursor-default rounded-full border bg-white px-4 py-2.5 text-xs font-bold'>
-                                    Berita
-                                </div>
-                                <div className='text-primary-500 cursor-default rounded-full border bg-white px-4 py-2.5 text-xs font-bold'>
-                                    Event
-                                </div>
-                                <div className='text-primary-500 cursor-default rounded-full border bg-white px-4 py-2.5 text-xs font-bold'>
-                                    Nasional
-                                </div>
-                                <div className='text-primary-500 cursor-default rounded-full border bg-white px-4 py-2.5 text-xs font-bold'>
-                                    Internasional
-                                </div>
-                                <div className='text-primary-500 cursor-default rounded-full border bg-white px-4 py-2.5 text-xs font-bold'>
-                                    Pemerintah
-                                </div>
+                                {['Kegiatan', 'Cerita Perubahan', 'Siaran Pers'].map((cat) => (
+                                    <Navigate
+                                        key={cat}
+                                        href={{
+                                            pathname: '/news-from-us',
+                                            query: { category: cat }
+                                        }}
+                                        className='text-primary-500 hover:bg-primary-500 rounded-full border bg-white px-4 py-2.5 text-xs font-bold transition-colors duration-300 hover:text-white'>
+                                        {cat}
+                                    </Navigate>
+                                ))}
                             </div>
                         </div>
                     </div>

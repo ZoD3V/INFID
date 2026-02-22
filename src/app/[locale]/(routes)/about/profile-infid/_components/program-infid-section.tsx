@@ -26,7 +26,7 @@ export const ProgramINFIDSection = () => {
     ];
 
     return (
-        <div className='bg-secondary-100 relative min-h-screen py-24'>
+        <div className='bg-secondary-100 relative min-h-screen py-24' id='program-infid'>
             <Image
                 src='/images/decoration-program-1.png'
                 alt='decoration'
@@ -45,7 +45,7 @@ export const ProgramINFIDSection = () => {
                     title='Program INFID'
                     description='Program INFID dirancang untuk memperkuat ekosistem organisasi masyarakat sipil, demokrasi, keadilan sosial, dan perlindungan hak asasi manusia melalui advokasi kebijakan berbasis bukti.'
                     titleClassName='text-primary-900'
-                    descriptionClassName='text-primary-700 max-w-3xl'
+                    descriptionClassName='text-primary-700 max-w-4xl'
                 />
 
                 {/* Program Cards */}

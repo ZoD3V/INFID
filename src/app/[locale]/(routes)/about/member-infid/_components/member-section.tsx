@@ -1,6 +1,4 @@
-import React from 'react';
-
-import Image from 'next/image';
+'use client';
 
 import PageHeader from '@/components/common/background-section';
 import SectionBadge from '@/components/common/section-badge';
@@ -10,6 +8,20 @@ import RegistrationProcess from './registration-process';
 import { ArrowRight, Landmark, UserSearch } from 'lucide-react';
 
 const MemberSection = () => {
+    const scrollToRequirement = () => {
+        const element = document.getElementById('requirement-infid');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    const scrollToRegistration = () => {
+        const element = document.getElementById('registration-infid');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     const recognitions = [
         {
             title: 'Rekomendasi',
@@ -60,14 +72,16 @@ const MemberSection = () => {
                     yang inklusif, demokratis, dan berkeadilan.
                 </p>
                 <div className='grid grid-cols-2 gap-4 md:flex'>
-                    <Button className='rounded-full'>Lihat Persyaratan</Button>
-                    <Button variant='outline' className='rounded-full bg-white'>
+                    <Button className='rounded-full' onClick={scrollToRequirement}>
+                        Lihat Persyaratan
+                    </Button>
+                    <Button variant='outline' className='rounded-full bg-white' onClick={scrollToRegistration}>
                         Alur Pendaftaran
                     </Button>
                 </div>
             </section>
 
-            <section className='container flex flex-col items-center gap-18 py-24'>
+            <section className='container flex flex-col items-center gap-18 py-24' id='requirement-infid'>
                 <div className='space-y-4'>
                     <h2 className='max-w-3xl text-center text-4xl font-bold text-gray-900 lg:text-5xl'>
                         Persyaratan Anggota

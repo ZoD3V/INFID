@@ -149,7 +149,7 @@ export const InfidTimeline = () => {
     };
 
     return (
-        <div className='from-secondary-100 min-h-screen bg-linear-to-b to-transparent pt-24'>
+        <div className='from-secondary-100 min-h-screen bg-linear-to-b to-transparent pt-24' id='history-infid'>
             <div className='container'>
                 {/* Header */}
                 <SectionHeader
@@ -162,7 +162,7 @@ export const InfidTimeline = () => {
                     description='Tonggak perjalanan INFID dalam memperjuangkan demokrasi, keadilan sosial, dan hak asasi manusia
                         di tingkat nasional dan global.'
                     titleClassName='text-primary-900'
-                    descriptionClassName='text-primary-700'
+                    descriptionClassName='text-primary-700 max-w-3xl'
                 />
 
                 {/* Timeline */}

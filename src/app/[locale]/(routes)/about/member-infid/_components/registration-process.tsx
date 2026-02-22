@@ -33,7 +33,7 @@ const RegistrationProcess = () => {
     ];
 
     return (
-        <section className='bg-secondary-100 w-full py-24'>
+        <section className='bg-secondary-100 w-full py-24' id='registration-infid'>
             <div className='container'>
                 <div className='grid gap-8 lg:grid-cols-2 lg:gap-12'>
                     {/* Left Column */}

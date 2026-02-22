@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/navigation';
 
 const CommunitySection = () => {
     return (
@@ -45,9 +46,11 @@ const CommunitySection = () => {
 
                             <div className='flex gap-4'>
                                 <Button className='w-full rounded-full'>Daftar Anggota</Button>
-                                <Button variant='outline' className='border-primary-500 w-full rounded-full'>
-                                    Hubungi Kami
-                                </Button>
+                                <Link href='/contact-us' className='w-full'>
+                                    <Button variant='outline' className='border-primary-500 w-full rounded-full'>
+                                        Hubungi Kami
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>

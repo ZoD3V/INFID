@@ -22,6 +22,7 @@ const RealImpactSection = () => {
                     badge='Bergerak, Berdampak'
                     title='Dampak perubahan dari kerja bersama di lapangan'
                     description='Setiap program menghadirkan cerita nyata. Simak ringkasan dampak, lalu telusuri kisah lengkapnya seperti membaca blog.'
+                    descriptionClassName='max-w-3xl'
                 />
 
                 {/* Bento Grid */}

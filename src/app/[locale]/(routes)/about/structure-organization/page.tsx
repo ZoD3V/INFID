@@ -43,7 +43,7 @@ const StructureOrganizationPage = () => {
                     title='Para Penggerak Perubahan'
                     description='Kami menyebutnya #INFIDSquad, terdiri dari para penggerak perubahan yang memiliki ketertarikan dan semangat perjuangan pada isu pembangunan. Struktur organisasi INFID mencerminkan tata kelola yang kolektif, akuntabel, dan berbasis kolaborasi untuk mendukung advokasi kebijakan dan penguatan masyarakat sipil.'
                     titleClassName='text-primary-900'
-                    descriptionClassName='text-primary-700 max-w-3xl'
+                    descriptionClassName='text-primary-700 max-w-5xl'
                     className='mb-0'
                 />
 
