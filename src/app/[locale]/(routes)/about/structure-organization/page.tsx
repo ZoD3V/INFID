@@ -14,7 +14,17 @@ const StructureOrganizationPage = () => {
     const [active, setActive] = useState<keyof typeof organizationStructures>('sekretariat_infid');
 
     return (
-        <section className='overflow-hidden bg-slate-100' style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
+        <section className='relative overflow-hidden bg-stone-50'>
+            <div
+                className='absolute inset-0'
+                style={{
+                    backgroundImage: "url('/logo/bg-pattern-word-black.png')",
+                    backgroundRepeat: 'repeat',
+                    backgroundSize: '80px 80px',
+                    opacity: 0.2,
+                    pointerEvents: 'none'
+                }}
+            />
             <PageHeader
                 title='Para Penggerak Perubahan'
                 backgroundImage='/images/background-about-us.webp'
@@ -24,7 +34,7 @@ const StructureOrganizationPage = () => {
                     { label: 'Para Penggerak Perubahan', active: true }
                 ]}
             />
-            <div className='relative container py-24'>
+            <div className='container py-24'>
                 <Image
                     src='/images/decoration-about-us-2.png'
                     alt='images'
@@ -47,7 +57,7 @@ const StructureOrganizationPage = () => {
                     className='mb-0'
                 />
 
-                <div className='mt-12 flex justify-start gap-4 overflow-x-auto'>
+                <div className='relative mt-12 flex justify-start gap-4 overflow-x-auto'>
                     {Object.keys(organizationStructures).map((key) => (
                         <button
                             key={key}

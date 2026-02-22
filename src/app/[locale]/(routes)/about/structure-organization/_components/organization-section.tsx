@@ -1,5 +1,9 @@
+'use client';
+import { useState } from 'react';
+
 import Image from 'next/image';
 
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { formatLabel } from '@/lib/utils';
 
 import { OrganizationLevel } from '../data/organization-data';
@@ -10,6 +14,14 @@ type Props = {
 };
 
 export default function OrganizationStructure({ data, activeTitle }: Props) {
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [selectedPerson, setSelectedPerson] = useState<any>(null);
+
+    const handleOpenDialog = (person: any) => {
+        setSelectedPerson(person);
+        setDialogOpen(true);
+    };
+
     return (
         <div className='py-20'>
             <div className='container text-center'>
@@ -22,26 +34,70 @@ export default function OrganizationStructure({ data, activeTitle }: Props) {
                             <div className='flex flex-wrap justify-center gap-4'>
                                 {level.members.map((member, index) => (
                                     <div key={index} className='flex max-w-55 shrink-0 grow-0 basis-55 justify-center'>
-                                        <OrgCard {...member} />
+                                        <MemberCard {...member} onClick={() => handleOpenDialog(member)} />
                                     </div>
                                 ))}
                             </div>
 
-                            {/* SINGLE VERTICAL LINE (EXCEPT LAST LEVEL) */}
                             {index !== data.length - 1 && (
-                                <div className='my-8 h-10.5 w-0.5 rounded-full bg-slate-300' />
+                                <div className='bg-primary-500 my-8 h-10.5 w-0.5 rounded-full' />
                             )}
                         </div>
                     ))}
                 </div>
             </div>
+
+            <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                <DialogContent>
+                    {selectedPerson && (
+                        <>
+                            <DialogHeader>
+                                <DialogTitle></DialogTitle>
+                                <DialogDescription></DialogDescription>
+                            </DialogHeader>
+
+                            <div className='mt-4 space-y-6'>
+                                <div className='flex flex-col items-center'>
+                                    <div className='mb-4 h-62 w-62 overflow-hidden rounded-lg'>
+                                        <img
+                                            src={selectedPerson.image}
+                                            alt={selectedPerson.name}
+                                            className='h-full w-full object-cover'
+                                        />
+                                    </div>
+
+                                    <h3 className='text-2xl font-bold text-gray-900'>{selectedPerson.name}</h3>
+
+                                    <p className='text-primary-500 text-sm font-medium'>{selectedPerson.role}</p>
+                                </div>
+
+                                <p className='leading-relaxed text-gray-700'>
+                                    {selectedPerson.description || 'Tidak ada deskripsi tersedia.'}
+                                </p>
+                            </div>
+                        </>
+                    )}
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }
 
-function OrgCard({ name, role, image }: { name: string; role: string; image: string }) {
+function MemberCard({
+    name,
+    role,
+    image,
+    onClick
+}: {
+    name: string;
+    role: string;
+    image: string;
+    onClick: () => void;
+}) {
     return (
-        <div className='group cursor-default rounded-lg border border-slate-200 bg-slate-100/50 p-3'>
+        <div
+            onClick={onClick}
+            className='group cursor-pointer rounded-lg border border-slate-200 bg-white p-3 transition-shadow duration-300 hover:shadow'>
             <div className='relative mb-4 aspect-square h-50 w-full overflow-hidden rounded-lg'>
                 <Image src={image} alt={name} fill className='object-cover' />
             </div>

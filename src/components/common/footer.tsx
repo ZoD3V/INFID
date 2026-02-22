@@ -28,7 +28,11 @@ const Footer = () => {
 
     return (
         <footer className='bg-primary-500'>
-            <div className={cn('container px-4 py-16 md:px-6 xl:px-0', pathname == '/' && 'lg:pt-45')}>
+            <div
+                className={cn(
+                    'container px-4 py-16 md:px-6 xl:px-0',
+                    pathname == '/' || (pathname == '/about/member-infid' && 'lg:pt-45')
+                )}>
                 <div className='border-primary-400 grid grid-cols-1 gap-8 border-b pb-9 md:grid-cols-2 lg:grid-cols-12 lg:gap-12'>
                     {/* Brand Column */}
                     <div className='lg:col-span-5'>

@@ -1,13 +1,13 @@
-import React from 'react';
-
 import Image from 'next/image';
 
 import { Maps } from '@/components/common/maps';
 import SectionBadge from '@/components/common/section-badge';
 
+import CommunitySection from '../../../(home)/_components/community-section';
+
 const MapsMemberSection = () => {
     return (
-        <section className='relative w-full bg-white py-24'>
+        <section className='relative w-full bg-white pt-16 lg:pt-24 lg:pb-58'>
             <Image
                 src='/images/decoration-map.png'
                 alt='images'
@@ -15,7 +15,7 @@ const MapsMemberSection = () => {
                 height={150}
                 className='absolute top-10 right-10 hidden xl:block'
             />
-            <div className='container flex flex-col items-center'>
+            <div className='container mb-12 flex flex-col items-center lg:mb-0'>
                 <Maps />
                 <SectionBadge
                     lineColor='bg-primary-500 h-0.5 w-3 rounded-full'
@@ -24,6 +24,8 @@ const MapsMemberSection = () => {
                     80 Anggota untuk perubahan
                 </SectionBadge>
             </div>
+
+            <CommunitySection />
         </section>
     );
 };

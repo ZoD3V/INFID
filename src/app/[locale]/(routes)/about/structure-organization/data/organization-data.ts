@@ -21,6 +21,8 @@ export const organizationStructures = {
                     id: 1,
                     name: 'Siti Khoirun Ni’mah',
                     role: 'Executive Director',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
                     image: '/images/testimoni1.png'
                 }
             ]
@@ -32,11 +34,17 @@ export const organizationStructures = {
                     id: 2,
                     name: 'Yudi Santosa',
                     role: 'Finance Manager',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni3.png'
                 },
                 {
                     id: 3,
                     name: 'Rini Kartika',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     role: 'Design & Quality Manager',
                     image: '/images/testimoni8.png'
                 },
@@ -44,24 +52,36 @@ export const organizationStructures = {
                     id: 6,
                     name: 'Sari Wahyuni',
                     role: 'Program Manager',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni1.png'
                 },
                 {
                     id: 7,
                     name: 'Sari Wahyuni',
                     role: 'Program Manager',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni4.png'
                 },
                 {
                     id: 7,
                     name: 'Sari Probowo',
                     role: 'Program Manager',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni2.png'
                 },
                 {
                     id: 7,
                     name: 'Probowo',
                     role: 'Program Manager',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni2.png'
                 }
             ]
@@ -73,24 +93,35 @@ export const organizationStructures = {
                     id: 4,
                     name: 'Yudi Santosa',
                     role: 'Finance Manager',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni7.png'
                 },
                 {
                     id: 5,
                     name: 'Rini Kartika',
                     role: 'Design & Quality Manager',
+                    image: '/images/testimoni8.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
+                },
+                {
+                    id: 5,
+                    name: 'Rini Kartika',
+                    role: 'Design & Quality Manager',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni8.png'
                 },
                 {
                     id: 5,
                     name: 'Rini Kartika',
                     role: 'Design & Quality Manager',
-                    image: '/images/testimoni8.png'
-                },
-                {
-                    id: 5,
-                    name: 'Rini Kartika',
-                    role: 'Design & Quality Manager',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni8.png'
                 }
             ]
@@ -104,7 +135,10 @@ export const organizationStructures = {
                     id: 1,
                     name: 'Siti Khoirun khodijah',
                     role: 'Executive Director',
-                    image: '/images/testimoni8.png'
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
+                    image: '/images/testimoni2.png'
                 }
             ]
         },
@@ -115,12 +149,18 @@ export const organizationStructures = {
                     id: 2,
                     name: 'A.D. Erlani',
                     role: 'Deputy Director of Organizational Governance',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni2.png'
                 },
                 {
                     id: 3,
                     name: 'Bona Tua P.P',
                     role: 'Deputy Director for Program',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
                     image: '/images/testimoni1.png'
                 }
             ]
@@ -132,19 +172,25 @@ export const organizationStructures = {
                     id: 4,
                     name: 'Yudi Santosa',
                     role: 'Finance Manager',
-                    image: '/images/testimoni3.png'
+                    image: '/images/testimoni3.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
                 },
                 {
                     id: 5,
                     name: 'Rini Kartika',
                     role: 'Design & Quality Manager',
-                    image: '/images/testimoni4.png'
+                    image: '/images/testimoni4.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
                 },
                 {
                     id: 6,
                     name: 'Sari Wahyuni',
                     role: 'Program Manager',
-                    image: '/images/testimoni5.png'
+                    image: '/images/testimoni5.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
                 }
             ]
         }
@@ -157,7 +203,10 @@ export const organizationStructures = {
                     id: 1,
                     name: 'Siti Khoirun khodijah',
                     role: 'Executive Director',
-                    image: '/images/testimoni8.png'
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.',
+
+                    image: '/images/testimoni5.png'
                 }
             ]
         },
@@ -168,13 +217,17 @@ export const organizationStructures = {
                     id: 2,
                     name: 'A.D. Erlani',
                     role: 'Deputy Director of Organizational Governance',
-                    image: '/images/testimoni2.png'
+                    image: '/images/testimoni2.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
                 },
                 {
                     id: 3,
                     name: 'Bona Tua P.P',
                     role: 'Deputy Director for Program',
-                    image: '/images/testimoni1.png'
+                    image: '/images/testimoni1.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
                 }
             ]
         },
@@ -185,19 +238,25 @@ export const organizationStructures = {
                     id: 4,
                     name: 'Yudi Santosa',
                     role: 'Finance Manager',
-                    image: '/images/testimoni3.png'
+                    image: '/images/testimoni3.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
                 },
                 {
                     id: 5,
                     name: 'Rini Kartika',
                     role: 'Design & Quality Manager',
-                    image: '/images/testimoni4.png'
+                    image: '/images/testimoni4.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
                 },
                 {
                     id: 6,
                     name: 'Sari Wahyuni',
                     role: 'Program Manager',
-                    image: '/images/testimoni5.png'
+                    image: '/images/testimoni5.png',
+                    description:
+                        'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
                 }
             ]
         }
