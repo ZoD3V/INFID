@@ -6,11 +6,12 @@ import { Dialog, DialogClose, DialogContent, DialogHeader } from '@/components/u
 import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
-import { Check, Eye, Pencil, Play, PlayCircle, X } from 'lucide-react';
+import { Eye, Pencil, Play } from 'lucide-react';
 
 const RealImpactSection = () => {
-    const videoId = 'OK_b2-w0u60';
-    const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    const videoId = 'U0t1MvVi-9I';
+    const startTime = 74;
+    const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
 
     return (
         <section
