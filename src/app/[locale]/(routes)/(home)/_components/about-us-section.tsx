@@ -1,8 +1,15 @@
 import Image from 'next/image';
 
-import { ArrowRight, Users } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+
+import { ArrowRight, Play, Users } from 'lucide-react';
 
 const AboutUsSection = () => {
+    const videoId = 'U0t1MvVi-9I';
+    const startTime = 74;
+    const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
+
     return (
         <section className='bg-secondary-100 relative py-24' id='about-us'>
             <Image
@@ -31,6 +38,36 @@ const AboutUsSection = () => {
                             height={500}
                             className='z-1 h-auto w-full'
                         />
+
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                {/* Play Button */}
+                                <div className='group absolute bottom-13 left-18 z-0 cursor-pointer p-10 md:bottom-40 md:left-50 xl:bottom-27 xl:left-33'>
+                                    <div className='rounded-full bg-white/90 p-3 group-hover:shadow-lg'>
+                                        <Play />
+                                    </div>
+                                </div>
+                            </DialogTrigger>
+
+                            {/* Video Popup Modal */}
+                            <DialogContent className='max-w-[calc(100%-2rem)] overflow-hidden border-none bg-black p-0 md:max-w-184 [&>button]:hidden'>
+                                <VisuallyHidden>
+                                    <DialogHeader>
+                                        <DialogTitle>Video Perjalanan SDGs Tangerang - INFID</DialogTitle>
+                                    </DialogHeader>
+                                </VisuallyHidden>
+                                <div className='aspect-video w-full'>
+                                    <iframe
+                                        width='100%'
+                                        height='100%'
+                                        src={videoSrc}
+                                        title='YouTube video player'
+                                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                                        allowFullScreen
+                                        className='border-none'></iframe>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
 
                         {/* Decorative Logo */}
                         <div className='pointer-events-none absolute -bottom-20 -left-20 z-0 hidden xl:block'>
