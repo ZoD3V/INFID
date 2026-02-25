@@ -7,6 +7,7 @@ import Image from 'next/image';
 import SectionBadge from '@/components/common/section-badge';
 import { SectionHeader } from '@/components/common/section-header';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
 
 import { Founder, PeopleGrid } from './people-grid';
 
@@ -18,6 +19,8 @@ export interface TimelineItem {
     year: string;
     title: string;
     description: string;
+    image?: string;
+    customClass?: string;
     active: boolean;
     isFounder?: boolean;
     isLeader?: boolean;
@@ -29,43 +32,59 @@ export interface Person {
     image: string;
     role: string;
     description: string;
+    highlightDescription?: string;
 }
 
 const timelineData: TimelineItem[] = [
     {
         id: '07',
         year: '2019 - Saat Ini',
-        title: 'Tonggak Sejarah Global',
+        title: '',
         description:
-            'Kerja keras INFID bersama berbagai elemen masyarakat dalam mendorong pengesahan Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) berujung pada pengesahan UU tersebut tahun 2022. INFID memproduksi lima dokumen penguat advokasi, yaitu satu kertas kebijakan, dua briefing paper, satu kertas posisi, dan satu rekomendasi kebijakan. Upaya INFID dalam tidak berhenti sampai pengesahan, advokasi terus berlanjut untuk memastikan implementasi UU TPKS sesuai dengan mandat yang tertuang dalam UU.',
+            '<p><strong>Kerja keras INFID bersama berbagai elemen masyarakat dalam mendorong pengesahan Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) berujung pada pengesahan UU tersebut tahun 2022. INFID memproduksi lima dokumen penguat advokasi, yaitu satu kertas kebijakan, dua briefing paper, satu kertas posisi, dan satu rekomendasi kebijakan. Upaya INFID dalam tidak berhenti sampai pengesahan, advokasi terus berlanjut untuk memastikan implementasi UU TPKS sesuai dengan mandat yang tertuang dalam UU.</strong><br><br>Selain itu, dalam G20 Indonesia 2022, INFID ditunjuk sebagai Chair of Civil 20 (C20) untuk bergerak bersama ratusan civil society organisations (CSOs) dari seluruh dunia untuk mendesak pemimpin negara G20 menciptakan solusi atas tujuh isu; tujuan pembangunan berkelanjutan &amp; kemanusiaan; akses vaksin &amp; kesehatan global; kesetaraan gender &amp; disabilitas; perpajakan &amp; keuangan berkelanjutan; lingkungan, lingkungan, keadilan iklim, dan transisi energi; edukasi, digitalisasi, dan civic space; antikorupsi.<br><br>INFID akan terus bergerak untuk mewujudkan pembangunan yang berkeadilan di Indonesia dan mengambil peran dalam mendorong diskursus-diskursus perdamaian di tingkat global.</p>',
+        image: '/images/history-2019.webp',
+        customClass: 'w-[800px]',
         active: true
     },
     {
         id: '06',
         year: '2016 - 2018',
         title: '',
-        description: '',
+        description:
+            '<p><strong>Pada 2015, agenda MDGs dilanjutkan menjadi agenda SDGs (Sustainable Development Goals) untuk periode 2015&ndash;2030. SDGs memiliki 17 Tujuan dan 169 Indikator yang harus dicapai pada 2030. Seperti MDGs, INFID juga turut berperan aktif untuk mendorong pencapaian tujuan dan indikator SDGs, di antaranya melalui penyusunan kerangka regulasi Perpres SDGs No. 59 Tahun 2017 dan penyusunan kerangka kelembagaan, yaitu tim pelaksana dan pokja nasional.</strong><br><br>Selain itu, INFID juga mendampingi 10 Kabupaten Kota dalam pelaksanaan SDGs di tingkat daerah dengan tujuan memberikan praktik baik implementasi SDGs yang akan memberi inspirasi bagi daerah lainnya untuk turut melaksanakan pencapaian SDGs di tahun 2030.</p>',
+        image: '/images/history-2016.webp',
+        customClass: 'w-[336px]',
         active: false
     },
     {
         id: '05',
-        year: '2016 - 2018',
+        year: '2005 - 2015',
         title: '',
-        description: '',
+        description:
+            '<p><strong>INFID tercatat sebagai aktor utama dalam memperbaiki relasi yang lebih setara antara donor dan penerima. Pembubaran forum donor untuk Indonesia Consultative Group on Indonesia (CGI) tahun 2007 merupakan perubahan besar bagi Indonesia dan lembaga donor. Lembaga donor juga mengakui bahwa mereka selalu dipantau dan diawasi oleh INFID untuk membuat mereka lebih terbuka, transparan, dan jujur dengan peranan mereka.</strong><br><br>INFID secara konsisten menyesuaikan agendanya dengan perubahan situasi, mulai dari reposisi peran LSM/OMS, hingga isu-isu seperti pembiayaan untuk pembangunan, kebijakan perdagangan yang adil, Tujuan Pembangunan Milenium (Millennium Development Goals/MDGs), dan Tujuan Pembangunan Berkelanjutan (Sustainable Development Goals/SDGs).</p>',
+        image: '/images/history-2005.webp',
+        customClass: 'w-[800px]',
         active: false
     },
     {
         id: '04',
-        year: '2016 - 2018',
+        year: '1998 - 2004',
         title: '',
-        description: '',
+        description:
+            '<p><strong>Konferensi tematik dua tahunan INFID (1998&ndash;2004) telah mengubah kebijakan dan praktik lembaga donor dan lembaga keuangan internasional (Bank Dunia). Salah satu konferensi mengangkat tema mengenai data kebocoran 30 persen dalam dana utang luar negeri dari pinjaman Bank Dunia untuk berbagai proyek di Indonesia.</strong><br><br>Salah satu advokasi lantang INFID terkait utang dan krisis 1998 bertajuk &ldquo;Debt Kills Indonesian Babies&rdquo;. Advokasi ini berhasil menciptakan riak-riak gerakan di tengah masyarakat setelah ketajaman INFID dalam memberikan edukasi publik mengenai bagaimana setiap individu rakyat Indonesia berpotensi menanggung beban utang Pemerintah.<br><br>Akibat sikap penentangan yang kuat dari INGI/INFID terhadap pemerintah Indonesia, selama bertahun-tahun INGI/INFID tidak dapat menyelenggarakan pertemuan di dalam negeri. Pada 1999, INFID mengadakan konferensi pertamanya di Bali, yang menandai perubahan penting dalam struktur dan tata kelola organisasi.</p>',
+        image: '/images/history-1998.webp',
+        customClass: 'w-[800px]',
+
         active: false
     },
     {
         id: '03',
-        year: '2016 - 2018',
+        year: '1985 - 1998',
         title: '',
-        description: '',
+        description:
+            '<p><strong>INFID telah berperan penting dalam mewujudkan proses demokratisasi di Indonesia sejak Indonesia tunduk pada sistem otoriter di bawah rezim Orde Baru.&nbsp;</strong><br><strong>Para reformis seperti Abdurrahman Wahid (Gus Dur), Adnan Buyung Nasution, Toeti Heraty Nurhadi, dan Fauzi Abdullah, bersama sejumlah Lembaga Swadaya Masyarakat (LSM), bersatu dan bergabung. Mereka mendirikan International NGO Forum on Indonesia (INGI) pada 1985 dan bekerja erat dengan organisasi masyarakat sipil dari negara-negara donor Indonesia.</strong><br><br>INGI memiliki sekretariat pertamanya di Den Haag, Belanda, dan di Jakarta, Indonesia. INGI dibentuk sebagai wadah baru untuk advokasi strategis yang bertujuan mendorong pemerintah Indonesia agar memanfaatkan bantuan luar negeri untuk pembangunan yang adil dan berkelanjutan, dengan menghormati sepenuhnya hak asasi manusia.</p>',
+        image: '/images/history-1985.webp',
+        customClass: 'w-[800px]',
         active: false
     },
     {
@@ -149,7 +168,15 @@ export const InfidTimeline = () => {
     };
 
     return (
-        <div className='from-secondary-100 min-h-screen bg-linear-to-b to-transparent pt-24' id='history-infid'>
+        <div className='bg-secondary-100 relative py-24' id='history-infid'>
+            <Image
+                src='/images/decoration-about.png'
+                alt='images'
+                width={150}
+                height={150}
+                className='absolute right-10 bottom-50 hidden -rotate-95 xl:block'
+            />
+
             <div className='container'>
                 {/* Header */}
                 <SectionHeader
@@ -208,17 +235,18 @@ export const InfidTimeline = () => {
                     // Timeline Detail
                     <div className='max-w-full xl:max-w-3xl'>
                         <h2 className='text-primary-500 mb-6 text-2xl font-bold'>
-                            {selectedTimeline.year} | {selectedTimeline.title}
+                            {selectedTimeline.year} {selectedTimeline.title}
                         </h2>
-                        <p className='leading-relaxed font-semibold text-gray-900'>{selectedTimeline.description}</p>
-                        <p className='mt-3 leading-relaxed text-gray-700'>
-                            Selain itu, dalam G20 Indonesia 2022, INFID ditunjuk sebagai Chair of Civil 20 (C20) yang
-                            mengkoordinir ratusan civil society organisations (CSOs) dari seluruh dunia untuk mendesak
-                            pemimpin negara G20 menciptakan solusi atas tujuh isu; tujuan pembangunan berkelanjutan &
-                            kemanusiaan; akses vaksin & kesehatan global; kesetaraan gender & disabilitas; perpajakan &
-                            keuangan berkelanjutan; lingkungan, lingkungan, keadilan iklim, dan transisi energi;
-                            edukasi, digitalisasi, dan civic space; antikorupsi.
-                        </p>
+                        <div className='prose' dangerouslySetInnerHTML={{ __html: selectedTimeline.description }} />
+                        {selectedTimeline.image && (
+                            <Image
+                                src={selectedTimeline.image}
+                                alt={selectedTimeline.title}
+                                width={500}
+                                height={500}
+                                className={cn('mt-12', selectedTimeline.customClass)}
+                            />
+                        )}
                     </div>
                 )}
 
@@ -265,23 +293,6 @@ export const InfidTimeline = () => {
                         )}
                     </DialogContent>
                 </Dialog>
-            </div>
-
-            <div
-                className='from-secondary-100 relative mt-12 h-115.5 bg-linear-to-t to-transparent'
-                style={{
-                    backgroundImage: `url('/images/bg-garden.webp'), linear-gradient(180deg, #FAF5E3 0%, rgba(250, 245, 227, 0) 100%)`,
-                    backgroundBlendMode: 'overlay',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                }}>
-                <Image
-                    src='/images/decoration-about.png'
-                    alt='decoration'
-                    width={180}
-                    height={180}
-                    className='absolute top-0 right-0 hidden rotate-265 xl:block'
-                />
             </div>
         </div>
     );
