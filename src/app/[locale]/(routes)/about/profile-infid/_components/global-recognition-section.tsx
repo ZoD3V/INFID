@@ -8,21 +8,21 @@ export default function GlobalRecognitionSection() {
     const accordionData = [
         {
             id: '01',
-            title: 'Terakreditasi oleh Perserikatan Bangsa-Bangsa (PBB) dengan UN Special Consultative Status with the Economic and Social Council (ECOSOC).',
+            title: 'Terakreditasi oleh Perserikatan Bangsa-Bangsa (PBB) dengan UN Special Consultative Status with the Economic and Social Council (ECOSOC)',
             content:
                 'Menyandang status ini sejak 2004, INFID memiliki akses untuk terlibat dalam berbagai konferensi internasional yang diselenggarakan oleh PBB, seperti High Level Political Forum untuk membahas agenda pembangunan berkelanjutan yang diadakan setiap bulan Juli, serta Sidang Umum setiap bulan September.',
             defaultOpen: true
         },
         {
             id: '02',
-            title: 'Anggota aktif sejumlah forum organisasi masyarakat sipil global.',
+            title: 'Anggota aktif sejumlah forum organisasi masyarakat sipil global',
             content:
                 'INFID merupakan anggota aktif di FORUS sejak 2009, sebuah jaringan NGO global yang mewadahi forum-forum NGO nasional di seluruh dunia yang berbasis di Paris, Prancis. INFID juga bagian dari Beyond 2015, TAP Network, dan SDSN, yaitu inisiatif-inisiatif global yang bertujuan untuk mendorong pelaksanaan dan pencapaian Sustainable Development Goals (SDGs) pada 2022.',
             defaultOpen: false
         },
         {
             id: '03',
-            title: 'Memimpin berbagai advokasi global.',
+            title: 'Memimpin berbagai advokasi global',
             content:
                 'INFID berperan dalam mengawal pembangunan di daerah-daerah di Indonesia dengan memberikan masukan-masukan strategis, serta berkolaborasi bersama organisasi masyarakat sipil dunia untuk mengangkat agenda pembangunan berkeadilan ke tingkat global. INFID ditunjuk sebagai Envoy dan Steering Committee dalam Open Government Partnership (OGP Global) dalam agenda membangun pemerintahan terbuka. Pada 2022, INFID dipercaya menjadi Chair Civil20 (C20) dalam G20 Indonesia dan membangun solidaritas bersama ratusan civil society organisations (CSOs) global di forum G20.',
             defaultOpen: false

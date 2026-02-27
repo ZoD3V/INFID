@@ -42,11 +42,7 @@ const AboutUsSection = () => {
                         <Dialog>
                             <DialogTrigger asChild>
                                 {/* Play Button */}
-                                <div className='group absolute bottom-13 left-18 z-0 cursor-pointer p-10 md:bottom-40 md:left-50 xl:bottom-27 xl:left-33'>
-                                    <div className='rounded-full bg-white/90 p-3 group-hover:shadow-lg'>
-                                        <Play />
-                                    </div>
-                                </div>
+                                <div className='group absolute bottom-10 left-10 z-0 h-50 w-50 cursor-pointer sm:bottom-15 sm:left-15 md:bottom-15 md:left-25 xl:bottom-15 xl:left-25'></div>
                             </DialogTrigger>
 
                             {/* Video Popup Modal */}

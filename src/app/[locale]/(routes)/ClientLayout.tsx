@@ -14,6 +14,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 size: '40px',
                 borderRadius: '100px',
                 iconSize: '40px'
+            },
+            colors: {
+                primary: '#F59D41',
+                secondary: '#ffffff'
             }
         };
 

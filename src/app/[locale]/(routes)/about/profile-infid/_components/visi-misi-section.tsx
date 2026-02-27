@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import SectionBadge from '@/components/common/section-badge';
 
 export default function VisiMisiInfidSection() {
@@ -22,10 +24,17 @@ export default function VisiMisiInfidSection() {
 
     return (
         <section
-            className='w-full bg-gray-50 bg-repeat py-24'
+            className='relative w-full bg-gray-50 bg-repeat py-24'
             style={{
                 backgroundImage: "url('/logo/bg-pattern-word.png')"
             }}>
+            <Image
+                src='/images/decoration-about.png'
+                alt='images'
+                width={150}
+                height={150}
+                className='absolute top-5 right-5 hidden -rotate-180 xl:block'
+            />
             <div className='container'>
                 {/* Header */}
                 <div className='mb-12'>

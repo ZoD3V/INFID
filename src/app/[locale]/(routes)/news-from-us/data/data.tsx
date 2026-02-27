@@ -25,7 +25,7 @@ export interface FeaturedNewsItem {
     comments: number;
 }
 
-export const categoriesNews = ['Semua', 'Kegiatan', 'Cerita Perubahan', 'Siaran Pers'];
+export const categoriesNews = ['Semua', 'Kegiatan', 'Bergerak, Berdampak!', 'Siaran Pers', 'Laporan Tahunan'];
 
 export const authorsNews = [
     { label: 'Samantha', value: 'samantha' },
@@ -47,7 +47,7 @@ export const articles: Article[] = [
     {
         id: 2,
         title: 'Kisah Sukses Petani Milenial di Era Smart Farming',
-        category: 'Cerita Perubahan',
+        category: 'Bergerak, Berdampak!',
         date: '2023-08-20',
         author: 'Joko',
         image: '/images/background-about-us.webp'
@@ -71,7 +71,7 @@ export const articles: Article[] = [
     {
         id: 5,
         title: 'Dari Desa ke Global: Perjalanan UMKM Kerajinan Tangan',
-        category: 'Cerita Perubahan',
+        category: 'Bergerak, Berdampak!',
         date: '2022-06-18',
         author: 'Kevin',
         image: '/images/background-about-us.webp'
@@ -95,7 +95,7 @@ export const articles: Article[] = [
     {
         id: 8,
         title: 'Transformasi Kumuh Menjadi Kampung Wisata Kreatif',
-        category: 'Cerita Perubahan',
+        category: 'Bergerak, Berdampak!',
         date: '2025-08-30',
         author: 'Rudi',
         image: '/images/background-about-us.webp'
@@ -119,7 +119,7 @@ export const articles: Article[] = [
     {
         id: 11,
         title: 'Perempuan Berdaya: Mengubah Paradigma di Dunia Teknologi',
-        category: 'Cerita Perubahan',
+        category: 'Bergerak, Berdampak!',
         date: '2024-12-01',
         author: 'Samantha',
         image: '/images/background-about-us.webp'
@@ -143,7 +143,7 @@ export const articles: Article[] = [
     {
         id: 14,
         title: 'Akses Air Bersih: Perubahan Hidup bagi Warga NTT',
-        category: 'Cerita Perubahan',
+        category: 'Bergerak, Berdampak!',
         date: '2023-02-25',
         author: 'Anita',
         image: '/images/background-about-us.webp'
