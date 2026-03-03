@@ -7,7 +7,7 @@ import PublicationsSection from './_components/publications-section';
 import RealImpactSection from './_components/real-impact-section';
 import RecognitionSection from './_components/recognition-section';
 
-const Page = () => {
+const HomePage = () => {
     return (
         <>
             <Home />
@@ -22,4 +22,4 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default HomePage;
