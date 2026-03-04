@@ -339,6 +339,10 @@ export const InfidTimeline = () => {
                             {selectedTimeline.year} {selectedTimeline.title}
                         </h2>
                         <div className='flex flex-col items-start gap-8 md:flex-row'>
+                            <div
+                                className='prose w-full md:w-3/4'
+                                dangerouslySetInnerHTML={{ __html: selectedTimeline.description }}
+                            />
                             {selectedTimeline.image && (
                                 <div className='flex w-full flex-col gap-2 md:w-1/3'>
                                     {selectedTimeline.image.map((image, index) => (
@@ -353,10 +357,6 @@ export const InfidTimeline = () => {
                                     ))}
                                 </div>
                             )}
-                            <div
-                                className='prose w-full md:w-3/4'
-                                dangerouslySetInnerHTML={{ __html: selectedTimeline.description }}
-                            />
                         </div>
                     </div>
                 )}
