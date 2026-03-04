@@ -58,14 +58,13 @@ export function Navbar() {
         },
         {
             title: t('knowledge'),
-            href: '/knowledge'
-            // children: [
-            //     { title: t('knowledge_research'), href: '/knowledge/research' },
-            //     { title: t('knowledge_policy'), href: '/knowledge/terms-condition' },
-            //     { title: t('knowledge_module'), href: '/knowledge/module' },
-            //     { title: t('knowledge_infographic'), href: '/knowledge/infografis' },
-            //     { title: t('knowledge_article'), href: '/knowledge/article' }
-            // ]
+            href: '/knowledge',
+            children: [
+                { title: t('knowledge_research'), href: '/knowledge?category=Riset' },
+                { title: t('knowledge_policy'), href: '/knowledge?category=Kertas+Kebijakan' },
+                { title: t('knowledge_module'), href: '/knowledge?category=Modul+dan+Panduan' },
+                { title: t('knowledge_article'), href: '/knowledge?category=Artikel' }
+            ]
         },
         {
             title: t('news'),
@@ -128,7 +127,6 @@ export function Navbar() {
                                     <ChevronDown
                                         className={cn(
                                             'h-4 w-4 transition-transform duration-400 group-hover:rotate-180',
-                                            // Pastikan icon chevron juga mengikuti warna teks
                                             isScrolled ? 'text-slate-900' : 'text-brand-100'
                                         )}
                                     />

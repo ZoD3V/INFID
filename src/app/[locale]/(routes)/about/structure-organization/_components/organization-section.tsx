@@ -97,7 +97,7 @@ function MemberCard({
     return (
         <div
             onClick={onClick}
-            className='group cursor-pointer rounded-lg border border-slate-200 bg-white p-3 transition-shadow duration-300 hover:shadow'>
+            className='group cursor-pointer rounded-lg border border-slate-200 bg-white p-3 transition-shadow duration-300 ease-in-out hover:shadow'>
             <div className='relative mb-4 aspect-square h-50 w-full overflow-hidden rounded-lg'>
                 <Image src={image} alt={name} fill className='object-cover' />
             </div>

@@ -1,5 +1,7 @@
 'use client';
 
+import { useRef } from 'react';
+
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -8,15 +10,23 @@ import { Textarea } from '@/components/ui/textarea';
 import { getInitials } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { Captcha } from '../ui/captcha';
 import { ArrowRight } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-export const commentFormSchema = z.object({
-    nama: z.string().min(2, 'Nama harus diisi'),
-    email: z.string().email('Email tidak valid'),
-    komentar: z.string().min(5, 'Komentar minimal 5 karakter')
-});
+export const commentFormSchema = z
+    .object({
+        nama: z.string().min(2, 'Nama harus diisi'),
+        email: z.email('Email tidak valid'),
+        komentar: z.string().min(5, 'Komentar minimal 5 karakter'),
+        captchaInput: z.string().min(1, 'Captcha harus diisi'),
+        captchaExpected: z.string()
+    })
+    .refine((data) => data.captchaInput.toUpperCase() === data.captchaExpected.toUpperCase(), {
+        message: 'Kode captcha yang Anda masukkan salah',
+        path: ['captchaInput']
+    });
 
 export type CommentFormValues = z.infer<typeof commentFormSchema>;
 
@@ -62,9 +72,11 @@ const getColorFromName = (name: string) => {
 };
 
 export default function CommentSection({ comments, onSubmit }: CommentSectionProps) {
+    const captchaRef = useRef<any>(null);
+
     const form = useForm<CommentFormValues>({
         resolver: zodResolver(commentFormSchema),
-        defaultValues: { nama: '', email: '', komentar: '' }
+        defaultValues: { nama: '', email: '', komentar: '', captchaInput: '' }
     });
 
     const handleFormSubmit = (values: CommentFormValues) => {
@@ -84,7 +96,7 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
 
             {/* Form Section */}
             <div className='rounded-2xl border bg-white p-5'>
-                <h3 className='mb-6 text-xl font-bold'>Apa Pendapatmu?</h3>
+                <h3 className='mb-6 text-xl font-bold'>Tulis Komentar</h3>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleFormSubmit)} className='space-y-6'>
                         <div className='grid grid-cols-1 items-start gap-6 md:grid-cols-2'>
@@ -148,6 +160,27 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
                                 </FormItem>
                             )}
                         />
+
+                        <div className='flex flex-col gap-2 gap-y-4 sm:flex-row sm:items-start'>
+                            <Captcha ref={captchaRef} onVerify={(code) => form.setValue('captchaExpected', code)} />
+
+                            <FormField
+                                control={form.control}
+                                name='captchaInput'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                className='w-full sm:w-45'
+                                                placeholder='Masukkan Captcha'
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
 
                         <div className='flex justify-end'>
                             <Button type='submit' className='rounded-full'>

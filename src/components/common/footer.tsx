@@ -12,17 +12,17 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 const Footer = () => {
     const pathname = usePathname();
     const footerLinks = {
-        tentang_kami: [
-            { name: 'Struktur Organisasi', href: '/tentang-kami' },
-            { name: 'INFID Research Fellow', href: '/program-kami/umkm' },
-            { name: 'Anggota INFID', href: '/berita' },
-            { name: 'Mitra INFID', href: '/gallery' }
-        ],
-        pengetahuan: [
-            { name: 'Riset', href: '/tentang-kami' },
-            { name: 'Kertas Kerja', href: '/program-kami/umkm' },
-            { name: 'Modul & Panduan', href: '/berita' },
-            { name: 'Artikel', href: '/gallery' }
+        // tentang_kami: [
+        //     { name: 'Struktur Organisasi', href: '/tentang-kami' },
+        //     { name: 'INFID Research Fellow', href: '/program-kami/umkm' },
+        //     { name: 'Anggota INFID', href: '/berita' },
+        //     { name: 'Mitra INFID', href: '/gallery' }
+        // ],
+        advokasi_berbasis_bukti: [
+            { name: 'Riset', href: '/knowledge?category=Riset' },
+            { name: 'Kertas Kebijakan', href: '/knowledge?category=Kertas+Kebijakan' },
+            { name: 'Modul & Panduan', href: '/knowledge?category=Modul+dan+Panduan' },
+            { name: 'Artikel', href: '/knowledge?category=Artikel' }
         ]
     };
 

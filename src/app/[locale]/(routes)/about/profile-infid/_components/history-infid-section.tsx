@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { cn } from '@/lib/utils';
 
 import { Founder, PeopleGrid } from './people-grid';
+import { Eye, MessageSquare } from 'lucide-react';
 
 type ContentType = 'timeline' | 'founders' | 'leaders';
 
@@ -109,6 +110,53 @@ const foundersData: Founder[] = [
         name: 'Dr. Ahmad Suaedy',
         image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
         role: 'Founder & Aktivis HAM',
+        publications: [
+            {
+                id: 1,
+                category: 'KERTAS KEBIJAKAN',
+                date: '10 Jan 2025',
+                title: 'Transisi Energi yang Berkeadilan untuk Semua',
+                views: 345,
+                comments: 10,
+                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
+            },
+            {
+                id: 2,
+                category: 'KERTAS KEBIJAKAN',
+                date: '12 Feb 2025',
+                title: 'Analisis Dampak Lingkungan Berbasis Komunitas',
+                views: 120,
+                comments: 5,
+                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop'
+            },
+            {
+                id: 3,
+                category: 'KERTAS KEBIJAKAN',
+                date: '10 Jan 2025',
+                title: 'Transisi Energi yang Berkeadilan untuk Semua',
+                views: 345,
+                comments: 10,
+                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
+            },
+            {
+                id: 4,
+                category: 'KERTAS KEBIJAKAN',
+                date: '10 Jan 2025',
+                title: 'Transisi Energi yang Berkeadilan untuk Semua',
+                views: 345,
+                comments: 10,
+                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
+            },
+            {
+                id: 5,
+                category: 'KERTAS KEBIJAKAN',
+                date: '10 Jan 2025',
+                title: 'Transisi Energi yang Berkeadilan untuk Semua',
+                views: 345,
+                comments: 10,
+                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
+            }
+        ],
         description:
             'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
     },
@@ -117,21 +165,84 @@ const foundersData: Founder[] = [
         name: 'Lies Marcoes',
         image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
         role: 'Founder & Gender Specialist',
-        description: 'Lies Marcoes adalah seorang peneliti...'
+        publications: [
+            {
+                id: 1,
+                category: 'KERTAS KEBIJAKAN',
+                date: '10 Jan 2025',
+                title: 'Transisi Energi yang Berkeadilan untuk Semua',
+                views: 345,
+                comments: 10,
+                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
+            },
+            {
+                id: 2,
+                category: 'KERTAS KEBIJAKAN',
+                date: '12 Feb 2025',
+                title: 'Analisis Dampak Lingkungan Berbasis Komunitas',
+                views: 120,
+                comments: 5,
+                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop'
+            }
+        ],
+        description:
+            'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
     },
     {
         id: 3,
         name: 'Kamala Chandrakirana',
         image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
         role: "Founder & Women's Rights Advocate",
-        description: 'Kamala Chandrakirana merupakan advokat...'
+        publications: [
+            {
+                id: 1,
+                category: 'KERTAS KEBIJAKAN',
+                date: '10 Jan 2025',
+                title: 'Transisi Energi yang Berkeadilan untuk Semua',
+                views: 345,
+                comments: 10,
+                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
+            },
+            {
+                id: 2,
+                category: 'KERTAS KEBIJAKAN',
+                date: '12 Feb 2025',
+                title: 'Analisis Dampak Lingkungan Berbasis Komunitas',
+                views: 120,
+                comments: 5,
+                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop'
+            }
+        ],
+        description:
+            'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
     },
     {
         id: 4,
         name: 'Musdah Mulia',
         image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop',
         role: 'Founder & Islamic Scholar',
-        description: 'Prof. Dr. Musdah Mulia adalah seorang cendekiawan...'
+        publications: [
+            {
+                id: 1,
+                category: 'KERTAS KEBIJAKAN',
+                date: '10 Jan 2025',
+                title: 'Transisi Energi yang Berkeadilan untuk Semua',
+                views: 345,
+                comments: 10,
+                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
+            },
+            {
+                id: 2,
+                category: 'KERTAS KEBIJAKAN',
+                date: '12 Feb 2025',
+                title: 'Analisis Dampak Lingkungan Berbasis Komunitas',
+                views: 120,
+                comments: 5,
+                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop'
+            }
+        ],
+        description:
+            'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
     }
 ];
 
@@ -259,7 +370,7 @@ export const InfidTimeline = () => {
                 )}
 
                 <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                    <DialogContent>
+                    <DialogContent className='sm:max-w-xl md:max-w-2xl lg:max-w-3xl'>
                         {selectedPerson && (
                             <>
                                 <DialogHeader>
@@ -272,22 +383,62 @@ export const InfidTimeline = () => {
                                     </DialogTitle>
                                 </DialogHeader>
 
-                                <div className='mt-4 space-y-6'>
-                                    <div className='flex flex-col items-center'>
-                                        <div className='mb-4 h-62 w-62 overflow-hidden rounded-lg'>
-                                            <img
-                                                src={selectedPerson.image}
-                                                alt={selectedPerson.name}
-                                                className='h-full w-full object-cover'
-                                            />
-                                        </div>
-
-                                        <h3 className='text-2xl font-bold text-gray-900'>{selectedPerson.name}</h3>
-
-                                        <p className='text-primary-500 text-sm font-medium'>{selectedPerson.role}</p>
+                                <div className='mt-4 flex flex-col items-center gap-5 md:flex-row md:items-start'>
+                                    <div className='mb-4 h-60 w-60 shrink-0 overflow-hidden rounded-lg'>
+                                        <img
+                                            src={selectedPerson.image}
+                                            alt={selectedPerson.name}
+                                            className='h-full w-full object-cover'
+                                        />
                                     </div>
+                                    <div className='flex flex-col items-center md:items-start'>
+                                        <h3 className='text-2xl font-bold text-gray-900'>{selectedPerson.name}</h3>
+                                        <p className='text-primary-500 text-sm font-medium'>{selectedPerson.role}</p>
 
-                                    <p className='leading-relaxed text-gray-700'>{selectedPerson.description}</p>
+                                        <p className='mt-4 leading-relaxed text-gray-700'>
+                                            {selectedPerson.description}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <h4 className='mb-4 text-lg font-bold text-gray-900'>Publikasi Terbaru</h4>
+                                <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+                                    {selectedPerson.publications?.map((pub: any) => (
+                                        <div key={pub.id} className='group flex cursor-pointer gap-4'>
+                                            {/* Thumbnail */}
+                                            <div className='h-20 w-20 shrink-0 overflow-hidden rounded-md'>
+                                                <img
+                                                    src={pub.image}
+                                                    alt={pub.title}
+                                                    className='h-full w-full object-cover transition-transform group-hover:scale-110'
+                                                />
+                                            </div>
+
+                                            {/* Content */}
+                                            <div className='flex flex-col justify-between py-1'>
+                                                <div>
+                                                    <div className='text-secondary-200 flex items-center gap-2 text-[10px] font-bold tracking-wider uppercase'>
+                                                        {pub.category}
+                                                        <span className='text-slate-300'>•</span>
+                                                        <span className='font-normal text-slate-500'>{pub.date}</span>
+                                                    </div>
+                                                    <h5 className='mt-1 line-clamp-2 text-sm leading-snug font-bold text-slate-900'>
+                                                        {pub.title}
+                                                    </h5>
+                                                </div>
+
+                                                {/* Stats */}
+                                                <div className='mt-2 flex items-center gap-4 text-[11px] text-slate-400'>
+                                                    <div className='flex items-center gap-1'>
+                                                        <Eye size={14} /> {pub.views} Dilihat
+                                                    </div>
+                                                    <div className='flex items-center gap-1'>
+                                                        <MessageSquare size={14} /> {pub.comments} Komentar
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </>
                         )}
