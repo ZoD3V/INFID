@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -11,8 +11,10 @@ import { getInitials } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Captcha } from '../ui/captcha';
+import { ConfirmDialog } from './confirm-dialog';
 import { ArrowRight } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 export const commentFormSchema = z
@@ -73,15 +75,29 @@ const getColorFromName = (name: string) => {
 
 export default function CommentSection({ comments, onSubmit }: CommentSectionProps) {
     const captchaRef = useRef<any>(null);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [pendingValues, setPendingValues] = useState<CommentFormValues | null>(null);
 
     const form = useForm<CommentFormValues>({
         resolver: zodResolver(commentFormSchema),
-        defaultValues: { nama: '', email: '', komentar: '', captchaInput: '' }
+        defaultValues: { nama: '', email: '', komentar: '', captchaInput: '', captchaExpected: '' }
     });
 
     const handleFormSubmit = (values: CommentFormValues) => {
-        onSubmit(values);
-        form.reset();
+        setPendingValues(values);
+        setShowConfirm(true);
+    };
+
+    const handleConfirmFinal = () => {
+        if (pendingValues) {
+            onSubmit(pendingValues);
+
+            form.reset();
+            captchaRef.current?.refresh();
+            toast.success('Komentar berhasil terkirim.');
+            setShowConfirm(false);
+            setPendingValues(null);
+        }
     };
 
     return (
@@ -215,6 +231,13 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
                     );
                 })}
             </div>
+            <ConfirmDialog
+                isOpen={showConfirm}
+                onClose={() => setShowConfirm(false)}
+                onConfirm={handleConfirmFinal}
+                title='Konfirmasi Komentar'
+                description='Komentar anda akan direview terlebih dahulu oleh admin sebelum dipublikasikan.'
+            />
         </div>
     );
 }
