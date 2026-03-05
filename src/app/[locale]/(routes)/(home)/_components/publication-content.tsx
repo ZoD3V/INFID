@@ -4,43 +4,51 @@ import { useState } from 'react';
 
 import EmptyState from '@/components/common/empty-state';
 import PublicationsSkeleton from '@/components/common/publication-skeleton';
-import { Skeleton } from '@/components/ui/skeleton';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiBase } from '@/lib/axios-server';
 
 import { Eye, Loader2, MessageSquareMore, Pencil, TriangleAlertIcon } from 'lucide-react';
 
-const tabs = [
-    { id: 'semua', label: 'Semua' },
-    { id: 'riset', label: 'Riset' },
-    { id: 'kebijakan', label: 'Kertas Kebijakan' }
-];
+interface Article {
+    id: number;
+    name: string;
+    slug: string;
+    description: string | null;
+    created_at: string;
+    updated_at: string;
+}
 
-export const PublicationContent = ({ initialData }: { initialData: any[] }) => {
-    const [activeTab, setActiveTab] = useState('semua');
+export const PublicationContent = ({
+    initialData,
+    categoriesData
+}: {
+    initialData: any[];
+    categoriesData: Article[];
+}) => {
+    const [activeTab, setActiveTab] = useState(0);
     const [publications, setPublications] = useState(initialData);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleTabChange = async (tabId: string) => {
+    const handleTabChange = async (tabId: number) => {
         setActiveTab(tabId);
         setIsLoading(true);
 
         setTimeout(() => {
             setIsLoading(false);
         }, 2000);
-        // try {
-        //     const res = await apiBase.get(API_ENDPOINTS.posts, {
-        //         params: {
-        //             featured: true,
-        //             category: tabId === 'semua' ? undefined : tabId
-        //         }
-        //     });
-        //     setPublications(res.data.data);
-        // } catch (err) {
-        //     console.error(err);
-        // } finally {
-        //     setIsLoading(false);
-        // }
+        try {
+            const res = await apiBase.get(API_ENDPOINTS.posts, {
+                params: {
+                    featured: true,
+                    category: tabId === 0 ? undefined : tabId
+                }
+            });
+            setPublications(res.data.data);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const featured = publications[0];
@@ -48,22 +56,24 @@ export const PublicationContent = ({ initialData }: { initialData: any[] }) => {
 
     return (
         <>
-            <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
-                <div className='flex flex-wrap gap-3'>
-                    {tabs.map((tab) => (
-                        <button
-                            key={tab.id}
-                            onClick={() => handleTabChange(tab.id)}
-                            className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-colors ${
-                                activeTab === tab.id
-                                    ? 'bg-teal-600 text-white'
-                                    : 'bg-slate-200 text-slate-700 hover:bg-slate-300 disabled:opacity-50'
-                            }`}>
-                            {tab.label}
-                        </button>
-                    ))}
+            {categoriesData.length > 0 && (
+                <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
+                    <div className='flex flex-wrap gap-3'>
+                        {categoriesData.map((tab) => (
+                            <button
+                                key={tab.id}
+                                onClick={() => handleTabChange(tab.id)}
+                                className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-colors ${
+                                    activeTab === tab.id
+                                        ? 'bg-teal-600 text-white'
+                                        : 'bg-slate-200 text-slate-700 hover:bg-slate-300 disabled:opacity-50'
+                                }`}>
+                                {tab.name}
+                            </button>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
 
             {isLoading ? (
                 <PublicationsSkeleton />
@@ -158,7 +168,6 @@ export const PublicationContent = ({ initialData }: { initialData: any[] }) => {
                                                     {article.title}
                                                 </h3>
 
-                                                {/* ✅ FIXED AUTHOR */}
                                                 <div className='flex items-center gap-1 text-xs text-gray-500'>
                                                     <Pencil className='h-3 w-3' /> By {article.createdBy}
                                                 </div>
