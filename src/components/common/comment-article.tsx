@@ -94,7 +94,9 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
 
             form.reset();
             captchaRef.current?.refresh();
-            toast.success('Komentar berhasil terkirim.');
+            toast.success('Komentar berhasil terkirim.', {
+                description: 'Komentar berhasil dikirim dan sedang menunggu proses verifikasi'
+            });
             setShowConfirm(false);
             setPendingValues(null);
         }
