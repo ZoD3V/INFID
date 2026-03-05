@@ -102,7 +102,7 @@ export default function QuizPage() {
             </div>
 
             {/* Question Card */}
-            <div className='flex items-center justify-center p-4 lg:mt-12'>
+            <div className='flex min-h-[calc(100vh-220px)] items-center justify-center px-4 py-6'>
                 <div className='flex w-full max-w-2xl flex-col gap-4 rounded-xl border bg-white p-6 shadow'>
                     <div className='flex items-center justify-between'>
                         <span>KUIS</span>
