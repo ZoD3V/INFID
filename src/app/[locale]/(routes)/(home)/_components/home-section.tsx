@@ -70,7 +70,7 @@ const Home = () => {
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>
-                        <Button variant='ghost' onClick={() => setIsQuizDialogOpen(false)}>
+                        <Button variant='ghost' onClick={() => setIsQuizDialogOpen(false)} className='rounded-full'>
                             Nanti Saja
                         </Button>
                         <Button onClick={handleGoToQuiz} className='rounded-full'>
