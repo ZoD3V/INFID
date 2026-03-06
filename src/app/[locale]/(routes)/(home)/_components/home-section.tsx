@@ -17,7 +17,8 @@ import { useRouter } from '@/i18n/routing';
 import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-const STORAGE_KEY = 'has_seen_quiz_dialog';
+const STORAGE_KEY = 'last_quiz_dialog_shown';
+const ONE_HOUR_IN_MS = 3600000;
 
 const Home = () => {
     const t = useTranslations('hero');
@@ -26,28 +27,26 @@ const Home = () => {
     const [isQuizDialogOpen, setIsQuizDialogOpen] = useState(false);
 
     useEffect(() => {
-        const hasSeenQuiz = localStorage.getItem(STORAGE_KEY);
+        const lastShown = localStorage.getItem(STORAGE_KEY);
+        const now = new Date().getTime();
 
-        if (!hasSeenQuiz) {
+        if (!lastShown || now - parseInt(lastShown) > ONE_HOUR_IN_MS) {
             const timer = setTimeout(() => {
                 setIsQuizDialogOpen(true);
-            }, 2000);
+                localStorage.setItem(STORAGE_KEY, now.toString());
+            }, 1000);
 
             return () => clearTimeout(timer);
         }
     }, []);
 
     const handleGoToQuiz = () => {
-        localStorage.setItem(STORAGE_KEY, 'true');
+        // Jika user klik mulai, kita bisa set waktu ke masa depan yang sangat jauh
+        // atau gunakan key berbeda agar tidak muncul lagi sama sekali setelah mengisi
+        localStorage.setItem(STORAGE_KEY, (new Date().getTime() + ONE_HOUR_IN_MS * 24).toString());
 
         setIsQuizDialogOpen(false);
-
         router.push('/quiz');
-    };
-
-    const handleDismiss = () => {
-        // localStorage.setItem(STORAGE_KEY, 'true');
-        setIsQuizDialogOpen(false);
     };
 
     const scrollToAbout = () => {
@@ -65,13 +64,13 @@ const Home = () => {
             <Dialog open={isQuizDialogOpen} onOpenChange={setIsQuizDialogOpen}>
                 <DialogContent className='sm:max-w-106.25'>
                     <DialogHeader>
-                        <DialogTitle>Mulai Kuis</DialogTitle>
+                        <DialogTitle>Kenali dirimu lebih dalam, tipe apa kamu? </DialogTitle>
                         <DialogDescription className='pt-2'>
-                            Luangkan waktu anda sebentar untuk mengisi kuis.
+                            Seberapa aware dirimu terhadap pembangunan berkeadilan?
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>
-                        <Button variant='ghost' className='rounded-full' onClick={handleDismiss}>
+                        <Button variant='ghost' onClick={() => setIsQuizDialogOpen(false)}>
                             Nanti Saja
                         </Button>
                         <Button onClick={handleGoToQuiz} className='rounded-full'>

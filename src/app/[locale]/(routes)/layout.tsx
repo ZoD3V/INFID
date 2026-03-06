@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 
 import '@/app/globals.css';
-import Footer from '@/components/common/footer';
 import HomeFloatingCard from '@/components/common/home-floating-card';
 import { Navbar } from '@/components/common/navbar';
 import { Toaster } from '@/components/ui/sonner';

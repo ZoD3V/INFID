@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
 import { ExternalLink, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { BsTwitterX } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 const ContactUs = () => {
@@ -45,7 +46,7 @@ const ContactUs = () => {
                     <div className='z-10 flex flex-col items-center justify-center gap-4 lg:gap-6'>
                         <div className='inline-flex w-fit items-center gap-2 rounded-full border border-white/20 px-3 py-2 backdrop-blur-sm'>
                             <span className='h-2 w-2 animate-pulse rounded-full bg-orange-500'></span>
-                            <p className='text-xs font-medium tracking-wide text-white'>Mari Berkontak</p>
+                            <p className='text-xs font-medium tracking-wide text-white uppercase'>Mari Berkontak</p>
                         </div>
                         {/* Title */}
                         <h2 className='text-3xl font-bold tracking-wide text-white md:text-4xl lg:text-5xl'>
@@ -120,7 +121,7 @@ const ContactUs = () => {
                                 <FaFacebook className='h-6 w-6' />
                             </button>
                             <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <FaTwitter className='h-6 w-6' />
+                                <BsTwitterX className='h-5 w-5' />
                             </button>
                         </div>
                     </div>
