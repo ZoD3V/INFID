@@ -44,7 +44,7 @@ export default async function HomeLayout({
 
                     <ClientLayout>{children}</ClientLayout>
 
-                    <Toaster />
+                    <Toaster richColors />
                     <Footer />
                 </NextIntlClientProvider>
             </body>

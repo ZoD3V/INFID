@@ -4,66 +4,78 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
-import { Maps } from '@/components/common/maps';
+import { Maps, Region } from '@/components/common/maps';
 import SectionBadge from '@/components/common/section-badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { REGION_DISPLAY_MAP, REGION_KEYS, RegionKey } from '@/data/region-data';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { ApiResponse, apiBase } from '@/lib/axios-server';
+import { slugify } from '@/lib/utils';
 
 import CommunitySection from '../../../(home)/_components/community-section';
 import { Link2, Mail, MapPin, Phone } from 'lucide-react';
 
-interface Organization {
+export interface Member {
+    id: number;
     name: string;
     address: string;
-    phones: string[];
     emails: string[];
-    website?: string;
+    phones: string[];
+    website: string;
 }
 
-// Example data structure - sesuaikan dengan data asli kamu
-const organizations: Organization[] = [
-    {
-        name: 'Lembaga Bela Banua Talino LBBT - Pontianak',
-        address: 'Jalan Budi Utomo Blok A5/No. 4 Siantan Hulu, Pontianak Utara, Kota Pontianak 78241',
-        phones: ['0561 884566'],
-        emails: ['banua.talino@gmail.com'],
-        website: 'www.lbbt.org'
-    },
-    {
-        name: 'Institute of Dayakology',
-        address: 'Kompleks Bumi Indah Khatulistiwa, Jl. Budi Utomo Blok B no. 4, Pontianak 78241 Kalimantan Barat',
-        phones: ['0561 – 884 567'],
-        emails: ['i.dayakologi@ptk.centrin.net.id', 'krissusandi@gmail.com'],
-        website: 'www.lbbt.org'
-    }
-];
+export interface RegionDetail {
+    id: number;
+    name: string;
+    description: string | null;
+    members: Member[];
+}
 
-const MapsMemberSection = () => {
+export interface ApiDetailResponse {
+    data: RegionDetail;
+}
+
+interface MapsSectionProps {
+    initialRegions: Region[];
+}
+
+export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }) => {
     const [open, setOpen] = useState<boolean>(false);
-    const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+    const [selectedRegion, setSelectedRegion] = useState<RegionDetail | null>(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const mapEl = document.getElementById('map');
         if (!mapEl) return;
-        // setChartData([]);
 
-        const onClick = (e: any) => {
+        const onClick = async (e: MouseEvent) => {
             const t = e.target as SVGElement;
             if (!t?.classList?.contains('region')) return;
 
-            const nameKey = (t as any).dataset?.name || (t as any).getAttribute('data-name') || (t as any).id;
-            // setSelectedRegionKey(nameKey);
-            const matchKey = REGION_KEYS.find((k) => k === nameKey) ?? nameKey;
+            const nameKey = (t as any).dataset?.name || t.getAttribute('data-name') || t.id;
+            console.log(nameKey);
+            const foundRegion = initialRegions.find((r) => slugify(r.name) === nameKey);
 
-            const displayName = REGION_DISPLAY_MAP[matchKey as RegionKey] || 'Wilayah';
-            setSelectedRegion(displayName);
+            if (foundRegion) {
+                try {
+                    setLoading(true);
+                    const res = await apiBase.get<ApiDetailResponse>(
+                        `${API_ENDPOINTS.regions}/${foundRegion.id}/members`
+                    );
 
-            setOpen(true);
+                    setSelectedRegion(res.data.data);
+                    setOpen(true);
+                } catch (error) {
+                    console.error('Gagal mengambil detail member:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
         };
 
         mapEl.addEventListener('click', onClick);
         return () => mapEl.removeEventListener('click', onClick);
-    }, []);
+    }, [initialRegions]);
 
     return (
         <section className='relative w-full bg-white pt-16 lg:pt-24 lg:pb-58'>
@@ -75,7 +87,7 @@ const MapsMemberSection = () => {
                 className='absolute top-10 right-10 hidden xl:block'
             />
             <div className='container mb-12 flex flex-col items-center lg:mb-0'>
-                <Maps />
+                <Maps data={initialRegions} />
                 <SectionBadge
                     lineColor='bg-primary-500 h-0.5 w-3 rounded-full'
                     textColor='text-primary-500'
@@ -90,7 +102,7 @@ const MapsMemberSection = () => {
                         <DialogTitle>
                             <div className='flex flex-col items-start justify-between gap-2 lg:flex-row'>
                                 <h2 className='text-left text-xl font-bold text-gray-900'>
-                                    {selectedRegion ?? 'Detail Daerah'}
+                                    {selectedRegion?.name ?? 'Detail Daerah'}
                                 </h2>
                             </div>
                         </DialogTitle>
@@ -99,7 +111,7 @@ const MapsMemberSection = () => {
 
                     {/* Organization List */}
                     <div className='mt-2 flex max-h-[60vh] flex-col gap-4 overflow-y-auto pr-1'>
-                        {(organizations ?? []).map((org, index) => (
+                        {(selectedRegion?.members ?? []).map((org, index) => (
                             <div key={org.name ?? index} className='rounded-xl border border-slate-200 bg-white p-4'>
                                 <div className='flex gap-3'>
                                     {/* Icon */}
