@@ -65,9 +65,9 @@ const Home = () => {
             <Dialog open={isQuizDialogOpen} onOpenChange={setIsQuizDialogOpen}>
                 <DialogContent className='sm:max-w-106.25'>
                     <DialogHeader>
-                        <DialogTitle>Mulai Personalisasi Kuis</DialogTitle>
+                        <DialogTitle>Mulai Kuis</DialogTitle>
                         <DialogDescription className='pt-2'>
-                            Bantu kami memberikan rekomendasi terbaik untuk perjalanan akademik Anda di SPMB 2026.
+                            Luangkan waktu anda sebentar untuk mengisi kuis.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>
