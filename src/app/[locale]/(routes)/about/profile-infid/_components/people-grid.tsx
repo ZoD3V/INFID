@@ -5,6 +5,7 @@ export interface Founder {
     image: string;
     role: string;
     description: string;
+    publications?: any;
 }
 
 interface PeopleGridProps {
@@ -14,7 +15,7 @@ interface PeopleGridProps {
 }
 
 export const PeopleGrid = ({ title, data, onItemClick }: PeopleGridProps) => (
-    <div>
+    <div className='flex flex-col'>
         <h2 className='text-primary-500 mb-8 text-3xl font-bold'>{title}</h2>
 
         <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4'>

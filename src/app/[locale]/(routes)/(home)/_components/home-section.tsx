@@ -1,13 +1,53 @@
 'use client';
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog';
+import { useRouter } from '@/i18n/routing';
 
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+
+const STORAGE_KEY = 'last_quiz_dialog_shown';
+const ONE_HOUR_IN_MS = 3600000;
 
 const Home = () => {
     const t = useTranslations('hero');
+    const router = useRouter();
+
+    const [isQuizDialogOpen, setIsQuizDialogOpen] = useState(false);
+
+    useEffect(() => {
+        const lastShown = localStorage.getItem(STORAGE_KEY);
+        const now = new Date().getTime();
+
+        if (!lastShown || now - parseInt(lastShown) > ONE_HOUR_IN_MS) {
+            const timer = setTimeout(() => {
+                setIsQuizDialogOpen(true);
+                localStorage.setItem(STORAGE_KEY, now.toString());
+            }, 1000);
+
+            return () => clearTimeout(timer);
+        }
+    }, []);
+
+    const handleGoToQuiz = () => {
+        // Jika user klik mulai, kita bisa set waktu ke masa depan yang sangat jauh
+        // atau gunakan key berbeda agar tidak muncul lagi sama sekali setelah mengisi
+        localStorage.setItem(STORAGE_KEY, (new Date().getTime() + ONE_HOUR_IN_MS * 24).toString());
+
+        setIsQuizDialogOpen(false);
+        router.push('/quiz');
+    };
 
     const scrollToAbout = () => {
         const element = document.getElementById('about-us');
@@ -20,7 +60,25 @@ const Home = () => {
         <section
             className='relative min-h-screen overflow-x-hidden bg-cover bg-center bg-no-repeat'
             style={{ backgroundImage: "url('/images/background-home.webp')" }}>
-            <div className='absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(16,123,134,0)_0%,rgba(16,123,134,0.8)_100%)]'></div>{' '}
+            <div className='absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(16,123,134,0)_0%,rgba(16,123,134,0.8)_100%)]'></div>
+            <Dialog open={isQuizDialogOpen} onOpenChange={setIsQuizDialogOpen}>
+                <DialogContent className='sm:max-w-106.25'>
+                    <DialogHeader>
+                        <DialogTitle>Kenali dirimu lebih dalam, tipe apa kamu? </DialogTitle>
+                        <DialogDescription className='pt-2'>
+                            Seberapa aware dirimu terhadap pembangunan berkeadilan?
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>
+                        <Button variant='ghost' onClick={() => setIsQuizDialogOpen(false)} className='rounded-full'>
+                            Nanti Saja
+                        </Button>
+                        <Button onClick={handleGoToQuiz} className='rounded-full'>
+                            Mulai Kuis Sekarang
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
             <div
                 onClick={scrollToAbout}
                 className='absolute bottom-5 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 transform animate-bounce cursor-pointer'>

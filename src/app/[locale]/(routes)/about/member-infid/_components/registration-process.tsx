@@ -56,7 +56,7 @@ const RegistrationProcess = () => {
                             <p className='mb-4 text-teal-100'>Hubungi sekretariat kami untuk panduan lebih lanjut.</p>
                             <a
                                 href='mailto:office@infid.org'
-                                className='group inline-flex items-center gap-2 font-medium text-yellow-300 transition-colors hover:text-yellow-200'>
+                                className='group hover:text-secondary-200 inline-flex items-center gap-2 font-medium text-yellow-300 transition-colors'>
                                 office@infid.org
                                 <ArrowRight className='size-4' />
                             </a>

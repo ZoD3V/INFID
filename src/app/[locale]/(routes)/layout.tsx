@@ -2,12 +2,12 @@ import { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 
 import '@/app/globals.css';
-import Footer from '@/components/common/footer';
 import HomeFloatingCard from '@/components/common/home-floating-card';
 import { Navbar } from '@/components/common/navbar';
 import { Toaster } from '@/components/ui/sonner';
 
 import ClientLayout from './ClientLayout';
+import FooterWrapper from './footer-wrapper';
 import { NextIntlClientProvider } from 'next-intl';
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export default async function HomeLayout({
                     <ClientLayout>{children}</ClientLayout>
 
                     <Toaster richColors />
-                    <Footer />
+                    <FooterWrapper />
                 </NextIntlClientProvider>
             </body>
         </html>
