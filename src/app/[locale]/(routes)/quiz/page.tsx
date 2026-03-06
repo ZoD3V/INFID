@@ -155,6 +155,9 @@ export default function QuizPage() {
 
             {/* Bottom Navigation */}
             <div className='fixed bottom-0 left-0 flex w-full items-center justify-end gap-5 border-t bg-white px-4 py-3 shadow-lg md:px-8'>
+                <Button onClick={next} variant='secondary' disabled={!canContinue} className='rounded-full'>
+                    {isLastStep ? 'Kirim Jawaban' : 'Lanjutkan'}
+                </Button>
                 <div className='flex items-center gap-4'>
                     <button
                         onClick={back}
@@ -169,10 +172,6 @@ export default function QuizPage() {
                         <ChevronRight className='text-secondary-200 h-6 w-6 group-hover:text-white' />
                     </button> */}
                 </div>
-
-                <Button onClick={next} variant='secondary' disabled={!canContinue} className='rounded-full'>
-                    {isLastStep ? 'Kirim Jawaban' : 'Lanjutkan'}
-                </Button>
             </div>
 
             {/* shadcn/ui Dialog */}

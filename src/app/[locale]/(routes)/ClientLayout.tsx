@@ -6,7 +6,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     useEffect(() => {
         (window as any).ACCESSIBILITY_WIDGET_CONFIG = {
             widgetPosition: {
-                side: 'left',
+                side: 'right',
                 left: '25px',
                 bottom: '25px'
             },

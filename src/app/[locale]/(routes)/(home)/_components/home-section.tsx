@@ -1,13 +1,54 @@
 'use client';
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog';
+import { useRouter } from '@/i18n/routing';
 
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+
+const STORAGE_KEY = 'has_seen_quiz_dialog';
 
 const Home = () => {
     const t = useTranslations('hero');
+    const router = useRouter();
+
+    const [isQuizDialogOpen, setIsQuizDialogOpen] = useState(false);
+
+    useEffect(() => {
+        const hasSeenQuiz = localStorage.getItem(STORAGE_KEY);
+
+        if (!hasSeenQuiz) {
+            const timer = setTimeout(() => {
+                setIsQuizDialogOpen(true);
+            }, 2000);
+
+            return () => clearTimeout(timer);
+        }
+    }, []);
+
+    const handleGoToQuiz = () => {
+        localStorage.setItem(STORAGE_KEY, 'true');
+
+        setIsQuizDialogOpen(false);
+
+        router.push('/quiz');
+    };
+
+    const handleDismiss = () => {
+        // localStorage.setItem(STORAGE_KEY, 'true');
+        setIsQuizDialogOpen(false);
+    };
 
     const scrollToAbout = () => {
         const element = document.getElementById('about-us');
@@ -20,7 +61,25 @@ const Home = () => {
         <section
             className='relative min-h-screen overflow-x-hidden bg-cover bg-center bg-no-repeat'
             style={{ backgroundImage: "url('/images/background-home.webp')" }}>
-            <div className='absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(16,123,134,0)_0%,rgba(16,123,134,0.8)_100%)]'></div>{' '}
+            <div className='absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(16,123,134,0)_0%,rgba(16,123,134,0.8)_100%)]'></div>
+            <Dialog open={isQuizDialogOpen} onOpenChange={setIsQuizDialogOpen}>
+                <DialogContent className='sm:max-w-106.25'>
+                    <DialogHeader>
+                        <DialogTitle>Mulai Personalisasi Kuis</DialogTitle>
+                        <DialogDescription className='pt-2'>
+                            Bantu kami memberikan rekomendasi terbaik untuk perjalanan akademik Anda di SPMB 2026.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>
+                        <Button variant='ghost' className='rounded-full' onClick={handleDismiss}>
+                            Nanti Saja
+                        </Button>
+                        <Button onClick={handleGoToQuiz} className='rounded-full'>
+                            Mulai Kuis Sekarang
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
             <div
                 onClick={scrollToAbout}
                 className='absolute bottom-5 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 transform animate-bounce cursor-pointer'>

@@ -400,46 +400,6 @@ export const InfidTimeline = () => {
                                         </p>
                                     </div>
                                 </div>
-
-                                <h4 className='mb-4 text-lg font-bold text-gray-900'>Publikasi Terbaru</h4>
-                                <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
-                                    {selectedPerson.publications?.map((pub: any) => (
-                                        <div key={pub.id} className='group flex cursor-pointer gap-4'>
-                                            {/* Thumbnail */}
-                                            <div className='h-20 w-20 shrink-0 overflow-hidden rounded-md'>
-                                                <img
-                                                    src={pub.image}
-                                                    alt={pub.title}
-                                                    className='h-full w-full object-cover transition-transform group-hover:scale-110'
-                                                />
-                                            </div>
-
-                                            {/* Content */}
-                                            <div className='flex flex-col justify-between py-1'>
-                                                <div>
-                                                    <div className='text-secondary-200 flex items-center gap-2 text-[10px] font-bold tracking-wider uppercase'>
-                                                        {pub.category}
-                                                        <span className='text-slate-300'>•</span>
-                                                        <span className='font-normal text-slate-500'>{pub.date}</span>
-                                                    </div>
-                                                    <h5 className='mt-1 line-clamp-2 text-sm leading-snug font-bold text-slate-900'>
-                                                        {pub.title}
-                                                    </h5>
-                                                </div>
-
-                                                {/* Stats */}
-                                                <div className='mt-2 flex items-center gap-4 text-[11px] text-slate-400'>
-                                                    <div className='flex items-center gap-1'>
-                                                        <Eye size={14} /> {pub.views} Dilihat
-                                                    </div>
-                                                    <div className='flex items-center gap-1'>
-                                                        <MessageSquare size={14} /> {pub.comments} Komentar
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
                             </>
                         )}
                     </DialogContent>
