@@ -58,7 +58,7 @@ export default function HomeFloatingCard() {
     return (
         <div
             className={cn(
-                'fixed right-4 bottom-6 z-50',
+                'fixed right-10 bottom-20 z-50',
                 'w-80 rounded-lg border border-slate-200 bg-white shadow-lg',
                 'p-6'
             )}>
