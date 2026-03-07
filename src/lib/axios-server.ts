@@ -3,8 +3,6 @@ import { API_BASE_URL } from '@/lib/api-endpoints';
 import axios from 'axios';
 import { toast } from 'sonner';
 
-// Pastikan sudah install sonner
-
 export interface ApiResponse<T> {
     data: T[];
 }
