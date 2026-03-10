@@ -58,7 +58,7 @@ export const PublicationContent = ({
 
     return (
         <>
-            <h1 className='text-primary-900 mb-8 text-4xl font-bold lg:text-5xl'>{t('title')}</h1>
+            <h1 className='text-primary-900 mb-8 max-w-sm text-4xl font-bold lg:text-5xl'>{t('title')}</h1>
 
             {categoriesData.length > 0 && (
                 <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
