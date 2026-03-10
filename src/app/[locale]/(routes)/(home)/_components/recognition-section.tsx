@@ -1,36 +1,28 @@
-import React from 'react';
-
 import Image from 'next/image';
 
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import SectionBadge from '@/components/common/section-badge';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 
 import CommunitySection from './community-section';
+import { useTranslations } from 'next-intl';
 
 const RecognitionSection = () => {
+    const t = useTranslations('recognition');
+
     const recognitions = [
         {
-            title: 'Penghargaan Ormas 2017',
-            organization: 'KEMENTERIAN DALAM NEGERI RI',
-            description:
-                'Penerima penghargaan Bidang Sosial Kemanusiaan atas kontribusi nyata dalam pembangunan masyarakat.',
+            title: t('items.award_2017.title'),
+            organization: t('items.award_2017.organization'),
+            description: t('items.award_2017.description'),
             logo: '/icons/ic-rekognisi-1.png',
-            alt: 'Logo Kemendagri'
+            alt: t('items.award_2017.alt')
         },
         {
-            title: 'Special Consultative Status',
-            organization: 'DEWAN EKONOMI & SOSIAL PBB',
-            description:
-                'Status konsultatif resmi sejak 2004 (Ref. No: D1035), membawa suara Indonesia ke forum global.',
+            title: t('items.ecosoc.title'),
+            organization: t('items.ecosoc.organization'),
+            description: t('items.ecosoc.description'),
             logo: '/icons/ic-rekognisi-2.png',
-            alt: 'Logo ECOSOC PBB'
-        },
-        {
-            title: 'Penghargaan Ormas 2017',
-            organization: 'KEMENTERIAN DALAM NEGERI RI',
-            description:
-                'Penerima penghargaan Bidang Sosial Kemanusiaan atas kontribusi nyata dalam pembangunan masyarakat.',
-            logo: '/icons/ic-rekognisi-1.png',
-            alt: 'Logo Kemendagri'
+            alt: t('items.ecosoc.alt')
         }
     ];
 
@@ -40,17 +32,11 @@ const RecognitionSection = () => {
             style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
             <div className='relative container'>
                 {/* Header */}
-                <div className='mb-16 text-center'>
-                    <div className='flex items-center justify-center gap-4'>
-                        <div className='mb-4 flex items-center gap-2 text-sm font-medium tracking-widest text-white'>
-                            <span className='h-px w-4 bg-white'></span>
-                            Pengakuan Nasional & Internasional
-                            <span className='h-px w-4 bg-white'></span>
-                        </div>
-                    </div>
-                    <h2 className='text-4xl font-bold tracking-wide text-white lg:text-5xl'>
-                        Pengakuan dan Kolaborasi Global
-                    </h2>
+                <div className='mb-16 flex flex-col items-center'>
+                    <SectionBadge className='text-center' textColor='text-white' lineColor='bg-white'>
+                        {t('section.badge')}
+                    </SectionBadge>
+                    <h2 className='text-4xl font-bold tracking-wide text-white lg:text-5xl'>{t('section.title')}</h2>
                 </div>
 
                 {/* Recognition Cards */}

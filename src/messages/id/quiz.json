@@ -1,0 +1,82 @@
+{
+    "ui": {
+        "label": "KUIS",
+        "progress": "{current} dari {total}",
+        "continue": "Lanjutkan",
+        "submit": "Kirim Jawaban"
+    },
+    "dialog": {
+        "title": "Konfirmasi Kirim Jawaban",
+        "description": "Kamu bisa mengisi kuisioner ini hanya satu kali. Saat ini kamu masih bisa mengubah jawaban jika dirasa masih ada yang belum sesuai.",
+        "edit": "Ubah Jawaban",
+        "submit": "Kirim Jawaban"
+    },
+    "questions": [
+        {
+            "id": 1,
+            "question": "Apa yang dimaksud dengan pembangunan berkeadilan?",
+            "options": [
+                "Pembangunan yang hanya berfokus pada pertumbuhan ekonomi",
+                "Pembangunan yang merata tanpa memperhatikan kualitas",
+                "Pembangunan yang memberikan manfaat setara bagi seluruh lapisan masyarakat",
+                "Pembangunan yang dipusatkan di wilayah perkotaan"
+            ],
+            "correct": 2
+        },
+        {
+            "id": 2,
+            "question": "Contoh kebijakan yang mencerminkan pembangunan berkeadilan adalah…",
+            "options": [
+                "Membangun gedung pencakar langit di ibu kota",
+                "Memberikan subsidi pendidikan bagi keluarga kurang mampu",
+                "Menaikkan pajak untuk semua warga tanpa pengecualian",
+                "Memprioritaskan industri besar dibanding UMKM"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 3,
+            "question": "Mengapa pembangunan berkeadilan penting bagi kemajuan negara?",
+            "options": [
+                "Mengurangi jumlah penduduk",
+                "Mencegah kecemburuan dan kesenjangan sosial",
+                "Mempercepat urbanisasi",
+                "Meningkatkan persaingan antar daerah"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 4,
+            "question": "Prinsip utama pembangunan berkeadilan adalah…",
+            "options": [
+                "Siapa yang kuat, dia yang maju",
+                "Pemerataan hasil dan kesempatan",
+                "Keuntungan sebesar-besarnya bagi investor",
+                "Pembangunan secepat mungkin"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 5,
+            "question": "Peran masyarakat sipil dalam mendukung pembangunan berkeadilan adalah…",
+            "options": [
+                "Bersikap apatis terhadap kebijakan publik",
+                "Membiarkan ketimpangan sosial tanpa upaya pengawasan",
+                "Berpartisipasi aktif dan mengawasi pelaksanaan pembangunan",
+                "Fokus pada kepentingan pribadi/organisasi"
+            ],
+            "correct": 2
+        },
+        {
+            "id": 6,
+            "question": "Apa peran INFID dalam advokasi pembangunan berkeadilan?",
+            "options": [
+                "Memproduksi riset dan menyelenggarakan dialog kebijakan dengan pemerintah dan pemangku kepentingan",
+                "Melakukan pendampingan korban kekerasan",
+                "Menyediakan forum pendampingan hukum bagi korban pelanggaran HAM",
+                "Membuka donasi publik untuk penggalangan dana bantuan korban"
+            ],
+            "correct": 0
+        }
+    ]
+}

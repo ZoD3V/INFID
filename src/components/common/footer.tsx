@@ -6,23 +6,28 @@ import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { ArrowRight, ChevronUp, MailIcon, PhoneCall } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { BsTwitterX, BsWhatsapp } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
     const pathname = usePathname();
+    const t = useTranslations('footer');
+    const b = useTranslations('button');
+    const p = useTranslations('placeholder');
+
     const footerLinks = {
         tentang_kami: [
-            { name: 'Struktur Organisasi', href: '/tentang-kami' },
+            { name: t('links.structure'), href: '/tentang-kami' },
             // { name: 'INFID Research Fellow', href: '/program-kami/umkm' },
-            { name: 'Anggota INFID', href: '/berita' },
-            { name: 'Mitra INFID', href: '/gallery' }
+            { name: t('links.members'), href: '/berita' },
+            { name: t('links.partners'), href: '/gallery' }
         ],
         advokasi_berbasis_bukti: [
-            { name: 'Riset', href: '/knowledge?category=Riset' },
-            { name: 'Kertas Kebijakan', href: '/knowledge?category=Kertas+Kebijakan' },
-            { name: 'Modul & Panduan', href: '/knowledge?category=Modul+dan+Panduan' },
-            { name: 'Artikel', href: '/knowledge?category=Artikel' }
+            { name: t('links.research'), href: '/knowledge?category=Riset' },
+            { name: t('links.policy'), href: '/knowledge?category=Kertas+Kebijakan' },
+            { name: t('links.modules'), href: '/knowledge?category=Modul+dan+Panduan' },
+            { name: t('links.articles'), href: '/knowledge?category=Artikel' }
         ]
     };
 
@@ -46,11 +51,7 @@ const Footer = () => {
                             />
                         </div>
 
-                        <p className='mb-6 text-sm font-normal text-slate-200'>
-                            INFID adalah organisasi masyarakat sipil berbasis anggota yang berjuang untuk pembangunan
-                            Indonesia sejak 1985. Kekuatan terbesar pada gerakan INFID adalah jaringan 80 anggota di
-                            seluruh Indonesia dan komitmen untuk mengadvokasi kebijakan dengan berbasis bukti.
-                        </p>
+                        <p className='mb-6 text-sm font-normal text-slate-200'>{t('description')}</p>
 
                         <div className='flex gap-4'>
                             <a
@@ -136,11 +137,8 @@ const Footer = () => {
                             ))}
                             <div className='col-span-2 flex w-full flex-col gap-4 lg:col-span-1 lg:w-fit'>
                                 <div className='flex flex-col gap-4'>
-                                    <h6 className='text-base font-bold text-white'>Berlangganan Newsletter</h6>
-                                    <p className='text-sm font-normal text-slate-200'>
-                                        Dapatkan update terbaru tentang program, riset, dan berita seputar advokasi
-                                        kebijakan di Indonesia.
-                                    </p>
+                                    <h6 className='text-base font-bold text-white'>{t('sections.newsletter')}</h6>
+                                    <p className='text-sm font-normal text-slate-200'>{t('newsletter.description')}</p>
                                 </div>
 
                                 <form
@@ -148,11 +146,11 @@ const Footer = () => {
                                     onSubmit={(e) => e.preventDefault()}>
                                     <Input
                                         type='email'
-                                        placeholder='Masukan Email Kamu'
+                                        placeholder={p('insertEmail')}
                                         className='rounded-full border-gray-400 bg-white/10 text-sm text-white placeholder:text-slate-400 focus-visible:ring-slate-400'
                                     />
                                     <Button type='submit' variant='secondary' className='w-full rounded-full'>
-                                        Berlangganan
+                                        {b('subscribe')}
                                         <ArrowRight />
                                     </Button>
                                 </form>
@@ -162,7 +160,7 @@ const Footer = () => {
                 </div>
                 <div className='flex w-full flex-col items-start justify-between gap-5 md:flex-row md:items-end'>
                     <div className='flex flex-col gap-2 pt-8'>
-                        <h6 className='text-base font-bold text-white'>Sekretariat INFD</h6>
+                        <h6 className='text-base font-bold text-white'>{t('contact.title')}</h6>
                         <p className='text-sm font-normal text-slate-200'>
                             Jl. Sebret No.4 C, Jati Padang, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
                         </p>
@@ -181,8 +179,8 @@ const Footer = () => {
                         type='button'
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         className='flex cursor-pointer items-center gap-1 text-white transition hover:opacity-80'
-                        aria-label='Kembali ke atas'>
-                        <p className='text-sm font-semibold'>Kembali ke Atas</p>
+                        aria-label={t('backToTop')}>
+                        <p className='text-sm font-semibold'>{t('backToTop')}</p>
                         <ChevronUp size={20} />
                     </button>
                 </div>

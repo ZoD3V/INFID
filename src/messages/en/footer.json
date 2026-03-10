@@ -1,0 +1,27 @@
+{
+    "description": "INFID is a member-based civil society organization that has been fighting for Indonesia's development since 1985. The greatest strength of the INFID movement is its network of 80 members throughout Indonesia and its commitment to evidence-based policy advocacy.",
+    "sections": {
+        "about": "About Us",
+        "advocacy": "Evidence-Based Advocacy",
+        "newsletter": "Newsletter Subscription"
+    },
+    "links": {
+        "structure": "Organizational Structure",
+        "members": "INFID Members",
+        "partners": "INFID Partners",
+        "research": "Research",
+        "policy": "Policy Papers",
+        "modules": "Modules & Guides",
+        "articles": "Articles"
+    },
+    "newsletter": {
+        "description": "Get the latest updates on programs, research, and news about policy advocacy in Indonesia.",
+        "placeholder": "Enter Your Email",
+        "button": "Subscribe"
+    },
+    "contact": {
+        "title": "INFID Secretariat",
+        "address": "Jl. Sebret No.4 C, Jati Padang, Pasar Minggu, South Jakarta, 12540, Indonesia"
+    },
+    "backToTop": "Back to Top"
+}

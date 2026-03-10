@@ -22,6 +22,8 @@ const ONE_HOUR_IN_MS = 3600000;
 
 const Home = () => {
     const t = useTranslations('hero');
+    const b = useTranslations('button');
+    const d = useTranslations('quiz-dialog');
     const router = useRouter();
 
     const [isQuizDialogOpen, setIsQuizDialogOpen] = useState(false);
@@ -41,8 +43,6 @@ const Home = () => {
     }, []);
 
     const handleGoToQuiz = () => {
-        // Jika user klik mulai, kita bisa set waktu ke masa depan yang sangat jauh
-        // atau gunakan key berbeda agar tidak muncul lagi sama sekali setelah mengisi
         localStorage.setItem(STORAGE_KEY, (new Date().getTime() + ONE_HOUR_IN_MS * 24).toString());
 
         setIsQuizDialogOpen(false);
@@ -64,17 +64,18 @@ const Home = () => {
             <Dialog open={isQuizDialogOpen} onOpenChange={setIsQuizDialogOpen}>
                 <DialogContent className='sm:max-w-106.25'>
                     <DialogHeader>
-                        <DialogTitle>Kenali dirimu lebih dalam, tipe apa kamu? </DialogTitle>
-                        <DialogDescription className='pt-2'>
-                            Seberapa aware dirimu terhadap pembangunan berkeadilan?
-                        </DialogDescription>
+                        <DialogTitle>{d('title')}</DialogTitle>
+
+                        <DialogDescription className='pt-2'>{d('description')}</DialogDescription>
                     </DialogHeader>
+
                     <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>
                         <Button variant='ghost' onClick={() => setIsQuizDialogOpen(false)} className='rounded-full'>
-                            Nanti Saja
+                            {d('buttons.later')}
                         </Button>
+
                         <Button onClick={handleGoToQuiz} className='rounded-full'>
-                            Mulai Kuis Sekarang
+                            {d('buttons.start')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -91,7 +92,7 @@ const Home = () => {
                         {/* Tag */}
                         <div className='inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 backdrop-blur-sm'>
                             <span className='h-2 w-2 animate-pulse rounded-full bg-orange-500'></span>
-                            <p className='text-xs font-medium tracking-wide text-white'>{t('tagline')}</p>
+                            <p className='text-xs font-medium tracking-wide text-white uppercase'>{t('tagline')}</p>
                         </div>
 
                         {/* Main Heading */}
@@ -109,13 +110,13 @@ const Home = () => {
                         {/* CTA Buttons */}
                         <div className='grid grid-cols-2 gap-4 md:flex'>
                             <Button variant='secondary' className='rounded-full font-semibold'>
-                                Jelajahi Program
+                                {b('exploreProgram')}
                                 <ArrowRight />
                             </Button>
                             <Button
                                 variant='outline'
                                 className='rounded-full border-white/30 bg-slate-500/10 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:text-slate-100'>
-                                Pelajari Sejarah
+                                {b('learnHistory')}
                             </Button>
                         </div>
                     </div>

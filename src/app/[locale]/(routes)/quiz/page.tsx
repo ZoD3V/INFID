@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,21 +14,22 @@ import {
 import { useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
-import { QUIZ_QUESTIONS } from './constant/quiz';
 import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 export default function QuizPage() {
+    const t = useTranslations('quiz');
     const router = useRouter();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState<Record<number, number[]>>({});
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const questions = QUIZ_QUESTIONS;
+    const questions = t.raw('questions');
     const currentQuestion = questions[currentIndex];
 
     const handleSubmit = () => {
-        toast.success('Quiz berhasil terkirim.');
+        toast.success('The quiz has been successfully sent.');
         setIsDialogOpen(false);
         setTimeout(() => {
             router.push('/');
@@ -37,23 +38,30 @@ export default function QuizPage() {
 
     const getOptionLabel = (index: number) => String.fromCharCode(65 + index);
 
-    const isSelected = (qId: number, optId: number) => {
-        return userAnswers[qId]?.includes(optId);
+    const isSelected = (qId: number, optIndex: number) => {
+        return userAnswers[qId]?.includes(optIndex);
     };
 
-    const toggleAnswer = (qId: number, optId: number, type: number, max: number) => {
+    const toggleAnswer = (qId: number, optIndex: number, type: number, max: number) => {
         const currentSelected = userAnswers[qId] || [];
 
         if (type === 1) {
-            // Multiple Choice
-            if (currentSelected.includes(optId)) {
-                setUserAnswers({ ...userAnswers, [qId]: currentSelected.filter((id) => id !== optId) });
+            if (currentSelected.includes(optIndex)) {
+                setUserAnswers({
+                    ...userAnswers,
+                    [qId]: currentSelected.filter((id) => id !== optIndex)
+                });
             } else if (currentSelected.length < max) {
-                setUserAnswers({ ...userAnswers, [qId]: [...currentSelected, optId] });
+                setUserAnswers({
+                    ...userAnswers,
+                    [qId]: [...currentSelected, optIndex]
+                });
             }
         } else {
-            // Single Choice
-            setUserAnswers({ ...userAnswers, [qId]: [optId] });
+            setUserAnswers({
+                ...userAnswers,
+                [qId]: [optIndex]
+            });
         }
     };
 
@@ -70,7 +78,7 @@ export default function QuizPage() {
     };
 
     const isLastStep = currentIndex === questions.length - 1;
-    const canContinue = userAnswers[currentQuestion.pertanyaan_id]?.length > 0;
+    const canContinue = userAnswers[currentQuestion.id]?.length > 0;
 
     if (!questions.length) {
         return (
@@ -86,9 +94,9 @@ export default function QuizPage() {
             {/* Stepper / Progress Bar */}
             <div className='bg-primary-500 flex h-35 w-full items-center justify-center overflow-x-auto border-b px-3'>
                 <div className='flex min-w-max items-center justify-start gap-2 pt-16 md:justify-center'>
-                    {questions.map((_, i) => (
+                    {questions.map((q: any, i: number) => (
                         <div
-                            key={i}
+                            key={q.id}
                             className={cn(
                                 'flex h-10 w-9 items-center justify-center rounded-sm text-base font-semibold transition-colors',
                                 i <= currentIndex
@@ -105,27 +113,32 @@ export default function QuizPage() {
             <div className='flex min-h-[calc(100vh-220px)] items-center justify-center px-4 py-6'>
                 <div className='flex w-full max-w-2xl flex-col gap-4 rounded-xl border bg-white p-6 shadow'>
                     <div className='flex items-center justify-between'>
-                        <span>KUIS</span>
+                        <span>{t('ui.label')}</span>
 
                         <span className='text-xs font-medium text-gray-400'>
-                            {currentIndex + 1} dari {questions.length}
+                            {/* {currentIndex + 1} dari {questions.length} */}
+                            {t('ui.progress', {
+                                current: currentIndex + 1,
+                                total: questions.length
+                            })}
                         </span>
                     </div>
 
                     <h3 className='text-lg leading-snug font-semibold text-gray-800'>{currentQuestion.pertanyaan}</h3>
 
                     <div className='flex flex-col gap-3'>
-                        {currentQuestion.options.map((opt, i) => {
-                            const active = isSelected(currentQuestion.pertanyaan_id, opt.pilihan_id);
+                        {currentQuestion.options.map((opt: string, i: number) => {
+                            const active = isSelected(currentQuestion.id, i);
+
                             return (
                                 <div
-                                    key={opt.pilihan_id}
+                                    key={i}
                                     onClick={() =>
                                         toggleAnswer(
-                                            currentQuestion.pertanyaan_id,
-                                            opt.pilihan_id,
+                                            currentQuestion.id,
+                                            i,
                                             currentQuestion.type,
-                                            currentQuestion.maksimal_pilihan
+                                            currentQuestion.maxSelection
                                         )
                                     }
                                     className={cn(
@@ -139,7 +152,8 @@ export default function QuizPage() {
                                         )}>
                                         {getOptionLabel(i)}
                                     </div>
-                                    <span className={cn('primary-500 text-sm font-medium')}>{opt.pilihan}</span>
+
+                                    <span className='primary-500 text-sm font-medium'>{opt}</span>
                                 </div>
                             );
                         })}
@@ -156,7 +170,7 @@ export default function QuizPage() {
             {/* Bottom Navigation */}
             <div className='fixed bottom-0 left-0 flex w-full items-center justify-end gap-5 border-t bg-white px-4 py-3 shadow-lg md:px-8'>
                 <Button onClick={next} variant='secondary' disabled={!canContinue} className='rounded-full'>
-                    {isLastStep ? 'Kirim Jawaban' : 'Lanjutkan'}
+                    {isLastStep ? t('ui.submit') : t('ui.continue')}
                 </Button>
                 <div className='flex items-center gap-4'>
                     <button
@@ -178,18 +192,15 @@ export default function QuizPage() {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent className='sm:max-w-md'>
                     <DialogHeader>
-                        <DialogTitle>Konfirmasi Kirim Jawaban</DialogTitle>
-                        <DialogDescription className='pt-2'>
-                            Kamu bisa mengisi kuisioner ini hanya satu kali, saat ini kamu masih bisa mengubah jawaban
-                            jika dirasa masih ada yang belum sesuai.
-                        </DialogDescription>
+                        <DialogTitle> {t('dialog.title')}</DialogTitle>
+                        <DialogDescription className='pt-2'>{t('dialog.description')}</DialogDescription>
                     </DialogHeader>
                     <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>
                         <Button variant='outline' onClick={() => setIsDialogOpen(false)} className='rounded-full'>
-                            Ubah Jawaban
+                            {t('dialog.edit')}
                         </Button>
                         <Button onClick={handleSubmit} className='rounded-full'>
-                            Kirim Jawaban
+                            {t('dialog.submit')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

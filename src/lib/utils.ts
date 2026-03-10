@@ -47,3 +47,10 @@ export const getInitials = (name: string) => {
     }
     return name.substring(0, 2).toUpperCase();
 };
+
+export const slugify = (text: string) => {
+    return text
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '');
+};

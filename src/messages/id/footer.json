@@ -1,0 +1,27 @@
+{
+    "description": "INFID adalah organisasi masyarakat sipil berbasis anggota yang berjuang untuk pembangunan Indonesia sejak 1985. Kekuatan terbesar pada gerakan INFID adalah jaringan 80 anggota di seluruh Indonesia dan komitmen untuk mengadvokasi kebijakan dengan berbasis bukti.",
+    "sections": {
+        "about": "Tentang Kami",
+        "advocacy": "Advokasi Berbasis Bukti",
+        "newsletter": "Berlangganan Newsletter"
+    },
+    "links": {
+        "structure": "Struktur Organisasi",
+        "members": "Anggota INFID",
+        "partners": "Mitra INFID",
+        "research": "Riset",
+        "policy": "Kertas Kebijakan",
+        "modules": "Modul & Panduan",
+        "articles": "Artikel"
+    },
+    "newsletter": {
+        "description": "Dapatkan update terbaru tentang program, riset, dan berita seputar advokasi kebijakan di Indonesia.",
+        "placeholder": "Masukan Email Kamu",
+        "button": "Berlangganan"
+    },
+    "contact": {
+        "title": "Sekretariat INFID",
+        "address": "Jl. Sebret No.4 C, Jati Padang, Pasar Minggu, Jakarta Selatan, 12540, Indonesia"
+    },
+    "backToTop": "Kembali ke Atas"
+}

@@ -1,0 +1,21 @@
+{
+    "section": {
+        "badge": "IMPACT STORY",
+        "title": "PROGRAM KAMI",
+        "description": "Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan."
+    },
+    "programs": {
+        "human_rights": {
+            "title": "Masyarakat Sipil untuk Hak Asasi Manusia & Demokrasi",
+            "description": "Memperkuat peran masyarakat sipil dalam menegakkan HAM dan memastikan proses demokrasi yang substansial dan bebas dari kekerasan."
+        },
+        "climate_governance": {
+            "title": "Tata Kelola Iklim yang Demokratis dan Berkeadilan Gender",
+            "description": "Mendorong kebijakan iklim yang partisipatif, transparan, dan responsif gender untuk memastikan keadilan bagi kelompok rentan."
+        },
+        "inclusive_development": {
+            "title": "Pembangunan yang Inklusif dan Berkeadilan",
+            "description": "Mengawal agenda pembangunan agar memberikan manfaat merata, mengurangi ketimpangan, dan tidak meninggalkan siapapun."
+        }
+    }
+}

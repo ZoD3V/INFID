@@ -1,0 +1,82 @@
+{
+    "ui": {
+        "label": "QUIZ",
+        "progress": "{current} of {total}",
+        "continue": "Continue",
+        "submit": "Submit Answers"
+    },
+    "dialog": {
+        "title": "Confirm Submission",
+        "description": "You can complete this questionnaire only once. At this stage, you may still change your answers if there is anything you would like to revise.",
+        "edit": "Change Answer",
+        "submit": "Send Answer"
+    },
+    "questions": [
+        {
+            "id": 1,
+            "question": "What is meant by equitable development?",
+            "options": [
+                "Development focused only on economic growth",
+                "Development distributed evenly without considering quality",
+                "Development that benefits all layers of society equally",
+                "Development concentrated in urban areas"
+            ],
+            "correct": 2
+        },
+        {
+            "id": 2,
+            "question": "An example of a policy reflecting equitable development is…",
+            "options": [
+                "Building skyscrapers in the capital city",
+                "Providing education subsidies for low-income families",
+                "Increasing taxes for all citizens without exception",
+                "Prioritizing large industries over SMEs"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 3,
+            "question": "Why is equitable development important for national progress?",
+            "options": [
+                "Reducing population growth",
+                "Preventing social jealousy and inequality",
+                "Accelerating urbanization",
+                "Increasing competition between regions"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 4,
+            "question": "The main principle of equitable development is…",
+            "options": [
+                "The strongest gets ahead",
+                "Equal distribution of results and opportunities",
+                "Maximum profit for investors",
+                "Development as fast as possible"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 5,
+            "question": "The role of civil society in supporting equitable development is…",
+            "options": [
+                "Being apathetic toward public policy",
+                "Allowing social inequality without oversight",
+                "Actively participating and monitoring development implementation",
+                "Focusing only on personal or organizational interests"
+            ],
+            "correct": 2
+        },
+        {
+            "id": 6,
+            "question": "What is INFID's role in advocating equitable development?",
+            "options": [
+                "Producing research and organizing policy dialogues with government and stakeholders",
+                "Providing assistance to victims of violence",
+                "Offering legal assistance forums for human rights violation victims",
+                "Opening public donations for humanitarian aid"
+            ],
+            "correct": 0
+        }
+    ]
+}
