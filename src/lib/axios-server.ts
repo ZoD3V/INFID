@@ -19,9 +19,9 @@ apiBase.interceptors.response.use(
         return response;
     },
     (error) => {
-        const errorMessage = error.response?.data?.message || error.message || 'Terjadi kesalahan pada server';
+        const errorMessage = error.response?.data?.message || error.message || 'an error occurred on the server';
 
-        toast.error('Gagal memuat data', {
+        toast.error('Failed to load data', {
             description: errorMessage
         });
 

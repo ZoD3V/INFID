@@ -1,29 +1,29 @@
 import Image from 'next/image';
 
-import { Maps } from '@/components/common/maps';
 import { SectionHeader } from '@/components/common/section-header';
 import { Button } from '@/components/ui/button';
 
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const ProgramSection = () => {
+    const t = useTranslations('program-us');
+    const b = useTranslations('button');
+
     const programs = [
         {
-            title: 'Masyarakat Sipil untuk Hak Asasi Manusia & Demokrasi',
-            description:
-                'Memperkuat peran masyarakat sipil dalam menegakkan HAM dan memastikan proses demokrasi yang substansial dan bebas dari kekerasan.',
+            title: t('programs.human_rights.title'),
+            description: t('programs.human_rights.description'),
             image: '/images/bg-program-1.webp'
         },
         {
-            title: 'Tata Kelola Iklim yang Demokratis dan Berkeadilan Gender',
-            description:
-                'Mendorong kebijakan iklim yang partisipatif, transparan, dan responsif gender untuk memastikan keadilan bagi kelompok rentan.',
+            title: t('programs.climate_governance.title'),
+            description: t('programs.climate_governance.description'),
             image: '/images/bg-program-2.webp'
         },
         {
-            title: 'Pembangunan yang Inklusif dan Berkeadilan',
-            description:
-                'Mengawal agenda pembangunan agar memberikan manfaat merata, mengurangi ketimpangan, dan tidak meninggalkan siapapun.',
+            title: t('programs.inclusive_development.title'),
+            description: t('programs.inclusive_development.description'),
             image: '/images/bg-program-3.webp'
         }
     ];
@@ -35,14 +35,14 @@ const ProgramSection = () => {
                 alt='decoration'
                 width={200}
                 height={200}
-                className='absolute top-0 left-0 hidden xl:block'
+                className='absolute top-0 left-0 hidden h-auto w-auto xl:block'
             />
             <Image
                 src='/images/decoration-about.png'
                 alt='images'
                 width={180}
                 height={180}
-                className='absolute -bottom-10 -left-10 hidden xl:block'
+                className='absolute -bottom-10 -left-10 hidden h-auto w-auto xl:block'
             />
             <Image
                 src='/images/decoration-program-2.png'
@@ -56,13 +56,13 @@ const ProgramSection = () => {
                     {/* Sticky Text Section */}
                     <div className='h-fit lg:sticky lg:top-25'>
                         <SectionHeader
-                            badge='IMPACT STORY'
+                            badge={t('section.badge')}
+                            title={t('section.title')}
+                            description={t('section.description')}
                             badgeProps={{
                                 textColor: 'text-slate-500',
                                 lineColor: 'bg-primary-400'
                             }}
-                            title='PROGRAM KAMI'
-                            description='Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan.'
                             titleClassName='text-primary-900'
                             descriptionClassName='text-primary-700'
                             className='mb-20'
@@ -70,7 +70,8 @@ const ProgramSection = () => {
 
                         {/* CTA Button */}
                         <button className='group inline-flex cursor-pointer items-center gap-2 border-b border-slate-900 pb-2 text-sm font-semibold lg:mt-8'>
-                            Baca Selengkapnya
+                            {b('exploreProgram')}
+
                             <ArrowRight className='h-5 w-5 transition-transform group-hover:translate-x-1' />
                         </button>
                     </div>
@@ -98,7 +99,7 @@ const ProgramSection = () => {
                                             {program.description}
                                         </p>
                                         <Button variant='secondary' size='sm' className='rounded-full'>
-                                            Jelajahi Program
+                                            {b('exploreProgram')}
                                             <ArrowRight />
                                         </Button>
                                     </div>

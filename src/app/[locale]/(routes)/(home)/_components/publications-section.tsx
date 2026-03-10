@@ -26,15 +26,10 @@ async function getInitialCategoryPublications() {
 const PublicationsSection = async () => {
     const initialData = await getInitialPublications();
     const categoriesData = await getInitialCategoryPublications();
-    console.log(categoriesData);
 
     return (
         <section className='relative bg-slate-50 py-24'>
             <div className='container'>
-                <h1 className='text-primary-900 mb-8 text-4xl font-bold lg:text-5xl'>
-                    PUBLIKASI
-                    <br />& RISET
-                </h1>
                 <PublicationContent initialData={initialData} categoriesData={categoriesData} />
             </div>
         </section>

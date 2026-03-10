@@ -8,6 +8,7 @@ import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiBase } from '@/lib/axios-server';
 
 import { Eye, Loader2, MessageSquareMore, Pencil, TriangleAlertIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface Article {
     id: number;
@@ -28,6 +29,7 @@ export const PublicationContent = ({
     const [activeTab, setActiveTab] = useState(0);
     const [publications, setPublications] = useState(initialData);
     const [isLoading, setIsLoading] = useState(false);
+    const t = useTranslations('publications');
 
     const handleTabChange = async (tabId: number) => {
         setActiveTab(tabId);
@@ -56,6 +58,8 @@ export const PublicationContent = ({
 
     return (
         <>
+            <h1 className='text-primary-900 mb-8 text-4xl font-bold lg:text-5xl'>{t('title')}</h1>
+
             {categoriesData.length > 0 && (
                 <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
                     <div className='flex flex-wrap gap-3'>
@@ -193,7 +197,7 @@ export const PublicationContent = ({
                     </div>
                 </div>
             ) : (
-                <EmptyState title='Data Tidak Ditemukan' description='Tidak ada publikasi untuk category ini.' />
+                <EmptyState title='Data Not Found' description='There are no publications for this category.' />
             )}
         </>
     );

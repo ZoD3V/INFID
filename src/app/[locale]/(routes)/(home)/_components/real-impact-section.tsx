@@ -7,8 +7,12 @@ import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import { Eye, Pencil, Play } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const RealImpactSection = () => {
+    const t = useTranslations('hero');
+    const b = useTranslations('button');
+    const c = useTranslations('card');
     const videoId = 'U0t1MvVi-9I';
     const startTime = 74;
     const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
@@ -20,9 +24,9 @@ const RealImpactSection = () => {
             <div className='container'>
                 {/* Header */}
                 <SectionHeader
-                    badge='Bergerak, Berdampak'
-                    title='Dampak perubahan dari kerja bersama di lapangan'
-                    description='Setiap program menghadirkan cerita nyata. Simak ringkasan dampak, lalu telusuri kisah lengkapnya seperti membaca blog.'
+                    badge={t('impactTag')}
+                    title={t('impactTitle')}
+                    description={t('impactDescription')}
                     descriptionClassName='max-w-3xl'
                 />
 
@@ -38,6 +42,7 @@ const RealImpactSection = () => {
                                         src='/images/background-about-us.webp'
                                         alt='featured'
                                         fill
+                                        sizes='50vw'
                                         className='object-cover transition-all duration-300'
                                     />
 
@@ -209,19 +214,15 @@ const RealImpactSection = () => {
                             alt='decoration'
                             width={175}
                             height={175}
-                            className='ml-24 rounded-xl'
+                            className='ml-24 h-auto w-auto rounded-xl'
                         />
                         <div className='px-5 pb-5 lg:pt-0'>
                             <div className='space-y-2 lg:space-y-4'>
                                 <h3 className='group-hover:text-primary-500 line-clamp-2 text-xl leading-snug font-bold transition-colors lg:text-2xl'>
-                                    Jelajahi semua kisah{' '}
-                                    <span className='font-extrabold italic'>Bergerak, Berdampak</span>
+                                    {c('impactCardTitle')}
                                 </h3>
-                                <p className='max-w-3xl text-base'>
-                                    Temukan lebih banyak cerita perubahan, pembelajaran, dan dokumentasi program dalam
-                                    format artikel.
-                                </p>
-                                <Button className='w-full rounded-full'>Simak Semua Cerita</Button>
+                                <p className='max-w-3xl text-base'>{c('impactCardDescription')}</p>
+                                <Button className='w-full rounded-full'>{b('readAllStories')}</Button>
                             </div>
                         </div>
                     </div>

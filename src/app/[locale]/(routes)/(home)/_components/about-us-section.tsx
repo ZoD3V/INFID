@@ -3,9 +3,12 @@ import Image from 'next/image';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
-import { ArrowRight, Play, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const AboutUsSection = () => {
+    const t = useTranslations('hero');
+    const b = useTranslations('button');
     const videoId = 'U0t1MvVi-9I';
     const startTime = 74;
     const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
@@ -17,7 +20,7 @@ const AboutUsSection = () => {
                 alt='images'
                 width={90}
                 height={90}
-                className='absolute top-10 right-10 hidden xl:block'
+                className='absolute top-10 right-10 hidden h-auto w-auto xl:block'
             />
             <div className='container'>
                 <div className='grid items-center gap-10 lg:grid-cols-2 lg:gap-12'>
@@ -81,32 +84,20 @@ const AboutUsSection = () => {
                     <div>
                         <div className='text-primary mb-4 flex items-center gap-2 text-xs font-medium tracking-wider'>
                             <span className='bg-primary h-px w-4'></span>
-                            TENTANG KAMI
+                            {t('aboutUsTag')}
                             <span className='bg-primary h-px w-4'></span>
                         </div>
 
                         <h2 className='text-primary mb-6 text-4xl leading-tight font-bold lg:text-5xl'>
-                            Mengawal Pembangunan Berkeadilan
+                            {t('aboutUsTitle')}
                         </h2>
 
                         <div className='space-y-4 text-left text-base leading-relaxed text-slate-600'>
-                            <p>
-                                International NGO Forum on Indonesian Development (INFID) adalah jaringan organisasi
-                                masyarakat sipil yang berdiri sejak 1985 dan berkomitmen untuk memperjuangkan
-                                pembangunan berkeadilan, demokrasi, kesetaraan, dan penghormatan terhadap hak asasi
-                                manusia di Indonesia.
-                            </p>
+                            <p>{t('aboutUsDescription1')}</p>
 
-                            <p>
-                                INFID bekerja melalui pendekatan advokasi inklusif berbasis bukti, dengan fokus pada
-                                isu-isu strategis seperti penurunan ketimpangan, pelaksanaan Tujuan Pembangunan
-                                Berkelanjutan (SDGs), serta penguatan ruang sipil dan demokrasi.
-                            </p>
+                            <p>{t('aboutUsDescription2')}</p>
 
-                            <p>
-                                INFID memiliki 80 anggota di seluruh Indonesia dan terakreditasi oleh Perserikatan
-                                Bangsa-Bangsa (PBB) dan menyandang Special Consultative Status untuk ECOSOC di PBB.
-                            </p>
+                            <p>{t('aboutUsDescription3')}</p>
                         </div>
 
                         {/* Info Box */}
@@ -115,11 +106,10 @@ const AboutUsSection = () => {
                                 <Image src='/icons/ic-user-signal.png' alt='icon' width={50} height={50} />
                                 <div>
                                     <h3 className='mb-1 text-base font-bold text-gray-900 lg:mb-2 lg:text-lg'>
-                                        Memiliki 80 organisasi anggota
+                                        {t('aboutUsOrganizationTitle')}
                                     </h3>
                                     <p className='text-sm leading-relaxed text-gray-600 md:text-base'>
-                                        Tersebar di seluruh nusantara, bekerja bersama untuk mengenal lebih dalam
-                                        kebijakan publik berpihak pada keadilan sosial.
+                                        {t('aboutUsOrganizationDescription')}
                                     </p>
                                 </div>
                             </div>
@@ -127,7 +117,7 @@ const AboutUsSection = () => {
 
                         {/* CTA Button */}
                         <button className='group mt-6 inline-flex cursor-pointer items-center gap-2 border-b border-slate-900 pb-2 text-sm font-semibold lg:mt-8'>
-                            Baca Selengkapnya
+                            {b('readMore')}
                             <ArrowRight className='h-5 w-5 transition-transform group-hover:translate-x-1' />
                         </button>
                     </div>

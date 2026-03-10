@@ -18,6 +18,8 @@ export default function HomeFloatingCard() {
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
     const t = useTranslations('home-floating');
+    const p = useTranslations('placeholder');
+    const b = useTranslations('button');
 
     useEffect(() => {
         if (!pathname) return;
@@ -27,7 +29,7 @@ export default function HomeFloatingCard() {
         const isLocalizedHome = segments.length === 1;
 
         if (!isLocalizedHome) {
-            setIsVisible(false); // ✅ IMPORTANT FIX
+            setIsVisible(false);
             return;
         }
 
@@ -77,11 +79,11 @@ export default function HomeFloatingCard() {
             <form className='flex w-full flex-col items-center gap-3' onSubmit={onSubmit}>
                 <Input
                     type='email'
-                    placeholder='Masukan Email Kamu'
+                    placeholder={p('insertEmail')}
                     className='rounded-full border-slate-200 bg-slate-50 text-sm placeholder:text-slate-500'
                 />
                 <Button type='submit' size='sm' variant='secondary' className='w-full rounded-full'>
-                    Berlangganan
+                    {b('subscribe')}
                     <ArrowRight className='ml-2 h-4 w-4' />
                 </Button>
             </form>

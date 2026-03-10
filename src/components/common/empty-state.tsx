@@ -11,8 +11,8 @@ type EmptyStateProps = {
 
 export default function EmptyState({
     icon,
-    title = 'Data Tidak Ditemukan',
-    description = 'Tidak ada data tersedia.',
+    title = 'Data Not Found',
+    description = 'No data available.',
     className = ''
 }: EmptyStateProps) {
     return (
