@@ -1,0 +1,36 @@
+{
+    "hero": {
+        "badge": "MARI BERKONTAK",
+        "title": "Hubungi Kami",
+        "description": "Punya pertanyaan, usulan kerjasama, atau ingin tahu lebih lanjut tentang program kami? Jangan ragu untuk menghubungi tim INFID."
+    },
+    "info": {
+        "title": "Kontak Langsung",
+        "email": "Email",
+        "contact": "Kontak",
+        "phone": "Telepon",
+        "whatsapp": "Whatsapp",
+        "address_title": "Sekretariat INFID",
+        "button_direction": "Direction",
+        "follow_us": "Ikuti Kami"
+    },
+    "form": {
+        "title": "Kirim Pesan",
+        "tab_org": "Organisasi/Institusi",
+        "tab_ind": "Individu",
+        "label_name_org": "Nama Organisasi/Institusi",
+        "label_name_ind": "Nama Lengkap",
+        "placeholder_name_org": "Masukan Nama Organisasi/Institusi",
+        "placeholder_name_ind": "Masukan Nama Lengkap",
+        "label_email_org": "Email Organisasi",
+        "label_email_ind": "Email",
+        "placeholder_email_org": "Masukan Email Organisasi",
+        "placeholder_email_ind": "Masukan Email",
+        "label_subject": "Subjek Pesan",
+        "placeholder_subject": "Masukan Subjek Pesan",
+        "label_message": "Pesan Anda",
+        "placeholder_message": "Tuliskan Pesan Anda Disini...",
+        "privacy_agreement": "Saya setuju bahwa data yang saya kirimkan akan digunakan untuk memproses pertanyaan ini sesuai dengan kebijakan privasi.",
+        "button_submit": "Kirim Pesan"
+    }
+}

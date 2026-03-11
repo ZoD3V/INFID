@@ -8,10 +8,13 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
 import { ExternalLink, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { BsTwitterX } from 'react-icons/bs';
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 const ContactUs = () => {
+    const t = useTranslations('contact');
     const [senderType, setSenderType] = useState('organization');
     const [formData, setFormData] = useState({
         organizationName: '',
@@ -22,8 +25,8 @@ const ContactUs = () => {
     });
 
     const handleSubmit = () => {
-        console.log('Form submitted:', { senderType, ...formData });
-        alert('Pesan berhasil dikirim!');
+        // console.log('Form submitted:', { senderType, ...formData });
+        toast.success('The form has been successfully sent.');
     };
 
     const handleInputChange = (e: any) => {
@@ -46,15 +49,14 @@ const ContactUs = () => {
                     <div className='z-10 flex flex-col items-center justify-center gap-4 lg:gap-6'>
                         <div className='inline-flex w-fit items-center gap-2 rounded-full border border-white/20 px-3 py-2 backdrop-blur-sm'>
                             <span className='h-2 w-2 animate-pulse rounded-full bg-orange-500'></span>
-                            <p className='text-xs font-medium tracking-wide text-white uppercase'>Mari Berkontak</p>
+                            <p className='text-xs font-medium tracking-wide text-white uppercase'>{t('hero.badge')}</p>
                         </div>
                         {/* Title */}
                         <h2 className='text-3xl font-bold tracking-wide text-white md:text-4xl lg:text-5xl'>
-                            Hubungi Kami
+                            {t('hero.title')}
                         </h2>
                         <p className='max-w-3xl text-center text-sm text-white md:text-base lg:text-lg'>
-                            Punya pertanyaan, usulan kerjasama, atau ingin tahu lebih lanjut tentang program kami?
-                            Jangan ragu untuk menghubungi tim INFID.
+                            {t('hero.description')}
                         </p>
                     </div>
                 </div>
@@ -62,7 +64,7 @@ const ContactUs = () => {
             <div className='relative z-20 container flex w-full flex-col items-start gap-4 py-16 lg:-mt-30 lg:flex-row'>
                 {/* Left Section - Contact Info */}
                 <div className='w-full rounded-xl border border-slate-200 bg-white p-8 lg:w-[50%]'>
-                    <h2 className='mb-8 text-lg font-bold text-gray-800 lg:text-xl'>Kontak Langsung</h2>
+                    <h2 className='mb-8 text-lg font-bold text-gray-800 lg:text-xl'>{t('info.title')}</h2>
 
                     {/* Email Section */}
                     <div className='mb-8 flex items-start gap-4'>
@@ -70,7 +72,7 @@ const ContactUs = () => {
                             <Mail className='h-5 w-5 text-teal-600' />
                         </div>
                         <div>
-                            <h3 className='text-base font-semibold text-gray-800'>Email</h3>
+                            <h3 className='text-base font-semibold text-gray-800'>{t('info.email')}</h3>
                             <p className='text-primary-900 text-sm'>info@infid.org</p>
                             <p className='text-primary-900 text-sm'>pengaduan@infid.org</p>
                         </div>
@@ -82,8 +84,8 @@ const ContactUs = () => {
                             <Phone className='h-5 w-5 text-teal-600' />
                         </div>
                         <div>
-                            <h3 className='text-base font-semibold text-gray-800'>Kontak</h3>
-                            <p className='text-primary-900 text-sm'>Telepon : +62 21 781 9734</p>
+                            <h3 className='text-base font-semibold text-gray-800'>{t('info.contact')}</h3>
+                            <p className='text-primary-900 text-sm'>{t('info.phone')} : +62 21 781 9734</p>
                             <p className='text-primary-900 text-sm'>Whatsapp : +628119277507</p>
                         </div>
                     </div>
@@ -94,7 +96,7 @@ const ContactUs = () => {
                             <MapPin className='h-5 w-5 text-teal-600' />
                         </div>
                         <div>
-                            <h3 className='text-base font-semibold text-gray-800'>Sekretariat INFID</h3>
+                            <h3 className='text-base font-semibold text-gray-800'>{t('info.address_title')}</h3>
                             <p className='text-primary-900 text-sm'>Jl. Jatipadang Raya No. 105,</p>
                             <p className='text-primary-900 text-sm'>Pasar Minggu, Jakarta Selatan,</p>
                             <p className='text-primary-900 text-sm'>DKI Jakarta 12540</p>
@@ -106,21 +108,21 @@ const ContactUs = () => {
 
                     {/* Social Media Section */}
                     <div className='border-t border-slate-200 pt-8'>
-                        <h3 className='mb-4 text-lg font-bold text-gray-800'>Ikuti Kami</h3>
+                        <h3 className='mb-4 text-lg font-bold text-gray-800'>{t('info.follow_us')}</h3>
                         <div className='flex gap-4'>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
                                 <FaInstagram className='h-6 w-6' />
                             </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
                                 <FaLinkedin className='h-6 w-6' />
                             </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
                                 <FaYoutube className='h-6 w-6' />
                             </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
                                 <FaFacebook className='h-6 w-6' />
                             </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
                                 <BsTwitterX className='h-5 w-5' />
                             </button>
                         </div>
@@ -129,7 +131,7 @@ const ContactUs = () => {
 
                 {/* Right Section - Contact Form */}
                 <div className='rounded-xl border border-slate-200 bg-white p-8'>
-                    <h2 className='mb-8 text-lg font-bold text-gray-800 lg:text-xl'>Kirim Pesan</h2>
+                    <h2 className='mb-8 text-lg font-bold text-gray-800 lg:text-xl'>{t('form.title')}</h2>
 
                     <div>
                         {/* Switch Button */}
@@ -142,7 +144,7 @@ const ContactUs = () => {
                                         ? 'bg-primary-500 text-white'
                                         : 'text-slate-600 hover:text-slate-800'
                                 }`}>
-                                Organisasi/Institusi
+                                {t('form.tab_org')}
                             </button>
                             <button
                                 type='button'
@@ -152,7 +154,7 @@ const ContactUs = () => {
                                         ? 'bg-primary-500 text-white'
                                         : 'text-slate-600 hover:text-slate-800'
                                 }`}>
-                                Individu
+                                {t('form.tab_ind')}
                             </button>
                         </div>
 
@@ -160,22 +162,28 @@ const ContactUs = () => {
                         <div className='mb-6 grid gap-6 md:grid-cols-2'>
                             <div>
                                 <Label htmlFor='organizationName' className='mb-2 block'>
-                                    Nama {senderType === 'organization' ? 'Organisasi/Institusi' : 'Lengkap'}
+                                    {senderType === 'organization'
+                                        ? t('form.label_name_org')
+                                        : t('form.label_name_ind')}
                                 </Label>
                                 <Input
                                     id='organizationName'
                                     name='organizationName'
                                     value={formData.organizationName}
                                     onChange={handleInputChange}
-                                    placeholder={`Masukan Nama ${
-                                        senderType === 'organization' ? 'Organisasi/Institusi' : 'Lengkap'
-                                    }`}
+                                    placeholder={
+                                        senderType === 'organization'
+                                            ? t('form.placeholder_name_org')
+                                            : t('form.placeholder_name_ind')
+                                    }
                                 />
                             </div>
 
                             <div>
                                 <Label htmlFor='organizationEmail' className='mb-2 block'>
-                                    Email {senderType === 'organization' ? 'Organisasi' : ''}
+                                    {senderType === 'organization'
+                                        ? t('form.label_email_org')
+                                        : t('form.label_email_ind')}
                                 </Label>
                                 <Input
                                     id='organizationEmail'
@@ -183,34 +191,38 @@ const ContactUs = () => {
                                     name='organizationEmail'
                                     value={formData.organizationEmail}
                                     onChange={handleInputChange}
-                                    placeholder={`Masukan Email ${senderType === 'organization' ? 'Organisasi' : ''}`}
+                                    placeholder={
+                                        senderType === 'organization'
+                                            ? t('form.placeholder_email_org')
+                                            : t('form.placeholder_email_ind')
+                                    }
                                 />
                             </div>
                         </div>
 
                         <div className='mb-6'>
                             <Label htmlFor='subject' className='mb-2 block'>
-                                Subjek Pesan
+                                {t('form.label_subject')}
                             </Label>
                             <Input
                                 id='subject'
                                 name='subject'
                                 value={formData.subject}
                                 onChange={handleInputChange}
-                                placeholder='Masukan Subjek Pesan'
+                                placeholder={t('form.placeholder_subject')}
                             />
                         </div>
 
                         <div className='mb-6'>
                             <Label htmlFor='message' className='mb-2 block'>
-                                Pesan Anda
+                                {t('form.label_message')}
                             </Label>
                             <Textarea
                                 id='message'
                                 name='message'
                                 value={formData.message}
                                 onChange={handleInputChange}
-                                placeholder='Tuliskan Pesan Anda Disini...'
+                                placeholder={t('form.placeholder_message')}
                                 className='min-h-30 resize-none'
                             />
                         </div>
@@ -231,15 +243,16 @@ const ContactUs = () => {
                                     } as any)
                                 }
                             />
-                            <Label htmlFor='agreeToPrivacy' className='text-muted-foreground text-sm leading-relaxed'>
-                                Saya setuju bahwa data yang saya kirimkan akan digunakan untuk memproses pertanyaan ini
-                                sesuai dengan kebijakan privasi.
+                            <Label
+                                htmlFor='agreeToPrivacy'
+                                className='text-muted-foreground flex-1 text-sm leading-relaxed'>
+                                {t('form.privacy_agreement')}
                             </Label>
                         </div>
 
                         {/* Submit Button */}
                         <Button className='w-full rounded-full' onClick={handleSubmit}>
-                            Kirim Pesan
+                            {t('form.button_submit')}
                             <Send className='h-5 w-5 transition-transform group-hover:translate-x-1' />
                         </Button>
                     </div>

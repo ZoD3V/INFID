@@ -17,13 +17,13 @@ const Footer = () => {
     const p = useTranslations('placeholder');
 
     const footerLinks = {
-        tentang_kami: [
+        about: [
             { name: t('links.structure'), href: '/tentang-kami' },
             // { name: 'INFID Research Fellow', href: '/program-kami/umkm' },
             { name: t('links.members'), href: '/berita' },
             { name: t('links.partners'), href: '/gallery' }
         ],
-        advokasi_berbasis_bukti: [
+        advocacy: [
             { name: t('links.research'), href: '/knowledge?category=Riset' },
             { name: t('links.policy'), href: '/knowledge?category=Kertas+Kebijakan' },
             { name: t('links.modules'), href: '/knowledge?category=Modul+dan+Panduan' },
@@ -104,12 +104,7 @@ const Footer = () => {
                         <div className='grid grid-cols-2 gap-8 lg:flex'>
                             {Object.entries(footerLinks).map(([category, links]) => (
                                 <div key={category} className='lg:w-1/2'>
-                                    <h6 className='mb-4 text-base font-bold text-white'>
-                                        {category
-                                            .split('_')
-                                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                            .join(' ')}
-                                    </h6>
+                                    <h6 className='mb-4 text-base font-bold text-white'>{t(`sections.${category}`)}</h6>
 
                                     <ul className='flex flex-col gap-4'>
                                         {links.map((link, index) => (

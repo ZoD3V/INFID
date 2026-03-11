@@ -10,11 +10,18 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
     const messages: Record<string, unknown> = {};
 
-    for (const file of files.filter((f) => f.endsWith('.json'))) {
-        const content = JSON.parse(await fs.readFile(path.join(dir, file), 'utf-8'));
+    const contents = await Promise.all(
+        files
+            .filter((f) => f.endsWith('.json'))
+            .map(async (file) => {
+                const content = JSON.parse(await fs.readFile(path.join(dir, file), 'utf-8'));
+                return { name: file.replace('.json', ''), content };
+            })
+    );
 
-        messages[file.replace('.json', '')] = content;
-    }
+    contents.forEach(({ name, content }) => {
+        messages[name] = content;
+    });
 
     return {
         locale,

@@ -1,0 +1,36 @@
+{
+    "hero": {
+        "badge": "GET IN TOUCH",
+        "title": "Contact Us",
+        "description": "Have questions, suggestions for collaboration, or want to know more about our programs? Don't hesitate to contact the INFID team."
+    },
+    "info": {
+        "title": "Direct Contact",
+        "email": "Email",
+        "contact": "Contact",
+        "phone": "Phone",
+        "whatsapp": "Whatsapp",
+        "address_title": "INFID Secretariat",
+        "button_direction": "Directions",
+        "follow_us": "Follow Us"
+    },
+    "form": {
+        "title": "Send a Message",
+        "tab_org": "Organization/Institution",
+        "tab_ind": "Individual",
+        "label_name_org": "Organization/Institution Name",
+        "label_name_ind": "Full Name",
+        "placeholder_name_org": "Enter Organization/Institution Name",
+        "placeholder_name_ind": "Enter Full Name",
+        "label_email_org": "Organization Email",
+        "label_email_ind": "Email",
+        "placeholder_email_org": "Enter Organization Email",
+        "placeholder_email_ind": "Enter Email",
+        "label_subject": "Message Subject",
+        "placeholder_subject": "Enter Message Subject",
+        "label_message": "Your Message",
+        "placeholder_message": "Write Your Message Here...",
+        "privacy_agreement": "I agree that the data I submit will be used to process this inquiry in accordance with the privacy policy.",
+        "button_submit": "Send Message"
+    }
+}
