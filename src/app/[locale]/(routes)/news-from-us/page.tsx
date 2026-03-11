@@ -15,11 +15,13 @@ import { Link } from '@/i18n/navigation';
 import { FeaturedNews } from './_components/featured-news';
 import { articles, authorsNews, categoriesNews, yearsNews } from './data/data';
 import { featuredNews } from './data/featured-news';
+import { useTranslations } from 'next-intl';
 
 const PAGE_SIZE = 8;
 const MAX_PAGES = 3;
 
 export default function NewsFromUsPage() {
+    const t = useTranslations('news');
     const [filters, setFilters] = useState({
         category: 'Semua',
         year: 'all',
@@ -90,11 +92,12 @@ export default function NewsFromUsPage() {
             <PageHeaderSearch
                 defaultValue={filters.search}
                 onSearch={(val) => setFilters((f) => ({ ...f, search: val }))}
-                badge='Ikuti Perkembangan'
-                title='Dapatkan kabar'
-                highlight='terbaru'
-                endTitle='dari kami'
-                description='Temukan artikel blog terkini, analisis mendalam, dan wawasan ahli tentang pembangunan Indonesia yang berkeadilan.'
+                badge={t('header.badge')}
+                title={t('header.title')}
+                highlight={t('header.highlight')}
+                endTitle={t('header.endTitle')}
+                placeholder={t('header.placeholder')}
+                description={t('header.description')}
             />
 
             <div className='sticky top-16 z-20 w-full border bg-white py-5'>

@@ -1,0 +1,16 @@
+{
+    "header": {
+        "badge": "Stay Updated",
+        "title": "Get",
+        "highlight": "the latest",
+        "endTitle": "news from us",
+        "placeholder": "Search topics, titles or keywords",
+        "description": "Discover current blog articles, in-depth analysis, and expert insights on equitable development in Indonesia."
+    },
+    "filters": {
+        "all": "All",
+        "latest": "Latest",
+        "popular": "Popular",
+        "not_found": "News not found"
+    }
+}

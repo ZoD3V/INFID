@@ -1,0 +1,16 @@
+{
+    "header": {
+        "badge": "Ikuti Perkembangan",
+        "title": "Dapatkan kabar",
+        "highlight": "terbaru",
+        "endTitle": "dari kami",
+        "placeholder": "Cari topik, judul atau kata kunci",
+        "description": "Temukan artikel blog terkini, analisis mendalam, dan wawasan ahli tentang pembangunan Indonesia yang berkeadilan."
+    },
+    "filters": {
+        "all": "Semua",
+        "latest": "Terbaru",
+        "popular": "Populer",
+        "not_found": "Berita tidak ditemukan"
+    }
+}

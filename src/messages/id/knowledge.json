@@ -1,0 +1,16 @@
+{
+    "header": {
+        "badge": "PUSAT PENGETAHUAN",
+        "title": "Jelajahi",
+        "highlight": "gagasan",
+        "endTitle": "masa depan",
+        "placeholder": "Cari topik, judul atau kata kunci",
+        "description": "Kumpulan riset, data, dan perspektif terkini untuk pembangunan Indonesia yang berkeadilan, inklusif, dan berkelanjutan."
+    },
+    "filters": {
+        "all": "Semua",
+        "latest": "Terbaru",
+        "popular": "Populer",
+        "not_found": "Berita tidak ditemukan"
+    }
+}

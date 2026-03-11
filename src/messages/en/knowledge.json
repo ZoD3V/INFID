@@ -1,0 +1,16 @@
+{
+    "header": {
+        "badge": "KNOWLEDGE CENTER",
+        "title": "Explore",
+        "highlight": "future",
+        "endTitle": "ideas",
+        "placeholder": "Search topics, titles or keywords",
+        "description": "A collection of the latest research, data, and perspectives for equitable, inclusive, and sustainable development in Indonesia."
+    },
+    "filters": {
+        "all": "All",
+        "latest": "Latest",
+        "popular": "Popular",
+        "not_found": "News not found"
+    }
+}

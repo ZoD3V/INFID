@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import PageHeader from '@/components/common/background-section';
 import { JobSkeleton } from '@/components/common/job-skeleton';
@@ -8,10 +8,13 @@ import { Button } from '@/components/ui/button';
 
 import { JobAccordion } from './_components/job-accordion';
 import { accordionData } from './data/data';
+import { useTranslations } from 'next-intl';
 
 const categories = ['Semua', 'Program', 'Kelembagaan', 'Konsultan'];
 
 const CareerPage = () => {
+    const t = useTranslations('career');
+
     const [activeCategory, setActiveCategory] = useState('Semua');
     const [deadline, setDeadline] = useState<string | undefined>();
     const [isMounted, setIsMounted] = useState(false);
@@ -55,13 +58,13 @@ const CareerPage = () => {
     return (
         <section className='w-full bg-slate-50'>
             <PageHeader
-                title='Bertumbuh Bersama Kami'
+                title={t('header.title')}
                 showDescription={true}
-                description='INFID bekerja berlandaskan keberagaman, tanpa memandang suku, agama, ras, warna kulit, kewarganegaraan, dan kemampuan fisik. Fokus pada kompetensi dan semangat beradvokasi, serta berkolaborasi.'
+                description={t('header.description')}
                 backgroundImage='/images/background-about-us.webp'
                 breadcrumbs={[
-                    { label: 'Beranda', href: '/' },
-                    { label: 'Karir', active: true }
+                    { label: t('header.breadcrumb.home'), href: '/' },
+                    { label: t('header.breadcrumb.active'), active: true }
                 ]}
                 containerClassName='h-[300px] pt-8'
             />

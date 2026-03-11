@@ -1,0 +1,15 @@
+{
+    "header": {
+        "title": "Grow With Us",
+        "description": "INFID works based on diversity, regardless of ethnicity, religion, race, skin color, nationality, and physical ability. We focus on competence, advocacy spirit, and collaboration.",
+        "breadcrumb": {
+            "home": "Home",
+            "active": "Careers"
+        }
+    },
+    "job_section": {
+        "title": "Available Openings",
+        "empty": "There are currently no vacancies available. Please check back later.",
+        "apply": "Apply Now"
+    }
+}

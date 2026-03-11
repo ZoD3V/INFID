@@ -14,11 +14,14 @@ import { Link } from '@/i18n/navigation';
 
 import { ArticleCarousel } from './_components/carousel-knowledge';
 import { articlesKnowledge, authorsKnowledge, categoriesKnowledge, yearsKnowledge } from './data/data';
+import { useTranslations } from 'next-intl';
 
 const PAGE_SIZE = 8;
 const MAX_PAGES = 3;
 
 export default function KnowledgePage() {
+    const t = useTranslations('knowledge');
+
     const [filters, setFilters] = useState({
         category: 'Semua',
         year: 'all',
@@ -89,11 +92,12 @@ export default function KnowledgePage() {
             <PageHeaderSearch
                 defaultValue={filters.search}
                 onSearch={(val) => setFilters((f) => ({ ...f, search: val }))}
-                badge='PUSAT PENGETAHUAN'
-                title='Jelajahi'
-                highlight='gagasan'
-                endTitle='masa depan'
-                description='Kumpulan riset, data, dan perspektif terkini untuk pembangunan Indonesia yang berkeadilan, inklusif, dan berkelanjutan.'
+                badge={t('header.badge')}
+                title={t('header.title')}
+                highlight={t('header.highlight')}
+                endTitle={t('header.endTitle')}
+                placeholder={t('header.placeholder')}
+                description={t('header.description')}
             />
 
             <div className='sticky top-16 z-20 w-full border bg-white py-5'>

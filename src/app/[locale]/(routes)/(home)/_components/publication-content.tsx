@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import EmptyState from '@/components/common/empty-state';
 import PublicationsSkeleton from '@/components/common/publication-skeleton';
+import { Link } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiBase } from '@/lib/axios-server';
 
@@ -26,10 +27,10 @@ export const PublicationContent = ({
     initialData: any[];
     categoriesData: Article[];
 }) => {
+    const t = useTranslations('home.publications');
     const [activeTab, setActiveTab] = useState(0);
     const [publications, setPublications] = useState(initialData);
     const [isLoading, setIsLoading] = useState(false);
-    const t = useTranslations('home.publications');
 
     const handleTabChange = async (tabId: number) => {
         setActiveTab(tabId);
@@ -144,54 +145,54 @@ export const PublicationContent = ({
                         {/* Side Articles */}
                         <div className='grid grid-rows-3 gap-5 lg:gap-6'>
                             {sideArticles.map((article) => (
-                                <div
-                                    key={article.id}
-                                    className='cursor-pointer overflow-hidden rounded-lg transition-shadow'>
-                                    <div className='flex h-full flex-col items-start gap-3 md:flex-row md:items-center lg:gap-5'>
-                                        <div className='h-52 w-full shrink-0 overflow-hidden rounded-lg md:h-38 md:w-42 lg:h-full'>
-                                            <img
-                                                src={article.image}
-                                                alt={article.title}
-                                                className='h-full w-full object-cover transition-transform duration-300'
-                                            />
-                                        </div>
-
-                                        <div className='flex h-full flex-1 flex-col justify-evenly'>
-                                            <div className='flex items-center gap-2'>
-                                                <span className='text-secondary-300 text-xs font-medium lg:text-sm'>
-                                                    {article.type}
-                                                </span>
-
-                                                <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-
-                                                <span className='text-xs text-slate-500'>{article.date}</span>
+                                <Link key={article.id} href={`/news-from-us/${article.id}`}>
+                                    <div className='cursor-pointer overflow-hidden rounded-lg transition-shadow'>
+                                        <div className='flex h-full flex-col items-start gap-3 md:flex-row md:items-center lg:gap-5'>
+                                            <div className='h-52 w-full shrink-0 overflow-hidden rounded-lg md:h-38 md:w-42 lg:h-full'>
+                                                <img
+                                                    src={article.image}
+                                                    alt={article.title}
+                                                    className='h-full w-full object-cover transition-transform duration-300'
+                                                />
                                             </div>
 
-                                            <div className='flex flex-col gap-2'>
-                                                <h3 className='text-primary-900 text-lg leading-tight font-bold lg:text-xl'>
-                                                    {article.title}
-                                                </h3>
-
-                                                <div className='flex items-center gap-1 text-xs text-gray-500'>
-                                                    <Pencil className='h-3 w-3' /> By {article.createdBy}
-                                                </div>
-
-                                                <div className='flex items-center gap-2 text-xs text-slate-500'>
-                                                    <div className='flex items-center gap-1'>
-                                                        <Eye className='h-4 w-4' /> {article.seen} Dilihat
-                                                    </div>
+                                            <div className='flex h-full flex-1 flex-col justify-evenly'>
+                                                <div className='flex items-center gap-2'>
+                                                    <span className='text-secondary-300 text-xs font-medium lg:text-sm'>
+                                                        {article.type}
+                                                    </span>
 
                                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
 
-                                                    <div className='flex items-center gap-1'>
-                                                        <MessageSquareMore className='h-4 w-4' /> {article.comments}{' '}
-                                                        Komentar
+                                                    <span className='text-xs text-slate-500'>{article.date}</span>
+                                                </div>
+
+                                                <div className='flex flex-col gap-2'>
+                                                    <h3 className='text-primary-900 text-lg leading-tight font-bold lg:text-xl'>
+                                                        {article.title}
+                                                    </h3>
+
+                                                    <div className='flex items-center gap-1 text-xs text-gray-500'>
+                                                        <Pencil className='h-3 w-3' /> By {article.createdBy}
+                                                    </div>
+
+                                                    <div className='flex items-center gap-2 text-xs text-slate-500'>
+                                                        <div className='flex items-center gap-1'>
+                                                            <Eye className='h-4 w-4' /> {article.seen} Dilihat
+                                                        </div>
+
+                                                        <span className='h-1 w-1 rounded-full bg-slate-500'></span>
+
+                                                        <div className='flex items-center gap-1'>
+                                                            <MessageSquareMore className='h-4 w-4' /> {article.comments}{' '}
+                                                            Komentar
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
