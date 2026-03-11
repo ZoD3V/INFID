@@ -21,7 +21,7 @@ const STORAGE_KEY = 'last_quiz_dialog_shown';
 const ONE_HOUR_IN_MS = 3600000;
 
 const Home = () => {
-    const t = useTranslations('hero');
+    const t = useTranslations('home.hero_section');
     const b = useTranslations('button');
     const d = useTranslations('quiz-dialog');
     const router = useRouter();

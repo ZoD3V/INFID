@@ -29,7 +29,7 @@ export const PublicationContent = ({
     const [activeTab, setActiveTab] = useState(0);
     const [publications, setPublications] = useState(initialData);
     const [isLoading, setIsLoading] = useState(false);
-    const t = useTranslations('publications');
+    const t = useTranslations('home.publications');
 
     const handleTabChange = async (tabId: number) => {
         setActiveTab(tabId);

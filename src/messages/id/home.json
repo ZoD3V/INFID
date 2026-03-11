@@ -1,0 +1,72 @@
+{
+    "hero_section": {
+        "tagline": "MENGGERAKAN PERUBAHAN BERSAMA",
+        "title": "Saatnya Pembangunan yang Mengangkat Semua, Bukan Meninggalkan Sebagian",
+        "subtitle": "Ketimpangan adalah hasil dari pilihan kebijakan.",
+        "description": "Sejak 1985, kami menghubungkan suara masyarakat sipil dengan kebijakan negara. Memperjuangkan pembangunan yang adil, inklusif, dan kebijakan publik yang berpihak pada keadilan sosial, khususnya kelompok rentan.",
+        "titleImpact": "Dampak Kami",
+        "memberOrganizations": "Organisasi Anggota",
+        "policyRecommendations": "Rekomendasi Kebijakan",
+        "consultativeStatus": "Status Konsultatif PBB",
+        "aboutUsTag": "Tentang Kami",
+        "aboutUsTitle": "Mengawal Pembangunan Berkeadilan",
+        "aboutUsDescription1": "International NGO Forum on Indonesian Development (INFID) adalah jaringan organisasi masyarakat sipil yang berdiri sejak 1985 dan berkomitmen untuk memperjuangkan pembangunan berkeadilan, demokrasi, kesetaraan, dan penghormatan terhadap hak asasi manusia di Indonesia.",
+        "aboutUsDescription2": "INFID bekerja melalui pendekatan advokasi inklusif berbasis bukti, dengan fokus pada isu-isu strategis seperti penurunan ketimpangan, pelaksanaan Tujuan Pembangunan Berkelanjutan (SDGs), serta penguatan ruang sipil dan demokrasi.",
+        "aboutUsDescription3": "INFID memiliki 80 anggota di seluruh Indonesia dan terakreditasi oleh Perserikatan Bangsa-Bangsa (PBB) dan menyandang Special Consultative Status untuk ECOSOC di PBB.",
+        "aboutUsOrganizationTitle": "Memiliki 80 organisasi anggota",
+        "aboutUsOrganizationDescription": "Tersebar di seluruh nusantara, bekerja bersama untuk mengenal lebih dalam kebijakan publik berpihak pada keadilan sosial.",
+        "impactTag": "Bergerak, Berdampak",
+        "impactTitle": "Dampak perubahan dari kerja bersama di lapangan",
+        "impactDescription": "Setiap program menghadirkan cerita nyata. Simak ringkasan dampak, lalu telusuri kisah lengkapnya seperti membaca blog."
+    },
+    "our_network": {
+        "badge": "JARINGAN KAMI",
+        "title": "Kekuatan Pada Anggota",
+        "description": "INFID membuka pintu bagi organisasi dan individu yang memiliki fokus ketertarikan dan upaya dalam pembangunan Indonesia",
+        "maps": "80 Anggota untuk perubahan"
+    },
+    "program_us": {
+        "section": {
+            "badge": "IMPACT STORY",
+            "title": "PROGRAM KAMI",
+            "description": "Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan."
+        },
+        "programs": {
+            "human_rights": {
+                "title": "Masyarakat Sipil untuk Hak Asasi Manusia & Demokrasi",
+                "description": "Memperkuat peran masyarakat sipil dalam menegakkan HAM dan memastikan proses demokrasi yang substansial dan bebas dari kekerasan."
+            },
+            "climate_governance": {
+                "title": "Tata Kelola Iklim yang Demokratis dan Berkeadilan Gender",
+                "description": "Mendorong kebijakan iklim yang partisipatif, transparan, dan responsif gender untuk memastikan keadilan bagi kelompok rentan."
+            },
+            "inclusive_development": {
+                "title": "Pembangunan yang Inklusif dan Berkeadilan",
+                "description": "Mengawal agenda pembangunan agar memberikan manfaat merata, mengurangi ketimpangan, dan tidak meninggalkan siapapun."
+            }
+        }
+    },
+    "publications": {
+        "title": "PUBLIKASI & RISET"
+    },
+    "recognition": {
+        "section": {
+            "badge": "Pengakuan Nasional & Internasional",
+            "title": "Pengakuan dan Kolaborasi Global"
+        },
+        "items": {
+            "award_2017": {
+                "title": "Penghargaan Ormas 2017",
+                "organization": "KEMENTERIAN DALAM NEGERI RI",
+                "description": "Penerima penghargaan Bidang Sosial Kemanusiaan atas kontribusi nyata dalam pembangunan masyarakat.",
+                "alt": "Logo Kemendagri"
+            },
+            "ecosoc": {
+                "title": "Special Consultative Status",
+                "organization": "DEWAN EKONOMI & SOSIAL PBB",
+                "description": "Status konsultatif resmi sejak 2004 (Ref. No: D1035), membawa suara Indonesia ke forum global.",
+                "alt": "Logo ECOSOC PBB"
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+{
+    "hero_section": {
+        "tagline": "Driving Change Together",
+        "title": "It’s Time for Development that Lifts Everyone, Not Leaves Some Behind",
+        "subtitle": "Inequality is the result of policy choices.",
+        "description": "Since 1985, we have connected civil society voices with public policy. Advocating for fair, inclusive development and public policies that promote social justice, especially for vulnerable groups.",
+        "titleImpact": "Our Impact",
+        "memberOrganizations": "Member Organizations",
+        "policyRecommendations": "Policy Recommendations",
+        "consultativeStatus": "UN Consultative Status",
+        "aboutUsTag": "About Us",
+        "aboutUsTitle": "Guiding Equitable Development.",
+        "aboutUsDescription1": "The International NGO Forum on Indonesian Development (INFID) is a network of civil society organizations established in 1985 and committed to promoting equitable development, democracy, equality, and respect for human rights in Indonesia.",
+        "aboutUsDescription2": "INFID works through an evidence-based, inclusive advocacy approach, focusing on strategic issues such as reducing inequality, implementing the Sustainable Development Goals (SDGs), and strengthening civil society and democracy.",
+        "aboutUsDescription3": "INFID has 80 members throughout Indonesia and is accredited by the United Nations (UN) and holds Special Consultative Status with ECOSOC at the UN.",
+        "aboutUsOrganizationTitle": "Has 80 member organizations",
+        "aboutUsOrganizationDescription": "Working across the archipelago to collaboratively deepen understanding of public policies that advance social justice.",
+        "impactTag": "Bergerak, Berdampak",
+        "impactTitle": "The impact of changes from working together in the field",
+        "impactDescription": "Each program brings real stories of change. Explore a summary of the impacts, then dive deeper into the full stories, just like reading a blog."
+    },
+    "our_network": {
+        "badge": "OUR NETWORK",
+        "title": "Power of Members",
+        "description": "INFID welcomes organizations and individuals who are committed to and actively engaged in advancing Indonesia’s development.",
+        "maps": "80 Members creating impact"
+    },
+    "program_us": {
+        "section": {
+            "badge": "IMPACT STORY",
+            "title": "OUR PROGRAMME",
+            "description": "A comprehensive approach to addressing contemporary challenges. From rights issues to field action."
+        },
+        "programs": {
+            "human_rights": {
+                "title": "Civil Society for Human Rights & Democracy",
+                "description": "Strengthening the role of civil society in upholding human rights and ensuring a substantive and violence-free democratic process."
+            },
+            "climate_governance": {
+                "title": "Democratic and Gender-Just Climate Governance",
+                "description": "Promoting participatory, transparent and gender-responsive climate policies to ensure justice for vulnerable groups."
+            },
+            "inclusive_development": {
+                "title": "Inclusive and Equitable Development",
+                "description": "Overseeing the development agenda to ensure equitable benefits, reduce inequality, and leave no one behind."
+            }
+        }
+    },
+    "publications": {
+        "title": "PUBLICATIONS & RESEARCH"
+    },
+    "recognition": {
+        "section": {
+            "badge": "National & International Recognition",
+            "title": "Global Recognition and Collaboration"
+        },
+        "items": {
+            "award_2017": {
+                "title": "2017 Community Organisation Awards",
+                "organization": "Ministry of Home Affairs of the Republic of Indonesia",
+                "description": "Recipient of the Social Humanitarian Award for tangible contributions to community development.",
+                "alt": "Ministry of Home Affairs Logo"
+            },
+            "ecosoc": {
+                "title": "Special Consultative Status",
+                "organization": "UNITED NATIONS ECONOMIC AND SOCIAL COUNCIL",
+                "description": "Official consultative status since 2004 (Ref. No: D1035), bringing Indonesia's voice to the global forum.",
+                "alt": "UN ECOSOC Logo"
+            }
+        }
+    }
+}

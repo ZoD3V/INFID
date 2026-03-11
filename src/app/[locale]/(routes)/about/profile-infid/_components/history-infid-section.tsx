@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 
 import { Founder, PeopleGrid } from './people-grid';
 import { Eye, MessageSquare } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 type ContentType = 'timeline' | 'founders' | 'leaders';
 
@@ -247,6 +248,7 @@ const foundersData: Founder[] = [
 ];
 
 export const InfidTimeline = () => {
+    const t = useTranslations('profile.timeline_section');
     const [contentType, setContentType] = useState<ContentType>('timeline');
     const [activeTimelineId, setActiveTimelineId] = useState<string>(timelineData[0].id);
     const [selectedTimeline, setSelectedTimeline] = useState<TimelineItem>(timelineData[0]);
@@ -281,16 +283,15 @@ export const InfidTimeline = () => {
             <div className='container'>
                 {/* Header */}
                 <SectionHeader
-                    badge='JEJAK PERJALANAN'
+                    badge={t('header.badge')}
                     badgeProps={{
                         textColor: 'text-slate-500',
                         lineColor: 'bg-primary-400'
                     }}
-                    title='Perjalanan INFID'
-                    description='Tonggak perjalanan INFID dalam memperjuangkan demokrasi, keadilan sosial, dan hak asasi manusia
-                        di tingkat nasional dan global.'
+                    title={t('header.title')}
+                    description={t('header.description')}
                     titleClassName='text-primary-900'
-                    descriptionClassName='text-primary-700 max-w-3xl'
+                    descriptionClassName='text-primary-700 max-w-4xl'
                 />
 
                 {/* Timeline */}

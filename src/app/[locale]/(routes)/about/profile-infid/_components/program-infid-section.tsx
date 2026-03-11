@@ -1,28 +1,16 @@
 import Image from 'next/image';
 
-import SectionBadge from '@/components/common/section-badge';
 import { SectionHeader } from '@/components/common/section-header';
 
+import { useTranslations } from 'next-intl';
+
 export const ProgramINFIDSection = () => {
-    const programs = [
-        {
-            title: 'Tata Kelola Iklim yang Demokratis dan Berkeadilan Gender',
-            description:
-                'Mengawasi dan memastikan tata kelola iklim berjalan secara demokratis dan menjunjung prinsip hak asasi manusia, khususnya bagi perempuan dan kelompok rentan.',
-            image: '/images/news-1.webp'
-        },
-        {
-            title: 'Pembangunan yang Inklusif dan Berkeadilan',
-            description:
-                'Merespon dan mengadvokasi solusi atas ketimpangan pembangunan melalui rekomendasi kebijakan yang adil dan inklusif.',
-            image: '/images/news-2.webp'
-        },
-        {
-            title: 'Masyarakat Sipil untuk HAM & Demokrasi',
-            description:
-                'Memastikan masyarakat sipil berdaya, kuat, dan terlibat secara bermakna dalam proses pembangunan dan demokrasi.',
-            image: '/images/news-3.webp'
-        }
+    const t = useTranslations('profile.program_section');
+
+    const programItems = [
+        { image: '/images/news-1.webp' },
+        { image: '/images/news-2.webp' },
+        { image: '/images/news-3.webp' }
     ];
 
     return (
@@ -37,19 +25,18 @@ export const ProgramINFIDSection = () => {
             <div className='container'>
                 {/* Header */}
                 <SectionHeader
-                    badge='FOKUS UTAMA'
+                    badge={t('header.badge')}
                     badgeProps={{
                         textColor: 'text-slate-500',
                         lineColor: 'bg-primary-400'
                     }}
-                    title='Program INFID'
-                    description='Program INFID dirancang untuk memperkuat ekosistem organisasi masyarakat sipil, demokrasi, keadilan sosial, dan perlindungan hak asasi manusia melalui advokasi kebijakan berbasis bukti.'
+                    title={t('header.title')}
+                    description={t('header.description')}
                     titleClassName='text-primary-900'
                     descriptionClassName='text-primary-700 max-w-4xl'
                 />
 
                 {/* Program Cards */}
-
                 <div className='relative grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
                     <Image
                         src='/images/decoration-program-2.png'
@@ -58,12 +45,12 @@ export const ProgramINFIDSection = () => {
                         height={100}
                         className='absolute -right-10 bottom-0 z-30 hidden xl:block'
                     />
-                    {programs.map((program, index) => (
+                    {programItems.map((program, index) => (
                         <div key={index} className='group relative overflow-hidden rounded-2xl border bg-slate-100 p-2'>
                             <div className='relative h-125 overflow-hidden rounded-xl md:h-139.5'>
                                 <Image
                                     src={program.image}
-                                    alt={program.title}
+                                    alt={t(`items.${index}.title`)}
                                     width={500}
                                     height={500}
                                     className='h-full w-full object-cover'
@@ -71,9 +58,11 @@ export const ProgramINFIDSection = () => {
                                 <div className='from-primary-500/80 via-primary-500/40 absolute inset-0 bg-linear-to-t to-transparent' />
                                 <div className='absolute right-0 bottom-0 left-0 p-5 text-white'>
                                     <h3 className='mb-3 text-xl leading-tight font-bold lg:text-2xl'>
-                                        {program.title}
+                                        {t(`items.${index}.title`)}
                                     </h3>
-                                    <p className='mb-4 text-sm leading-relaxed text-gray-200'>{program.description}</p>
+                                    <p className='mb-4 text-sm leading-relaxed text-gray-200'>
+                                        {t(`items.${index}.description`)}
+                                    </p>
                                 </div>
                             </div>
                         </div>

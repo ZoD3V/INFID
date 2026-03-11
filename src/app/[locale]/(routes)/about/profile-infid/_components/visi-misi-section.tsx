@@ -2,25 +2,17 @@ import Image from 'next/image';
 
 import SectionBadge from '@/components/common/section-badge';
 
-export default function VisiMisiInfidSection() {
-    const misiItems = [
-        {
-            number: '01',
-            text: 'Menumbuhkan kesadaran publik tentang HAM, demokrasi, kesetaraan, dan keadilan sosial melalui pendidikan publik.'
-        },
-        {
-            number: '02',
-            text: 'Melakukan penelitian dan kajian kebijakan berbasis bukti.'
-        },
-        {
-            number: '03',
-            text: 'Mendorong dialog kebijakan untuk kebijakan yang berpihak pada kelompok miskin dan marjinal.'
-        },
-        {
-            number: '04',
-            text: 'Membangun jejaring dan solidaritas masyarakat sipil.'
-        }
-    ];
+import { useTranslations } from 'next-intl';
+
+const VisiMisiInfidSection = () => {
+    const t = useTranslations('profile.vision_mission_section');
+
+    const missionIds = ['01', '02', '03', '04'] as const;
+
+    const misiItems = missionIds.map((id) => ({
+        number: id,
+        text: t(`mission.items.${id}`)
+    }));
 
     return (
         <section
@@ -39,29 +31,25 @@ export default function VisiMisiInfidSection() {
                 {/* Header */}
                 <div className='mb-12'>
                     <SectionBadge textColor='text-slate-500' lineColor='bg-slate-400'>
-                        NILAI & ARAH GERAK
+                        {t('header.badge')}
                     </SectionBadge>
-                    <h2 className='text-4xl font-bold text-gray-900 lg:text-5xl'>Visi & Misi</h2>
+                    <h2 className='text-4xl font-bold text-gray-900 lg:text-5xl'>{t('header.title')}</h2>
                 </div>
 
                 {/* Content Grid */}
                 <div className='grid gap-12 lg:grid-cols-2'>
                     {/* Visi */}
                     <div>
-                        <h3 className='text-primary-500 mb-6 text-2xl font-bold'>Visi</h3>
-                        <p className='mb-8 text-sm leading-relaxed text-gray-500 md:text-base'>
-                            Mewujudkan demokrasi, kesetaraan, keadilan sosial dan perdamaian serta terjamin dan
-                            terpenuhinya Hak Asasi Manusia di tingkat nasional (Indonesia) dan global.
-                        </p>
+                        <h3 className='text-primary-500 mb-6 text-2xl font-bold'>{t('vision.title')}</h3>
+                        <p className='mb-8 text-sm leading-relaxed text-gray-500 md:text-base'>{t('vision.content')}</p>
 
                         <div className='border-l-primary-500 border-l-3 pl-3'>
                             <div>
                                 <h4 className='text-primary-500 mb-3 text-2xl font-bold italic md:text-3xl lg:text-4xl'>
-                                    Inklusif, Toleransi, dan Kolaborasi
+                                    {t('vision.quote_title')}
                                 </h4>
                                 <p className='text-sm leading-relaxed text-gray-600 italic md:text-base'>
-                                    INFID bekerja berlandaskan keberagaman tanpa membedakan suku, agama, ras, warna
-                                    kulit, kewarganegaraan, dan kemampuan fisik.
+                                    {t('vision.quote_desc')}
                                 </p>
                             </div>
                         </div>
@@ -89,4 +77,6 @@ export default function VisiMisiInfidSection() {
             </div>
         </section>
     );
-}
+};
+
+export default VisiMisiInfidSection;

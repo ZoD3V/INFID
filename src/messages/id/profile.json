@@ -1,0 +1,103 @@
+{
+    "about_section": {
+        "breadcrumb": {
+            "home": "Beranda",
+            "about": "Tentang Kami",
+            "struggle": "Perjuangan INFID"
+        },
+        "badge": "SIAPA KAMI",
+        "title": "Lembaga Advokasi Kebijakan\nBerbasis Bukti",
+        "description": "International NGO Forum on Indonesian Development (INFID) adalah organisasi masyarakat sipil yang berjuang untuk pembangunan Indonesia sejak 1985.",
+        "stats": {
+            "status_label": "Status",
+            "status_title": "Special Consultative",
+            "status_sub": "ECOSOC - PBB",
+            "since_label": "Sejak",
+            "since_title": "Tahun 1985",
+            "since_sub": "Jejak advokasi & kolaborasi"
+        },
+        "buttons": {
+            "explore": "Jelajahi Program",
+            "history": "Pelajari Sejarah"
+        },
+        "card": {
+            "focus_label": "FOCUS",
+            "focus_title": "Suara masyarakat sipil dalam kebijakan publik",
+            "focus_desc": "Advokasi berbasis bukti, kolaborasi, dan penguatan demokrasi.",
+            "access_label": "AKSES",
+            "access_title": "PBB",
+            "access_sub": "Sejak Tahun 2004",
+            "access_link": "ECOSOC Status"
+        }
+    },
+    "recognition_section": {
+        "header": {
+            "badge": "RINGKASAN",
+            "title": "Pengakuan & Peran Global",
+            "description": "Tiga pilar yang memperkuat posisi INFID dalam advokasi kebijakan dan kolaborasi internasional."
+        },
+        "items": {
+            "01": {
+                "title": "Terakreditasi oleh Perserikatan Bangsa-Bangsa (PBB) dengan UN Special Consultative Status with the Economic and Social Council (ECOSOC)",
+                "content": "Menyandang status ini sejak 2004, INFID memiliki akses untuk terlibat dalam berbagai konferensi internasional yang diselenggarakan oleh PBB, seperti High Level Political Forum untuk membahas agenda pembangunan berkelanjutan yang diadakan setiap bulan Juli, serta Sidang Umum setiap bulan September."
+            },
+            "02": {
+                "title": "Anggota aktif sejumlah forum organisasi masyarakat sipil global",
+                "content": "INFID merupakan anggota aktif di FORUS sejak 2009, sebuah jaringan NGO global yang mewadahi forum-forum NGO nasional di seluruh dunia yang berbasis di Paris, Prancis. INFID juga bagian dari Beyond 2015, TAP Network, dan SDSN, yaitu inisiatif-inisiatif global yang bertujuan untuk mendorong pelaksanaan dan pencapaian Sustainable Development Goals (SDGs) pada 2022."
+            },
+            "03": {
+                "title": "Memimpin berbagai advokasi global",
+                "content": "INFID berperan dalam mengawal pembangunan di daerah-daerah di Indonesia dengan memberikan masukan-masukan strategis, serta berkolaborasi bersama organisasi masyarakat sipil dunia untuk mengangkat agenda pembangunan berkeadilan ke tingkat global. INFID ditunjuk sebagai Envoy dan Steering Committee dalam Open Government Partnership (OGP Global) dalam agenda membangun pemerintahan terbuka. Pada 2022, INFID dipercaya menjadi Chair Civil20 (C20) dalam G20 Indonesia dan membangun solidaritas bersama ratusan civil society organisations (CSOs) global di forum G20."
+            }
+        }
+    },
+    "program_section": {
+        "header": {
+            "badge": "FOKUS UTAMA",
+            "title": "Program INFID",
+            "description": "Program INFID dirancang untuk memperkuat ekosistem organisasi masyarakat sipil, demokrasi, keadilan sosial, dan perlindungan hak asasi manusia melalui advokasi kebijakan berbasis bukti."
+        },
+        "items": [
+            {
+                "title": "Tata Kelola Iklim yang Demokratis dan Berkeadilan Gender",
+                "description": "Mengawasi dan memastikan tata kelola iklim berjalan secara demokratis dan menjunjung prinsip hak asasi manusia, khususnya bagi perempuan dan kelompok rentan."
+            },
+            {
+                "title": "Pembangunan yang Inklusif dan Berkeadilan",
+                "description": "Merespon dan mengadvokasi solusi atas ketimpangan pembangunan melalui rekomendasi kebijakan yang adil dan inklusif."
+            },
+            {
+                "title": "Masyarakat Sipil untuk HAM & Demokrasi",
+                "description": "Memastikan masyarakat sipil berdaya, kuat, dan terlibat secara bermakna dalam proses pembangunan dan demokrasi."
+            }
+        ]
+    },
+    "vision_mission_section": {
+        "header": {
+            "badge": "NILAI & ARAH GERAK",
+            "title": "Visi & Misi"
+        },
+        "vision": {
+            "title": "Visi",
+            "content": "Mewujudkan demokrasi, kesetaraan, keadilan sosial dan perdamaian serta terjamin dan terpenuhinya Hak Asasi Manusia di tingkat nasional (Indonesia) dan global.",
+            "quote_title": "Inklusif, Toleransi, dan Kolaborasi",
+            "quote_desc": "INFID bekerja berlandaskan keberagaman tanpa membedakan suku, agama, ras, warna kulit, kewarganegaraan, dan kemampuan fisik."
+        },
+        "mission": {
+            "title": "Misi",
+            "items": {
+                "01": "Menumbuhkan kesadaran publik tentang HAM, demokrasi, kesetaraan, dan keadilan sosial melalui pendidikan publik.",
+                "02": "Melakukan penelitian dan kajian kebijakan berbasis bukti.",
+                "03": "Mendorong dialog kebijakan untuk kebijakan yang berpihak pada kelompok miskin dan marjinal.",
+                "04": "Membangun jejaring dan solidaritas masyarakat sipil."
+            }
+        }
+    },
+    "timeline_section": {
+        "header": {
+            "badge": "JEJAK PERJALANAN",
+            "title": "Perjalanan INFID",
+            "description": "Tonggak perjalanan INFID dalam memperjuangkan demokrasi, keadilan sosial, dan hak asasi manusia di tingkat nasional dan global."
+        }
+    }
+}

@@ -10,7 +10,7 @@ import { Eye, Pencil, Play } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const RealImpactSection = () => {
-    const t = useTranslations('hero');
+    const t = useTranslations('home.hero_section');
     const b = useTranslations('button');
     const c = useTranslations('card');
     const videoId = 'U0t1MvVi-9I';

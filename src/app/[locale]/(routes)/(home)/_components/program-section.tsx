@@ -7,7 +7,8 @@ import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const ProgramSection = () => {
-    const t = useTranslations('program-us');
+    const t = useTranslations('home.program_us');
+
     const b = useTranslations('button');
 
     const programs = [

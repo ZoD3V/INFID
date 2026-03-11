@@ -1,8 +1,6 @@
 import Image from 'next/image';
 
 import { Maps, Region } from '@/components/common/maps';
-import SectionBadge from '@/components/common/section-badge';
-import { SectionHeader } from '@/components/common/section-header';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { ApiResponse, apiBase } from '@/lib/axios-server';
 

@@ -7,7 +7,7 @@ import CommunitySection from './community-section';
 import { useTranslations } from 'next-intl';
 
 const RecognitionSection = () => {
-    const t = useTranslations('recognition');
+    const t = useTranslations('home.recognition');
 
     const recognitions = [
         {

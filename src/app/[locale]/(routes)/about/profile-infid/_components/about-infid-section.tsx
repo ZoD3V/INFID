@@ -11,9 +11,11 @@ import {
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 
-import { ArrowRight, Check, CheckCircle2 } from 'lucide-react';
+import { Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const AboutInfid = () => {
+    const t = useTranslations('profile.about_section');
     const scrollToProgram = () => {
         const element = document.getElementById('program-infid');
         if (element) {
@@ -41,19 +43,19 @@ const AboutInfid = () => {
                     <BreadcrumbList>
                         <BreadcrumbItem>
                             <BreadcrumbLink href='/' className='text-secondary-200 hover:text-secondary-300'>
-                                Beranda
+                                {t('breadcrumb.home')}
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator className='text-secondary-200 hover:text-secondary-300' />
                         <BreadcrumbItem>
                             <BreadcrumbLink href='/' className='text-secondary-200 hover:text-secondary-300'>
-                                Tentang Kami
+                                {t('breadcrumb.about')}
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator className='text-secondary-200 hover:text-secondary-300' />
                         <BreadcrumbItem>
                             <BreadcrumbLink className='text-secondary-200 hover:text-secondary-300 font-bold'>
-                                Perjuangan INFID
+                                {t('breadcrumb.struggle')}
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                     </BreadcrumbList>
@@ -63,16 +65,15 @@ const AboutInfid = () => {
                     <div className='flex-1.5 space-y-6'>
                         <div className='inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/10 px-3 py-1 text-xs text-white'>
                             <span className='bg-secondary-200 h-2 w-2 rounded-full' />
-                            SIAPA KAMI
+                            {t('badge')}
                         </div>
 
-                        <h1 className='text-secondary-200 text-3xl leading-tight font-bold md:text-4xl'>
-                            Lembaga Advokasi Kebijakan <br /> Berbasis Bukti
+                        <h1 className='text-secondary-200 text-3xl leading-tight font-bold whitespace-pre-line md:text-4xl'>
+                            {t('title')}
                         </h1>
 
                         <p className='max-w-xl text-sm leading-relaxed text-white opacity-90 sm:text-base'>
-                            International NGO Forum on Indonesian Development (INFID) adalah organisasi masyarakat sipil
-                            yang berjuang untuk pembangunan Indonesia sejak 1985.
+                            {t('description')}
                         </p>
 
                         <div className='mt-7 flex flex-col gap-5 sm:mt-17.5 md:gap-8'>
@@ -80,14 +81,14 @@ const AboutInfid = () => {
                                 <div className='w-full rounded-xl border border-slate-200 bg-white'>
                                     <div className='px-4 py-4'>
                                         <div className='text-primary-900 mb-2 text-xs font-normal tracking-wider uppercase'>
-                                            Status
+                                            {t('stats.status_label')}
                                         </div>
                                         <div className='flex items-center justify-between gap-4 md:items-start'>
                                             <div>
                                                 <h3 className='text-primary-800 text-base font-bold'>
-                                                    Special Consultative
+                                                    {t('stats.status_title')}
                                                 </h3>
-                                                <p className='text-xs text-gray-500'>ECOSOC - PBB</p>
+                                                <p className='text-xs text-gray-500'>{t('stats.status_sub')}</p>
                                             </div>
                                             <Check
                                                 className='text-secondary-300 bg-secondary-100 border-secondary-200 h-10 w-10 rounded-xl border p-2'
@@ -100,12 +101,14 @@ const AboutInfid = () => {
                                 <div className='w-full rounded-xl border border-slate-200 bg-white'>
                                     <div className='px-4 py-4'>
                                         <div className='text-primary-900 mb-2 text-xs font-normal tracking-wider uppercase'>
-                                            Sejak
+                                            {t('stats.since_label')}
                                         </div>
                                         <div className='flex items-center justify-between gap-4 md:items-start'>
                                             <div>
-                                                <h3 className='text-primary-800 text-base font-bold'>Tahun 1985</h3>
-                                                <p className='text-xs text-gray-500'>Jejak advokasi & kolaborasi</p>
+                                                <h3 className='text-primary-800 text-base font-bold'>
+                                                    {t('stats.since_title')}
+                                                </h3>
+                                                <p className='text-xs text-gray-500'>{t('stats.since_sub')}</p>
                                             </div>
                                             <div className='text-primary-500 bg-primary-50 border-primary-200 flex h-10 w-10 items-center justify-center rounded-xl border p-2 text-sm font-bold'>
                                                 40+
@@ -117,10 +120,10 @@ const AboutInfid = () => {
 
                             <div className='grid grid-cols-2 gap-2 sm:flex sm:items-center'>
                                 <Button className='rounded-full font-semibold' onClick={scrollToProgram}>
-                                    Jelajahi Program
+                                    {t('buttons.explore')}
                                 </Button>
                                 <Button variant='outline' className='rounded-full' onClick={scrollToHistory}>
-                                    Pelajari Sejarah
+                                    {t('buttons.history')}
                                 </Button>
                             </div>
                         </div>
@@ -140,28 +143,26 @@ const AboutInfid = () => {
                                 <div className='flex flex-col gap-5 pt-5 xl:flex-row'>
                                     <div className='space-y-3 rounded-lg border border-gray-200 bg-gray-50 p-4'>
                                         <div className='text-primary-900 mb-2 text-xs font-normal tracking-wider uppercase'>
-                                            FOCUS
+                                            {t('card.focus_label')}
                                         </div>
-                                        <h4 className='text-primary-500 text-lg font-bold'>
-                                            Suara masyarakat sipil dalam kebijakan publik
-                                        </h4>
-                                        <p className='text-sm leading-relaxed text-gray-500'>
-                                            Advokasi berbasis bukti, kolaborasi, dan penguatan demokrasi.
-                                        </p>
+                                        <h4 className='text-primary-500 text-lg font-bold'>{t('card.focus_title')}</h4>
+                                        <p className='text-sm leading-relaxed text-gray-500'>{t('card.focus_desc')}</p>
                                     </div>
                                     <div className='bg-secondary-100 border-secondary-200 flex flex-col items-start justify-between space-y-3 rounded-lg border p-4'>
                                         <div className='flex flex-col gap-2'>
                                             <div className='text-primary-900 text-xs font-normal tracking-wider uppercase'>
-                                                AKSES
+                                                {t('card.access_label')}
                                             </div>
-                                            <h4 className='text-lg font-bold text-slate-800'>PBB</h4>
-                                            <p className='text-sm text-slate-500'>Sejak Tahun 2004</p>
+                                            <h4 className='text-lg font-bold text-slate-800'>
+                                                {t('card.access_title')}
+                                            </h4>
+                                            <p className='text-sm text-slate-500'>{t('card.access_sub')}</p>
                                         </div>
 
                                         <Button
                                             variant='link'
                                             className='text-primary-500 h-auto p-0 text-xs font-semibold tracking-widest uppercase'>
-                                            ECOSOC Status
+                                            {t('card.access_link')}
                                         </Button>
                                     </div>
                                 </div>

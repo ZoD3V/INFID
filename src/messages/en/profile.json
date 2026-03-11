@@ -1,0 +1,103 @@
+{
+    "about_section": {
+        "breadcrumb": {
+            "home": "Home",
+            "about": "About Us",
+            "struggle": "INFID’s Advocacy"
+        },
+        "badge": "WHO WE ARE",
+        "title": "Evidence-Based Policy\nAdvocacy Institution",
+        "description": "The International NGO Forum on Indonesian Development (INFID) is a civil society organization that has been fighting for Indonesia's development since 1985.",
+        "stats": {
+            "status_label": "Status",
+            "status_title": "Special Consultative",
+            "status_sub": "UN - ECOSOC",
+            "since_label": "Since",
+            "since_title": "Year 1985",
+            "since_sub": "Advocacy & collaboration tracks"
+        },
+        "buttons": {
+            "explore": "Explore Programs",
+            "history": "Learn History"
+        },
+        "card": {
+            "focus_label": "FOCUS",
+            "focus_title": "Civil society's voice in public policy",
+            "focus_desc": "Evidence-based advocacy, collaboration, and democratic strengthening.",
+            "access_label": "ACCESS",
+            "access_title": "PBB",
+            "access_sub": "Since Year 2004",
+            "access_link": "ECOSOC Status"
+        }
+    },
+    "recognition_section": {
+        "header": {
+            "badge": "SUMMARY",
+            "title": "Global Recognition & Role",
+            "description": "Three pillars that strengthen INFID's position in policy advocacy and international collaboration."
+        },
+        "items": {
+            "01": {
+                "title": "Accredited by the United Nations (UN) with UN Special Consultative Status with the Economic and Social Council (ECOSOC)",
+                "content": "Holding this status since 2004, INFID has access to participate in various international conferences organized by the United Nations, such as the High Level Political Forum on sustainable development held every July, as well as the UN General Assembly held every September."
+            },
+            "02": {
+                "title": "Active Member of Global Civil Society Networks",
+                "content": "INFID has been an active member of FORUS since 2009, a global NGO network that brings together national NGO platforms from around the world and is based in Paris, France. INFID is also part of Beyond 2015, TAP Network, and SDSN, global initiatives that promote the implementation and achievement of the Sustainable Development Goals (SDGs)."
+            },
+            "03": {
+                "title": "Leading Global Advocacy Efforts",
+                "content": "INFID plays an active role in supporting development across regions in Indonesia by providing strategic policy inputs, while also collaborating with civil society organizations worldwide to elevate the agenda of equitable development at the global level. INFID serves as an Envoy and Steering Committee member of the Open Government Partnership (OGP Global) in advancing the open government agenda. In 2022, INFID was entrusted to serve as the Chair of Civil20 (C20) during Indonesia’s G20 Presidency, building solidarity with hundreds of global civil society organizations (CSOs) within the G20 forum."
+            }
+        }
+    },
+    "program_section": {
+        "header": {
+            "badge": "MAIN FOCUS",
+            "title": "INFID Programs",
+            "description": "INFID programs are designed to strengthen the ecosystem of civil society organizations, democracy, social justice, and the protection of human rights through evidence-based policy advocacy."
+        },
+        "items": [
+            {
+                "title": "Democratic and Gender-Just Climate Governance",
+                "description": "Monitoring and ensuring climate governance operates democratically and upholds human rights principles, particularly for women and vulnerable groups."
+            },
+            {
+                "title": "Inclusive and Equitable Development",
+                "description": "Responding to and advocating for solutions to development inequality through fair and inclusive policy recommendations."
+            },
+            {
+                "title": "Civil Society for HR & Democracy",
+                "description": "Ensuring civil society is empowered, strong, and meaningfully involved in development and democratic processes."
+            }
+        ]
+    },
+    "vision_mission_section": {
+        "header": {
+            "badge": "VALUES & DIRECTION",
+            "title": "Vision & Mission"
+        },
+        "vision": {
+            "title": "Vision",
+            "content": "To realize democracy, equality, social justice, and peace, as well as ensuring and fulfilling Human Rights at both national (Indonesia) and global levels.",
+            "quote_title": "Inclusion, Tolerance, and Collaboration",
+            "quote_desc": "INFID works based on diversity without discriminating based on ethnicity, religion, race, skin color, nationality, and physical ability."
+        },
+        "mission": {
+            "title": "Mission",
+            "items": {
+                "01": "Fostering public awareness about HR, democracy, equality, and social justice through public education.",
+                "02": "Conducting evidence-based research and policy studies.",
+                "03": "Encouraging policy dialogue for policies that favor the poor and marginalized groups.",
+                "04": "Building networks and civil society solidarity."
+            }
+        }
+    },
+    "timeline_section": {
+        "header": {
+            "badge": "OUR MILESTONES",
+            "title": "INFID JOURNEY",
+            "description": "INFID's milestones in fighting for democracy, social justice, and human rights at the national and global levels."
+        }
+    }
+}

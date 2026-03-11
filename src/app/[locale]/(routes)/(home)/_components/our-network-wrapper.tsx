@@ -7,7 +7,7 @@ import { SectionHeader } from '@/components/common/section-header';
 import { useTranslations } from 'next-intl';
 
 const OurNetworkWrapper = ({ regions }: { regions: Region[] }) => {
-    const t = useTranslations('our-network');
+    const t = useTranslations('home.our_network');
 
     return (
         <div className='container flex flex-col items-center'>
