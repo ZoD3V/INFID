@@ -9,8 +9,10 @@ import { formatLabel } from '@/lib/utils';
 
 import OrganizationStructure from './_components/organization-section';
 import { organizationStructures } from './data/organization-data';
+import { useTranslations } from 'next-intl';
 
 const StructureOrganizationPage = () => {
+    const t = useTranslations('structure');
     const [active, setActive] = useState<keyof typeof organizationStructures>('sekretariat_infid');
 
     return (
@@ -26,37 +28,36 @@ const StructureOrganizationPage = () => {
                 }}
             />
             <PageHeader
-                title='Para Penggerak Perubahan'
+                title={t('header.title')}
                 backgroundImage='/images/background-about-us.webp'
                 breadcrumbs={[
-                    { label: 'Beranda', href: '/' },
-                    { label: 'Tentang Kami', href: '/' },
-                    { label: 'Para Penggerak Perubahan', active: true }
+                    { label: t('header.breadcrumb.home'), href: '/' },
+                    { label: t('header.breadcrumb.about'), href: '/' },
+                    { label: t('header.breadcrumb.active'), active: true }
                 ]}
             />
-            <div className='container py-24'>
+
+            <div className='relative container py-24'>
                 <Image
                     src='/images/decoration-about-us-2.png'
-                    alt='images'
+                    alt='decoration'
                     width={80}
                     height={80}
                     className='absolute top-10 right-0 hidden xl:block'
                 />
-                {/* Header */}
 
                 <SectionHeader
-                    badge='STRUKTUR ORGANISASI'
+                    badge={t('content.badge')}
                     badgeProps={{
                         textColor: 'text-slate-500',
                         lineColor: 'bg-primary-400'
                     }}
-                    title='Para Penggerak Perubahan'
-                    description='Kami menyebutnya #INFIDSquad, terdiri dari para penggerak perubahan yang memiliki ketertarikan dan semangat perjuangan pada isu pembangunan. Struktur organisasi INFID mencerminkan tata kelola yang kolektif, akuntabel, dan berbasis kolaborasi untuk mendukung advokasi kebijakan dan penguatan masyarakat sipil.'
+                    title={t('content.title')}
+                    description={t('content.description')}
                     titleClassName='text-primary-900'
                     descriptionClassName='text-primary-700 max-w-5xl'
                     className='mb-0'
                 />
-
                 <div className='relative mt-12 flex justify-start gap-4 overflow-x-auto'>
                     {Object.keys(organizationStructures).map((key) => (
                         <button

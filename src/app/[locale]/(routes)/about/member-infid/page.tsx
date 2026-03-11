@@ -6,6 +6,7 @@ import { ApiResponse, apiBase } from '@/lib/axios-server';
 
 import MapsMemberSection from './_components/maps-member-section';
 import MemberSection from './_components/member-section';
+import RegistrationProcess from './_components/registration-process';
 
 async function getRegions() {
     try {
@@ -24,6 +25,7 @@ const MemberInfid = async () => {
     return (
         <>
             <MemberSection />
+            <RegistrationProcess />
             <MapsMemberSection initialRegions={regions} />
         </>
     );

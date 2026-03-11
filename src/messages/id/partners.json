@@ -1,0 +1,21 @@
+{
+    "partner_section": {
+        "header": {
+            "title": "Mitra Pembangunan",
+            "breadcrumb": {
+                "home": "Beranda",
+                "about": "Tentang Kami",
+                "active": "Mitra Pembangunan"
+            }
+        },
+        "content": {
+            "badge": "JARINGAN & KOLABORASI",
+            "title": "Mitra Pembangunan",
+            "description": "Kami bekerja sama dengan berbagai organisasi nasional dan internasional untuk mewujudkan pembangunan yang inklusif dan berkelanjutan."
+        },
+        "categories": {
+            "national": "Mitra Nasional",
+            "international": "Mitra Internasional"
+        }
+    }
+}

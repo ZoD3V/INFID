@@ -1,0 +1,71 @@
+{
+    "member_section": {
+        "header": {
+            "title": "INFID Members",
+            "breadcrumb": {
+                "home": "Home",
+                "about": "About Us",
+                "active": "INFID Members"
+            }
+        },
+        "hero": {
+            "badge": "MEMBERSHIP",
+            "title": "Join the Civil Society Movement",
+            "description": "INFID is a collaborative forum for civil society organizations fighting for inclusive, democratic, and just development in Indonesia.",
+            "buttons": {
+                "requirement": "See Requirements",
+                "registration": "Registration Flow"
+            }
+        },
+        "requirement": {
+            "title": "Member Requirements",
+            "description": "INFID is a collaborative forum for civil society organizations fighting for inclusive, democratic, and just development in Indonesia.",
+            "items": {
+                "recommendation": {
+                    "title": "Recommendation",
+                    "description": "Obtain recommendations from 2 (two) INFID member institutions located in the Java region/island"
+                },
+                "legality": {
+                    "title": "Legality",
+                    "description": "Accept INFID's Statutes, particularly the obligations of INFID members as stated in Chapter VI on Membership and INFID's Bylaws in Chapter II on Membership"
+                }
+            }
+        },
+        "footer_section": {
+            "title": "Ready to Join Us?",
+            "description": "Click the button below to start the registration process or learn more about the flow.",
+            "button": "Register Now"
+        }
+    },
+    "registration_process": {
+        "header": {
+            "badge": "REGISTRATION PROCESS",
+            "title": "INFID Member Admission Process",
+            "description": "The admission process is conducted transparently and in stages through official organizational mechanisms."
+        },
+        "help_box": {
+            "title": "Need Help?",
+            "description": "Contact our secretariat for further guidance.",
+            "email": "office@infid.org"
+        },
+        "steps": {
+            "01": {
+                "title": "Selection Result Decision",
+                "description": "The decision on whether or not a prospective member is accepted will be issued through the Board of Directors Meeting. The Board's decision is published as a Decree regarding the Prospective Member's Application."
+            },
+            "02": {
+                "title": "Decree Delivery",
+                "description": "The INFID Secretariat will promptly deliver the Decree regarding the Prospective Member's Application to the relevant parties."
+            },
+            "03": {
+                "title": "New Member Legalization",
+                "description": "Prospective Members declared accepted will be designated and legalized in the General Assembly as INFID Members."
+            },
+            "04": {
+                "title": "Information & Contact",
+                "description": "To obtain further information regarding INFID membership requirements and registration processes, please contact the INFID Secretariat via email at office@infid.org."
+            }
+        }
+    },
+    "maps": "80 Members creating impact"
+}

@@ -1,36 +1,18 @@
-import React from 'react';
-
 import SectionBadge from '@/components/common/section-badge';
 
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const RegistrationProcess = () => {
-    const processSteps = [
-        {
-            number: '01',
-            title: 'Keputusan Hasil Seleksi',
-            description:
-                'Keputusan diterima atau tidaknya calon anggota akan dikeluarkan melalui Rapat Dewan Pengurus. Keputusan Dewan Pengurus diterbitkan dalam bentuk Surat Keputusan tentang Permohonan Calon Anggota'
-        },
-        {
-            number: '02',
-            title: 'Penyampaian Surat Keputusan',
-            description:
-                'Sekretariat INFID segera menyampaikan Surat Keputusan tentang Permohonan Calon Anggota kepada pihak yang berkepentingan.'
-        },
-        {
-            number: '03',
-            title: 'Pengesahan Anggota Baru',
-            description:
-                'Calon Anggota yang dinyatakan diterima akan ditetapkan dan disahkan dalam Sidang Umum sebagai Anggota INFID'
-        },
-        {
-            number: '04',
-            title: 'Informasi & Kontak',
-            description:
-                'Untuk memperoleh informasi lebih lanjut mengenai persyaratan dan proses pendaftaran anggota INFID, silahkan menghubungi Sekretariat INFID melalui email office@infid.org.'
-        }
-    ];
+    const t = useTranslations('member.registration_process');
+
+    const stepIds = ['01', '02', '03', '04'] as const;
+
+    const processSteps = stepIds.map((id) => ({
+        number: id,
+        title: t(`steps.${id}.title`),
+        description: t(`steps.${id}.description`)
+    }));
 
     return (
         <section className='bg-secondary-100 w-full py-24' id='registration-infid'>
@@ -39,25 +21,22 @@ const RegistrationProcess = () => {
                     {/* Left Column */}
                     <div className='space-y-6'>
                         <SectionBadge textColor='text-primary-500' lineColor='bg-primary-500'>
-                            PROSES PENDAFTARAN
+                            {t('header.badge')}
                         </SectionBadge>
 
                         <h2 className='mb-4 max-w-3xl text-4xl font-bold text-gray-900 lg:text-5xl'>
-                            Proses Penerimaan Anggota INFID
+                            {t('header.title')}
                         </h2>
-                        <p className='mb-6 max-w-2xl text-sm text-slate-600 md:text-base'>
-                            Proses penerimaan dilakukan secara transparan dan bertahap melalui mekanisme organisasi
-                            resmi.
-                        </p>
+                        <p className='mb-6 max-w-2xl text-sm text-slate-600 md:text-base'>{t('header.description')}</p>
 
                         {/* Help Box */}
                         <div className='bg-primary-900 mt-8 rounded-xl p-8 text-white'>
-                            <h3 className='mb-3 text-xl font-semibold'>Butuh Bantuan?</h3>
-                            <p className='mb-4 text-teal-100'>Hubungi sekretariat kami untuk panduan lebih lanjut.</p>
+                            <h3 className='mb-3 text-xl font-semibold'>{t('help_box.title')}</h3>
+                            <p className='mb-4 text-teal-100'>{t('help_box.description')}</p>
                             <a
-                                href='mailto:office@infid.org'
+                                href={`mailto:${t('help_box.email')}`}
                                 className='group hover:text-secondary-200 inline-flex items-center gap-2 font-medium text-yellow-300 transition-colors'>
-                                office@infid.org
+                                {t('help_box.email')}
                                 <ArrowRight className='size-4' />
                             </a>
                         </div>

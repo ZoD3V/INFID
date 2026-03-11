@@ -26,7 +26,7 @@ const CommunitySection = () => {
                     alt='decoration'
                     width={120}
                     height={120}
-                    className='absolute top-0 left-35 hidden h-auto w-auto xl:block'
+                    className='absolute top-0 left-50 hidden h-auto w-auto xl:block'
                 />
                 {/* Content */}
                 <div className='grid grid-cols-1 p-5 md:grid-cols-2 md:p-12'>

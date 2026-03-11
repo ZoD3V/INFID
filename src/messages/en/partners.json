@@ -1,0 +1,21 @@
+{
+    "partner_section": {
+        "header": {
+            "title": "Development Partners",
+            "breadcrumb": {
+                "home": "Home",
+                "about": "About Us",
+                "active": "Development Partners"
+            }
+        },
+        "content": {
+            "badge": "NETWORK & COLLABORATION",
+            "title": "Development Partners",
+            "description": "We collaborate with various national and international organizations to realize inclusive and sustainable development."
+        },
+        "categories": {
+            "national": "National Partners",
+            "international": "International Partners"
+        }
+    }
+}

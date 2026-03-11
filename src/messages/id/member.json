@@ -1,0 +1,71 @@
+{
+    "member_section": {
+        "header": {
+            "title": "Anggota INFID",
+            "breadcrumb": {
+                "home": "Beranda",
+                "about": "Tentang Kami",
+                "active": "Anggota INFID"
+            }
+        },
+        "hero": {
+            "badge": "KEANGGOTAAN",
+            "title": "Bergabung dalam Gerakan Masyarakat Sipil",
+            "description": "INFID adalah wadah kolaborasi organisasi masyarakat sipil yang berjuang untuk pembangunan Indonesia yang inklusif, demokratis, dan berkeadilan.",
+            "buttons": {
+                "requirement": "Lihat Persyaratan",
+                "registration": "Alur Pendaftaran"
+            }
+        },
+        "requirement": {
+            "title": "Persyaratan Anggota",
+            "description": "INFID adalah wadah kolaborasi organisasi masyarakat sipil yang berjuang untuk pembangunan Indonesia yang inklusif, demokratis, dan berkeadilan.",
+            "items": {
+                "recommendation": {
+                    "title": "Rekomendasi",
+                    "description": "Mendapat rekomendasi dari 2 (dua) lembaga anggota INFID yang berada di wilayah/Pulau Jawa"
+                },
+                "legality": {
+                    "title": "Legalitas",
+                    "description": "Menerima Anggaran Dasar INFID, khususnya kewajiban anggota INFID yang terdapat dalam BAB VI tentang Keanggotaan dan Anggaran Rumah Tangga INFID dalam BAB II tentang Keanggotaan"
+                }
+            }
+        },
+        "footer_section": {
+            "title": "Siap Menjadi Bagian dari Kami?",
+            "description": "Klik tombol di bawah untuk memulai proses pendaftaran atau pelajari alur lebih lanjut.",
+            "button": "Daftar Sekarang"
+        }
+    },
+    "registration_process": {
+        "header": {
+            "badge": "PROSES PENDAFTARAN",
+            "title": "Proses Penerimaan Anggota INFID",
+            "description": "Proses penerimaan dilakukan secara transparan dan bertahap melalui mekanisme organisasi resmi."
+        },
+        "help_box": {
+            "title": "Butuh Bantuan?",
+            "description": "Hubungi sekretariat kami untuk panduan lebih lanjut.",
+            "email": "office@infid.org"
+        },
+        "steps": {
+            "01": {
+                "title": "Keputusan Hasil Seleksi",
+                "description": "Keputusan diterima atau tidaknya calon anggota akan dikeluarkan melalui Rapat Dewan Pengurus. Keputusan Dewan Pengurus diterbitkan dalam bentuk Surat Keputusan tentang Permohonan Calon Anggota"
+            },
+            "02": {
+                "title": "Penyampaian Surat Keputusan",
+                "description": "Sekretariat INFID segera menyampaikan Surat Keputusan tentang Permohonan Calon Anggota kepada pihak yang berkepentingan."
+            },
+            "03": {
+                "title": "Pengesahan Anggota Baru",
+                "description": "Calon Anggota yang dinyatakan diterima akan ditetapkan dan disahkan dalam Sidang Umum sebagai Anggota INFID"
+            },
+            "04": {
+                "title": "Informasi & Kontak",
+                "description": "Untuk memperoleh informasi lebih lanjut mengenai persyaratan dan proses pendaftaran anggota INFID, silahkan menghubungi Sekretariat INFID melalui email office@infid.org."
+            }
+        }
+    },
+    "maps": "80 Anggota untuk perubahan"
+}

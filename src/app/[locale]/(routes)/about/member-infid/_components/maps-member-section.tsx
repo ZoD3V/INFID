@@ -14,6 +14,7 @@ import { slugify } from '@/lib/utils';
 
 import CommunitySection from '../../../(home)/_components/community-section';
 import { Link2, Mail, MapPin, Phone } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export interface Member {
     id: number;
@@ -40,6 +41,8 @@ interface MapsSectionProps {
 }
 
 export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }) => {
+    const t = useTranslations('member');
+
     const [open, setOpen] = useState<boolean>(false);
     const [selectedRegion, setSelectedRegion] = useState<RegionDetail | null>(null);
     const [loading, setLoading] = useState(false);
@@ -92,7 +95,7 @@ export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }
                     lineColor='bg-primary-500 h-0.5 w-3 rounded-full'
                     textColor='text-primary-500'
                     className='mt-16 rounded-full bg-white px-3 py-2 font-bold shadow-sm'>
-                    80 Anggota untuk perubahan
+                    {t('maps')}
                 </SectionBadge>
             </div>
 
