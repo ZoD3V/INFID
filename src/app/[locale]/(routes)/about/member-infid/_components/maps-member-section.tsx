@@ -1,25 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Image from 'next/image';
 
 import { Maps, Region } from '@/components/common/maps';
 import SectionBadge from '@/components/common/section-badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { REGION_DISPLAY_MAP, REGION_KEYS, RegionKey } from '@/data/region-data';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { ApiResponse, apiBase } from '@/lib/axios-server';
-import { slugify } from '@/lib/utils';
+import { apiBase } from '@/lib/axios-server';
 
 import CommunitySection from '../../../(home)/_components/community-section';
 import { Link2, Mail, MapPin, Phone } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 export interface Member {
     id: number;
     name: string;
     address: string;
+    description: string;
     emails: string[];
     phones: string[];
     website: string;
@@ -47,38 +47,23 @@ export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }
     const [selectedRegion, setSelectedRegion] = useState<RegionDetail | null>(null);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const mapEl = document.getElementById('map');
-        if (!mapEl) return;
+    const handleRegionClick = async (region: Region) => {
+        try {
+            setLoading(true);
 
-        const onClick = async (e: MouseEvent) => {
-            const t = e.target as SVGElement;
-            if (!t?.classList?.contains('region')) return;
+            const res = await apiBase.get<ApiDetailResponse>(`${API_ENDPOINTS.regions}/${region.id}/members`);
 
-            const nameKey = (t as any).dataset?.name || t.getAttribute('data-name') || t.id;
-            console.log(nameKey);
-            const foundRegion = initialRegions.find((r) => slugify(r.name) === nameKey);
+            setSelectedRegion(res.data.data);
+            setOpen(true);
 
-            if (foundRegion) {
-                try {
-                    setLoading(true);
-                    const res = await apiBase.get<ApiDetailResponse>(
-                        `${API_ENDPOINTS.regions}/${foundRegion.id}/members`
-                    );
-
-                    setSelectedRegion(res.data.data);
-                    setOpen(true);
-                } catch (error) {
-                    console.error('Gagal mengambil detail member:', error);
-                } finally {
-                    setLoading(false);
-                }
-            }
-        };
-
-        mapEl.addEventListener('click', onClick);
-        return () => mapEl.removeEventListener('click', onClick);
-    }, [initialRegions]);
+            console.log(`Berhasil mengambil data untuk: ${region.name}`);
+        } catch (error) {
+            toast.error('Gagal mengambil data member');
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <section className='relative w-full bg-white pt-16 lg:pt-24 lg:pb-58'>
@@ -90,7 +75,7 @@ export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }
                 className='absolute top-10 right-10 hidden xl:block'
             />
             <div className='container mb-12 flex flex-col items-center lg:mb-0'>
-                <Maps data={initialRegions} />
+                <Maps data={initialRegions} onRegionClick={handleRegionClick} isLoading={loading} />
                 <SectionBadge
                     lineColor='bg-primary-500 h-0.5 w-3 rounded-full'
                     textColor='text-primary-500'
@@ -100,7 +85,7 @@ export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }
             </div>
 
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className='max-w-[calc(100%-2rem)] md:max-w-184'>
+                <DialogContent className='max-w-[calc(100%-2rem)] md:max-w-200'>
                     <DialogHeader>
                         <DialogTitle>
                             <div className='flex flex-col items-start justify-between gap-2 lg:flex-row'>

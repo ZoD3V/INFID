@@ -28,11 +28,11 @@ export const PublicationContent = ({
     categoriesData: Article[];
 }) => {
     const t = useTranslations('home.publications');
-    const [activeTab, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useState('');
     const [publications, setPublications] = useState(initialData);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleTabChange = async (tabId: number) => {
+    const handleTabChange = async (tabId: string) => {
         setActiveTab(tabId);
         setIsLoading(true);
 
@@ -42,11 +42,18 @@ export const PublicationContent = ({
         try {
             const res = await apiBase.get(API_ENDPOINTS.posts, {
                 params: {
-                    featured: true,
-                    category: tabId === 0 ? undefined : tabId
+                    featured: '',
+                    category: tabId === '' ? undefined : tabId,
+                    search: '',
+                    author: '',
+                    tags: '',
+                    year: '',
+                    random: '',
+                    limit: ''
                 }
             });
-            setPublications(res.data.data);
+            // setPublications(res.data.data);
+            setPublications([]);
         } catch (err) {
             console.error(err);
         } finally {
@@ -55,6 +62,7 @@ export const PublicationContent = ({
     };
 
     const featured = publications[0];
+    console.log(featured);
     const sideArticles = publications.slice(1, 4);
 
     return (
@@ -67,9 +75,9 @@ export const PublicationContent = ({
                         {categoriesData.map((tab) => (
                             <button
                                 key={tab.id}
-                                onClick={() => handleTabChange(tab.id)}
+                                onClick={() => handleTabChange(tab.name)}
                                 className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-colors ${
-                                    activeTab === tab.id
+                                    activeTab === tab.name
                                         ? 'bg-teal-600 text-white'
                                         : 'bg-slate-200 text-slate-700 hover:bg-slate-300 disabled:opacity-50'
                                 }`}>
@@ -83,7 +91,7 @@ export const PublicationContent = ({
             {isLoading ? (
                 <PublicationsSkeleton />
             ) : publications && publications.length > 0 ? (
-                <div className='grid grid-cols-1 gap-12 lg:grid-cols-2'>
+                <div className='mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2'>
                     <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
                         {/* Featured Article */}
                         <div className='group cursor-pointer'>

@@ -6,9 +6,19 @@ import { PublicationContent } from './publication-content';
 async function getInitialPublications() {
     try {
         const res = await apiBase.get(API_ENDPOINTS.posts, {
-            params: { featured: true }
+            params: {
+                featured: true,
+                category: '',
+                search: '',
+                author: '',
+                tags: '',
+                year: '',
+                random: '',
+                limit: ''
+            }
         });
-        return res.data.data;
+        // return res.data.data;
+        return [];
     } catch (err) {
         return [];
     }

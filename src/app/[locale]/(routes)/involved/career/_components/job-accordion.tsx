@@ -3,23 +3,11 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Job } from '@/types/job';
 
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
+import { id } from 'date-fns/locale';
 import { FileText } from 'lucide-react';
-
-type Job = {
-    id: number;
-    title: string;
-    status: string;
-    deadline: string;
-    jobType: string;
-    location: string;
-    image: string;
-    background: string;
-    features: string[];
-    about: string;
-    expectations: string[];
-};
 
 export function JobAccordion({ data }: { data: Job[] }) {
     if (!data.length) {
@@ -45,10 +33,13 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                 <div className='space-y-1 text-left'>
                                     <div className='flex items-center gap-2'>
                                         <Badge className='bg-secondary-300 rounded-full text-xs font-medium'>
-                                            {item.status}
+                                            {item.employment_type}
                                         </Badge>
                                         <span className='text-sm text-slate-500'>
-                                            Batas Waktu: {format(new Date(item.deadline), 'dd MMM yyyy')}
+                                            Batas Waktu:{' '}
+                                            {item.closing_date
+                                                ? format(parseISO(item.closing_date), 'dd MMM yyyy', { locale: id })
+                                                : '-'}
                                         </span>
                                     </div>
 
@@ -58,7 +49,7 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                 </div>
 
                                 <div className='hidden text-right text-sm md:block'>
-                                    <div className='font-semibold'>{item.jobType}</div>
+                                    <div className='font-semibold'>{item.work_location_type}</div>
                                     <div className='text-slate-600'>{item.location}</div>
                                 </div>
                             </div>
@@ -70,7 +61,7 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                 {/* IMAGE */}
                                 <div className='md:col-span-4'>
                                     <img
-                                        src={item.image}
+                                        src={item.image || '/images/placeholder.png'}
                                         alt={item.title}
                                         className='w-full rounded-xl border object-cover'
                                     />
@@ -78,38 +69,31 @@ export function JobAccordion({ data }: { data: Job[] }) {
 
                                 {/* DETAIL */}
                                 <div className='space-y-6 md:col-span-8'>
-                                    <Section title='Latar Belakang'>{item.background}</Section>
-
-                                    <Section title='Fitur Tambahan'>
-                                        <ol className='list-decimal space-y-1 pl-4'>
-                                            {item.features.map((f, i) => (
-                                                <li key={i}>{f}</li>
-                                            ))}
-                                        </ol>
+                                    {/* Menampilkan deskripsi dari API */}
+                                    <Section title='Deskripsi Pekerjaan'>
+                                        <div className='whitespace-pre-line'>{item.description}</div>
                                     </Section>
 
-                                    <Section title={`Tentang ${item.title.split(' ')[0]}`}>{item.about}</Section>
-
-                                    <Section title='Karakter dan Ekspektasi'>
-                                        <ol className='list-decimal space-y-1 pl-4'>
-                                            {item.expectations.map((e, i) => (
-                                                <li key={i}>{e}</li>
-                                            ))}
-                                        </ol>
-                                    </Section>
+                                    {item.position && <Section title='Posisi'>{item.position}</Section>}
 
                                     {/* ACTION */}
                                     <div className='flex flex-col items-start justify-between border-t border-t-slate-200 pt-4 lg:flex-row lg:items-center'>
                                         <h3 className='text-base font-bold md:text-lg'>Apply Sekarang!</h3>
                                         <div className='flex flex-wrap gap-3 pt-4'>
                                             <Button variant='outline' className='rounded-full'>
-                                                <FileText />
+                                                <FileText className='mr-2 h-4 w-4' />
                                                 PDF
                                             </Button>
-                                            <Button variant='outline' className='rounded-full'>
-                                                Kirim Email
-                                            </Button>
-                                            <Button className='rounded-full'>Submit via Link</Button>
+
+                                            {item.link ? (
+                                                <Button className='rounded-full' asChild>
+                                                    <a href={item.link} target='_blank' rel='noopener noreferrer'>
+                                                        Submit via Link
+                                                    </a>
+                                                </Button>
+                                            ) : (
+                                                <Button className='rounded-full'>Kirim Email</Button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +106,6 @@ export function JobAccordion({ data }: { data: Job[] }) {
     );
 }
 
-/* 🔹 HELPER COMPONENT */
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
     return (
         <section>

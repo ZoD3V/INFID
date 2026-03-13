@@ -11,9 +11,11 @@ export interface Region {
 
 interface MapsProps {
     data: Region[];
+    onRegionClick: (region: Region) => void;
+    isLoading: boolean;
 }
 
-export const Maps: React.FC<MapsProps> = ({ data }) => {
+export const Maps: React.FC<MapsProps> = ({ data, onRegionClick, isLoading }) => {
     const getRegionBySlug = (slug: string) => {
         return data.find((r) => slugify(r.name) === slug);
     };
@@ -24,12 +26,24 @@ export const Maps: React.FC<MapsProps> = ({ data }) => {
 
         if (region.total_member > 5) return 'fill-primary-500';
         if (region.total_member > 0) return 'fill-primary-300';
-        return 'fill-gray-300';
+        return 'fill-muted';
+    };
+
+    const handleClick = (e: React.MouseEvent<SVGSVGElement>) => {
+        const target = e.target as SVGElement;
+        if (!target.classList.contains('region')) return;
+
+        const slug = target.getAttribute('data-name') || target.id;
+        const foundRegion = data.find((r) => slugify(r.name) === slug);
+
+        if (foundRegion && !isLoading) {
+            onRegionClick(foundRegion);
+        }
     };
 
     return (
         <div className='w-87.5 sm:w-100 md:w-153.75 lg:w-200 xl:w-full'>
-            <svg id='map' viewBox='0 0 1200 480' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <svg onClick={handleClick} id='map' viewBox='0 0 1200 480' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <g clipPath='url(#clip0_40000873_5171)'>
                     <path
                         id='aceh'

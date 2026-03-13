@@ -19,11 +19,13 @@ apiBase.interceptors.response.use(
         return response;
     },
     (error) => {
-        const errorMessage = error.response?.data?.message || error.message || 'an error occurred on the server';
+        if (typeof window !== 'undefined') {
+            const errorMessage = error.response?.data?.message || error.message || 'An error occurred on the server';
 
-        toast.error('Failed to load data', {
-            description: errorMessage
-        });
+            toast.error('Failed to load data', {
+                description: errorMessage
+            });
+        }
 
         return Promise.reject(error);
     }
