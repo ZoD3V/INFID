@@ -68,13 +68,13 @@ export function Navbar() {
         },
         {
             title: t('news'),
-            href: '/news-from-us'
-            // children: [
-            //     { title: t('news_activity'), href: '/news-from-us' }
-            //     { title: t('news_story'), href: '/news/story' },
-            //     { title: t('news_press'), href: '/news/broadcast' },
-            //     { title: t('news_report'), href: '/news/report-yearly' }
-            // ]
+            href: '/news-from-us',
+            children: [
+                { title: 'Kegiatan', href: '/news-from-us?category=Kegiatan' },
+                { title: 'Bergerak, Berdampak!', href: '/news-from-us?category=Bergerak%2C+Berdampak%21' },
+                { title: 'Siaran Pers', href: '/news-from-us?category=Siaran+Pers' },
+                { title: 'Laporan Tahunan', href: '/news-from-us?category=Laporan+Tahunan' }
+            ]
         },
         { title: t('contact'), href: '/contact-us' }
     ];

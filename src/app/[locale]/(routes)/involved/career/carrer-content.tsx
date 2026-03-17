@@ -11,7 +11,7 @@ import { SingleDatePicker } from '@/components/common/single-date-picker';
 import { Button } from '@/components/ui/button';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { apiBase } from '@/lib/axios-server';
+import { apiRequest } from '@/lib/api-request';
 
 import { JobAccordion } from './_components/job-accordion';
 
@@ -29,14 +29,15 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
     const fetchJobs = useCallback(async (category: any, date: any) => {
         setIsLoading(true);
         try {
-            const res = await apiBase.get(API_ENDPOINTS.jobRecruitments, {
+            const res = await apiRequest.get<any[]>(API_ENDPOINTS.jobRecruitments, {
                 params: {
                     category: category === 'all' ? undefined : category,
                     closing_date: date,
                     limit: 10
                 }
             });
-            setJobs(res.data.data);
+
+            setJobs(res.data);
         } catch (error) {
             console.error('Error fetching jobs');
         } finally {

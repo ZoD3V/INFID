@@ -6,7 +6,7 @@ import EmptyState from '@/components/common/empty-state';
 import PublicationsSkeleton from '@/components/common/publication-skeleton';
 import { Link } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { apiBase } from '@/lib/axios-server';
+import { apiRequest } from '@/lib/api-request';
 
 import { Eye, Loader2, MessageSquareMore, Pencil, TriangleAlertIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -40,7 +40,7 @@ export const PublicationContent = ({
             setIsLoading(false);
         }, 2000);
         try {
-            const res = await apiBase.get(API_ENDPOINTS.posts, {
+            const res = await apiRequest.get<any[]>(API_ENDPOINTS.posts, {
                 params: {
                     featured: '',
                     category: tabId === '' ? undefined : tabId,
@@ -52,6 +52,7 @@ export const PublicationContent = ({
                     limit: ''
                 }
             });
+
             // setPublications(res.data.data);
             setPublications([]);
         } catch (err) {
@@ -62,7 +63,6 @@ export const PublicationContent = ({
     };
 
     const featured = publications[0];
-    console.log(featured);
     const sideArticles = publications.slice(1, 4);
 
     return (

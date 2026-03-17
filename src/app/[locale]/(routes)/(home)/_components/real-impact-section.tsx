@@ -13,8 +13,8 @@ const RealImpactSection = () => {
     const t = useTranslations('home.hero_section');
     const b = useTranslations('button');
     const c = useTranslations('card');
-    const videoId = 'U0t1MvVi-9I';
-    const startTime = 74;
+    const videoId = '6KJBSilT76k';
+    const startTime = 10;
     const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
 
     return (

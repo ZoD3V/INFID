@@ -1,11 +1,11 @@
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { apiBase } from '@/lib/axios-server';
+import { apiRequest } from '@/lib/api-request';
 
 import { PublicationContent } from './publication-content';
 
 async function getInitialPublications() {
     try {
-        const res = await apiBase.get(API_ENDPOINTS.posts, {
+        const res = await apiRequest.get<any[]>(API_ENDPOINTS.posts, {
             params: {
                 featured: true,
                 category: '',
@@ -26,8 +26,8 @@ async function getInitialPublications() {
 
 async function getInitialCategoryPublications() {
     try {
-        const res = await apiBase.get(API_ENDPOINTS.categories);
-        return res.data.data;
+        const res = await apiRequest.get<any[]>(API_ENDPOINTS.categories);
+        return res.data;
     } catch (err) {
         return [];
     }

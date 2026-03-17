@@ -8,33 +8,13 @@ import { Maps, Region } from '@/components/common/maps';
 import SectionBadge from '@/components/common/section-badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { apiBase } from '@/lib/axios-server';
+import { apiRequest } from '@/lib/api-request';
+import { RegionDetail } from '@/types/region';
 
 import CommunitySection from '../../../(home)/_components/community-section';
 import { Link2, Mail, MapPin, Phone } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-
-export interface Member {
-    id: number;
-    name: string;
-    address: string;
-    description: string;
-    emails: string[];
-    phones: string[];
-    website: string;
-}
-
-export interface RegionDetail {
-    id: number;
-    name: string;
-    description: string | null;
-    members: Member[];
-}
-
-export interface ApiDetailResponse {
-    data: RegionDetail;
-}
 
 interface MapsSectionProps {
     initialRegions: Region[];
@@ -51,12 +31,12 @@ export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }
         try {
             setLoading(true);
 
-            const res = await apiBase.get<ApiDetailResponse>(`${API_ENDPOINTS.regions}/${region.id}/members`);
+            const res = await apiRequest.get<RegionDetail>(`${API_ENDPOINTS.regions}/${region.id}/members`);
 
-            setSelectedRegion(res.data.data);
+            setSelectedRegion(res.data);
             setOpen(true);
 
-            console.log(`Berhasil mengambil data untuk: ${region.name}`);
+            // console.log(`Berhasil mengambil data untuk: ${region.name}`);
         } catch (error) {
             toast.error('Gagal mengambil data member');
             console.error(error);

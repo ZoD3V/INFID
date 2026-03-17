@@ -157,7 +157,7 @@ const Footer = () => {
                     <div className='flex flex-col gap-2 pt-8'>
                         <h6 className='text-base font-bold text-white'>{t('contact.title')}</h6>
                         <p className='text-sm font-normal text-slate-200'>
-                            Jl. Sebret No.4 C, Jati Padang, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
+                            Jl. Jatipadang Raya Kav.3 No.105, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
                         </p>
                         <div className='flex items-center gap-3'>
                             <div className='flex items-center gap-2 text-sm text-white'>

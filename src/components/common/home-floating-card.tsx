@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
-import { ArrowRight, X } from 'lucide-react';
+import { ArrowRight, Mail, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
@@ -17,76 +17,102 @@ const STORAGE_KEY = 'home-floating-card-closed';
 export default function HomeFloatingCard() {
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+    const [isOnHomePage, setIsOnHomePage] = useState(false);
+
     const t = useTranslations('home-floating');
     const p = useTranslations('placeholder');
     const b = useTranslations('button');
 
     useEffect(() => {
+        setIsMounted(true);
         if (!pathname) return;
 
         const segments = pathname.split('/').filter(Boolean);
 
         const isLocalizedHome = segments.length === 1;
-
-        if (!isLocalizedHome) {
-            setIsVisible(false);
+        if (isLocalizedHome) {
+            setIsOnHomePage(true);
             return;
-        }
-
-        const isClosed = localStorage.getItem(STORAGE_KEY);
-
-        if (!isClosed) {
-            setIsVisible(true);
+        } else {
+            setIsOnHomePage(false);
         }
     }, [pathname]);
 
-    const handleClose = () => {
-        localStorage.setItem(STORAGE_KEY, 'true');
-        setIsVisible(false);
+    const handleToggle = (state: boolean) => {
+        setIsVisible(state);
+        if (!state) {
+            localStorage.setItem(STORAGE_KEY, 'true');
+        } else {
+            localStorage.removeItem(STORAGE_KEY);
+        }
     };
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        toast.success('Berhasil berlangganan!', {
-            description: 'Terima kasih telah mendaftarkan email Anda.'
-        });
-
-        handleClose();
+        toast.success('Berhasil berlangganan!');
+        handleToggle(false);
     };
 
-    if (!isVisible) return null;
+    if (!isMounted) return null;
 
     return (
-        <div
-            className={cn(
-                'fixed right-10 bottom-20 z-50',
-                'w-80 rounded-lg border border-slate-200 bg-white shadow-lg',
-                'p-6'
-            )}>
-            {/* Close Button */}
-            <button onClick={handleClose} className='text-primary-900 absolute top-3 right-3 p-3' aria-label='Close'>
-                <X size={22} />
-            </button>
+        <>
+            {isOnHomePage && (
+                <div className='fixed right-5.5 bottom-20 z-50'>
+                    {isVisible ? (
+                        <div
+                            className={cn(
+                                'w-80 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl',
+                                'animate-in fade-in zoom-in duration-300'
+                            )}>
+                            {/* Close Button */}
+                            <button
+                                onClick={() => handleToggle(false)}
+                                className='absolute top-3 right-3 p-2 text-slate-400 transition-colors hover:text-slate-600'>
+                                <X size={20} />
+                            </button>
 
-            {/* Logo Center */}
-            <div className='mb-4 flex justify-center pt-12'>
-                <img src='/logo/logo-floating-card.png' alt='Logo' className='h-10 w-auto object-contain' />
-            </div>
+                            <div className='mb-4 flex justify-center pt-8'>
+                                <img
+                                    src='/logo/logo-floating-card.png'
+                                    alt='Logo'
+                                    className='h-10 w-auto object-contain'
+                                />
+                            </div>
 
-            <p className='text-primary-900 mb-4 text-center text-sm font-semibold'>{t('home')}</p>
+                            <p className='text-primary-900 mb-6 text-center text-sm font-semibold'>{t('home')}</p>
 
-            <form className='flex w-full flex-col items-center gap-3' onSubmit={onSubmit}>
-                <Input
-                    type='email'
-                    placeholder={p('insertEmail')}
-                    className='rounded-full border-slate-200 bg-slate-50 text-sm placeholder:text-slate-500'
-                />
-                <Button type='submit' size='sm' variant='secondary' className='w-full rounded-full'>
-                    {b('subscribe')}
-                    <ArrowRight className='ml-2 h-4 w-4' />
-                </Button>
-            </form>
-        </div>
+                            <form className='flex w-full flex-col items-center gap-3' onSubmit={onSubmit}>
+                                <Input
+                                    type='email'
+                                    required
+                                    placeholder={p('insertEmail')}
+                                    className='rounded-full border-slate-200 bg-slate-50'
+                                />
+                                <Button type='submit' size='sm' variant='secondary' className='w-full rounded-full'>
+                                    {b('subscribe')}
+                                    <ArrowRight className='ml-2 h-4 w-4' />
+                                </Button>
+                            </form>
+                        </div>
+                    ) : (
+                        <button
+                            onClick={() => handleToggle(true)}
+                            className={cn(
+                                'bg-primary flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full shadow-lg transition-all hover:scale-110 active:scale-95',
+                                'animate-in fade-in slide-in-from-bottom-4'
+                            )}>
+                            <Mail className='text-white' size={24} />
+                            {/* Dot Notifikasi (Opsional) */}
+                            {/* <span className='absolute top-0 right-0 flex h-3 w-3'>
+                        <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75'></span>
+                        <span className='relative inline-flex h-3 w-3 rounded-full bg-red-500'></span>
+                    </span> */}
+                        </button>
+                    )}
+                </div>
+            )}
+        </>
     );
 }

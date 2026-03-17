@@ -1,10 +1,13 @@
 import { API_BASE_URL } from '@/lib/api-endpoints';
 
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
 import { toast } from 'sonner';
 
 export interface ApiResponse<T> {
-    data: T[];
+    status_code: number;
+    message: string;
+    data: T;
 }
 
 export const apiBase = axios.create({
@@ -14,19 +17,19 @@ export const apiBase = axios.create({
     }
 });
 
+apiBase.interceptors.request.use((config) => {
+    const locale = Cookies.get('NEXT_LOCALE') || 'id';
+    config.params = { ...config.params, lang: locale };
+    return config;
+});
+
 apiBase.interceptors.response.use(
-    (response) => {
-        return response;
-    },
+    (response) => response,
     (error) => {
         if (typeof window !== 'undefined') {
-            const errorMessage = error.response?.data?.message || error.message || 'An error occurred on the server';
-
-            toast.error('Failed to load data', {
-                description: errorMessage
-            });
+            const errorMessage = error.response?.data?.message || 'An error occurred';
+            toast.error('Error', { description: errorMessage });
         }
-
         return Promise.reject(error);
     }
 );

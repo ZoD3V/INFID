@@ -1,17 +1,17 @@
 import Image from 'next/image';
 
-import { Maps, Region } from '@/components/common/maps';
+import { Region } from '@/components/common/maps';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { ApiResponse, apiBase } from '@/lib/axios-server';
+import { apiRequest } from '@/lib/api-request';
 
 import OurNetworkWrapper from './our-network-wrapper';
 
 async function getRegions() {
     try {
-        const res = await apiBase.get<ApiResponse<Region>>(API_ENDPOINTS.regions, {
+        const res = await apiRequest.get<Region[]>(API_ENDPOINTS.regions, {
             params: { limit: 'all' }
         });
-        return res.data.data;
+        return res.data;
     } catch (error) {
         console.error('Gagal mengambil data region:', error);
         return [];

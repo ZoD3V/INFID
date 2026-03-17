@@ -47,7 +47,7 @@ const CommunitySection = () => {
                             <p className='text-base leading-relaxed text-gray-700'>{t('description')}</p>
 
                             <div className='flex gap-4'>
-                                <Button className='w-full rounded-full'> {t('buttons.register')}</Button>
+                                {/* <Button className='w-full rounded-full'> {t('buttons.register')}</Button> */}
                                 <Link href='/contact-us' className='w-full'>
                                     <Button variant='outline' className='border-primary-500 w-full rounded-full'>
                                         {t('buttons.contact')}

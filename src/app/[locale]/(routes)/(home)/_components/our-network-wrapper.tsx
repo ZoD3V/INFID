@@ -6,10 +6,9 @@ import SectionBadge from '@/components/common/section-badge';
 import { SectionHeader } from '@/components/common/section-header';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { apiBase } from '@/lib/axios-server';
+import { apiRequest } from '@/lib/api-request';
+import { RegionDetail } from '@/types/region';
 
-import { ApiDetailResponse, RegionDetail } from '../../about/member-infid/_components/maps-member-section';
-import { Link2, Mail, MapPin, Phone } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const OurNetworkWrapper = ({ regions }: { regions: Region[] }) => {
@@ -22,12 +21,11 @@ const OurNetworkWrapper = ({ regions }: { regions: Region[] }) => {
         try {
             setLoading(true);
 
-            const res = await apiBase.get<ApiDetailResponse>(`${API_ENDPOINTS.regions}/${region.id}/members`);
-
-            setSelectedRegion(res.data.data);
+            const res = await apiRequest.get<RegionDetail>(`${API_ENDPOINTS.regions}/${region.id}/members`);
+            setSelectedRegion(res.data);
             setOpen(true);
 
-            console.log(`Berhasil mengambil data untuk: ${region.name}`);
+            // console.log(`Berhasil mengambil data untuk: ${region.name}`);
         } catch (error) {
             console.error(error);
         } finally {

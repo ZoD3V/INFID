@@ -1,13 +1,13 @@
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { apiBase } from '@/lib/axios-server';
+import { apiRequest } from '@/lib/api-request';
 
 import CareerContent from './carrer-content';
 import { getTranslations } from 'next-intl/server';
 
 async function getCategories() {
     try {
-        const res = await apiBase.get(API_ENDPOINTS.categories);
-        return res.data.data;
+        const res = await apiRequest.get<any[]>(API_ENDPOINTS.categories);
+        return res.data;
     } catch (err) {
         return [];
     }
@@ -15,8 +15,9 @@ async function getCategories() {
 
 async function getInitialJobs() {
     try {
-        const res = await apiBase.get(API_ENDPOINTS.jobRecruitments);
-        return res.data.data;
+        const res = await apiRequest.get<any[]>(API_ENDPOINTS.jobRecruitments);
+
+        return res.data;
     } catch (err) {
         return [];
     }
