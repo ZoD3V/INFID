@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
@@ -110,18 +110,18 @@ const Footer = () => {
                                         {links.map((link, index) => (
                                             <li key={index} className='flex items-start gap-2'>
                                                 {link.name === 'whatsapp' ? (
-                                                    <a
+                                                    <Link
                                                         href={link.href}
                                                         className='flex items-center gap-1 text-sm text-slate-200 hover:text-slate-300'>
                                                         <BsWhatsapp />
                                                         081288881951
-                                                    </a>
+                                                    </Link>
                                                 ) : link.href !== '' ? (
-                                                    <a
+                                                    <Link
                                                         href={link.href}
                                                         className='text-sm text-slate-200 hover:text-slate-300'>
                                                         {link.name}
-                                                    </a>
+                                                    </Link>
                                                 ) : (
                                                     <div className='text-sm text-slate-200'>{link.name}</div>
                                                 )}
@@ -157,7 +157,7 @@ const Footer = () => {
                     <div className='flex flex-col gap-2 pt-8'>
                         <h6 className='text-base font-bold text-white'>{t('contact.title')}</h6>
                         <p className='text-sm font-normal text-slate-200'>
-                            Jl. Jatipadang Raya Kav.3 No.105, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
+                            Jl. Sebret No.4 C, Jati Padang, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
                         </p>
                         <div className='flex items-center gap-3'>
                             <div className='flex items-center gap-2 text-sm text-white'>

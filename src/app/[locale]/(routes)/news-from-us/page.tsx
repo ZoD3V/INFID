@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import { ArticleCard } from '@/components/common/article-card';
 import { ArticleCardSkeleton } from '@/components/common/article-card-skeleton';
@@ -11,6 +11,7 @@ import { PageHeaderSearch } from '@/components/common/background-news-section';
 import { FeaturedNewsSkeleton } from '@/components/common/featured-news-skeleton';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
+import { usePathname, useRouter } from '@/i18n/routing';
 
 import { FeaturedNews } from './_components/featured-news';
 import { articles, authorsNews, categoriesNews, yearsNews } from './data/data';
@@ -28,24 +29,52 @@ export default function NewsFromUsPage() {
         author: 'all',
         search: ''
     });
+    const searchParams = useSearchParams();
     const router = useRouter();
+    const pathname = usePathname();
     const [isMounted, setIsMounted] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        setFilters({
-            category: params.get('category') || 'Semua',
-            year: params.get('year') || 'all',
-            author: params.get('author') || 'all',
-            search: params.get('search') || ''
-        });
-        setIsMounted(true);
-    }, []);
+        const categoryFromUrl = searchParams.get('category') || 'Semua';
+        const yearFromUrl = searchParams.get('year') || 'all';
+        const authorFromUrl = searchParams.get('author') || 'all';
+        const searchFromUrl = searchParams.get('search') || '';
+
+        if (
+            filters.category !== categoryFromUrl ||
+            filters.year !== yearFromUrl ||
+            filters.author !== authorFromUrl ||
+            filters.search !== searchFromUrl
+        ) {
+            setFilters({
+                category: categoryFromUrl,
+                year: yearFromUrl,
+                author: authorFromUrl,
+                search: searchFromUrl
+            });
+        }
+
+        if (!isMounted) setIsMounted(true);
+    }, [searchParams]);
 
     useEffect(() => {
         if (!isMounted) return;
+
+        const currentCategory = searchParams.get('category') || 'Semua';
+        const currentYear = searchParams.get('year') || 'all';
+        const currentAuthor = searchParams.get('author') || 'all';
+        const currentSearch = searchParams.get('search') || '';
+
+        if (
+            filters.category === currentCategory &&
+            filters.year === currentYear &&
+            filters.author === currentAuthor &&
+            filters.search === currentSearch
+        ) {
+            return;
+        }
 
         const params = new URLSearchParams();
         if (filters.category !== 'Semua') params.set('category', filters.category);
@@ -53,12 +82,15 @@ export default function NewsFromUsPage() {
         if (filters.author !== 'all') params.set('author', filters.author);
         if (filters.search) params.set('search', filters.search);
 
-        window.history.replaceState(null, '', `?${params.toString()}`);
+        const queryString = params.toString();
+        const targetUrl = `${pathname}${queryString ? `?${queryString}` : ''}`;
+
+        router.replace(targetUrl, { scroll: false });
 
         setIsLoading(true);
         setCurrentPage(1);
-        const timer = setTimeout(() => setIsLoading(false), 600);
-        return () => clearTimeout(timer);
+
+        setIsLoading(false);
     }, [filters, isMounted]);
 
     const handleCardClick = (id: number | string) => {

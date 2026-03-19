@@ -3,6 +3,7 @@
 import React from 'react';
 
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -79,6 +80,23 @@ export function Navbar() {
         { title: t('contact'), href: '/contact-us' }
     ];
 
+    const searchParams = useSearchParams();
+    const currentCategory = searchParams.get('category');
+
+    const isChildActive = (itemHref: string) => {
+        const [targetPath, targetQuery] = itemHref.split('?');
+        const targetParams = new URLSearchParams(targetQuery);
+        const targetCategory = targetParams.get('category');
+
+        const isPathMatch = pathname === targetPath;
+
+        if (targetCategory) {
+            return isPathMatch && currentCategory === targetCategory;
+        }
+
+        return isPathMatch && !currentCategory;
+    };
+
     React.useEffect(() => {
         if (!isMobile && isOpen) {
             setIsOpen(false);
@@ -137,19 +155,23 @@ export function Navbar() {
                             {item.children && (
                                 <div className='invisible absolute top-full left-1/2 w-48 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100'>
                                     <div className='relative overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-2xl'>
-                                        {item.children.map((child) => (
-                                            <Link
-                                                key={child.title}
-                                                href={child.href}
-                                                className={cn(
-                                                    'block px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-200',
-                                                    pathname === child.href
-                                                        ? 'bg-brand-50 text-brand-900 font-semibold'
-                                                        : 'hover:text-primary-500 hover:bg-gray-50'
-                                                )}>
-                                                {child.title}
-                                            </Link>
-                                        ))}
+                                        {item.children.map((child) => {
+                                            const active = isChildActive(child.href);
+
+                                            return (
+                                                <Link
+                                                    key={child.title}
+                                                    href={child.href}
+                                                    className={cn(
+                                                        'block px-4 py-2 text-sm font-medium transition-all duration-200',
+                                                        active
+                                                            ? 'bg-brand-50 text-brand-900 font-bold' // State Aktif
+                                                            : 'hover:text-primary-500 text-slate-700 hover:bg-gray-50'
+                                                    )}>
+                                                    {child.title}
+                                                </Link>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )}
@@ -198,20 +220,21 @@ export function Navbar() {
                                                                 )}
                                                             </AccordionTrigger>
                                                             <AccordionContent className='flex flex-col gap-1 border-l py-1 pl-3'>
-                                                                {item.children.map((child) => (
-                                                                    <Link
-                                                                        key={child.title}
-                                                                        href={child.href}
-                                                                        onClick={() => setIsOpen(false)}
-                                                                        className={cn(
-                                                                            'rounded-md px-3 py-1 text-sm transition-colors hover:bg-gray-100',
-                                                                            pathname === child.href
-                                                                                ? 'font-semibold'
-                                                                                : ''
-                                                                        )}>
-                                                                        {child.title}
-                                                                    </Link>
-                                                                ))}
+                                                                {item.children.map((child) => {
+                                                                    const active = isChildActive(child.href);
+                                                                    return (
+                                                                        <Link
+                                                                            key={child.title}
+                                                                            href={child.href}
+                                                                            onClick={() => setIsOpen(false)}
+                                                                            className={cn(
+                                                                                'rounded-md px-3 py-1 text-sm transition-colors hover:bg-gray-100',
+                                                                                active ? 'font-semibold' : ''
+                                                                            )}>
+                                                                            {child.title}
+                                                                        </Link>
+                                                                    );
+                                                                })}
                                                             </AccordionContent>
                                                         </>
                                                     ) : (
