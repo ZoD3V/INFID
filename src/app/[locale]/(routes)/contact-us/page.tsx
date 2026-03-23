@@ -97,9 +97,9 @@ const ContactUs = () => {
                         </div>
                         <div>
                             <h3 className='text-base font-semibold text-gray-800'>{t('info.address_title')}</h3>
-                            <p className='text-primary-900 text-sm'>Jl. Jatipadang Raya No. 105,</p>
+                            <p className='text-primary-900 text-sm'>Jl. Jatipadang Raya Kav.3 No.105</p>
                             <p className='text-primary-900 text-sm'>Pasar Minggu, Jakarta Selatan,</p>
-                            <p className='text-primary-900 text-sm'>DKI Jakarta 12540</p>
+                            <p className='text-primary-900 text-sm'>12540, Indonesia</p>
                             <Button className='text-primary-900 mt-4 rounded-full bg-slate-100 hover:bg-gray-200'>
                                 Direction <ExternalLink className='h-4 w-4' />
                             </Button>
