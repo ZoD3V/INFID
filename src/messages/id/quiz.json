@@ -3,80 +3,189 @@
         "label": "KUIS",
         "progress": "{current} dari {total}",
         "continue": "Lanjutkan",
+        "loading": "Memuat Pertanyaan...",
         "submit": "Kirim Jawaban"
+    },
+    "score": {
+        "status": " Kuis Selesai!",
+        "title": "Skor Akhir",
+        "button_feedback": "Lihat Feedback Jawaban",
+        "button_beranda": "Kembali ke Beranda"
+    },
+    "review_mode": {
+        "title": "Mode Review Jawaban"
     },
     "dialog": {
         "title": "Konfirmasi Kirim Jawaban",
-        "description": "Kamu bisa mengisi kuisioner ini hanya satu kali. Saat ini kamu masih bisa mengubah jawaban jika dirasa masih ada yang belum sesuai.",
+        "name_description": "Masukkan nama lengkap Anda untuk melanjutkan.",
+        "name_title": "Mulai Quiz",
+        "description": "Kamu bisa mengisi quiz ini hanya satu kali. Saat ini kamu masih bisa mengubah jawaban jika dirasa masih ada yang belum sesuai.",
         "edit": "Ubah Jawaban",
+        "placeholder_name": "Nama Lengkap",
         "submit": "Kirim Jawaban"
     },
     "questions": [
         {
             "id": 1,
             "question": "Apa yang dimaksud dengan pembangunan berkeadilan?",
+            "weight": 10,
             "options": [
-                "Pembangunan yang hanya berfokus pada pertumbuhan ekonomi",
-                "Pembangunan yang merata tanpa memperhatikan kualitas",
-                "Pembangunan yang memberikan manfaat setara bagi seluruh lapisan masyarakat",
-                "Pembangunan yang dipusatkan di wilayah perkotaan"
-            ],
-            "correct": 2
+                {
+                    "id": 1,
+                    "option": "Pembangunan yang hanya berfokus pada pertumbuhan ekonomi",
+                    "is_correct": false
+                },
+                {
+                    "id": 2,
+                    "option": "Pembangunan yang merata tanpa memperhatikan kualitas",
+                    "is_correct": false
+                },
+                {
+                    "id": 3,
+                    "option": "Pembangunan yang memberikan manfaat setara bagi seluruh lapisan masyarakat",
+                    "is_correct": true
+                },
+                {
+                    "id": 4,
+                    "option": "Pembangunan yang dipusatkan di wilayah perkotaan",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 2,
             "question": "Contoh kebijakan yang mencerminkan pembangunan berkeadilan adalah…",
+            "weight": 10,
             "options": [
-                "Membangun gedung pencakar langit di ibu kota",
-                "Memberikan subsidi pendidikan bagi keluarga kurang mampu",
-                "Menaikkan pajak untuk semua warga tanpa pengecualian",
-                "Memprioritaskan industri besar dibanding UMKM"
-            ],
-            "correct": 1
+                {
+                    "id": 5,
+                    "option": "Membangun gedung pencakar langit di ibu kota",
+                    "is_correct": false
+                },
+                {
+                    "id": 6,
+                    "option": "Memberikan subsidi pendidikan bagi keluarga kurang mampu",
+                    "is_correct": true
+                },
+                {
+                    "id": 7,
+                    "option": "Menaikkan pajak untuk semua warga tanpa pengecualian",
+                    "is_correct": false
+                },
+                {
+                    "id": 8,
+                    "option": "Memprioritaskan industri besar dibanding UMKM",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 3,
             "question": "Mengapa pembangunan berkeadilan penting bagi kemajuan negara?",
+            "weight": 10,
             "options": [
-                "Mengurangi jumlah penduduk",
-                "Mencegah kecemburuan dan kesenjangan sosial",
-                "Mempercepat urbanisasi",
-                "Meningkatkan persaingan antar daerah"
-            ],
-            "correct": 1
+                {
+                    "id": 9,
+                    "option": "Mengurangi jumlah penduduk",
+                    "is_correct": false
+                },
+                {
+                    "id": 10,
+                    "option": "Mencegah kecemburuan dan kesenjangan sosial",
+                    "is_correct": true
+                },
+                {
+                    "id": 11,
+                    "option": "Mempercepat urbanisasi",
+                    "is_correct": false
+                },
+                {
+                    "id": 12,
+                    "option": "Meningkatkan persaingan antar daerah",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 4,
             "question": "Prinsip utama pembangunan berkeadilan adalah…",
+            "weight": 10,
             "options": [
-                "Siapa yang kuat, dia yang maju",
-                "Pemerataan hasil dan kesempatan",
-                "Keuntungan sebesar-besarnya bagi investor",
-                "Pembangunan secepat mungkin"
-            ],
-            "correct": 1
+                {
+                    "id": 13,
+                    "option": "Siapa yang kuat, dia yang maju",
+                    "is_correct": false
+                },
+                {
+                    "id": 14,
+                    "option": "Pemerataan hasil dan kesempatan",
+                    "is_correct": true
+                },
+                {
+                    "id": 15,
+                    "option": "Keuntungan sebesar-besarnya bagi investor",
+                    "is_correct": false
+                },
+                {
+                    "id": 16,
+                    "option": "Pembangunan secepat mungkin",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 5,
             "question": "Peran masyarakat sipil dalam mendukung pembangunan berkeadilan adalah…",
+            "weight": 10,
             "options": [
-                "Bersikap apatis terhadap kebijakan publik",
-                "Membiarkan ketimpangan sosial tanpa upaya pengawasan",
-                "Berpartisipasi aktif dan mengawasi pelaksanaan pembangunan",
-                "Fokus pada kepentingan pribadi/organisasi"
-            ],
-            "correct": 2
+                {
+                    "id": 17,
+                    "option": "Bersikap apatis terhadap kebijakan publik",
+                    "is_correct": false
+                },
+                {
+                    "id": 18,
+                    "option": "Membiarkan ketimpangan sosial tanpa upaya pengawasan",
+                    "is_correct": false
+                },
+                {
+                    "id": 19,
+                    "option": "Berpartisipasi aktif dan mengawasi pelaksanaan pembangunan",
+                    "is_correct": true
+                },
+                {
+                    "id": 20,
+                    "option": "Fokus pada kepentingan pribadi/organisasi",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 6,
             "question": "Apa peran INFID dalam advokasi pembangunan berkeadilan?",
+            "weight": 10,
             "options": [
-                "Memproduksi riset dan menyelenggarakan dialog kebijakan dengan pemerintah dan pemangku kepentingan",
-                "Melakukan pendampingan korban kekerasan",
-                "Menyediakan forum pendampingan hukum bagi korban pelanggaran HAM",
-                "Membuka donasi publik untuk penggalangan dana bantuan korban"
-            ],
-            "correct": 0
+                {
+                    "id": 21,
+                    "option": "Memproduksi riset dan menyelenggarakan dialog kebijakan dengan pemerintah dan pemangku kepentingan",
+                    "is_correct": true
+                },
+                {
+                    "id": 22,
+                    "option": "Melakukan pendampingan korban kekerasan",
+                    "is_correct": false
+                },
+                {
+                    "id": 23,
+                    "option": "Menyediakan forum pendampingan hukum bagi korban pelanggaran HAM",
+                    "is_correct": false
+                },
+                {
+                    "id": 24,
+                    "option": "Membuka donasi publik untuk penggalangan dana bantuan korban",
+                    "is_correct": false
+                }
+            ]
         }
     ]
 }

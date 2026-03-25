@@ -8,7 +8,7 @@ import { Link } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 
-import { Eye, Loader2, MessageSquareMore, Pencil, TriangleAlertIcon } from 'lucide-react';
+import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 interface Article {

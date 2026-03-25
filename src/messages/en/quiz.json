@@ -3,11 +3,24 @@
         "label": "QUIZ",
         "progress": "{current} of {total}",
         "continue": "Continue",
+        "loading": "Load questions...",
         "submit": "Submit Answers"
+    },
+    "score": {
+        "status": "Quiz Completed!",
+        "title": "Final Score",
+        "button_feedback": "View Answer Feedback",
+        "button_beranda": "Back to Home"
+    },
+    "review_mode": {
+        "title": "Answer Review Mode"
     },
     "dialog": {
         "title": "Confirm Submission",
+        "name_description": "Enter your full name to continue.",
+        "name_title": "Start Quiz",
         "description": "You can complete this questionnaire only once. At this stage, you may still change your answers if there is anything you would like to revise.",
+        "placeholder_name": "Full Name",
         "edit": "Change Answer",
         "submit": "Send Answer"
     },
@@ -15,68 +28,164 @@
         {
             "id": 1,
             "question": "What is meant by equitable development?",
+            "weight": 10,
             "options": [
-                "Development focused only on economic growth",
-                "Development distributed evenly without considering quality",
-                "Development that benefits all layers of society equally",
-                "Development concentrated in urban areas"
-            ],
-            "correct": 2
+                {
+                    "id": 1,
+                    "option": "Development that focuses only on economic growth",
+                    "is_correct": false
+                },
+                {
+                    "id": 2,
+                    "option": "Development that is evenly distributed without regard to quality",
+                    "is_correct": false
+                },
+                {
+                    "id": 3,
+                    "option": "Development that provides equal benefits to all levels of society",
+                    "is_correct": true
+                },
+                {
+                    "id": 4,
+                    "option": "Development that is centralized in urban areas",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 2,
-            "question": "An example of a policy reflecting equitable development is…",
+            "question": "Which policy exemplifies equitable development?",
+            "weight": 10,
             "options": [
-                "Building skyscrapers in the capital city",
-                "Providing education subsidies for low-income families",
-                "Increasing taxes for all citizens without exception",
-                "Prioritizing large industries over SMEs"
-            ],
-            "correct": 1
+                {
+                    "id": 5,
+                    "option": "Building skyscrapers in the capital city",
+                    "is_correct": false
+                },
+                {
+                    "id": 6,
+                    "option": "Providing education subsidies for underprivileged families",
+                    "is_correct": true
+                },
+                {
+                    "id": 7,
+                    "option": "Increasing taxes for all citizens without exception",
+                    "is_correct": false
+                },
+                {
+                    "id": 8,
+                    "option": "Prioritizing large industries over MSMEs",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 3,
             "question": "Why is equitable development important for national progress?",
+            "weight": 10,
             "options": [
-                "Reducing population growth",
-                "Preventing social jealousy and inequality",
-                "Accelerating urbanization",
-                "Increasing competition between regions"
-            ],
-            "correct": 1
+                {
+                    "id": 9,
+                    "option": "Reduces the population",
+                    "is_correct": false
+                },
+                {
+                    "id": 10,
+                    "option": "Prevents social jealousy and inequality",
+                    "is_correct": true
+                },
+                {
+                    "id": 11,
+                    "option": "Accelerates urbanization",
+                    "is_correct": false
+                },
+                {
+                    "id": 12,
+                    "option": "Increases competition between regions",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 4,
-            "question": "The main principle of equitable development is…",
+            "question": "What is the main principle of equitable development?",
+            "weight": 10,
             "options": [
-                "The strongest gets ahead",
-                "Equal distribution of results and opportunities",
-                "Maximum profit for investors",
-                "Development as fast as possible"
-            ],
-            "correct": 1
+                {
+                    "id": 13,
+                    "option": "The strongest shall prevail",
+                    "is_correct": false
+                },
+                {
+                    "id": 14,
+                    "option": "Equitable distribution of outcomes and opportunities",
+                    "is_correct": true
+                },
+                {
+                    "id": 15,
+                    "option": "Maximum profit for investors",
+                    "is_correct": false
+                },
+                {
+                    "id": 16,
+                    "option": "Development as quickly as possible",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 5,
-            "question": "The role of civil society in supporting equitable development is…",
+            "question": "What is the role of civil society in supporting equitable development?",
+            "weight": 10,
             "options": [
-                "Being apathetic toward public policy",
-                "Allowing social inequality without oversight",
-                "Actively participating and monitoring development implementation",
-                "Focusing only on personal or organizational interests"
-            ],
-            "correct": 2
+                {
+                    "id": 17,
+                    "option": "Being apathetic towards public policies",
+                    "is_correct": false
+                },
+                {
+                    "id": 18,
+                    "option": "Allowing social inequality without any oversight",
+                    "is_correct": false
+                },
+                {
+                    "id": 19,
+                    "option": "Actively participating and monitoring development implementation",
+                    "is_correct": true
+                },
+                {
+                    "id": 20,
+                    "option": "Focusing on personal/organizational interests",
+                    "is_correct": false
+                }
+            ]
         },
         {
             "id": 6,
-            "question": "What is INFID's role in advocating equitable development?",
+            "question": "What is INFID's role in advocating for equitable development?",
+            "weight": 10,
             "options": [
-                "Producing research and organizing policy dialogues with government and stakeholders",
-                "Providing assistance to victims of violence",
-                "Offering legal assistance forums for human rights violation victims",
-                "Opening public donations for humanitarian aid"
-            ],
-            "correct": 0
+                {
+                    "id": 21,
+                    "option": "Producing research and organizing policy dialogues with the government and stakeholders",
+                    "is_correct": true
+                },
+                {
+                    "id": 22,
+                    "option": "Providing assistance to victims of violence",
+                    "is_correct": false
+                },
+                {
+                    "id": 23,
+                    "option": "Providing a legal aid forum for human rights violation victims",
+                    "is_correct": false
+                },
+                {
+                    "id": 24,
+                    "option": "Opening public donations for victim relief fundraising",
+                    "is_correct": false
+                }
+            ]
         }
     ]
 }
