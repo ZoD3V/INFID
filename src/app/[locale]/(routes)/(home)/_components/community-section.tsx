@@ -48,7 +48,7 @@ const CommunitySection = () => {
 
                             <div className='flex gap-4'>
                                 {/* <Button className='w-full rounded-full'> {t('buttons.register')}</Button> */}
-                                <Link href='/contact-us' className='w-full'>
+                                <Link href='/contact-us'>
                                     <Button variant='outline' className='border-primary-500 w-fit rounded-full'>
                                         {t('buttons.contact')}
                                     </Button>
