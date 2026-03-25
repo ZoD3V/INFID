@@ -183,8 +183,7 @@ export default function QuizPage() {
             <Dialog open={isNameDialogOpen}>
                 <DialogContent className='[&>button]:hidden' onPointerDownOutside={(e) => e.preventDefault()}>
                     <DialogHeader>
-                        <DialogTitle>{t('dialog.name_title')}</DialogTitle>
-                        <DialogDescription>{t('dialog.name_description')}</DialogDescription>
+                        <DialogTitle>{t('dialog.name_description')}</DialogTitle>
                     </DialogHeader>
                     <Input
                         placeholder={t('dialog.placeholder_name')}
@@ -196,7 +195,7 @@ export default function QuizPage() {
                             className='w-full rounded-full'
                             disabled={!userName.trim()}
                             onClick={() => setIsNameDialogOpen(false)}>
-                            Mulai Kuis
+                            {t('dialog.name_title')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>
@@ -220,7 +219,7 @@ export default function QuizPage() {
             </BlueHeader>
 
             <div className='flex min-h-[calc(100vh-220px)] items-center justify-center px-4 py-6'>
-                <div className='relative flex w-full max-w-2xl flex-col gap-4 rounded-xl border bg-white p-6 shadow-sm'>
+                <div className='relative flex w-full max-w-2xl flex-col gap-4 rounded-xl border bg-white p-6 shadow-sm overflow-hidden'>
                     {isReviewMode && (
                         <div className='absolute top-0 left-0 w-full bg-amber-50 py-1 text-center text-[10px] font-bold text-amber-600 uppercase'>
                             {t('review_mode.title')}
@@ -321,10 +320,10 @@ export default function QuizPage() {
                         <DialogDescription className='pt-2'>{t('dialog.description')}</DialogDescription>
                     </DialogHeader>
                     <DialogFooter className='gap-2'>
-                        <Button variant='outline' onClick={() => setIsSubmitDialogOpen(false)}>
+                        <Button variant='outline' className='rounded-full' onClick={() => setIsSubmitDialogOpen(false)}>
                             {t('dialog.edit')}
                         </Button>
-                        <Button onClick={handleSubmit} disabled={isSubmitting}>
+                        <Button className='rounded-full' onClick={handleSubmit} disabled={isSubmitting}>
                             {isSubmitting ? <Loader2 className='animate-spin' /> : t('dialog.submit')}
                         </Button>
                     </DialogFooter>
