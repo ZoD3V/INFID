@@ -10,6 +10,8 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { useIsMobile } from '@/hooks/use-mobile';
 import { usePathname } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { apiRequest } from '@/lib/api-request';
 import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 
@@ -24,6 +26,29 @@ export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false);
     const t = useTranslations('navigation');
     const [isScrolled, setIsScrolled] = React.useState(false);
+    const [categories, setCategories] = React.useState<any[]>([]);
+
+    React.useEffect(() => {
+        const fetchNavCategories = async () => {
+            try {
+                const res = await apiRequest.get<any[]>(API_ENDPOINTS.categories);
+                const data = res.data || [];
+                setCategories(data);
+            } catch (error) {
+                console.error('Error fetching nav categories', error);
+            }
+        };
+        fetchNavCategories();
+    }, []);
+
+    const createCategoryHref = (basePath: string, categoryName: string) => {
+        const params = new URLSearchParams();
+        params.set('category', categoryName);
+        return `${basePath}?${params.toString()}`;
+    };
+
+    const knowledgeCategories = ['Riset', 'Kertas Kebijakan', 'Modul dan Panduan', 'Artikel'];
+    const newsCategories = ['Kegiatan', 'Bergerak', 'Berdampak', 'Siaran Pers', 'Laporan Tahunan'];
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -60,22 +85,22 @@ export function Navbar() {
         {
             title: t('knowledge'),
             href: '/knowledge',
-            children: [
-                { title: t('knowledge_research'), href: '/knowledge?category=Riset' },
-                { title: t('knowledge_policy'), href: '/knowledge?category=Kertas+Kebijakan' },
-                { title: t('knowledge_module'), href: '/knowledge?category=Modul+dan+Panduan' },
-                { title: t('knowledge_article'), href: '/knowledge?category=Artikel' }
-            ]
+            children: categories
+                .filter((cat) => knowledgeCategories.includes(cat.name))
+                .map((cat) => ({
+                    title: cat.name,
+                    href: createCategoryHref('/knowledge', cat.name)
+                }))
         },
         {
             title: t('news'),
             href: '/news-from-us',
-            children: [
-                { title: 'Kegiatan', href: '/news-from-us?category=Kegiatan' },
-                { title: 'Bergerak, Berdampak!', href: '/news-from-us?category=Bergerak%2C+Berdampak%21' },
-                { title: 'Siaran Pers', href: '/news-from-us?category=Siaran+Pers' },
-                { title: 'Laporan Tahunan', href: '/news-from-us?category=Laporan+Tahunan' }
-            ]
+            children: categories
+                .filter((cat) => newsCategories.includes(cat.name))
+                .map((cat) => ({
+                    title: cat.name,
+                    href: createCategoryHref('/news-from-us', cat.name)
+                }))
         },
         { title: t('contact'), href: '/contact-us' }
     ];

@@ -17,7 +17,7 @@ import { useRouter } from '@/i18n/routing';
 import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-const STORAGE_KEY = 'last_quiz_dialog_shown';
+const STORAGE_KEY = 'quiz_dialog_status';
 const ONE_HOUR_IN_MS = 3600000;
 
 const Home = () => {
@@ -29,22 +29,26 @@ const Home = () => {
     const [isQuizDialogOpen, setIsQuizDialogOpen] = useState(false);
 
     useEffect(() => {
-        const lastShown = localStorage.getItem(STORAGE_KEY);
+        const status = localStorage.getItem(STORAGE_KEY);
         const now = new Date().getTime();
 
-        if (!lastShown || now - parseInt(lastShown) > ONE_HOUR_IN_MS) {
+        if (status === 'completed') return;
+
+        if (!status || now - parseInt(status) > ONE_HOUR_IN_MS) {
             const timer = setTimeout(() => {
                 setIsQuizDialogOpen(true);
-                localStorage.setItem(STORAGE_KEY, now.toString());
             }, 1000);
-
             return () => clearTimeout(timer);
         }
     }, []);
 
-    const handleGoToQuiz = () => {
-        localStorage.setItem(STORAGE_KEY, (new Date().getTime() + ONE_HOUR_IN_MS * 24).toString());
+    const handleCloseLater = () => {
+        localStorage.setItem(STORAGE_KEY, new Date().getTime().toString());
+        setIsQuizDialogOpen(false);
+    };
 
+    const handleGoToQuiz = () => {
+        localStorage.setItem(STORAGE_KEY, 'completed');
         setIsQuizDialogOpen(false);
         router.push('/quiz');
     };
@@ -68,7 +72,7 @@ const Home = () => {
                     </DialogHeader>
 
                     <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>
-                        <Button variant='ghost' onClick={() => setIsQuizDialogOpen(false)} className='rounded-full'>
+                        <Button variant='ghost' onClick={handleCloseLater} className='rounded-full'>
                             {d('buttons.later')}
                         </Button>
 

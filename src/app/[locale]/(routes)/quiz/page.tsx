@@ -21,6 +21,8 @@ import { CheckCircle2, ChevronLeft, Loader2, XCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+const STORAGE_KEY = 'quiz_dialog_status';
+
 export default function QuizPage() {
     const t = useTranslations('quiz');
     const router = useRouter();
@@ -111,6 +113,11 @@ export default function QuizPage() {
         }
     };
 
+    const handleCloseLater = () => {
+        localStorage.setItem(STORAGE_KEY, new Date().getTime().toString());
+        router.push('/');
+    };
+
     // Helper: UI
     const getOptionLabel = (index: number) => String.fromCharCode(65 + index);
     const canContinue = currentQuestion && userAnswers[currentQuestion.id]?.length > 0;
@@ -191,12 +198,17 @@ export default function QuizPage() {
                         onChange={(e) => setUserName(e.target.value)}
                     />
                     <DialogFooter>
-                        <Button
-                            className='w-full rounded-full'
-                            disabled={!userName.trim()}
-                            onClick={() => setIsNameDialogOpen(false)}>
-                            {t('dialog.name_title')}
-                        </Button>
+                        <div className='flex w-full flex-col gap-4'>
+                            <Button
+                                className='w-full rounded-full'
+                                disabled={!userName.trim()}
+                                onClick={() => setIsNameDialogOpen(false)}>
+                                {t('dialog.name_title')}
+                            </Button>
+                            <Button variant='ghost' className='rounded-full' onClick={handleCloseLater}>
+                                {t('score.button_beranda')}
+                            </Button>
+                        </div>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
@@ -219,7 +231,7 @@ export default function QuizPage() {
             </BlueHeader>
 
             <div className='flex min-h-[calc(100vh-220px)] items-center justify-center px-4 py-6'>
-                <div className='relative flex w-full max-w-2xl flex-col gap-4 rounded-xl border bg-white p-6 shadow-sm overflow-hidden'>
+                <div className='relative flex w-full max-w-2xl flex-col gap-4 overflow-hidden rounded-xl border bg-white p-6 shadow-sm'>
                     {isReviewMode && (
                         <div className='absolute top-0 left-0 w-full bg-amber-50 py-1 text-center text-[10px] font-bold text-amber-600 uppercase'>
                             {t('review_mode.title')}
@@ -287,7 +299,7 @@ export default function QuizPage() {
                 </div>
             </div>
 
-            <div className='fixed bottom-0 left-0 flex w-full items-center justify-end gap-4 border-t bg-white px-4 py-3 shadow-lg md:px-8'>
+            <div className='fixed bottom-0 left-0 flex w-full items-center justify-center gap-4 border-t bg-white px-4 py-3 shadow-lg md:px-8'>
                 <div className='flex items-center gap-3'>
                     <Button
                         variant='secondary'

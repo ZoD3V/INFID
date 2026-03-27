@@ -108,7 +108,7 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
             <div className='flex items-center gap-2 text-2xl font-bold'>
                 <span>Komentar</span>
                 <span className='bg-primary-100 text-primary-500 rounded-sm px-2 py-0.5 text-sm'>
-                    {comments.length}
+                    {comments?.length ?? 0}
                 </span>
             </div>
 
