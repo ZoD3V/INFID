@@ -7,6 +7,7 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
 interface BreadcrumbItemType {
@@ -52,9 +53,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({
                                         <BreadcrumbItem>
                                             {item.href && !item.active ? (
                                                 <BreadcrumbLink
-                                                    href={item.href}
+                                                    asChild
                                                     className='text-secondary-200 hover:text-secondary-300'>
-                                                    {item.label}
+                                                    <Link href={item.href}>{item.label}</Link>
                                                 </BreadcrumbLink>
                                             ) : (
                                                 <BreadcrumbLink className='text-secondary-200 hover:text-secondary-300 cursor-default font-bold'>

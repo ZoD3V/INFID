@@ -99,7 +99,6 @@ export default function KnowledgePage() {
             try {
                 const res = await apiRequest.get<any>(API_ENDPOINTS.posts, {
                     params: {
-                        featured: true,
                         limit: 8,
                         category: filters.category === 'Semua' ? '' : filters.category,
                         search: filters.search,
@@ -233,7 +232,7 @@ export default function KnowledgePage() {
                     ) : (
                         <>
                             {articles.map((article, index) => (
-                                <Link key={index} href={`/knowledge/${article.translations[0]?.slug}`}>
+                                <Link key={index} href={`/knowledge/${article.id}-${article.translations[0]?.slug}`}>
                                     <ArticleCard article={article} imageClassName='h-67' />
                                 </Link>
                             ))}

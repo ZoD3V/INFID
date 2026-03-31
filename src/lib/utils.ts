@@ -40,6 +40,20 @@ export function formatArticleDate(date: string | Date | null | undefined): strin
     return format(parsedDate, 'dd MMM yy', { locale: id });
 }
 
+export const formatFullDate = (dateString: string | Date, locale: string = 'id') => {
+    if (!dateString) return '-';
+
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) return '-';
+
+    return new Intl.DateTimeFormat(locale === 'id' ? 'id-ID' : 'en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    }).format(date);
+};
+
 export const getInitials = (name: string) => {
     const names = name.trim().split(' ');
     if (names.length >= 2) {

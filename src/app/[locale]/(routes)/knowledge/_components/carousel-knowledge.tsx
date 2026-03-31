@@ -66,6 +66,8 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                         item.translations?.find((t: any) => t.language === 'id') || item.translations?.[0];
 
                     const title = translation?.title || 'No Title';
+                    const seen = item.seen || 0;
+                    const comments = item.comments.length || 0;
                     const description = translation?.content || '';
                     const categoryName = item.category?.name || 'Featured';
                     const authorName = item.author?.name || 'Admin';
@@ -80,6 +82,7 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                                         src={item.cover || '/images/placeholder-potrait.png'}
                                         alt={title}
                                         fill
+                                        sizes='100%'
                                         className='rounded-lg object-cover'
                                     />
                                 </div>
@@ -107,18 +110,18 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                                             <div className='flex items-center gap-1'>
                                                 <Eye className='h-3 w-3' />
-                                                200 Dilihat
+                                                {seen} Dilihat
                                             </div>
 
                                             <span className='h-1 w-1 rounded-full bg-slate-500' />
 
                                             <div className='flex items-center gap-1'>
                                                 <MessageSquareMore className='h-3 w-3' />
-                                                14 Komentar
+                                                {comments} Komentar
                                             </div>
                                         </div>
                                     </div>
-                                    <Link href={`/knowledge/${translation?.slug}`}>
+                                    <Link href={`/knowledge/${item.id}-${item.translations[0]?.slug}`}>
                                         <Button size='sm' className='w-fit rounded-full'>
                                             Baca Selengkapnya
                                             <ArrowRight />

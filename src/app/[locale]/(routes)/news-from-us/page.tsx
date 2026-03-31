@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
@@ -99,7 +99,6 @@ export default function NewsFromUsPage() {
             try {
                 const res = await apiRequest.get<any>(API_ENDPOINTS.posts, {
                     params: {
-                        featured: true,
                         limit: 2,
                         category: filters.category === 'Semua' ? '' : filters.category,
                         search: filters.search,
@@ -231,7 +230,7 @@ export default function NewsFromUsPage() {
                     ) : (
                         <>
                             {articles.map((article, index) => (
-                                <Link key={index} href={`/news-from-us/${article.translations[0]?.slug}`}>
+                                <Link key={index} href={`/news-from-us/${article.id}-${article.translations[0]?.slug}`}>
                                     <ArticleCard article={article} imageClassName='h-67' />
                                 </Link>
                             ))}

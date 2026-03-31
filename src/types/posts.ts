@@ -21,7 +21,16 @@ export interface PostTranslation {
     content: string;
     created_at: string;
     updated_at: string;
-    assets: any[];
+    assets: { file_path: string }[];
+}
+
+export interface Tags {
+    id: number;
+    name: string;
+    slug: string;
+    description: string | null;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Post {
@@ -30,11 +39,13 @@ export interface Post {
     category: Category;
     status: 'published' | 'draft' | string;
     featured: boolean;
+    seen?: number;
     published_at: string;
     cover: string;
     translations: PostTranslation[];
-    tags: any[];
+    tags: Tags[];
     comments: any[];
+    assets: { file_path: string }[];
     created_at: string;
     updated_at: string;
 }

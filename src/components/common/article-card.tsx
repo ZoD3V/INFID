@@ -4,6 +4,7 @@ import { formatArticleDate } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
+import { useLocale } from 'next-intl';
 
 export interface BaseArticle {
     id: number;
@@ -30,7 +31,10 @@ interface ArticleCardProps<T extends BaseArticle> {
 }
 
 export function ArticleCard<T extends BaseArticle>({ article, className, imageClassName }: ArticleCardProps<T>) {
-    const translation = article.translations?.find((t: any) => t.language === 'id') || article.translations?.[0];
+    const locale = useLocale();
+
+    const langIndex = locale === 'id' ? 0 : 1;
+    const translation = article.translations?.[langIndex] || article.translations?.[0];
 
     const title = translation?.title || 'No Title';
     const categoryName = article.category?.name || 'Uncategorized';
