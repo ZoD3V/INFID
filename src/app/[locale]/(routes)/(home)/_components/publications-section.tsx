@@ -1,13 +1,14 @@
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { Post } from '@/types/posts';
 
 import { PublicationContent } from './publication-content';
 
 async function getInitialPublications() {
     try {
-        const res = await apiRequest.get<any[]>(API_ENDPOINTS.posts, {
+        const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
             params: {
-                featured: true,
+                featured: '',
                 category: '',
                 search: '',
                 author: '',
@@ -17,8 +18,7 @@ async function getInitialPublications() {
                 limit: ''
             }
         });
-        // return res.data.data;
-        return [];
+        return res.data;
     } catch (err) {
         return [];
     }

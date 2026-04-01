@@ -13,11 +13,11 @@ export default function EmptyState({
     icon,
     title = 'Data Not Found',
     description = 'No data available.',
-    className = ''
+    className = 'mt-12'
 }: EmptyStateProps) {
     return (
         <div
-            className={`mt-12 flex h-100 w-full flex-col items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50/50 px-4 text-center ${className}`}>
+            className={`flex h-100 w-full flex-col items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50/50 px-4 text-center ${className}`}>
             <div className='mb-3 rounded-full bg-slate-100 p-3'>
                 {icon ?? <TriangleAlertIcon className='h-6 w-6 text-slate-400' />}
             </div>

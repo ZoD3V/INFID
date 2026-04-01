@@ -3,37 +3,23 @@
 import Image from 'next/image';
 
 import PageHeader from '@/components/common/background-section';
-import { Partner, PartnerCard } from '@/components/common/partner-card';
+import EmptyState from '@/components/common/empty-state';
+import { PartnerCard } from '@/components/common/partner-card';
 import { SectionHeader } from '@/components/common/section-header';
+import { Partners } from '@/types/patner';
 
 import { useTranslations } from 'next-intl';
 
-const PartnersSection = () => {
+interface Props {
+    initialData: Partners[] | null;
+}
+
+const PartnersSection = ({ initialData }: Props) => {
     const t = useTranslations('partners.partner_section');
 
-    const nationalPartners: Partner[] = [
-        { name: 'Kantor Staf Presiden', logo: '/logo/logo-mitra-nasional-1.png' },
-        { name: 'Kemnaker', logo: '/logo/logo-mitra-nasional-2.png' },
-        { name: 'Kementerian PPN/Bappenas', logo: '/logo/logo-mitra-nasional-3.png' },
-        { name: 'Kemenko Polhukam', logo: '/logo/logo-mitra-nasional-4.png' },
-        { name: 'Universitas Indonesia', logo: '/logo/logo-mitra-nasional-5.png' },
-        { name: 'BPS', logo: '/logo/logo-mitra-nasional-6.png' },
-        { name: 'BPIP', logo: '/logo/logo-mitra-nasional-7.png' },
-        { name: 'Kementerian Dalam Negeri', logo: '/logo/logo-mitra-nasional-8.png' },
-        { name: 'Ansor', logo: '/logo/logo-mitra-nasional-9.png' },
-        { name: 'Pemkot Yogyakarta', logo: '/logo/logo-mitra-nasional-10.png' }
-    ];
+    const nationalPartners: Partners[] = initialData?.filter((item) => item.category == 'national') || [];
 
-    const internationalPartners: Partner[] = [
-        { name: 'Ford Foundation', logo: '/logo/logo-mitra-internasional-1.png' },
-        { name: 'European Union', logo: '/logo/logo-mitra-internasional-2.png' },
-        { name: 'NED', logo: '/logo/logo-mitra-internasional-3.png' },
-        { name: 'CIC', logo: '/logo/logo-mitra-internasional-4.png' },
-        { name: 'Mennonite Central Committee', logo: '/logo/logo-mitra-internasional-5.png' },
-        { name: 'Global Center', logo: '/logo/logo-mitra-internasional-6.png' },
-        { name: 'KOICA', logo: '/logo/logo-mitra-internasional-7.png' },
-        { name: 'UNDP', logo: '/logo/logo-mitra-internasional-8.png' }
-    ];
+    const internationalPartners: Partners[] = initialData?.filter((item) => item.category == 'international') || [];
 
     return (
         <section className='bg-gray-50'>
@@ -78,11 +64,19 @@ const PartnersSection = () => {
                         <div className='grow border-t border-gray-200'></div>
                     </div>
 
-                    <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-5'>
-                        {nationalPartners.map((partner, index) => (
-                            <PartnerCard key={index} partner={partner} />
-                        ))}
-                    </div>
+                    {nationalPartners.length > 0 ? (
+                        <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-5'>
+                            {nationalPartners.map((partner, index) => (
+                                <PartnerCard key={index} partner={partner} />
+                            ))}
+                        </div>
+                    ) : (
+                        <EmptyState
+                            className='mt-0'
+                            title='No Data Found'
+                            description='There are no national partner.'
+                        />
+                    )}
                 </div>
 
                 {/* International Partners */}
@@ -95,11 +89,19 @@ const PartnersSection = () => {
                         <div className='grow border-t border-gray-200'></div>
                     </div>
 
-                    <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-5'>
-                        {internationalPartners.map((partner, index) => (
-                            <PartnerCard key={index} partner={partner} />
-                        ))}
-                    </div>
+                    {internationalPartners.length > 0 ? (
+                        <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-5'>
+                            {internationalPartners.map((partner, index) => (
+                                <PartnerCard key={index} partner={partner} />
+                            ))}
+                        </div>
+                    ) : (
+                        <EmptyState
+                            className='mt-0'
+                            title='No Data Found'
+                            description='There are no international partner.'
+                        />
+                    )}
                 </div>
             </div>
         </section>
