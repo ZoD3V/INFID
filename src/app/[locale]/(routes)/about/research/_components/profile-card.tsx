@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Image from 'next/image';
 
 type ProfileCardProps = {
@@ -7,11 +9,19 @@ type ProfileCardProps = {
 };
 
 export default function ProfileCard({ name, title, image }: ProfileCardProps) {
+    const [imgSrc, setImgSrc] = useState(image || '/images/placeholder-square.png');
+
     return (
         <div className='overflow-hidden rounded-lg border border-slate-200 bg-white p-3'>
             {/* Image */}
             <div className='relative aspect-square w-full rounded-lg'>
-                <Image src={image} alt={name} fill className='object-cover' />
+                <Image
+                    src={imgSrc}
+                    alt={name}
+                    fill
+                    className='object-cover'
+                    onError={() => setImgSrc('/images/placeholder-square.png')}
+                />
             </div>
 
             {/* Content */}

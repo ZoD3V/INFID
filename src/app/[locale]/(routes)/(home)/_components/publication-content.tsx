@@ -26,7 +26,7 @@ export const PublicationContent = ({
     initialData,
     categoriesData
 }: {
-    initialData: any[];
+    initialData: Post[];
     categoriesData: Article[];
 }) => {
     const t = useTranslations('home.publications');
