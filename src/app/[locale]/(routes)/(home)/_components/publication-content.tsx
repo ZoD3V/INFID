@@ -105,10 +105,12 @@ export const PublicationContent = ({
                                 : ['01', 'Jan', '2026'];
 
                             return (
-                                <Link href={`/knowledge/${translation?.slug}`} className='group cursor-pointer'>
+                                <Link
+                                    href={`/news-from-us/${featured.id}-${featured.translations[0]?.slug}`}
+                                    className='group cursor-pointer'>
                                     <div className='relative mb-6 h-80 overflow-hidden rounded-lg lg:h-96'>
                                         <img
-                                            src={featured.cover || '/images/placeholder.jpg'}
+                                            src={featured.cover || '/images/placeholder-square.jpg'}
                                             alt={translation?.title}
                                             className='h-full w-full object-cover'
                                         />
@@ -167,7 +169,9 @@ export const PublicationContent = ({
                             const translation = article.translations?.[langIndex] || article.translations?.[0];
 
                             return (
-                                <Link key={article.id} href={`/knowledge/${translation?.slug}`}>
+                                <Link
+                                    key={article.id}
+                                    href={`/news-from-us/${article.id}-${article.translations[0]?.slug}`}>
                                     <div className='cursor-pointer overflow-hidden rounded-lg transition-shadow'>
                                         <div className='flex h-full flex-col items-start gap-3 md:flex-row md:items-center lg:gap-5'>
                                             <div className='h-52 w-full shrink-0 overflow-hidden rounded-lg md:h-38 md:w-42 lg:h-full'>
