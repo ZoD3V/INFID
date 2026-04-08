@@ -4,14 +4,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Link } from '@/i18n/navigation';
 import { useRouter } from '@/i18n/routing';
 
 import { ArrowRight } from 'lucide-react';
@@ -111,14 +105,17 @@ const Home = () => {
 
                         {/* CTA Buttons */}
                         <div className='grid grid-cols-2 gap-4 md:flex'>
-                            <Button variant='secondary' className='rounded-full font-semibold'>
-                                {b('exploreProgram')}
-                                <ArrowRight />
+                            <Button asChild variant='secondary' className='rounded-full font-semibold'>
+                                <Link href='/news-from-us?category=Kegiatan'>
+                                    {b('exploreProgram')}
+                                    <ArrowRight />
+                                </Link>
                             </Button>
                             <Button
+                                asChild
                                 variant='outline'
                                 className='rounded-full border-white/30 bg-slate-500/10 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:text-slate-100'>
-                                {b('learnHistory')}
+                                <Link href='/about/profile-infid'>{b('learnHistory')}</Link>
                             </Button>
                         </div>
                     </div>

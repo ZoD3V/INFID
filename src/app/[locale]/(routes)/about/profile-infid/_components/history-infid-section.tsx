@@ -2,308 +2,60 @@
 
 import { useState } from 'react';
 
-import Image from 'next/image';
-
+import EmptyState from '@/components/common/empty-state';
+import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { cn } from '@/lib/utils';
+import { LTPeople, LeadershipTimeline } from '@/types/leadership-timeline';
 
-import { Founder, PeopleGrid } from './people-grid';
-import { Eye, MessageSquare } from 'lucide-react';
+import { PeopleGrid } from './people-grid';
 import { useTranslations } from 'next-intl';
 
-type ContentType = 'timeline' | 'founders' | 'leaders';
-
-// Timeline item
-export interface TimelineItem {
-    id: string;
-    year: string;
-    title: string;
-    description: string;
-    image?: string[];
-    customClass?: string;
-    active: boolean;
-    isFounder?: boolean;
-    isLeader?: boolean;
-}
-
-export interface Person {
-    id: number;
-    name: string;
-    image: string;
-    role: string;
-    description: string;
-    highlightDescription?: string;
-}
-
-const timelineData: TimelineItem[] = [
-    {
-        id: '07',
-        year: '2019 - Saat Ini',
-        title: '',
-        description:
-            '<p><strong>Kerja keras INFID bersama berbagai elemen masyarakat dalam mendorong pengesahan Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) berujung pada pengesahan UU tersebut tahun 2022. INFID memproduksi lima dokumen penguat advokasi, yaitu satu kertas kebijakan, dua briefing paper, satu kertas posisi, dan satu rekomendasi kebijakan. Upaya INFID dalam tidak berhenti sampai pengesahan, advokasi terus berlanjut untuk memastikan implementasi UU TPKS sesuai dengan mandat yang tertuang dalam UU.</strong><br><br>Selain itu, dalam G20 Indonesia 2022, INFID ditunjuk sebagai Chair of Civil 20 (C20) untuk bergerak bersama ratusan civil society organisations (CSOs) dari seluruh dunia untuk mendesak pemimpin negara G20 menciptakan solusi atas tujuh isu; tujuan pembangunan berkelanjutan &amp; kemanusiaan; akses vaksin &amp; kesehatan global; kesetaraan gender &amp; disabilitas; perpajakan &amp; keuangan berkelanjutan; lingkungan, lingkungan, keadilan iklim, dan transisi energi; edukasi, digitalisasi, dan civic space; antikorupsi.<br><br>INFID akan terus bergerak untuk mewujudkan pembangunan yang berkeadilan di Indonesia dan mengambil peran dalam mendorong diskursus-diskursus perdamaian di tingkat global.</p>',
-        image: ['/images/history-2019-1.webp', '/images/history-2019-2.webp'],
-        customClass: 'w-[800px]',
-        active: true
-    },
-    {
-        id: '06',
-        year: '2016 - 2018',
-        title: '',
-        description:
-            '<p><strong>Pada 2015, agenda MDGs dilanjutkan menjadi agenda SDGs (Sustainable Development Goals) untuk periode 2015&ndash;2030. SDGs memiliki 17 Tujuan dan 169 Indikator yang harus dicapai pada 2030. Seperti MDGs, INFID juga turut berperan aktif untuk mendorong pencapaian tujuan dan indikator SDGs, di antaranya melalui penyusunan kerangka regulasi Perpres SDGs No. 59 Tahun 2017 dan penyusunan kerangka kelembagaan, yaitu tim pelaksana dan pokja nasional.</strong><br><br>Selain itu, INFID juga mendampingi 10 Kabupaten Kota dalam pelaksanaan SDGs di tingkat daerah dengan tujuan memberikan praktik baik implementasi SDGs yang akan memberi inspirasi bagi daerah lainnya untuk turut melaksanakan pencapaian SDGs di tahun 2030.</p>',
-        image: ['/images/history-2016.webp'],
-        customClass: 'w-[336px]',
-        active: false
-    },
-    {
-        id: '05',
-        year: '2005 - 2015',
-        title: '',
-        description:
-            '<p><strong>INFID tercatat sebagai aktor utama dalam memperbaiki relasi yang lebih setara antara donor dan penerima. Pembubaran forum donor untuk Indonesia Consultative Group on Indonesia (CGI) tahun 2007 merupakan perubahan besar bagi Indonesia dan lembaga donor. Lembaga donor juga mengakui bahwa mereka selalu dipantau dan diawasi oleh INFID untuk membuat mereka lebih terbuka, transparan, dan jujur dengan peranan mereka.</strong><br><br>INFID secara konsisten menyesuaikan agendanya dengan perubahan situasi, mulai dari reposisi peran LSM/OMS, hingga isu-isu seperti pembiayaan untuk pembangunan, kebijakan perdagangan yang adil, Tujuan Pembangunan Milenium (Millennium Development Goals/MDGs), dan Tujuan Pembangunan Berkelanjutan (Sustainable Development Goals/SDGs).</p>',
-        image: ['/images/history-2005-1.png', '/images/history-2005-2.png'],
-        customClass: 'w-[800px]',
-        active: false
-    },
-    {
-        id: '04',
-        year: '1998 - 2004',
-        title: '',
-        description:
-            '<p><strong>Konferensi tematik dua tahunan INFID (1998&ndash;2004) telah mengubah kebijakan dan praktik lembaga donor dan lembaga keuangan internasional (Bank Dunia). Salah satu konferensi mengangkat tema mengenai data kebocoran 30 persen dalam dana utang luar negeri dari pinjaman Bank Dunia untuk berbagai proyek di Indonesia.</strong><br><br>Salah satu advokasi lantang INFID terkait utang dan krisis 1998 bertajuk &ldquo;Debt Kills Indonesian Babies&rdquo;. Advokasi ini berhasil menciptakan riak-riak gerakan di tengah masyarakat setelah ketajaman INFID dalam memberikan edukasi publik mengenai bagaimana setiap individu rakyat Indonesia berpotensi menanggung beban utang Pemerintah.<br><br>Akibat sikap penentangan yang kuat dari INGI/INFID terhadap pemerintah Indonesia, selama bertahun-tahun INGI/INFID tidak dapat menyelenggarakan pertemuan di dalam negeri. Pada 1999, INFID mengadakan konferensi pertamanya di Bali, yang menandai perubahan penting dalam struktur dan tata kelola organisasi.</p>',
-        image: ['/images/history-1998-1.png', '/images/history-1998-2.png'],
-        customClass: 'w-[800px]',
-
-        active: false
-    },
-    {
-        id: '03',
-        year: '1985 - 1998',
-        title: '',
-        description:
-            '<p><strong>INFID telah berperan penting dalam mewujudkan proses demokratisasi di Indonesia sejak Indonesia tunduk pada sistem otoriter di bawah rezim Orde Baru.&nbsp;</strong><br><strong>Para reformis seperti Abdurrahman Wahid (Gus Dur), Adnan Buyung Nasution, Toeti Heraty Nurhadi, dan Fauzi Abdullah, bersama sejumlah Lembaga Swadaya Masyarakat (LSM), bersatu dan bergabung. Mereka mendirikan International NGO Forum on Indonesia (INGI) pada 1985 dan bekerja erat dengan organisasi masyarakat sipil dari negara-negara donor Indonesia.</strong><br><br>INGI memiliki sekretariat pertamanya di Den Haag, Belanda, dan di Jakarta, Indonesia. INGI dibentuk sebagai wadah baru untuk advokasi strategis yang bertujuan mendorong pemerintah Indonesia agar memanfaatkan bantuan luar negeri untuk pembangunan yang adil dan berkelanjutan, dengan menghormati sepenuhnya hak asasi manusia.</p>',
-        image: ['/images/history-1985-1.png', '/images/history-1985-2.png'],
-        active: false
-    },
-    {
-        id: '02',
-        year: 'Pendiri',
-        title: '',
-        description: '',
-        active: false,
-        isFounder: true
-    },
-    {
-        id: '01',
-        year: 'Pemimpin Terdahulu',
-        title: '',
-        description: '',
-        active: false,
-        isLeader: true
-    }
-];
-
-const foundersData: Founder[] = [
-    {
-        id: 1,
-        name: 'Dr. Ahmad Suaedy',
-        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-        role: 'Founder & Aktivis HAM',
-        publications: [
-            {
-                id: 1,
-                category: 'KERTAS KEBIJAKAN',
-                date: '10 Jan 2025',
-                title: 'Transisi Energi yang Berkeadilan untuk Semua',
-                views: 345,
-                comments: 10,
-                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
-            },
-            {
-                id: 2,
-                category: 'KERTAS KEBIJAKAN',
-                date: '12 Feb 2025',
-                title: 'Analisis Dampak Lingkungan Berbasis Komunitas',
-                views: 120,
-                comments: 5,
-                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop'
-            },
-            {
-                id: 3,
-                category: 'KERTAS KEBIJAKAN',
-                date: '10 Jan 2025',
-                title: 'Transisi Energi yang Berkeadilan untuk Semua',
-                views: 345,
-                comments: 10,
-                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
-            },
-            {
-                id: 4,
-                category: 'KERTAS KEBIJAKAN',
-                date: '10 Jan 2025',
-                title: 'Transisi Energi yang Berkeadilan untuk Semua',
-                views: 345,
-                comments: 10,
-                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
-            },
-            {
-                id: 5,
-                category: 'KERTAS KEBIJAKAN',
-                date: '10 Jan 2025',
-                title: 'Transisi Energi yang Berkeadilan untuk Semua',
-                views: 345,
-                comments: 10,
-                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
-            }
-        ],
-        description:
-            'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
-    },
-    {
-        id: 2,
-        name: 'Lies Marcoes',
-        image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
-        role: 'Founder & Gender Specialist',
-        publications: [
-            {
-                id: 1,
-                category: 'KERTAS KEBIJAKAN',
-                date: '10 Jan 2025',
-                title: 'Transisi Energi yang Berkeadilan untuk Semua',
-                views: 345,
-                comments: 10,
-                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
-            },
-            {
-                id: 2,
-                category: 'KERTAS KEBIJAKAN',
-                date: '12 Feb 2025',
-                title: 'Analisis Dampak Lingkungan Berbasis Komunitas',
-                views: 120,
-                comments: 5,
-                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop'
-            }
-        ],
-        description:
-            'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
-    },
-    {
-        id: 3,
-        name: 'Kamala Chandrakirana',
-        image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
-        role: "Founder & Women's Rights Advocate",
-        publications: [
-            {
-                id: 1,
-                category: 'KERTAS KEBIJAKAN',
-                date: '10 Jan 2025',
-                title: 'Transisi Energi yang Berkeadilan untuk Semua',
-                views: 345,
-                comments: 10,
-                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
-            },
-            {
-                id: 2,
-                category: 'KERTAS KEBIJAKAN',
-                date: '12 Feb 2025',
-                title: 'Analisis Dampak Lingkungan Berbasis Komunitas',
-                views: 120,
-                comments: 5,
-                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop'
-            }
-        ],
-        description:
-            'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
-    },
-    {
-        id: 4,
-        name: 'Musdah Mulia',
-        image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop',
-        role: 'Founder & Islamic Scholar',
-        publications: [
-            {
-                id: 1,
-                category: 'KERTAS KEBIJAKAN',
-                date: '10 Jan 2025',
-                title: 'Transisi Energi yang Berkeadilan untuk Semua',
-                views: 345,
-                comments: 10,
-                image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=200&h=200&fit=crop'
-            },
-            {
-                id: 2,
-                category: 'KERTAS KEBIJAKAN',
-                date: '12 Feb 2025',
-                title: 'Analisis Dampak Lingkungan Berbasis Komunitas',
-                views: 120,
-                comments: 5,
-                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop'
-            }
-        ],
-        description:
-            'Seorang profesional dengan pengalaman lebih dari 20 tahun di bidang pemberdayaan masyarakat dan pengembangan organisasi. Memiliki komitmen kuat terhadap kemandirian ekonomi rakyat dan pembangunan berbasis komunitas.'
-    }
-];
-
-export const InfidTimeline = () => {
+const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) => {
     const t = useTranslations('profile.timeline_section');
-    const [contentType, setContentType] = useState<ContentType>('timeline');
-    const [activeTimelineId, setActiveTimelineId] = useState<string>(timelineData[0].id);
-    const [selectedTimeline, setSelectedTimeline] = useState<TimelineItem>(timelineData[0]);
 
-    const [selectedPerson, setSelectedPerson] = useState<any | null>(null);
+    if (!initialData || initialData.length === 0) {
+        return (
+            <section className='py-24'>
+                <EmptyState className='container mt-0' />
+            </section>
+        );
+    }
+
+    const [activeTimelineId, setActiveTimelineId] = useState<number>(initialData[0].id);
+    const [selectedTimeline, setSelectedTimeline] = useState<LeadershipTimeline>(initialData[0]);
+    const [selectedPerson, setSelectedPerson] = useState<LTPeople | null>(null);
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
-    const handleTimelineClick = (item: TimelineItem): void => {
+    const handleTimelineClick = (item: LeadershipTimeline): void => {
         setActiveTimelineId(item.id);
-
-        if (item.isFounder) {
-            setContentType('founders');
-            return;
-        }
-
-        if (item.isLeader) {
-            setContentType('leaders');
-            return;
-        }
-
         setSelectedTimeline(item);
-        setContentType('timeline');
     };
 
-    const handlePersonClick = (person: Person): void => {
+    const handlePersonClick = (person: LTPeople): void => {
         setSelectedPerson(person);
         setDialogOpen(true);
     };
 
     return (
-        <div className='from-secondary-100 min-h-screen bg-linear-to-b to-transparent pt-24' id='history-infid'>
+        <section className='from-secondary-100 min-h-screen bg-linear-to-b to-transparent pt-24' id='history-infid'>
             <div className='container'>
-                {/* Header */}
                 <SectionHeader
                     badge={t('header.badge')}
-                    badgeProps={{
-                        textColor: 'text-slate-500',
-                        lineColor: 'bg-primary-400'
-                    }}
+                    badgeProps={{ textColor: 'text-slate-500', lineColor: 'bg-primary-400' }}
                     title={t('header.title')}
                     description={t('header.description')}
                     titleClassName='text-primary-900'
                     descriptionClassName='text-primary-700 max-w-4xl'
                 />
 
-                {/* Timeline */}
+                {/* Timeline Navigation */}
                 <div className='mb-16'>
                     <div className='relative'>
-                        {/* Timeline line */}
                         <div className='absolute top-6 right-0 left-0 h-0.5 bg-gray-300' />
-
-                        <div className='flex justify-between gap-6 overflow-x-auto px-2'>
-                            {timelineData.map((item) => {
+                        <div className='scrollbar-hide flex justify-start gap-6 overflow-x-auto px-2 pb-4'>
+                            {initialData.map((item, index) => {
                                 const isActive = item.id === activeTimelineId;
-
                                 return (
                                     <div
                                         key={item.id}
@@ -311,20 +63,17 @@ export const InfidTimeline = () => {
                                         onClick={() => handleTimelineClick(item)}>
                                         <div className='relative z-10 flex h-12 items-center'>
                                             <div
-                                                className={`flex h-12 w-12 items-center justify-center rounded-full border-2 bg-white font-bold ${
+                                                className={`flex h-12 w-12 items-center justify-center rounded-full border-2 bg-white font-bold transition-all ${
                                                     isActive
-                                                        ? 'text-primary-600 border-teal-600'
+                                                        ? 'text-primary-600 border-teal-600 shadow'
                                                         : 'text-primary-400 border-gray-300'
                                                 }`}>
-                                                {item.id}
+                                                {index + 1}
                                             </div>
                                         </div>
-
                                         <p
-                                            className={`mt-4 text-center text-sm leading-snug ${
-                                                isActive ? 'text-primary-500 font-semibold' : 'text-slate-900'
-                                            }`}>
-                                            {item.year}
+                                            className={`mt-4 text-center text-sm leading-snug ${isActive ? 'text-primary-500 font-semibold' : 'text-slate-900'}`}>
+                                            {item.title}
                                         </p>
                                     </div>
                                 );
@@ -333,72 +82,55 @@ export const InfidTimeline = () => {
                     </div>
                 </div>
 
-                {contentType === 'timeline' && (
-                    // Timeline Detail
-                    <div className='max-w-full xl:max-w-4xl'>
-                        <h2 className='text-primary-500 mb-6 text-2xl font-bold'>
-                            {selectedTimeline.year} {selectedTimeline.title}
-                        </h2>
-                        <div className='flex flex-col items-start gap-8 md:flex-row'>
-                            <div
-                                className='prose w-full md:w-3/4'
-                                dangerouslySetInnerHTML={{ __html: selectedTimeline.description }}
-                            />
-                            {selectedTimeline.image && (
-                                <div className='flex w-full flex-col gap-2 md:w-1/3'>
-                                    {selectedTimeline.image.map((image, index) => (
-                                        <Image
-                                            key={index}
-                                            src={image}
-                                            alt={selectedTimeline.title}
-                                            width={500}
-                                            height={500}
-                                            className={cn('max-h-90 w-full object-cover', selectedTimeline.customClass)}
-                                        />
-                                    ))}
-                                </div>
-                            )}
+                {/* Content Area */}
+                <div className='mt-8'>
+                    {selectedTimeline.peoples && selectedTimeline.peoples.length > 0 ? (
+                        <PeopleGrid
+                            title={selectedTimeline.title}
+                            data={selectedTimeline.peoples}
+                            onItemClick={handlePersonClick}
+                        />
+                    ) : (
+                        <div className='max-w-full xl:max-w-4xl'>
+                            <h2 className='text-primary-500 mb-6 text-2xl font-bold'>{selectedTimeline.title}</h2>
+                            <div className='flex flex-col items-start gap-8'>
+                                <article
+                                    className='prose prose-slate w-full max-w-none'
+                                    dangerouslySetInnerHTML={{ __html: selectedTimeline.description || '' }}
+                                />
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
 
-                {contentType === 'founders' && (
-                    <PeopleGrid title='Pendiri INFID' data={foundersData} onItemClick={handlePersonClick} />
-                )}
-
-                {contentType === 'leaders' && (
-                    <PeopleGrid title='Pemimpin Terdahulu' data={foundersData} onItemClick={handlePersonClick} />
-                )}
-
+                {/* Profile Dialog */}
                 <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                    <DialogContent className='sm:max-w-xl md:max-w-2xl lg:max-w-3xl'>
+                    <DialogContent className='max-h-[90vh] overflow-y-auto sm:max-w-xl md:max-w-2xl lg:max-w-3xl'>
                         {selectedPerson && (
                             <>
                                 <DialogHeader>
                                     <DialogTitle className='text-start font-bold text-gray-900'>
-                                        {contentType === 'founders'
-                                            ? 'Pendiri'
-                                            : contentType === 'leaders'
-                                              ? 'Pemimpin Terdahulu'
-                                              : 'Profil'}
+                                        Profil {selectedTimeline.title}
                                     </DialogTitle>
                                 </DialogHeader>
 
-                                <div className='mt-4 flex flex-col items-center gap-5 md:flex-row md:items-start'>
-                                    <div className='mb-4 h-60 w-60 shrink-0 overflow-hidden rounded-lg'>
-                                        <img
-                                            src={selectedPerson.image}
+                                <div className='mt-4 flex flex-col items-center gap-6 md:flex-row md:items-start'>
+                                    <div className='h-64 w-64 shrink-0 overflow-hidden rounded-xl border bg-slate-100'>
+                                        <OptimizedImage
+                                            src={selectedPerson.image ?? ''}
                                             alt={selectedPerson.name}
-                                            className='h-full w-full object-cover'
+                                            fill
+                                            placeholderType='square'
                                         />
                                     </div>
-                                    <div className='flex flex-col items-center md:items-start'>
+                                    <div className='flex flex-1 flex-col items-center text-center md:items-start md:text-left'>
                                         <h3 className='text-2xl font-bold text-gray-900'>{selectedPerson.name}</h3>
-                                        <p className='text-primary-500 text-sm font-medium'>{selectedPerson.role}</p>
-
-                                        <p className='mt-4 leading-relaxed text-gray-700'>
-                                            {selectedPerson.description}
+                                        <p className='text-primary-500 text-sm font-medium'>
+                                            {selectedPerson.occupation}
                                         </p>
+                                        <div className='prose prose-sm mt-4 text-slate-700'>
+                                            {selectedPerson.description || 'Tidak ada informasi detail tersedia.'}
+                                        </div>
                                     </div>
                                 </div>
                             </>
@@ -406,6 +138,8 @@ export const InfidTimeline = () => {
                     </DialogContent>
                 </Dialog>
             </div>
+
+            {/* Background Decoration */}
             <div
                 className='from-secondary-100 relative mt-12 h-115.5 bg-linear-to-t to-transparent'
                 style={{
@@ -413,7 +147,10 @@ export const InfidTimeline = () => {
                     backgroundBlendMode: 'overlay',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
-                }}></div>
-        </div>
+                }}
+            />
+        </section>
     );
 };
+
+export default InfidTimeline;

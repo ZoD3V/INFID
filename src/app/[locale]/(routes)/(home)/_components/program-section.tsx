@@ -1,117 +1,33 @@
-import Image from 'next/image';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { apiRequest } from '@/lib/api-request';
+import { Post } from '@/types/posts';
 
-import { SectionHeader } from '@/components/common/section-header';
-import { Button } from '@/components/ui/button';
+import ProgramContent from './program-content';
 
-import { ArrowRight } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+async function getInitialPublications() {
+    try {
+        const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
+            params: {
+                featured: '',
+                category: '',
+                search: '',
+                author: '',
+                tags: '',
+                year: '',
+                random: '',
+                limit: 3
+            }
+        });
+        return res.data;
+    } catch (err) {
+        return [];
+    }
+}
 
-const ProgramSection = () => {
-    const t = useTranslations('home.program_us');
+const ProgramSection = async () => {
+    const programData = await getInitialPublications();
 
-    const b = useTranslations('button');
-
-    const programs = [
-        {
-            title: t('programs.human_rights.title'),
-            description: t('programs.human_rights.description'),
-            image: '/images/bg-program-1.webp'
-        },
-        {
-            title: t('programs.climate_governance.title'),
-            description: t('programs.climate_governance.description'),
-            image: '/images/bg-program-2.webp'
-        },
-        {
-            title: t('programs.inclusive_development.title'),
-            description: t('programs.inclusive_development.description'),
-            image: '/images/bg-program-3.webp'
-        }
-    ];
-
-    return (
-        <section className='bg-secondary-100 relative py-24'>
-            <Image
-                src='/images/decoration-program-1.png'
-                alt='decoration'
-                width={200}
-                height={200}
-                className='absolute top-0 left-0 hidden h-auto w-auto xl:block'
-            />
-            <Image
-                src='/images/decoration-about.png'
-                alt='images'
-                width={180}
-                height={180}
-                className='absolute -bottom-10 -left-10 hidden h-auto w-auto xl:block'
-            />
-            <Image
-                src='/images/decoration-program-2.png'
-                alt='images'
-                width={100}
-                height={100}
-                className='absolute right-20 bottom-5 hidden xl:block'
-            />
-            <div className='container'>
-                <div className='grid gap-8 lg:grid-cols-2 lg:gap-16'>
-                    {/* Sticky Text Section */}
-                    <div className='h-fit lg:sticky lg:top-25'>
-                        <SectionHeader
-                            badge={t('section.badge')}
-                            title={t('section.title')}
-                            description={t('section.description')}
-                            badgeProps={{
-                                textColor: 'text-slate-500',
-                                lineColor: 'bg-primary-400'
-                            }}
-                            titleClassName='text-primary-900'
-                            descriptionClassName='text-primary-700'
-                            className='mb-20'
-                        />
-
-                        {/* CTA Button */}
-                        <button className='group inline-flex cursor-pointer items-center gap-2 border-b border-slate-900 pb-2 text-sm font-semibold lg:mt-8'>
-                            {b('exploreProgram')}
-
-                            <ArrowRight className='h-5 w-5 transition-transform group-hover:translate-x-1' />
-                        </button>
-                    </div>
-
-                    {/* Program Cards */}
-                    <div className='space-y-6'>
-                        {programs.map((program, index) => (
-                            <div
-                                key={index}
-                                className='group relative overflow-hidden rounded-2xl border bg-slate-100 p-2'>
-                                <div className='relative h-100 overflow-hidden rounded-xl bg-slate-900'>
-                                    <Image
-                                        src={program.image}
-                                        alt={program.title}
-                                        width={500}
-                                        height={500}
-                                        className='h-full w-full object-cover'
-                                    />
-                                    <div className='from-primary-500/80 via-primary-500/40 absolute inset-0 bg-linear-to-t to-transparent' />
-                                    <div className='absolute right-0 bottom-0 left-0 p-5 text-white lg:p-6'>
-                                        <h3 className='mb-3 text-xl leading-tight font-bold lg:text-2xl'>
-                                            {program.title}
-                                        </h3>
-                                        <p className='mb-4 text-sm leading-relaxed text-gray-200'>
-                                            {program.description}
-                                        </p>
-                                        <Button variant='secondary' size='sm' className='rounded-full'>
-                                            {b('exploreProgram')}
-                                            <ArrowRight />
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+    return <ProgramContent programData={programData} />;
 };
 
 export default ProgramSection;

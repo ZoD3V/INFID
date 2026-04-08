@@ -1,16 +1,10 @@
 'use client';
 import { useState } from 'react';
 
-import Image from 'next/image';
-
+import OptimizedImage from '@/components/common/optimized-image';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { formatLabel } from '@/lib/utils';
-import {
-    OrganizationPeople,
-    OrganizationPublication,
-    OrganizationStructureData,
-    OrganizationStructureProps
-} from '@/types/organization';
+import { OrganizationPeople, OrganizationPublication, OrganizationStructureProps } from '@/types/organization';
 
 import { Eye, MessageSquare } from 'lucide-react';
 
@@ -148,21 +142,12 @@ function MemberCard({
     image: string;
     onClick: () => void;
 }) {
-    const [imgSrc, setImgSrc] = useState(image || '/images/placeholder-square.png');
     return (
         <div
             onClick={onClick}
             className='group cursor-pointer rounded-lg border border-slate-200 bg-white p-3 transition-shadow duration-300 ease-in-out hover:shadow'>
             <div className='relative mb-4 aspect-square h-50 w-full overflow-hidden rounded-lg'>
-                <Image
-                    src={imgSrc}
-                    alt={name}
-                    fill
-                    className='object-cover'
-                    sizes='100%'
-                    priority
-                    onError={() => setImgSrc('/images/placeholder-square.png')}
-                />
+                <OptimizedImage src={image} alt={name} fill placeholderType='square' />
             </div>
             <h3 className='text-center font-bold text-slate-900'>{name}</h3>
             <p className='text-primary-500 mb-2 max-w-75 text-center text-sm font-medium'>{role}</p>

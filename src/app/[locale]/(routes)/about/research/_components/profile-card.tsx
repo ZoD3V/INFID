@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-import Image from 'next/image';
+import OptimizedImage from '@/components/common/optimized-image';
 
 type ProfileCardProps = {
     name: string;
@@ -9,19 +7,11 @@ type ProfileCardProps = {
 };
 
 export default function ProfileCard({ name, title, image }: ProfileCardProps) {
-    const [imgSrc, setImgSrc] = useState(image || '/images/placeholder-square.png');
-
     return (
         <div className='overflow-hidden rounded-lg border border-slate-200 bg-white p-3'>
             {/* Image */}
             <div className='relative aspect-square w-full rounded-lg'>
-                <Image
-                    src={imgSrc}
-                    alt={name}
-                    fill
-                    className='object-cover'
-                    onError={() => setImgSrc('/images/placeholder-square.png')}
-                />
+                <OptimizedImage src={image} alt={name} fill placeholderType='square' />
             </div>
 
             {/* Content */}

@@ -49,11 +49,18 @@ const RecognitionSection = () => {
                     <CarouselContent className='-ml-6'>
                         {recognitions.map((item, index) => (
                             <CarouselItem key={index} className='basis-full pl-6 lg:basis-1/2'>
-                                <div className='h-full cursor-default rounded-3xl bg-slate-100 px-5 py-6 transition-all duration-300 hover:shadow-teal-500/20'>
+                                <div className='flex h-full cursor-default items-center rounded-3xl bg-slate-100 px-5 py-6 transition-all duration-300 hover:shadow-teal-500/20'>
                                     <div className='flex items-center gap-5 md:gap-8'>
                                         {/* Logo */}
                                         <div className='shrink-0'>
-                                            <Image src={item.logo} alt={item.alt} width={42} height={42} />
+                                            <Image
+                                                src={item.logo}
+                                                alt={item.alt}
+                                                width={0}
+                                                height={0}
+                                                sizes='100vw'
+                                                className='h-auto w-10.5'
+                                            />
                                         </div>
 
                                         {/* Content */}
