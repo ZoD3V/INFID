@@ -3,12 +3,17 @@ export interface Job {
     title: string;
     image: string;
     position: string | null;
-    description: string;
+    description: Description[];
     location: string;
     work_location_type: string;
     employment_type: string;
     closing_date: string;
     link: string | null;
+}
+
+export interface Description {
+    language: string;
+    text: string;
 }
 
 export interface PaginatedResponse<T> {
