@@ -1,3 +1,6 @@
+'use client';
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 
 import EmptyState from '@/components/common/empty-state';
@@ -11,11 +14,12 @@ import { useTranslations } from 'next-intl';
 export const ProgramInfidContent = ({ programData }: { programData: Post[] }) => {
     const t = useTranslations('profile.program_section');
 
-    const programItems = [
-        { image: '/images/news-1.webp' },
-        { image: '/images/news-2.webp' },
-        { image: '/images/news-3.webp' }
-    ];
+    const [langIndex, setLangIndex] = useState(0);
+
+    useEffect(() => {
+        const locale = Cookies.get('NEXT_LOCALE') || 'id';
+        setLangIndex(locale === 'id' ? 0 : 1);
+    }, []);
 
     return (
         <div className='bg-secondary-100 relative min-h-screen py-24' id='program-infid'>
@@ -51,9 +55,8 @@ export const ProgramInfidContent = ({ programData }: { programData: Post[] }) =>
                             className='absolute -right-15 -bottom-5 z-30 hidden xl:block'
                         />
                         {programData.map((program, index) => {
-                            const locale = Cookies.get('NEXT_LOCALE') || 'id';
-                            const langIndex = locale === 'id' ? 0 : 1;
                             const translation = program?.translations?.[langIndex] || program?.translations?.[0];
+
                             return (
                                 <div
                                     key={index}
@@ -74,9 +77,9 @@ export const ProgramInfidContent = ({ programData }: { programData: Post[] }) =>
                                             <h3 className='mb-3 text-xl leading-tight font-bold lg:text-2xl'>
                                                 {translation.title}
                                             </h3>
-                                            <p
-                                                className='prose prose-slate mb-4 overflow-hidden text-sm leading-relaxed text-gray-200'
-                                                dangerouslySetInnerHTML={{ __html: translation.content || '' }}
+                                            <div
+                                                className='prose prose-invert mb-4 line-clamp-3 text-sm leading-relaxed text-gray-200'
+                                                dangerouslySetInnerHTML={{ __html: translation?.content || '' }}
                                             />
                                         </div>
                                     </div>

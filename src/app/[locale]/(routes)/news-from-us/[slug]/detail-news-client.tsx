@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import { ArticleCard } from '@/components/common/article-card';
+import { ArticleContent } from '@/components/common/article-content';
 import { ArticleHeader } from '@/components/common/article-header';
 import { ArticleShareBar } from '@/components/common/article-share-bar';
 import PageHeader from '@/components/common/background-section';
@@ -63,7 +64,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                 ]);
 
                 const filteredRelated = (relatedRes.data || relatedRes).filter(
-                    (item: any) => item.id !== initialData.id
+                    (item: Post) => item.id !== initialData.id && item.status === 'Published'
                 );
 
                 setRelatedArticles(filteredRelated);
@@ -140,10 +141,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                             priority
                         />
 
-                        <article
-                            className='prose prose-slate xl:prose-base max-w-none'
-                            dangerouslySetInnerHTML={{ __html: translation?.content || '' }}
-                        />
+                        <ArticleContent content={translation?.content || ''} />
 
                         <ArticleShareBar categoryName={initialData?.category?.name} title={translation?.title} />
 

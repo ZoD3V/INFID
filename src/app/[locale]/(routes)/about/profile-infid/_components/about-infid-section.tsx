@@ -48,13 +48,13 @@ const AboutInfid = () => {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator className='text-secondary-200 hover:text-secondary-300' />
                         <BreadcrumbItem>
-                            <BreadcrumbLink href='/' className='text-secondary-200 hover:text-secondary-300'>
+                            <BreadcrumbLink className='text-secondary-200 hover:text-secondary-300 cursor-default'>
                                 {t('breadcrumb.about')}
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator className='text-secondary-200 hover:text-secondary-300' />
                         <BreadcrumbItem>
-                            <BreadcrumbLink className='text-secondary-200 hover:text-secondary-300 font-bold'>
+                            <BreadcrumbLink className='text-secondary-200 hover:text-secondary-300 cursor-default font-bold'>
                                 {t('breadcrumb.struggle')}
                             </BreadcrumbLink>
                         </BreadcrumbItem>
@@ -90,10 +90,6 @@ const AboutInfid = () => {
                                                 </h3>
                                                 <p className='text-xs text-gray-500'>{t('stats.status_sub')}</p>
                                             </div>
-                                            <Check
-                                                className='text-secondary-300 bg-secondary-100 border-secondary-200 h-10 w-10 rounded-xl border p-2'
-                                                strokeWidth={1.5}
-                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -109,9 +105,6 @@ const AboutInfid = () => {
                                                     {t('stats.since_title')}
                                                 </h3>
                                                 <p className='text-xs text-gray-500'>{t('stats.since_sub')}</p>
-                                            </div>
-                                            <div className='text-primary-500 bg-primary-50 border-primary-200 flex h-10 w-10 items-center justify-center rounded-xl border p-2 text-sm font-bold'>
-                                                40+
                                             </div>
                                         </div>
                                     </div>

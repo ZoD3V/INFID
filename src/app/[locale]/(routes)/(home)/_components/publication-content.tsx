@@ -95,7 +95,7 @@ export const PublicationContent = ({
             {isLoading ? (
                 <PublicationsSkeleton />
             ) : publications && publications.length > 0 ? (
-                <div className='mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2'>
+                <div className='mt-12 grid grid-cols-1 gap-10 lg:grid-cols-2'>
                     {/* Featured Article */}
                     {featured &&
                         (() => {
@@ -164,7 +164,7 @@ export const PublicationContent = ({
                         })()}
 
                     {/* Side Articles */}
-                    <div className='grid grid-rows-3 gap-5 lg:gap-6'>
+                    <div className='grid grid-rows-3 gap-5'>
                         {sideArticles.map((article) => {
                             const translation = article.translations?.[langIndex] || article.translations?.[0];
 
@@ -174,7 +174,7 @@ export const PublicationContent = ({
                                     href={`/news-from-us/${article.id}-${article.translations[0]?.slug}`}>
                                     <div className='cursor-pointer overflow-hidden rounded-lg transition-shadow'>
                                         <div className='flex h-full flex-col items-start gap-3 md:flex-row md:items-center lg:gap-5'>
-                                            <div className='h-52 w-full shrink-0 overflow-hidden rounded-lg md:h-38 md:w-42 lg:h-full'>
+                                            <div className='h-52 w-full shrink-0 overflow-hidden rounded-lg md:h-38 md:w-42 lg:h-48'>
                                                 <img
                                                     src={article.cover || '/images/placeholder-square.png'}
                                                     alt={translation?.title}

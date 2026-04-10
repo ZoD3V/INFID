@@ -74,14 +74,7 @@ export function Navbar() {
                 { title: t('about_mitra'), href: '/about/partner' }
             ]
         },
-        {
-            title: t('involved'),
-            href: '',
-            children: [
-                { title: t('involved_career'), href: '/involved/career' }
-                // { title: t('involved_member'), href: '/involved/become-member' }
-            ]
-        },
+
         {
             title: t('knowledge'),
             href: '/knowledge',
@@ -101,6 +94,14 @@ export function Navbar() {
                     title: cat.name,
                     href: createCategoryHref('/news-from-us', cat.name)
                 }))
+        },
+        {
+            title: t('involved'),
+            href: '',
+            children: [
+                { title: t('involved_career'), href: '/involved/career' }
+                // { title: t('involved_member'), href: '/involved/become-member' }
+            ]
         },
         { title: t('contact'), href: '/contact-us' }
     ];
@@ -150,7 +151,7 @@ export function Navbar() {
                 {/* Desktop Navigation (Hidden on mobile) */}
                 <div
                     className={cn(
-                        'hidden items-center space-x-6 rounded-full lg:flex',
+                        'hidden items-center space-x-6 rounded-full xl:flex',
                         isScrolled ? '' : 'border border-white/10 px-4 py-3 shadow-sm backdrop-blur-sm'
                     )}>
                     {navItems.map((item) => (
@@ -209,7 +210,7 @@ export function Navbar() {
 
                     {/* Mobile Sidebar */}
                     {isMobile && (
-                        <div className='lg:hidden'>
+                        <div className='xl:hidden'>
                             <Sheet open={isOpen} onOpenChange={setIsOpen}>
                                 <SheetTrigger asChild>
                                     <Button

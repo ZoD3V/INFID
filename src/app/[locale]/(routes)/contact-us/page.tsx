@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 
+import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -110,21 +112,31 @@ const ContactUs = () => {
                     <div className='border-t border-slate-200 pt-8'>
                         <h3 className='mb-4 text-lg font-bold text-gray-800'>{t('info.follow_us')}</h3>
                         <div className='flex gap-4'>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <FaInstagram className='h-6 w-6' />
-                            </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <FaLinkedin className='h-6 w-6' />
-                            </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <FaYoutube className='h-6 w-6' />
-                            </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <FaFacebook className='h-6 w-6' />
-                            </button>
-                            <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                <BsTwitterX className='h-5 w-5' />
-                            </button>
+                            <Link href={'https://www.instagram.com/infid_id/'}>
+                                <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                                    <FaInstagram className='h-6 w-6' />
+                                </button>
+                            </Link>
+                            <Link href={'https://www.linkedin.com/company/infid/'}>
+                                <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                                    <FaLinkedin className='h-6 w-6' />
+                                </button>
+                            </Link>
+                            <Link href={'https://www.youtube.com/@INFIDJakarta'}>
+                                <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                                    <FaYoutube className='h-6 w-6' />
+                                </button>
+                            </Link>
+                            <Link href={'https://www.facebook.com/infid'}>
+                                <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                                    <FaFacebook className='h-6 w-6' />
+                                </button>
+                            </Link>
+                            <Link href={'https://x.com/infid_ID'}>
+                                <button className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
+                                    <BsTwitterX className='h-5 w-5' />
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

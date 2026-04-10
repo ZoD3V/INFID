@@ -12,9 +12,9 @@ interface ArticleFiltersProps {
     selectedCategory: string;
     onCategoryChange: (value: string) => void;
 
-    authors: FilterOption[];
-    selectedAuthor: string;
-    onAuthorChange: (value: string) => void;
+    authors?: FilterOption[];
+    selectedAuthor?: string;
+    onAuthorChange?: (value: string) => void;
 
     years: string[];
     selectedYear: string;
@@ -74,19 +74,21 @@ export function ArticleFilters({
                 </Select>
 
                 {/* Select Penulis */}
-                <Select value={selectedAuthor} onValueChange={onAuthorChange}>
-                    <SelectTrigger className='w-37.5'>
-                        <SelectValue placeholder='Penulis' />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value='all'>Semua Penulis</SelectItem>
-                        {authors.map((author) => (
-                            <SelectItem key={author.value} value={author.value}>
-                                {author.label}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+                {authors !== undefined && authors.length > 0 && (
+                    <Select value={selectedAuthor} onValueChange={onAuthorChange}>
+                        <SelectTrigger className='w-37.5'>
+                            <SelectValue placeholder='Penulis' />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value='all'>Semua Penulis</SelectItem>
+                            {authors.map((author) => (
+                                <SelectItem key={author.value} value={author.value}>
+                                    {author.label}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                )}
             </div>
         </div>
     );

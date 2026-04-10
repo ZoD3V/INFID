@@ -97,7 +97,7 @@ export default function KnowledgePage() {
             if (!isMounted) return;
             setIsFeaturedLoading(true);
             try {
-                const res = await apiRequest.get<any>(API_ENDPOINTS.posts, {
+                const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
                         limit: 8,
                         category: filters.category === 'Semua' ? '' : filters.category,
@@ -108,7 +108,7 @@ export default function KnowledgePage() {
                     }
                 });
 
-                const data = res.data || res;
+                const data = res.data.filter((item) => item.status == 'Published') || [];
                 setFeaturedArticles(data);
             } catch (error) {
                 console.error('Gagal load featured:', error);
@@ -197,35 +197,33 @@ export default function KnowledgePage() {
                 <ArticleFilters
                     categories={isCategoriesLoading ? ['Semua'] : categoriesNews}
                     years={yearsKnowledge}
-                    authors={authorsKnowledge}
                     selectedCategory={filters.category}
                     onCategoryChange={(v) => setFilters((f) => ({ ...f, category: v }))}
                     selectedYear={filters.year}
                     onYearChange={(v) => setFilters((f) => ({ ...f, year: v }))}
-                    selectedAuthor={filters.author}
-                    onAuthorChange={(v) => setFilters((f) => ({ ...f, author: v }))}
                 />
             </div>
 
             <div className='container pt-12 pb-16'>
-                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Feature Riset</h3>
-
                 {/* Featured */}
                 {isFeaturedLoading ? (
                     <FeaturedNewsSkeleton />
-                ) : featuredArticles.length > 0 ? (
-                    <ArticleCarousel items={featuredArticles} />
                 ) : (
-                    // <ArticleCarousel items={featuredArticles} />
-                    isMounted && (
-                        <div className='mb-8 flex h-40 w-full flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50'>
-                            <p className='text-sm text-slate-500'>Belum ada artikel terbaru.</p>
-                        </div>
+                    featuredArticles.length > 0 && (
+                        <>
+                            <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
+                                {filters.category == 'Semua' ? 'Highlight Publikasi' : `Highlight ${filters.category}`}
+                            </h3>
+
+                            <ArticleCarousel items={featuredArticles} />
+                        </>
                     )
                 )}
 
                 {/* Grid Artikel */}
-                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Semua Riset</h3>
+                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
+                    {filters.category == 'Semua' ? 'Semua Publikasi' : `Semua ${filters.category}`}
+                </h3>
                 <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                     {isLoading && articles.length === 0 ? (
                         Array.from({ length: PAGE_SIZE }).map((_, i) => <ArticleCardSkeleton key={i} />)

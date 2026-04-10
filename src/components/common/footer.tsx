@@ -55,7 +55,7 @@ const Footer = () => {
 
                         <div className='flex gap-4'>
                             <a
-                                href='https://www.instagram.com/dpp.pri/'
+                                href='https://www.instagram.com/infid_id/'
                                 aria-label='Instagram'
                                 target='_blank'
                                 rel='noreferrer'
@@ -64,7 +64,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                href='https://www.facebook.com/DppPartaiRakyat/'
+                                href='https://www.linkedin.com/company/infid/'
                                 aria-label='Linkedin'
                                 target='_blank'
                                 rel='noreferrer'
@@ -73,7 +73,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                href='https://www.youtube.com/@dpppri'
+                                href='https://www.youtube.com/@INFIDJakarta'
                                 aria-label='Youtube'
                                 target='_blank'
                                 rel='noreferrer'
@@ -81,7 +81,7 @@ const Footer = () => {
                                 <FaYoutube className='text-xl' />
                             </a>
                             <a
-                                href='https://www.tiktok.com/@dpp.pri'
+                                href='https://www.facebook.com/infid'
                                 aria-label='Facebook'
                                 target='_blank'
                                 rel='noreferrer'
@@ -89,7 +89,7 @@ const Footer = () => {
                                 <FaFacebook className='text-xl' />
                             </a>
                             <a
-                                href='https://www.tiktok.com/@dpp.pri'
+                                href='https://x.com/infid_ID'
                                 aria-label='X'
                                 target='_blank'
                                 rel='noreferrer'
@@ -157,7 +157,7 @@ const Footer = () => {
                     <div className='flex flex-col gap-2 pt-8'>
                         <h6 className='text-base font-bold text-white'>{t('contact.title')}</h6>
                         <p className='text-sm font-normal text-slate-200'>
-                          Jl. Jatipadang Raya Kav.3 No.105, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
+                            Jl. Jatipadang Raya Kav.3 No.105, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
                         </p>
                         <div className='flex items-center gap-3'>
                             <div className='flex items-center gap-2 text-sm text-white'>

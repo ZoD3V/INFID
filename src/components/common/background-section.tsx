@@ -51,16 +51,19 @@ const PageHeader: React.FC<PageHeaderProps> = ({
                                 {breadcrumbs.map((item, index) => (
                                     <React.Fragment key={index}>
                                         <BreadcrumbItem>
-                                            {item.href && !item.active ? (
+                                            {index !== 1 && !item.active ? (
                                                 <BreadcrumbLink
                                                     asChild
                                                     className='text-secondary-200 hover:text-secondary-300'>
-                                                    <Link href={item.href}>{item.label}</Link>
+                                                    <Link href={item.href!}>{item.label}</Link>
                                                 </BreadcrumbLink>
                                             ) : (
-                                                <BreadcrumbLink className='text-secondary-200 hover:text-secondary-300 cursor-default font-bold'>
+                                                <span
+                                                    className={`text-secondary-200 cursor-default ${
+                                                        item.active ? 'font-bold' : ''
+                                                    }`}>
                                                     {item.label}
-                                                </BreadcrumbLink>
+                                                </span>
                                             )}
                                         </BreadcrumbItem>
 

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Link } from '@/i18n/navigation';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import { ArrowRight } from 'lucide-react';
@@ -117,10 +118,12 @@ const AboutUsSection = () => {
                         </div>
 
                         {/* CTA Button */}
-                        <button className='group mt-6 inline-flex cursor-pointer items-center gap-2 border-b border-slate-900 pb-2 text-sm font-semibold lg:mt-8'>
-                            {b('readMore')}
-                            <ArrowRight className='h-5 w-5 transition-transform group-hover:translate-x-1' />
-                        </button>
+                        <Link href='/about/profile-infid'>
+                            <button className='group mt-6 inline-flex cursor-pointer items-center gap-2 border-b border-slate-900 pb-2 text-sm font-semibold lg:mt-8'>
+                                {b('readMore')}
+                                <ArrowRight className='h-5 w-5 transition-transform group-hover:translate-x-1' />
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

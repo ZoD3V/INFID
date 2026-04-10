@@ -93,7 +93,9 @@ const Home = () => {
 
                         {/* Main Heading */}
                         <div className='space-y-5 leading-[0.95]'>
-                            <h1 className='text-3xl font-extrabold text-white lg:text-4xl'>{t('title')}</h1>
+                            <h1 className='text-3xl font-extrabold whitespace-pre-line text-white lg:text-4xl'>
+                                {t('title')}
+                            </h1>
 
                             <h1 className='text-xl font-extrabold text-white lg:text-2xl'>{t('subtitle')}</h1>
                         </div>

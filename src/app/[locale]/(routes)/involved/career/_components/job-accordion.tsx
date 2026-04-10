@@ -8,8 +8,11 @@ import { Job } from '@/types/job';
 import { format, parseISO } from 'date-fns';
 import { id } from 'date-fns/locale';
 import { FileText } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export function JobAccordion({ data }: { data: Job[] }) {
+    const t = useTranslations('button');
+
     if (!data.length) {
         return (
             <div className='rounded-xl border p-6 text-center text-slate-500'>
@@ -36,7 +39,8 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                             {item.employment_type}
                                         </Badge>
                                         <span className='text-sm text-slate-500'>
-                                            Batas Waktu:{' '}
+                                            {t('deadline')}
+
                                             {item.closing_date
                                                 ? format(parseISO(item.closing_date), 'dd MMM yyyy', { locale: id })
                                                 : '-'}
@@ -69,7 +73,6 @@ export function JobAccordion({ data }: { data: Job[] }) {
 
                                 {/* DETAIL */}
                                 <div className='space-y-6 md:col-span-8'>
-                                    {/* Menampilkan deskripsi dari API */}
                                     <Section title='Deskripsi Pekerjaan'>
                                         <div className='whitespace-pre-line'>{item.description}</div>
                                     </Section>

@@ -97,7 +97,7 @@ export default function NewsFromUsPage() {
             if (!isMounted) return;
             setIsFeaturedLoading(true);
             try {
-                const res = await apiRequest.get<any>(API_ENDPOINTS.posts, {
+                const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
                         limit: 2,
                         category: filters.category === 'Semua' ? '' : filters.category,
@@ -108,7 +108,7 @@ export default function NewsFromUsPage() {
                     }
                 });
 
-                const data = res.data || res;
+                const data = res.data.filter((item) => item.status == 'Published') || [];
                 setFeaturedArticles(data);
             } catch (error) {
                 console.error('Gagal load featured:', error);

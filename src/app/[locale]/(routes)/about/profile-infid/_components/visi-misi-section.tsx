@@ -42,17 +42,6 @@ const VisiMisiInfidSection = () => {
                     <div>
                         <h3 className='text-primary-500 mb-6 text-2xl font-bold'>{t('vision.title')}</h3>
                         <p className='mb-8 text-sm leading-relaxed text-gray-500 md:text-base'>{t('vision.content')}</p>
-
-                        <div className='border-l-primary-500 border-l-3 pl-3'>
-                            <div>
-                                <h4 className='text-primary-500 mb-3 text-2xl font-bold italic md:text-3xl lg:text-4xl'>
-                                    {t('vision.quote_title')}
-                                </h4>
-                                <p className='text-sm leading-relaxed text-gray-600 italic md:text-base'>
-                                    {t('vision.quote_desc')}
-                                </p>
-                            </div>
-                        </div>
                     </div>
 
                     {/* Misi */}

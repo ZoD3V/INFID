@@ -14,7 +14,12 @@ export default function SectionBadge({
     lineColor = 'bg-secondary-300'
 }: SectionBadgeProps) {
     return (
-        <div className={cn('mb-4 flex items-center gap-2 text-sm font-medium tracking-wider', textColor, className)}>
+        <div
+            className={cn(
+                'mb-4 flex items-center gap-2 text-base font-medium tracking-wider uppercase',
+                textColor,
+                className
+            )}>
             <span className={cn('h-px w-4', lineColor)}></span>
 
             {children}

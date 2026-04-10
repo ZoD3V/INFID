@@ -75,58 +75,59 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                     return (
                         <CarouselItem key={item.id} className='basis-[80%] pl-4 lg:basis-[70%]'>
-                            <article className='flex h-full flex-col items-start overflow-hidden rounded-xl border bg-white p-3 lg:flex-row lg:items-center'>
-                                {/* Image */}
-                                <div className='relative h-87.5 w-full shrink-0 lg:w-61.75'>
+                            <article className='flex h-full flex-col overflow-hidden rounded-xl border bg-white p-3 lg:flex-row lg:items-center'>
+                                <div className='relative h-60 w-full shrink-0 md:h-87.5 lg:w-61.75'>
                                     <Image
                                         src={item.cover || '/images/placeholder-potrait.png'}
                                         alt={title}
                                         fill
-                                        sizes='100%'
+                                        sizes='(max-width: 1024px) 100vw, 250px'
                                         className='rounded-lg object-cover'
                                     />
                                 </div>
 
                                 {/* Content */}
-                                <div className='flex flex-1 flex-col py-3 lg:p-5'>
-                                    <div className='mb-4 flex items-center gap-2'>
-                                        <Badge variant='secondary'>{categoryName}</Badge>
-                                        <span className='text-sm text-slate-500'>
-                                            {publishedDate ? formatArticleDate(publishedDate) : 'No Date'}
-                                        </span>
+                                <div className='flex min-w-0 flex-1 flex-col py-3 lg:p-5'>
+                                    <div>
+                                        <div className='mb-3 flex items-center gap-2'>
+                                            <Badge variant='secondary'>{categoryName}</Badge>
+                                            <span className='text-sm text-slate-500'>
+                                                {publishedDate ? formatArticleDate(publishedDate) : 'No Date'}
+                                            </span>
+                                        </div>
+
+                                        <div className='mb-4 min-h-0 space-y-2'>
+                                            <h3 className='line-clamp-2 text-xl font-bold md:text-2xl'>{title}</h3>
+                                            <p className='line-clamp-2 text-sm leading-relaxed text-slate-600 md:text-base'>
+                                                {description}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className='mb-8 space-y-4'>
-                                        <h3 className='text-xl font-bold md:text-2xl lg:text-3xl'>{title}</h3>
-                                        <p className='line-clamp-2 text-sm text-slate-600 md:text-base lg:text-lg'>
-                                            {description.replace(/[#*`]/g, '')}
-                                        </p>
-                                        <div className='flex flex-wrap items-center gap-2 text-xs text-slate-500'>
+                                    <div className='mt-auto space-y-4'>
+                                        <div className='flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500'>
                                             <div className='flex items-center gap-1'>
                                                 <Pencil className='h-3 w-3' />
                                                 By {authorName}
                                             </div>
-
-                                            <span className='h-1 w-1 rounded-full bg-slate-500' />
-
                                             <div className='flex items-center gap-1'>
                                                 <Eye className='h-3 w-3' />
-                                                {seen} Dilihat
+                                                {seen}
                                             </div>
-
-                                            <span className='h-1 w-1 rounded-full bg-slate-500' />
-
                                             <div className='flex items-center gap-1'>
                                                 <MessageSquareMore className='h-3 w-3' />
-                                                {comments} Komentar
+                                                {comments}
                                             </div>
                                         </div>
+
+                                        <Link
+                                            href={`/knowledge/${item.id}-${item.translations[0]?.slug}`}
+                                            className='block'>
+                                            <Button size='sm' className='w-fit rounded-full'>
+                                                Baca Selengkapnya
+                                                <ArrowRight className='ml-2 h-4 w-4' />
+                                            </Button>
+                                        </Link>
                                     </div>
-                                    <Link href={`/knowledge/${item.id}-${item.translations[0]?.slug}`}>
-                                        <Button size='sm' className='w-fit rounded-full'>
-                                            Baca Selengkapnya
-                                            <ArrowRight />
-                                        </Button>
-                                    </Link>
                                 </div>
                             </article>
                         </CarouselItem>

@@ -14,8 +14,10 @@ import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 
 import { JobAccordion } from './_components/job-accordion';
+import { useTranslations } from 'next-intl';
 
 const CareerContent = ({ categories, initialJobs, translations }: any) => {
+    const t = useTranslations('button');
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -106,7 +108,7 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
                     </div>
 
                     <div className='flex items-center gap-2 text-sm'>
-                        Batas Waktu
+                        {t('deadline')}
                         <SingleDatePicker value={deadline} onChange={handleDeadlineChange} />
                         {deadline && (
                             <button

@@ -1,11 +1,11 @@
 {
     "hero_section": {
         "tagline": "MENGGERAKAN PERUBAHAN BERSAMA",
-        "title": "Saatnya Pembangunan yang Mengangkat Semua, Bukan Meninggalkan Sebagian",
+        "title": "Saatnya Pembangunan yang Mengangkat Semua,\n Bukan Meninggalkan Sebagian",
         "subtitle": "Ketimpangan adalah hasil dari pilihan kebijakan.",
         "description": "Sejak 1985, kami menghubungkan suara masyarakat sipil dengan kebijakan negara. Memperjuangkan pembangunan yang adil, inklusif, dan kebijakan publik yang berpihak pada keadilan sosial, khususnya kelompok rentan.",
         "titleImpact": "Dampak Kami",
-        "memberOrganizations": "Organisasi Anggota",
+        "memberOrganizations": "Anggota",
         "policyRecommendations": "Rekomendasi Kebijakan",
         "consultativeStatus": "Status Konsultatif PBB",
         "aboutUsTag": "Tentang Kami",
@@ -13,10 +13,10 @@
         "aboutUsDescription1": "International NGO Forum on Indonesian Development (INFID) adalah jaringan organisasi masyarakat sipil yang berdiri sejak 1985 dan berkomitmen untuk memperjuangkan pembangunan berkeadilan, demokrasi, kesetaraan, dan penghormatan terhadap hak asasi manusia di Indonesia.",
         "aboutUsDescription2": "INFID bekerja melalui pendekatan advokasi inklusif berbasis bukti, dengan fokus pada isu-isu strategis seperti penurunan ketimpangan, pelaksanaan Tujuan Pembangunan Berkelanjutan (SDGs), serta penguatan ruang sipil dan demokrasi.",
         "aboutUsDescription3": "INFID memiliki 80 anggota di seluruh Indonesia dan terakreditasi oleh Perserikatan Bangsa-Bangsa (PBB) dan menyandang Special Consultative Status untuk ECOSOC di PBB.",
-        "aboutUsOrganizationTitle": "Memiliki 80 organisasi anggota",
+        "aboutUsOrganizationTitle": "Memiliki 80 anggota",
         "aboutUsOrganizationDescription": "Tersebar di seluruh nusantara, bekerja bersama untuk mengenal lebih dalam kebijakan publik berpihak pada keadilan sosial.",
         "impactTag": "Bergerak, Berdampak",
-        "impactTitle": "Dampak perubahan dari kerja bersama di lapangan",
+        "impactTitle": "Cerita perubahan dari kerja bersama di lapangan",
         "impactDescription": "Setiap program menghadirkan cerita nyata. Simak ringkasan dampak, lalu telusuri kisah lengkapnya seperti membaca blog."
     },
     "our_network": {
@@ -27,9 +27,9 @@
     },
     "program_us": {
         "section": {
-            "badge": "IMPACT STORY",
+            "badge": "FOCUS",
             "title": "PROGRAM KAMI",
-            "description": "Pendekatan komprehensif untuk menjawab tantangan zaman. Dari isu hak hingga aksi lapangan."
+            "description": "Pendekatan komprehensif untuk menjawab tantangan zaman."
         },
         "programs": {
             "human_rights": {
