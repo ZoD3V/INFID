@@ -80,9 +80,9 @@ export const PublicationContent = ({
                             <button
                                 key={tab.id}
                                 onClick={() => handleTabChange(tab.name)}
-                                className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-colors ${
+                                className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:outline-none ${
                                     activeTab === tab.name
-                                        ? 'bg-teal-600 text-white'
+                                        ? 'bg-teal-600 text-white shadow-md'
                                         : 'bg-slate-200 text-slate-700 hover:bg-slate-300 disabled:opacity-50'
                                 }`}>
                                 {tab.name}

@@ -1,5 +1,4 @@
 'use client';
-import React, { useState } from 'react';
 
 import Link from 'next/link';
 
@@ -8,35 +7,59 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { apiRequest } from '@/lib/api-request';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { ExternalLink, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
 import { BsTwitterX } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { toast } from 'sonner';
+import z from 'zod';
+
+const contactSchema = z.object({
+    senderType: z.enum(['organization', 'individual']),
+    organizationName: z.string().min(2, 'Name is too short'),
+    organizationEmail: z.string().email('Invalid email address'),
+    subject: z.string().min(5, 'Subject must be at least 5 characters'),
+    message: z.string().min(10, 'Message is too short'),
+    agreeToPrivacy: z.literal(true, { message: 'You must agree to the privacy policy' })
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactUs = () => {
     const t = useTranslations('contact');
-    const [senderType, setSenderType] = useState('organization');
-    const [formData, setFormData] = useState({
-        organizationName: '',
-        organizationEmail: '',
-        subject: '',
-        message: '',
-        agreeToPrivacy: false
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        formState: { errors, isSubmitting }
+    } = useForm<ContactFormData>({
+        resolver: zodResolver(contactSchema),
+        defaultValues: {
+            senderType: 'organization',
+            organizationName: '',
+            organizationEmail: '',
+            subject: '',
+            message: ''
+        }
     });
 
-    const handleSubmit = () => {
-        // console.log('Form submitted:', { senderType, ...formData });
-        toast.success('The form has been successfully sent.');
-    };
+    const senderType = watch('senderType');
 
-    const handleInputChange = (e: any) => {
-        const { name, value, type, checked } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
+    const onSubmit = async (data: ContactFormData) => {
+        const res = await apiRequest.post(API_ENDPOINTS.inquiry, {
+            message: data.message,
+            email: data.organizationEmail,
+            name: data.organizationName,
+            subject: data.subject,
+            type: data.senderType
+        });
+        toast.success(res.message ?? 'The form has been successfully sent.');
     };
 
     return (
@@ -145,12 +168,12 @@ const ContactUs = () => {
                 <div className='rounded-xl border border-slate-200 bg-white p-8'>
                     <h2 className='mb-8 text-lg font-bold text-gray-800 lg:text-xl'>{t('form.title')}</h2>
 
-                    <div>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         {/* Switch Button */}
                         <div className='mb-8 flex w-fit gap-2 rounded-full bg-gray-100 p-1'>
                             <button
                                 type='button'
-                                onClick={() => setSenderType('organization')}
+                                onClick={() => setValue('senderType', 'organization')}
                                 className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                                     senderType === 'organization'
                                         ? 'bg-primary-500 text-white'
@@ -160,7 +183,7 @@ const ContactUs = () => {
                             </button>
                             <button
                                 type='button'
-                                onClick={() => setSenderType('individual')}
+                                onClick={() => setValue('senderType', 'individual')}
                                 className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                                     senderType === 'individual'
                                         ? 'bg-primary-500 text-white'
@@ -180,15 +203,16 @@ const ContactUs = () => {
                                 </Label>
                                 <Input
                                     id='organizationName'
-                                    name='organizationName'
-                                    value={formData.organizationName}
-                                    onChange={handleInputChange}
+                                    {...register('organizationName')}
                                     placeholder={
                                         senderType === 'organization'
                                             ? t('form.placeholder_name_org')
                                             : t('form.placeholder_name_ind')
                                     }
                                 />
+                                {errors.organizationName && (
+                                    <p className='mt-1 text-xs text-red-500'>{errors.organizationName.message}</p>
+                                )}
                             </div>
 
                             <div>
@@ -200,15 +224,16 @@ const ContactUs = () => {
                                 <Input
                                     id='organizationEmail'
                                     type='email'
-                                    name='organizationEmail'
-                                    value={formData.organizationEmail}
-                                    onChange={handleInputChange}
+                                    {...register('organizationEmail')}
                                     placeholder={
                                         senderType === 'organization'
                                             ? t('form.placeholder_email_org')
                                             : t('form.placeholder_email_ind')
                                     }
                                 />
+                                {errors.organizationEmail && (
+                                    <p className='mt-1 text-xs text-red-500'>{errors.organizationEmail.message}</p>
+                                )}
                             </div>
                         </div>
 
@@ -216,13 +241,8 @@ const ContactUs = () => {
                             <Label htmlFor='subject' className='mb-2 block'>
                                 {t('form.label_subject')}
                             </Label>
-                            <Input
-                                id='subject'
-                                name='subject'
-                                value={formData.subject}
-                                onChange={handleInputChange}
-                                placeholder={t('form.placeholder_subject')}
-                            />
+                            <Input id='subject' {...register('subject')} placeholder={t('form.placeholder_subject')} />
+                            {errors.subject && <p className='mt-1 text-xs text-red-500'>{errors.subject.message}</p>}
                         </div>
 
                         <div className='mb-6'>
@@ -231,43 +251,39 @@ const ContactUs = () => {
                             </Label>
                             <Textarea
                                 id='message'
-                                name='message'
-                                value={formData.message}
-                                onChange={handleInputChange}
+                                {...register('message')}
                                 placeholder={t('form.placeholder_message')}
                                 className='min-h-30 resize-none'
                             />
+                            {errors.message && <p className='mt-1 text-xs text-red-500'>{errors.message.message}</p>}
                         </div>
 
                         {/* Privacy Checkbox */}
-                        <div className='mb-6 flex items-center gap-3'>
-                            <Checkbox
-                                id='agreeToPrivacy'
-                                checked={formData.agreeToPrivacy}
-                                onCheckedChange={(checked) =>
-                                    handleInputChange({
-                                        target: {
-                                            name: 'agreeToPrivacy',
-                                            value: checked,
-                                            type: 'checkbox',
-                                            checked
-                                        }
-                                    } as any)
-                                }
-                            />
-                            <Label
-                                htmlFor='agreeToPrivacy'
-                                className='text-muted-foreground flex-1 text-sm leading-relaxed'>
-                                {t('form.privacy_agreement')}
-                            </Label>
+                        <div className='mb-6'>
+                            <div className='flex items-center gap-3'>
+                                <Checkbox
+                                    id='agreeToPrivacy'
+                                    onCheckedChange={(checked) => {
+                                        setValue('agreeToPrivacy', checked as true, { shouldValidate: true });
+                                    }}
+                                />
+                                <Label
+                                    htmlFor='agreeToPrivacy'
+                                    className='text-muted-foreground flex-1 text-sm leading-relaxed'>
+                                    {t('form.privacy_agreement')}
+                                </Label>
+                            </div>
+                            {errors.agreeToPrivacy && (
+                                <p className='mt-1 text-xs text-red-500'>{errors.agreeToPrivacy.message}</p>
+                            )}
                         </div>
 
                         {/* Submit Button */}
-                        <Button className='w-full rounded-full' onClick={handleSubmit}>
+                        <Button type='submit' className='w-full rounded-full' disabled={isSubmitting}>
                             {t('form.button_submit')}
-                            <Send className='h-5 w-5 transition-transform group-hover:translate-x-1' />
+                            <Send className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
                         </Button>
-                    </div>
+                    </form>
                 </div>
             </div>
             <iframe

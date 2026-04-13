@@ -21,7 +21,7 @@ import { Download } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Props {
-    initialData: any;
+    initialData: Post;
     locale: string;
     postId: string;
 }

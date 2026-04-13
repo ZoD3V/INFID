@@ -23,6 +23,13 @@ const RecognitionSection = () => {
             description: t('items.ecosoc.description'),
             logo: '/icons/ic-rekognisi-2.png',
             alt: t('items.ecosoc.alt')
+        },
+        {
+            title: t('items.ran_pe_awards_2024.title'),
+            organization: t('items.ran_pe_awards_2024.organization'),
+            description: t('items.ran_pe_awards_2024.description'),
+            logo: '/icons/ic-bnpt.png',
+            alt: t('items.ran_pe_awards_2024.alt')
         }
     ];
 

@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { getInitials } from '@/lib/utils';
+import { formatDateTime, getInitials } from '@/lib/utils';
+import { Comment } from '@/types/posts';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Captcha } from '../ui/captcha';
@@ -40,7 +41,7 @@ export type CommentType = {
 };
 
 interface CommentSectionProps {
-    comments: CommentType[];
+    comments: Comment[];
     onSubmit: (values: CommentFormValues) => void;
 }
 
@@ -210,21 +211,23 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
             {/* List Komentar */}
             <div className='mt-12 space-y-8'>
                 {comments.map((item) => {
-                    const avatarColor = getColorFromName(item.nama);
+                    const avatarColor = getColorFromName(item.name);
 
                     return (
                         <div key={item.id} className='flex items-start gap-4'>
                             <Avatar className={`h-12 w-12 ${avatarColor} text-white shadow-sm`}>
                                 <AvatarFallback className='bg-transparent font-bold'>
-                                    {getInitials(item.nama)}
+                                    {getInitials(item.name)}
                                 </AvatarFallback>
                             </Avatar>
                             <div className='flex-1 space-y-2'>
                                 <div className='flex items-center justify-between'>
-                                    <h4 className='font-bold text-slate-900'>{item.nama}</h4>
-                                    <span className='text-sm text-slate-500'>{item.waktu}</span>
+                                    <h4 className='font-bold text-slate-900'>{item.name}</h4>
+                                    <span className='text-sm text-slate-500'>
+                                        {item?.updated_at ? formatDateTime(item.updated_at) : '-'}
+                                    </span>
                                 </div>
-                                <p className='text-[15px] leading-relaxed text-slate-700'>{item.isi}</p>
+                                <p className='text-[15px] leading-relaxed text-slate-700'>{item.comment}</p>
                             </div>
                         </div>
                     );

@@ -33,6 +33,16 @@ export interface Tags {
     updated_at: string;
 }
 
+export interface Comment {
+    id: number;
+    comment: string;
+    email: string;
+    name: string;
+    is_approved: boolean | null;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface Post {
     id: number;
     author: Author;
@@ -44,7 +54,7 @@ export interface Post {
     cover: string;
     translations: PostTranslation[];
     tags: Tags[];
-    comments: any[];
+    comments: Comment[];
     assets: { file_path: string }[];
     created_at: string;
     updated_at: string;

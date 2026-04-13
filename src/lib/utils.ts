@@ -68,3 +68,29 @@ export const slugify = (text: string) => {
         .replace(/\s+/g, '-')
         .replace(/[^\w\-]+/g, '');
 };
+
+export const formatDate = (dateString: string, locale: string = 'id-ID') => {
+    if (!dateString) return '-';
+
+    const date = new Date(dateString);
+
+    return new Intl.DateTimeFormat(locale, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    }).format(date);
+};
+
+export const formatDateTime = (dateString: string, locale: string = 'id-ID') => {
+    if (!dateString) return '-';
+
+    const date = new Date(dateString);
+
+    return new Intl.DateTimeFormat(locale, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+        // hour: '2-digit',
+        // minute: '2-digit'
+    }).format(date);
+};

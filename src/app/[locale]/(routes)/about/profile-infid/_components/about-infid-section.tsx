@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import {
     Breadcrumb,
@@ -154,8 +155,14 @@ const AboutInfid = () => {
 
                                         <Button
                                             variant='link'
+                                            asChild
                                             className='text-primary-500 h-auto p-0 text-xs font-semibold tracking-widest uppercase'>
-                                            {t('card.access_link')}
+                                            <Link
+                                                href={
+                                                    'https://esango.un.org/civilsociety/consultativeStatusSummary.do?profileCode=2443'
+                                                }>
+                                                {t('card.access_link')}
+                                            </Link>
                                         </Button>
                                     </div>
                                 </div>
