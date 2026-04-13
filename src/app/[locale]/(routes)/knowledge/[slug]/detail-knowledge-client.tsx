@@ -21,7 +21,7 @@ import { Download } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Props {
-    initialData: Post;
+    initialData: Post | null;
     locale: string;
     postId: string;
 }
@@ -39,7 +39,7 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                 const [relatedRes, latestRes] = await Promise.all([
                     apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                         params: {
-                            category: initialData.category?.name || '',
+                            category: initialData?.category?.name || '',
                             limit: 3,
                             page: 1,
                             search: '',
@@ -64,7 +64,7 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                 ]);
 
                 const filteredRelated = (relatedRes.data || relatedRes).filter(
-                    (item: Post) => item.id !== initialData.id && item.status === 'Published'
+                    (item: Post) => item.id !== initialData?.id && item.status === 'Published'
                 );
                 setRelatedArticles(filteredRelated);
                 setLatestArticles(latestRes.data || latestRes);
@@ -74,7 +74,7 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
         };
 
         fetchSuggestions();
-    }, [initialData.id, initialData.category?.name]);
+    }, [initialData?.id, initialData?.category?.name]);
 
     const handleDownload = () => {
         const filePath = translation?.assets?.[0]?.file_path;

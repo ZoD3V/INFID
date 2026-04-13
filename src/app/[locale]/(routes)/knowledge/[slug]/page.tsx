@@ -9,7 +9,7 @@ import DetailKnowledgeClient from './detail-knowledge-client';
 async function getPostDetail(id: string) {
     try {
         const res = await apiRequest.get<Post>(`${API_ENDPOINTS.posts}/${id}`);
-        return res.data || [];
+        return res.data || null;
     } catch (error) {
         console.error('Fetch Detail Error:', error);
         return null;
