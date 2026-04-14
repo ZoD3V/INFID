@@ -288,7 +288,7 @@ const ContactUs = () => {
             </div>
             <iframe
                 className='col-span-2 w-full'
-                src='https://maps.google.com/maps?width=600&height=400&hl=en&q=Jl.%20Jatipadang%20Raya%20Kav.3%20No.105%2C%20Pasar%20Minggu%2C%20Jakarta%20Selatan%2C%2012540%2C%20Indonesia&t=&z=14&ie=UTF8&iwloc=B&output=embed'
+                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126904.63135160362!2d106.68426574335938!3d-6.293964199999985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3d4915d24af%3A0x7c259138a4087ce8!2sINFID!5e0!3m2!1sen!2sus!4v1776151128429!5m2!1sen!2sus'
                 width='600'
                 height='450'
                 style={{ border: '0' }}

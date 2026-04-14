@@ -141,7 +141,7 @@ export function Navbar() {
                     <Image
                         src={isScrolled ? '/logo/logo-infid-black.png' : '/logo/logo.png'}
                         loading='eager'
-                        alt=''
+                        alt='Infid Logo'
                         width={100}
                         height={100}
                         className='h-8 w-19.75'
@@ -149,7 +149,8 @@ export function Navbar() {
                 </Link>
 
                 {/* Desktop Navigation (Hidden on mobile) */}
-                <div
+                <nav
+                    aria-label='Main Navigation'
                     className={cn(
                         'hidden items-center space-x-6 rounded-full xl:flex',
                         isScrolled ? '' : 'border border-white/10 px-4 py-3 shadow-sm backdrop-blur-sm'
@@ -158,19 +159,21 @@ export function Navbar() {
                         <div key={item.title} className='group relative'>
                             <Link
                                 href={item.href}
+                                aria-label={item.title}
+                                aria-current={pathname === item.href ? 'page' : undefined}
                                 className={cn(
-                                    'flex cursor-pointer items-center gap-1 text-sm font-medium transition-colors duration-300',
+                                    'focus-visible:ring-primary-500 flex cursor-pointer items-center gap-1 rounded-md text-sm font-medium transition-colors duration-300 outline-none focus-visible:ring-2',
                                     isScrolled
                                         ? 'hover:text-primary-500 text-slate-900'
                                         : 'text-gray-100 hover:text-white',
-
                                     pathname === item.href ? 'font-extrabold' : ''
                                 )}>
                                 {item.title}
                                 {item.children && (
                                     <ChevronDown
+                                        aria-hidden='true'
                                         className={cn(
-                                            'h-4 w-4 transition-transform duration-400 group-hover:rotate-180',
+                                            'h-4 w-4 transition-transform duration-400 group-focus-within:rotate-180 group-hover:rotate-180',
                                             isScrolled ? 'text-slate-900' : 'text-brand-100'
                                         )}
                                     />
@@ -179,8 +182,16 @@ export function Navbar() {
 
                             {/* Dropdown Desktop */}
                             {item.children && (
-                                <div className='invisible absolute top-full left-1/2 w-48 -translate-x-1/2 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100'>
-                                    <div className='relative overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-2xl'>
+                                <div
+                                    className={cn(
+                                        'invisible absolute top-full left-1/2 w-48 -translate-x-1/2 pt-2 opacity-0 transition-all',
+                                        'group-hover:visible group-hover:opacity-100',
+                                        'group-focus-within:visible group-focus-within:opacity-100'
+                                    )}>
+                                    <div
+                                        role='menu'
+                                        aria-label={`Submenu ${item.title}`}
+                                        className='relative overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-2xl'>
                                         {item.children.map((child) => {
                                             const active = isChildActive(child.href);
 
@@ -188,10 +199,11 @@ export function Navbar() {
                                                 <Link
                                                     key={child.title}
                                                     href={child.href}
+                                                    role='menuitem'
                                                     className={cn(
-                                                        'block px-4 py-2 text-sm font-medium transition-all duration-200',
+                                                        'focus:text-primary-500 block px-4 py-2 text-sm font-medium transition-all duration-200 outline-none focus:bg-gray-100',
                                                         active
-                                                            ? 'bg-brand-50 text-brand-900 font-bold' // State Aktif
+                                                            ? 'bg-brand-50 text-brand-900 font-bold'
                                                             : 'hover:text-primary-500 text-slate-700 hover:bg-gray-50'
                                                     )}>
                                                     {child.title}
@@ -203,7 +215,7 @@ export function Navbar() {
                             )}
                         </div>
                     ))}
-                </div>
+                </nav>
                 <div className='flex items-center gap-2'>
                     <LanguageSwitcher />
                     <SearchModal />

@@ -1,7 +1,7 @@
 {
     "hero_section": {
         "tagline": "Driving Change Together",
-        "title": "It’s Time for Development that Lifts Everyone, Not Leaves Some Behind",
+        "title": "It’s Time for Development that Lifts Everyone,\n Not Leaves Some Behind",
         "subtitle": "Inequality is the result of policy choices.",
         "description": "Since 1985, we have connected civil society voices with public policy. Advocating for fair, inclusive development and public policies that promote social justice, especially for vulnerable groups.",
         "titleImpact": "Our Impact",
@@ -70,7 +70,7 @@
             "ran_pe_awards_2024": {
                 "title": "RAN PE Awards 2024",
                 "organization": "Badan Nasional Penanggulangan Terorisme (BNPT)",
-                "description": "Penghargaan kategori “Inisiator Kolaborasi Multipihak",
+                "description": "Multi-Stakeholder <i>Collaboration Initiator</i>",
                 "alt": "Logo ECOSOC PBB"
             }
         }

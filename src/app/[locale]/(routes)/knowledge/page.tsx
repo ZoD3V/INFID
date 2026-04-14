@@ -8,6 +8,7 @@ import { ArticleCard } from '@/components/common/article-card';
 import { ArticleCardSkeleton } from '@/components/common/article-card-skeleton';
 import { ArticleFilters } from '@/components/common/article-filters';
 import { PageHeaderSearch } from '@/components/common/background-news-section';
+import EmptyState from '@/components/common/empty-state';
 import { FeaturedNewsSkeleton } from '@/components/common/featured-news-skeleton';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
@@ -17,8 +18,7 @@ import { apiRequest } from '@/lib/api-request';
 import { Post } from '@/types/posts';
 
 import { ArticleCarousel } from './_components/carousel-knowledge';
-import { authorsKnowledge, yearsKnowledge } from './data/data';
-import { SearchX } from 'lucide-react';
+import { yearsKnowledge } from './data/data';
 import { useTranslations } from 'next-intl';
 
 const PAGE_SIZE = 8;
@@ -100,7 +100,7 @@ export default function KnowledgePage() {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
                         limit: 8,
-                        category: filters.category === 'Semua' ? '' : filters.category,
+                        category: filters.category === 'Semua' || filters.category === 'all' ? '' : filters.category,
                         search: filters.search,
                         year: filters.year === 'all' ? '' : filters.year,
                         author: filters.author === 'all' ? '' : filters.author,
@@ -222,7 +222,7 @@ export default function KnowledgePage() {
 
                 {/* Grid Artikel */}
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                    {filters.category == 'Semua' ? 'Semua Publikasi' : `Semua ${filters.category}`}
+                    {filters.category == 'Semua' ? t('content.all_article') : `${t('content.all')} ${filters.category}`}
                 </h3>
                 <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                     {isLoading && articles.length === 0 ? (
@@ -242,28 +242,12 @@ export default function KnowledgePage() {
                     )}
                 </div>
 
-                {!isLoading && isMounted && articles.length === 0 && (
-                    <div className='flex flex-col items-center justify-center py-20 text-center'>
-                        <div className='mb-4 rounded-full bg-slate-100 p-6'>
-                            <SearchX className='h-12 w-12 text-slate-400' />
-                        </div>
-                        <h4 className='text-lg font-bold text-slate-900'>Data Tidak Ditemukan</h4>
-                        <p className='mx-auto mt-2 max-w-xs text-slate-500'>
-                            Maaf, kami tidak dapat menemukan artikel yang sesuai dengan filter atau pencarian Anda.
-                        </p>
-                        <Button
-                            variant='link'
-                            className='text-primary-500 mt-4'
-                            onClick={() => setFilters({ category: 'Semua', year: 'all', author: 'all', search: '' })}>
-                            Reset Semua Filter
-                        </Button>
-                    </div>
-                )}
+                {!isLoading && isMounted && articles.length === 0 && <EmptyState />}
 
                 {!isLoading && hasMore && articles.length > 0 && (
                     <div className='mt-10 flex justify-center'>
                         <Button variant='outline' className='rounded-full bg-white px-8' onClick={handleLoadMore}>
-                            Muat Lebih Banyak
+                            {t('content.load_more')}
                         </Button>
                     </div>
                 )}

@@ -1,0 +1,25 @@
+{
+    "comments": {
+        "header": "Komentar",
+        "form_title": "Tulis Komentar",
+        "name_label": "Nama Lengkap",
+        "name_placeholder": "Masukkan Nama Lengkap",
+        "email_label": "Email",
+        "email_placeholder": "Masukkan Email",
+        "email_hint": "Email Anda tidak akan dipublikasikan.",
+        "comment_label": "Komentar",
+        "comment_placeholder": "Tuliskan Komentar Anda Disini...",
+        "captcha_placeholder": "Masukkan Captcha",
+        "submit_button": "Kirim Komentar",
+        "confirm_title": "Konfirmasi Komentar",
+        "confirm_desc": "Komentar anda akan direview terlebih dahulu oleh admin sebelum dipublikasikan.",
+        "errors": {
+            "name_required": "Nama lengkap wajib diisi",
+            "email_required": "Email wajib diisi",
+            "email_invalid": "Format email tidak valid",
+            "comment_required": "Komentar tidak boleh kosong",
+            "captcha_required": "Captcha wajib diisi",
+            "captcha_mismatch": "Kode captcha tidak sesuai"
+        }
+    }
+}

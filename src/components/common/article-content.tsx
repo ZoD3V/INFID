@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
 export const ArticleContent = ({ content }: { content: string }) => {
@@ -8,6 +9,7 @@ export const ArticleContent = ({ content }: { content: string }) => {
         <article className='prose prose-slate xl:prose-base max-w-none'>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
                 components={{
                     p: ({ children }) => {
                         const hasPreviewer = React.Children.toArray(children).some((child) => {

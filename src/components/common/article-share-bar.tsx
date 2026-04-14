@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link as LinkIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
     FacebookIcon,
     FacebookShareButton,
@@ -20,6 +21,7 @@ interface ArticleShareBarProps {
 
 export const ArticleShareBar: React.FC<ArticleShareBarProps> = ({ categoryName, title }) => {
     const [shareUrl, setShareUrl] = useState('');
+    const t = useTranslations('news');
 
     useEffect(() => {
         setShareUrl(window.location.href);
@@ -38,7 +40,7 @@ export const ArticleShareBar: React.FC<ArticleShareBarProps> = ({ categoryName, 
             <h3 className='text-secondary-300 font-bold uppercase'>{categoryName || 'General'}</h3>
 
             <div className='flex items-center gap-4'>
-                <p className='text-primary-900 text-sm md:text-base'>Dukung gagasan kami dan bagikan</p>
+                <p className='text-primary-900 text-sm md:text-base'>{t('content.article_share')}</p>
 
                 <div className='flex items-center gap-2'>
                     {/* Facebook */}

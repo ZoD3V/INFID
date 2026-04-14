@@ -52,12 +52,14 @@ export const LatestArticleCard: React.FC<LatestArticleCardProps> = ({ article })
 
                         <div className='flex items-center gap-2 text-xs text-slate-500'>
                             <div className='flex items-center gap-1'>
-                                <Eye className='h-3.5 w-3.5' /> {article.seen || 0} Dilihat
+                                <Eye className='h-3.5 w-3.5' /> {article.seen || 0}{' '}
+                                {locale == 'id' ? 'Dilihat' : 'Seen'}
                             </div>
                             <span className='h-1 w-1 rounded-full bg-slate-500'></span>
 
                             <div className='flex items-center gap-1'>
-                                <MessageSquareMore className='h-3.5 w-3.5' /> {article.comments?.length || 0} Komentar
+                                <MessageSquareMore className='h-3.5 w-3.5' /> {article.comments?.length || 0}{' '}
+                                {locale == 'id' ? 'Komentar' : 'Comment'}
                             </div>
                         </div>
 

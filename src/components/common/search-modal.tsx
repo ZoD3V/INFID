@@ -32,10 +32,10 @@ export default function SearchModal() {
 
     useEffect(() => {
         const handleKeyDown = (event: any) => {
-            if (event.key === '/' && !isOpen) {
-                event.preventDefault();
-                setIsOpen(true);
-            }
+            // if (event.key === '/' && !isOpen) {
+            //     event.preventDefault();
+            //     setIsOpen(true);
+            // }
             if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
                 setIsOpen(true);
             }

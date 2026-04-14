@@ -12,5 +12,32 @@
         "latest": "Terbaru",
         "popular": "Populer",
         "not_found": "Berita tidak ditemukan"
+    },
+    "breadcrumb": {
+        "home": "Beranda",
+        "about": "Advokasi Berbasis Bukti"
+    },
+    "content": {
+        "search": "Cari",
+        "all": "Semua",
+        "all_year": "Semua Tahun",
+        "year": "Tahun",
+        "writer": "Penulis",
+        "all_writer": "Semua Penulis",
+        "all_article": "Semua Publikasi",
+        "newest_article": "Belum ada artikel terbaru",
+        "views": "Dilihat",
+        "load_more": "Muat Lebih Banyak",
+        "latest_articles": "Artikel Terbaru",
+        "related_articles": "Artikel Terkait",
+        "comments": "Komentar"
+    },
+    "form": {
+        "placeholder_name": "Masukan Nama Lengkap",
+        "placeholder_email": "Masukan Email",
+        "placeholder_comment": "Tulis komentar anda disini",
+        "publish_email": "Email Anda tidak akan dipublikasikan",
+        "captcha": "Masukan Captcha",
+        "send_comment": "Kirim Komentar"
     }
 }

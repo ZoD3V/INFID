@@ -7,10 +7,37 @@
         "placeholder": "Search topics, titles or keywords",
         "description": "Find information on the latest activities, press releases, stories of change, and INFID's annual report for equitable development in Indonesia."
     },
+    "breadcrumb": {
+        "home": "Home",
+        "about": "News from us"
+    },
     "filters": {
         "all": "All",
         "latest": "Latest",
         "popular": "Popular",
         "not_found": "News not found"
+    },
+    "content": {
+        "article_share": "Support our message and share it",
+        "search": "Search",
+        "all_year": "All Years",
+        "year": "Year",
+        "writer": "Writer",
+        "all_writer": "All Writer",
+        "all_article": "All Article",
+        "newest_article": "There are no new articles yet",
+        "views": "Views",
+        "load_more": "Load More",
+        "latest_articles": "Latest Articles",
+        "related_articles": "Related Articles",
+        "comments": "Comments"
+    },
+    "form": {
+        "placeholder_name": "Enter Full Name",
+        "placeholder_email": "Enter Email",
+        "placeholder_comment": "Write your comment here",
+        "publish_email": "Your email address will not be published",
+        "captcha": "Enter Captcha",
+        "send_comment": "Post Comment"
     }
 }

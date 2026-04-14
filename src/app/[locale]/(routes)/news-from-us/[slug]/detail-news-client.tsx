@@ -18,6 +18,7 @@ import { apiRequest } from '@/lib/api-request';
 import { Post } from '@/types/posts';
 
 import { Download } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 interface Props {
@@ -27,6 +28,8 @@ interface Props {
 }
 
 const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
+    const t = useTranslations('news');
+
     const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
     const [latestArticles, setLatestArticles] = useState<any[]>([]);
 
@@ -95,10 +98,10 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
             };
             const res = await apiRequest.post(`${API_ENDPOINTS.posts}/${postId}/comment`, payload);
             if (res.status_code === 200 || res.status_code === 201) {
-                toast.success('Komentar berhasil dikirim.');
+                toast.success(res.message);
             }
         } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Gagal mengirim komentar');
+            toast.error(error.response?.data?.message || 'Failed sent comment');
         }
     };
 
@@ -109,8 +112,8 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                 showTitle={false}
                 backgroundImage='/images/background-about-us.webp'
                 breadcrumbs={[
-                    { label: 'Beranda', href: '/' },
-                    { label: 'Kabar dari Kami', href: '/news-from-us' },
+                    { label: t('breadcrumb.home'), href: '/' },
+                    { label: t('breadcrumb.about'), href: '/' },
                     { label: translation?.title ?? '', active: true }
                 ]}
                 containerClassName='h-38 pt-14'
@@ -151,7 +154,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                     {/* Sidebar */}
                     <div className='w-full space-y-5 xl:w-[40%]'>
                         <div className='flex flex-col'>
-                            <h3 className='pb-5 text-xl font-bold'>Artikel Terbaru</h3>
+                            <h3 className='pb-5 text-xl font-bold'>{t('content.latest_articles')}</h3>
                             <div className='flex w-full flex-col gap-4'>
                                 {latestArticles.map((article) => (
                                     <Navigate
@@ -184,7 +187,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
 
                 {/* Artikel Terkait */}
                 <div className='flex flex-col pt-16'>
-                    <h3 className='pb-5 text-xl font-bold'>Artikel Terkait</h3>
+                    <h3 className='pb-5 text-xl font-bold'>{t('content.related_articles')}</h3>
                     <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                         {relatedArticles.map((article, index) => (
                             <Navigate key={index} href={`/news-from-us/${article.id}-${article.translations[0]?.slug}`}>

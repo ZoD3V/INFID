@@ -1,0 +1,25 @@
+{
+    "comments": {
+        "header": "Comments",
+        "form_title": "Write a Comment",
+        "name_label": "Full Name",
+        "name_placeholder": "Enter Full Name",
+        "email_label": "Email",
+        "email_placeholder": "Enter Email",
+        "email_hint": "Your email will not be published.",
+        "comment_label": "Comment",
+        "comment_placeholder": "Write Your Comment Here...",
+        "captcha_placeholder": "Enter Captcha",
+        "submit_button": "Submit Comment",
+        "confirm_title": "Comment Confirmation",
+        "confirm_desc": "Your comment will be reviewed by an admin before being published.",
+        "errors": {
+            "name_required": "Full name is required",
+            "email_required": "Email is required",
+            "email_invalid": "Invalid email format",
+            "comment_required": "Comment cannot be empty",
+            "captcha_required": "Captcha is required",
+            "captcha_mismatch": "Captcha code does not match"
+        }
+    }
+}

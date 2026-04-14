@@ -14,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Captcha } from '../ui/captcha';
 import { ConfirmDialog } from './confirm-dialog';
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -75,9 +76,23 @@ const getColorFromName = (name: string) => {
 };
 
 export default function CommentSection({ comments, onSubmit }: CommentSectionProps) {
+    const t = useTranslations('comments');
     const captchaRef = useRef<any>(null);
     const [showConfirm, setShowConfirm] = useState(false);
     const [pendingValues, setPendingValues] = useState<CommentFormValues | null>(null);
+
+    const commentFormSchema = z
+        .object({
+            nama: z.string().min(1, t('comments.errors.name_required')),
+            email: z.string().min(1, t('comments.errors.email_required')).email(t('comments.errors.email_invalid')),
+            komentar: z.string().min(1, t('comments.errors.comment_required')),
+            captchaInput: z.string().min(1, t('comments.errors.captcha_required')),
+            captchaExpected: z.string()
+        })
+        .refine((data) => data.captchaInput === data.captchaExpected, {
+            message: t('comments.errors.captcha_mismatch'),
+            path: ['captchaInput']
+        });
 
     const form = useForm<CommentFormValues>({
         resolver: zodResolver(commentFormSchema),
@@ -104,7 +119,7 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
         <div className='space-y-5'>
             {/* Header Komentar */}
             <div className='flex items-center gap-2 text-2xl font-bold'>
-                <span>Komentar</span>
+                <span>{t('comments.header')}</span>
                 <span className='bg-primary-100 text-primary-500 rounded-sm px-2 py-0.5 text-sm'>
                     {comments?.length ?? 0}
                 </span>
@@ -121,10 +136,12 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
                                 name='nama'
                                 render={({ field }) => (
                                     <FormItem className='space-y-2'>
-                                        <FormLabel className='font-semibold text-slate-700'>Nama Lengkap</FormLabel>
+                                        <FormLabel className='font-semibold text-slate-700'>
+                                            {t('comments.name_label')}
+                                        </FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder='Masukkan Nama Lengkap'
+                                                placeholder={t('comments.name_placeholder')}
                                                 {...field}
                                                 className='bg-slate-50/50'
                                             />
@@ -141,15 +158,19 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
                                 name='email'
                                 render={({ field }) => (
                                     <FormItem className='space-y-2'>
-                                        <FormLabel className='font-semibold text-slate-700'>Email</FormLabel>
+                                        <FormLabel className='font-semibold text-slate-700'>
+                                            {t('comments.email_label')}
+                                        </FormLabel>
                                         <FormControl>
-                                            <Input placeholder='Masukkan Email' {...field} className='bg-slate-50/50' />
+                                            <Input
+                                                placeholder={t('comments.email_placeholder')}
+                                                {...field}
+                                                className='bg-slate-50/50'
+                                            />
                                         </FormControl>
                                         <div className='min-h-5'>
                                             {!form.formState.errors.email ? (
-                                                <p className='text-sm text-slate-500'>
-                                                    Email Anda tidak akan dipublikasikan.
-                                                </p>
+                                                <p className='text-sm text-slate-500'>{t('comments.email_hint')}</p>
                                             ) : (
                                                 <FormMessage className='text-sm' />
                                             )}
@@ -164,10 +185,12 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
                             name='komentar'
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className='font-semibold text-slate-700'>Komentar</FormLabel>
+                                    <FormLabel className='font-semibold text-slate-700'>
+                                        {t('comments.comment_label')}
+                                    </FormLabel>
                                     <FormControl>
                                         <Textarea
-                                            placeholder='Tuliskan Komentar Anda Disini...'
+                                            placeholder={t('comments.comment_placeholder')}
                                             className='min-h-30 resize-none bg-slate-50/50'
                                             {...field}
                                         />
@@ -179,7 +202,6 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
 
                         <div className='flex flex-col gap-2 gap-y-4 sm:flex-row sm:items-start'>
                             <Captcha ref={captchaRef} onVerify={(code) => form.setValue('captchaExpected', code)} />
-
                             <FormField
                                 control={form.control}
                                 name='captchaInput'
@@ -188,7 +210,7 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
                                         <FormControl>
                                             <Input
                                                 className='w-full sm:w-45'
-                                                placeholder='Masukkan Captcha'
+                                                placeholder={t('comments.captcha_placeholder')}
                                                 {...field}
                                             />
                                         </FormControl>
@@ -200,7 +222,7 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
 
                         <div className='flex justify-end'>
                             <Button type='submit' className='rounded-full'>
-                                Kirim Komentar
+                                {t('comments.submit_button')}
                                 <ArrowRight className='ml-2 h-4 w-4' />
                             </Button>
                         </div>

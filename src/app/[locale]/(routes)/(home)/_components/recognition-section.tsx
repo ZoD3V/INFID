@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import SectionBadge from '@/components/common/section-badge';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 import CommunitySection from './community-section';
 import { useTranslations } from 'next-intl';
@@ -13,21 +13,27 @@ const RecognitionSection = () => {
         {
             title: t('items.award_2017.title'),
             organization: t('items.award_2017.organization'),
-            description: t('items.award_2017.description'),
+            description: t.rich('items.award_2017.description', {
+                i: (chunks) => <i>{chunks}</i>
+            }),
             logo: '/icons/ic-rekognisi-1.png',
             alt: t('items.award_2017.alt')
         },
         {
             title: t('items.ecosoc.title'),
             organization: t('items.ecosoc.organization'),
-            description: t('items.ecosoc.description'),
+            description: t.rich('items.ecosoc.description', {
+                i: (chunks) => <i>{chunks}</i>
+            }),
             logo: '/icons/ic-rekognisi-2.png',
             alt: t('items.ecosoc.alt')
         },
         {
             title: t('items.ran_pe_awards_2024.title'),
             organization: t('items.ran_pe_awards_2024.organization'),
-            description: t('items.ran_pe_awards_2024.description'),
+            description: t.rich('items.ran_pe_awards_2024.description', {
+                i: (chunks) => <i>{chunks}</i>
+            }),
             logo: '/icons/ic-bnpt.png',
             alt: t('items.ran_pe_awards_2024.alt')
         }
@@ -50,9 +56,9 @@ const RecognitionSection = () => {
                 <Carousel
                     opts={{
                         align: 'start',
-                        slidesToScroll: 2
+                        slidesToScroll: 1
                     }}
-                    className='w-full overflow-visible pb-5'>
+                    className='w-full overflow-visible pb-8 md:pb-5'>
                     <CarouselContent className='-ml-6'>
                         {recognitions.map((item, index) => (
                             <CarouselItem key={index} className='basis-full pl-6 lg:basis-1/2'>
@@ -83,6 +89,8 @@ const RecognitionSection = () => {
                             </CarouselItem>
                         ))}
                     </CarouselContent>
+                    <CarouselPrevious className='absolute top-1/2 left-0 -translate-y-1/2 bg-white/80 hover:bg-white md:-left-5' />
+                    <CarouselNext className='absolute top-1/2 right-0 -translate-y-1/2 bg-white/80 hover:bg-white md:-right-5' />
                 </Carousel>
             </div>
             <CommunitySection />

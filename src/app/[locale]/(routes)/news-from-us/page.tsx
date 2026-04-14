@@ -8,6 +8,7 @@ import { ArticleCard } from '@/components/common/article-card';
 import { ArticleCardSkeleton } from '@/components/common/article-card-skeleton';
 import { ArticleFilters } from '@/components/common/article-filters';
 import { PageHeaderSearch } from '@/components/common/background-news-section';
+import EmptyState from '@/components/common/empty-state';
 import { FeaturedNewsSkeleton } from '@/components/common/featured-news-skeleton';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
@@ -18,7 +19,6 @@ import { Post } from '@/types/posts';
 
 import { FeaturedNews } from './_components/featured-news';
 import { authorsNews, yearsNews } from './data/data';
-import { SearchX } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const PAGE_SIZE = 8;
@@ -207,7 +207,7 @@ export default function NewsFromUsPage() {
             </div>
 
             <div className='container pt-12 pb-16'>
-                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Artikel Terbaru</h3>
+                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>{t('content.latest_articles')}</h3>
 
                 {/* Featured */}
                 {isFeaturedLoading ? (
@@ -217,13 +217,13 @@ export default function NewsFromUsPage() {
                 ) : (
                     isMounted && (
                         <div className='mb-8 flex h-40 w-full flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50'>
-                            <p className='text-sm text-slate-500'>Belum ada artikel terbaru.</p>
+                            <p className='text-sm text-slate-500'>{t('content.newest_article')}</p>
                         </div>
                     )
                 )}
 
                 {/* Grid Artikel */}
-                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>Semua Artikel</h3>
+                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>{t('content.all_article')}</h3>
                 <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                     {isLoading && articles.length === 0 ? (
                         Array.from({ length: PAGE_SIZE }).map((_, i) => <ArticleCardSkeleton key={i} />)
@@ -242,28 +242,12 @@ export default function NewsFromUsPage() {
                     )}
                 </div>
 
-                {!isLoading && isMounted && articles.length === 0 && (
-                    <div className='flex flex-col items-center justify-center py-20 text-center'>
-                        <div className='mb-4 rounded-full bg-slate-100 p-6'>
-                            <SearchX className='h-12 w-12 text-slate-400' />
-                        </div>
-                        <h4 className='text-lg font-bold text-slate-900'>Data Tidak Ditemukan</h4>
-                        <p className='mx-auto mt-2 max-w-xs text-slate-500'>
-                            Maaf, kami tidak dapat menemukan artikel yang sesuai dengan filter atau pencarian Anda.
-                        </p>
-                        <Button
-                            variant='link'
-                            className='text-primary-500 mt-4'
-                            onClick={() => setFilters({ category: 'Semua', year: 'all', author: 'all', search: '' })}>
-                            Reset Semua Filter
-                        </Button>
-                    </div>
-                )}
+                {!isLoading && isMounted && articles.length === 0 && <EmptyState />}
 
                 {!isLoading && hasMore && articles.length > 0 && (
                     <div className='mt-10 flex justify-center'>
                         <Button variant='outline' className='rounded-full bg-white px-8' onClick={handleLoadMore}>
-                            Muat Lebih Banyak
+                            {t('content.load_more')}
                         </Button>
                     </div>
                 )}

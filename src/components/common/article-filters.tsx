@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
+import { useTranslations } from 'next-intl';
+
 export interface FilterOption {
     label: string;
     value: string;
@@ -35,6 +37,8 @@ export function ArticleFilters({
     onYearChange,
     className
 }: ArticleFiltersProps) {
+    const t = useTranslations('news');
+
     return (
         <div
             className={cn(
@@ -61,10 +65,10 @@ export function ArticleFilters({
                 {/* Select Tahun */}
                 <Select value={selectedYear} onValueChange={onYearChange}>
                     <SelectTrigger className='w-37.5'>
-                        <SelectValue placeholder='Tahun' />
+                        <SelectValue placeholder={t('content.year')} />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value='all'>Semua Tahun</SelectItem>
+                        <SelectItem value='all'>{t('content.all_year')}</SelectItem>
                         {years.map((y) => (
                             <SelectItem key={y} value={y}>
                                 {y}
@@ -77,10 +81,10 @@ export function ArticleFilters({
                 {authors !== undefined && authors.length > 0 && (
                     <Select value={selectedAuthor} onValueChange={onAuthorChange}>
                         <SelectTrigger className='w-37.5'>
-                            <SelectValue placeholder='Penulis' />
+                            <SelectValue placeholder={t('content.writer')} />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value='all'>Semua Penulis</SelectItem>
+                            <SelectItem value='all'>{t('content.all_writer')}</SelectItem>
                             {authors.map((author) => (
                                 <SelectItem key={author.value} value={author.value}>
                                     {author.label}
