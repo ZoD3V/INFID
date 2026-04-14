@@ -108,7 +108,7 @@ const Home = () => {
                         {/* CTA Buttons */}
                         <div className='grid grid-cols-2 gap-4 md:flex'>
                             <Button asChild variant='secondary' className='rounded-full font-semibold'>
-                                <Link href='/news-from-us?category=Kegiatan'>
+                                <Link href='#program-us'>
                                     {b('exploreProgram')}
                                     <ArrowRight />
                                 </Link>

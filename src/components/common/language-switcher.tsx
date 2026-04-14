@@ -3,6 +3,7 @@
 import Image from 'next/image';
 
 import { usePathname, useRouter } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 
 import { useLocale } from 'next-intl';
 
@@ -22,15 +23,26 @@ export default function LanguageSwitcher() {
     };
 
     return (
-        <div className='static'>
-            <div className='flex items-center rounded-full border border-gray-200 bg-white p-1'>
+        <div className='static' aria-label='Select Language'>
+            <div
+                role='group'
+                aria-label='Language Selector'
+                className='flex items-center rounded-full border border-gray-200 bg-white p-1'>
                 <button
                     onClick={() => toggleLanguage('id')}
-                    className={`mr-2 cursor-pointer rounded-full font-bold transition-all`}>
+                    aria-pressed={locale === 'id'}
+                    aria-label='Switch to Indonesian'
+                    className={cn(
+                        'mr-2 cursor-pointer rounded-full transition-all outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2',
+                        locale === 'id' ? 'opacity-100' : 'opacity-60 hover:opacity-100'
+                    )}>
                     <Image
                         src='/icons/ic-id.png'
-                        alt='id'
-                        className={`rounded-full ${locale === 'id' ? 'border-3 border-slate-500' : ''}`}
+                        alt=''
+                        className={cn(
+                            'rounded-full transition-transform',
+                            locale === 'id' ? 'scale-110 border-2 border-slate-500' : 'border-2 border-transparent'
+                        )}
                         width={28}
                         height={28}
                     />
@@ -38,11 +50,19 @@ export default function LanguageSwitcher() {
 
                 <button
                     onClick={() => toggleLanguage('en')}
-                    className={`cursor-pointer rounded-full font-bold transition-all`}>
+                    aria-pressed={locale === 'en'}
+                    aria-label='Switch to English'
+                    className={cn(
+                        'cursor-pointer rounded-full transition-all outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2',
+                        locale === 'en' ? 'opacity-100' : 'opacity-60 hover:opacity-100'
+                    )}>
                     <Image
                         src='/icons/ic-en.png'
-                        alt='id'
-                        className={`rounded-full ${locale === 'en' ? 'border-3 border-slate-500' : ''}`}
+                        alt=''
+                        className={cn(
+                            'rounded-full transition-transform',
+                            locale === 'en' ? 'scale-110 border-2 border-slate-500' : 'border-2 border-transparent'
+                        )}
                         width={28}
                         height={28}
                     />

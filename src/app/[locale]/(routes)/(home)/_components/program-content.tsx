@@ -22,7 +22,7 @@ const ProgramContent = ({ programData }: { programData: Post[] }) => {
     }, []);
 
     return (
-        <section className='bg-secondary-100 relative py-24'>
+        <section id='program-us' className='bg-secondary-100 relative py-24'>
             <Image
                 src='/images/decoration-program-1.png'
                 alt='decoration'

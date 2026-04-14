@@ -196,7 +196,6 @@ export default function NewsFromUsPage() {
                 <ArticleFilters
                     categories={isCategoriesLoading ? ['Semua'] : categoriesNews}
                     years={yearsNews}
-                    authors={authorsNews}
                     selectedCategory={filters.category}
                     onCategoryChange={(v) => setFilters((f) => ({ ...f, category: v }))}
                     selectedYear={filters.year}
