@@ -12,19 +12,19 @@ import { Button } from '@/components/ui/button';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { Category } from '@/types/job';
 
 import { JobAccordion } from './_components/job-accordion';
 import { useTranslations } from 'next-intl';
 
-const CareerContent = ({ categories, initialJobs, translations }: any) => {
+const CareerContent = ({ categories, initialJobs, categoryFilter, translations }: any) => {
     const t = useTranslations('button');
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const [jobs, setJobs] = useState(initialJobs);
-    const [activeCategory, setActiveCategory] = useState<number | 'all'>(
-        searchParams.get('category') ? Number(searchParams.get('category')) : 'all'
-    );
+    const categoryParam = searchParams.get('category');
+    const [activeCategory, setActiveCategory] = useState<string>(categoryParam || 'all');
     const [deadline, setDeadline] = useState<string | undefined>(searchParams.get('deadline') || undefined);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -59,10 +59,10 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
         router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     };
 
-    const handleCategoryChange = (id: number | 'all') => {
-        setActiveCategory(id);
-        updateQueryParams(id, deadline);
-        fetchJobs(id, deadline);
+    const handleCategoryChange = (name: string | 'all') => {
+        setActiveCategory(name);
+        updateQueryParams(name, deadline);
+        fetchJobs(name, deadline);
     };
 
     const handleDeadlineChange = (date: string | undefined) => {
@@ -87,21 +87,34 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
 
             <div className='sticky top-16 z-20 w-full border bg-white py-4'>
                 <div className='container flex flex-wrap items-center justify-between gap-4'>
-                    <div className='flex flex-wrap gap-2'>
+                    <div className='flex flex-wrap gap-2' role='group' aria-label='Job category filters'>
                         <Button
                             size='sm'
-                            className={`rounded-full ${activeCategory !== 'all' && 'border-none bg-slate-100 shadow-none'}`}
+                            aria-label='Show all job categories'
+                            aria-pressed={activeCategory === 'all'}
+                            className={`focus-visible:ring-primary-500 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                                activeCategory === 'all'
+                                    ? 'bg-primary-500 hover:bg-primary-600 text-white'
+                                    : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none'
+                            }`}
                             variant={activeCategory === 'all' ? 'default' : 'outline'}
                             onClick={() => handleCategoryChange('all')}>
                             Semua
                         </Button>
+
                         {categories.map((cat: any) => (
                             <Button
                                 key={cat.id}
                                 size='sm'
-                                className={`rounded-full ${activeCategory !== cat.id && 'border-none bg-slate-100 shadow-none'}`}
-                                variant={activeCategory === cat.id ? 'default' : 'outline'}
-                                onClick={() => handleCategoryChange(cat.id)}>
+                                aria-label={`Filter by ${cat.name}`}
+                                aria-pressed={activeCategory === cat.name}
+                                className={`focus-visible:ring-primary-500 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                                    activeCategory === cat.name
+                                        ? 'bg-primary-500 hover:bg-primary-600 text-white'
+                                        : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none'
+                                }`}
+                                variant={activeCategory === cat.name ? 'default' : 'outline'}
+                                onClick={() => handleCategoryChange(cat.name)}>
                                 {cat.name}
                             </Button>
                         ))}
@@ -112,8 +125,10 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
                         <SingleDatePicker value={deadline} onChange={handleDeadlineChange} />
                         {deadline && (
                             <button
+                                aria-label='Reset deadline filter'
+                                type='button'
                                 onClick={() => handleDeadlineChange(undefined)}
-                                className='cursor-pointer text-xs font-semibold text-red-500 hover:underline'>
+                                className='focus-visible:ring-primary-500 cursor-pointer text-xs font-semibold text-red-500 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'>
                                 Reset
                             </button>
                         )}

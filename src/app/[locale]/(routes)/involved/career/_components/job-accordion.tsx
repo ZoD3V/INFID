@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { ArticleContent } from '@/components/common/article-content';
+import EmptyState from '@/components/common/empty-state';
 import OptimizedImage from '@/components/common/optimized-image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
@@ -24,16 +26,11 @@ export function JobAccordion({ data }: { data: Job[] }) {
     }, []);
 
     if (!data.length) {
-        return (
-            <div className='rounded-xl border p-6 text-center text-slate-500'>
-                Tidak ada lowongan yang sesuai filter
-            </div>
-        );
+        return <EmptyState />;
     }
 
     return (
         <div className='space-y-6'>
-            {/* ACCORDION */}
             <Accordion type='single' collapsible className='space-y-4'>
                 {data.map((item) => {
                     const translation = item?.description?.[langIndex] || item?.description?.[0];
@@ -41,9 +38,10 @@ export function JobAccordion({ data }: { data: Job[] }) {
                         <AccordionItem
                             key={item.id}
                             value={`item-${item.id}`}
-                            className='overflow-hidden rounded-xl border bg-white last:border-b'>
-                            {/* HEADER */}
-                            <AccordionTrigger className='group rounded-b-none p-5 hover:no-underline data-[state=open]:mb-5 data-[state=open]:bg-slate-50'>
+                            className='relative overflow-hidden rounded-xl border bg-white last:border-b'>
+                            <AccordionTrigger
+                                aria-label={`View details for ${item.title}`}
+                                className='group focus-visible:ring-primary-500 rounded-b-none p-5 transition-all hover:no-underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none data-[state=open]:mb-5 data-[state=open]:bg-slate-50'>
                                 <div className='flex w-full items-center justify-between gap-4'>
                                     <div className='space-y-1 text-left'>
                                         <div className='flex items-center gap-2'>
@@ -66,50 +64,60 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                     </div>
 
                                     <div className='hidden text-right text-sm md:block'>
-                                        <div className='font-semibold'>{item.work_location_type}</div>
+                                        <div className='font-semibold text-slate-900'>{item.work_location_type}</div>
                                         <div className='text-slate-600'>{item.location}</div>
                                     </div>
                                 </div>
                             </AccordionTrigger>
 
-                            {/* CONTENT */}
                             <AccordionContent className='px-6 pb-6'>
                                 <div className='grid grid-cols-1 gap-6 md:grid-cols-12'>
-                                    {/* IMAGE */}
                                     <div className='relative md:col-span-4'>
                                         <OptimizedImage
                                             src={item.image}
-                                            alt={item.title}
+                                            alt={`Banner image for ${item.title}`}
                                             className='h-full w-full rounded-xl border object-cover'
                                             placeholderType='portrait'
                                         />
                                     </div>
 
-                                    {/* DETAIL */}
                                     <div className='space-y-6 md:col-span-8'>
                                         <Section title='Deskripsi Pekerjaan'>
-                                            <div className='whitespace-pre-line'>{translation.text}</div>
+                                            <ArticleContent content={translation.text} />
                                         </Section>
 
                                         {item.position && <Section title='Posisi'>{item.position}</Section>}
 
-                                        {/* ACTION */}
                                         <div className='flex flex-col items-start justify-between border-t border-t-slate-200 pt-4 lg:flex-row lg:items-center'>
                                             <h3 className='text-base font-bold md:text-lg'>Apply Sekarang!</h3>
                                             <div className='flex flex-wrap gap-3 pt-4'>
-                                                <Button variant='outline' className='rounded-full'>
+                                                {/* Action Buttons with Focus States */}
+                                                <Button
+                                                    variant='outline'
+                                                    className='focus-visible:ring-primary-500 rounded-full focus-visible:ring-2 focus-visible:ring-offset-2'
+                                                    aria-label={`Download job description for ${item.title} as PDF`}>
                                                     <FileText className='mr-2 h-4 w-4' />
                                                     PDF
                                                 </Button>
 
                                                 {item.link ? (
-                                                    <Button className='rounded-full' asChild>
-                                                        <a href={item.link} target='_blank' rel='noopener noreferrer'>
+                                                    <Button
+                                                        className='bg-primary-500 hover:bg-primary-600 focus-visible:ring-primary-500 rounded-full text-white focus-visible:ring-2 focus-visible:ring-offset-2'
+                                                        asChild>
+                                                        <a
+                                                            href={item.link}
+                                                            target='_blank'
+                                                            rel='noopener noreferrer'
+                                                            aria-label={`Submit application for ${item.title} via external link`}>
                                                             Submit via Link
                                                         </a>
                                                     </Button>
                                                 ) : (
-                                                    <Button className='rounded-full'>Kirim Email</Button>
+                                                    <Button
+                                                        className='bg-primary-500 hover:bg-primary-600 focus-visible:ring-primary-500 rounded-full text-white focus-visible:ring-2 focus-visible:ring-offset-2'
+                                                        aria-label={`Apply for ${item.title} via Email`}>
+                                                        Kirim Email
+                                                    </Button>
                                                 )}
                                             </div>
                                         </div>

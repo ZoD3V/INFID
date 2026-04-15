@@ -62,12 +62,14 @@ export function SingleDatePicker({ value, onChange, className }: Props) {
                     <Button
                         variant='outline'
                         size='sm'
+                        aria-label={value ? `Change date, currently selected: ${label}` : 'Select a date'}
+                        aria-haspopup='dialog'
                         className={cn(
-                            'w-full justify-start text-left font-normal lg:w-fit',
+                            'focus-visible:ring-primary-500 w-full justify-start text-left font-normal focus-visible:ring-2 focus-visible:ring-offset-2 lg:w-fit',
                             !value && 'text-muted-foreground'
                         )}>
                         <span className='truncate'>{label}</span>
-                        <CalendarIcon className='mr-2 h-4 w-4' />
+                        <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
                     </Button>
                 </PopoverTrigger>
 
@@ -78,6 +80,7 @@ export function SingleDatePicker({ value, onChange, className }: Props) {
                         onSelect={handleSelect}
                         month={month}
                         onMonthChange={setMonth}
+                        initialFocus
                     />
                 </PopoverContent>
             </Popover>
