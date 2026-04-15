@@ -142,18 +142,18 @@ export const PublicationContent = ({
                                     <div className='flex items-start gap-4'>
                                         <div className='mb-4 hidden flex-col items-center lg:flex'>
                                             <div className='text-primary-900 text-5xl font-bold'>{dateParts[0]}</div>
-                                            <div className='text-xs font-normal text-slate-600 uppercase'>
+                                            <div className='text-xs whitespace-nowrap text-slate-600 uppercase'>
                                                 {dateParts[1]} {dateParts[2]}
                                             </div>
                                         </div>
 
-                                        <div className='flex flex-col'>
-                                            <h2 className='text-primary-900 mb-2 text-xl font-bold lg:text-2xl'>
+                                        <div className='flex min-w-0 flex-1 flex-col'>
+                                            <h2 className='text-primary-900 mb-2 line-clamp-3 text-xl leading-snug font-bold lg:text-2xl'>
                                                 {translation?.title}
                                             </h2>
 
-                                            <p className='mb-2 line-clamp-2 text-sm leading-relaxed text-slate-600'>
-                                                {translation?.content?.replace(/[#*`]/g, '')}
+                                            <p className='mb-2 line-clamp-3 text-sm leading-snug text-slate-600'>
+                                                {translation?.content}
                                             </p>
 
                                             <div className='mt-1 flex items-center gap-2 text-xs text-slate-500'>

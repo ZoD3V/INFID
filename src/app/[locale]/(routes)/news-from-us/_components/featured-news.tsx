@@ -69,7 +69,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                                 {/* Date Box (Sisi Kiri) */}
                                 <div className='mb-4 hidden flex-col items-center lg:flex'>
                                     <div className='text-primary-900 text-5xl font-bold'>{dateParts[0]}</div>
-                                    <div className='text-xs text-slate-600 uppercase'>
+                                    <div className='text-xs whitespace-nowrap text-slate-600 uppercase'>
                                         {dateParts[1]} {dateParts[2]}
                                     </div>
                                 </div>
@@ -81,7 +81,6 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                                     </h2>
 
                                     <p className='mb-2 line-clamp-2 text-sm leading-relaxed text-slate-600'>
-                                        {/* Menghapus tag markdown/html jika ada di content agar bersih di p */}
                                         {description.replace(/[#*`]/g, '')}
                                     </p>
 
