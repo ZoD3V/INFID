@@ -24,8 +24,6 @@ async function getInitialJobs() {
 
         return res;
     } catch (err) {
-        console.log(err);
-
         return [];
     }
 }

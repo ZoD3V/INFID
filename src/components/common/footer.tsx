@@ -42,9 +42,9 @@ const Footer = () => {
         e.preventDefault();
         setIsLoading(true);
 
-        const DATACENTER = 'us4';
-        const LIST_ID = 'da78e43b10';
-        const API_KEY = '8aae71abf28b9b22b1d2bfc0bd1acfe9-us4';
+        const API_KEY = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY;
+        const LIST_ID = process.env.NEXT_PUBLIC_MAILCHIMP_LIST_ID;
+        const DATACENTER = process.env.NEXT_PUBLIC_MAILCHIMP_DATACENTER;
 
         try {
             const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`, {
