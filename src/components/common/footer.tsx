@@ -1,21 +1,25 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Link, usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { ArrowRight, ChevronUp, MailIcon, PhoneCall } from 'lucide-react';
+import { ArrowRight, ChevronUp, Loader2, MailIcon, PhoneCall } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { BsTwitterX, BsWhatsapp } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 const Footer = () => {
     const pathname = usePathname();
     const t = useTranslations('footer');
     const b = useTranslations('button');
     const p = useTranslations('placeholder');
-
+    const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const footerLinks = {
         about: [
             { name: t('links.structure'), href: '/about/profile-infid' },
@@ -32,6 +36,42 @@ const Footer = () => {
                 href: '/knowledge?category=Modul+%26+Panduan'
             }
         ]
+    };
+
+    const onSubmit = async (e: any) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        const DATACENTER = 'us4';
+        const LIST_ID = 'da78e43b10';
+        const API_KEY = '8aae71abf28b9b22b1d2bfc0bd1acfe9-us4';
+
+        try {
+            const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Basic ${btoa(`user:${API_KEY}`)}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email_address: email,
+                    status: 'subscribed'
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success('Success subscribe!');
+                setEmail('');
+            } else {
+                console.error('Mailchimp Error:', data);
+            }
+        } catch (err) {
+            console.error('Network Error:', err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -139,20 +179,21 @@ const Footer = () => {
                                     <p className='text-sm font-normal text-slate-200'>{t('newsletter.description')}</p>
                                 </div>
 
-                                <form
-                                    className='flex w-full max-w-sm flex-col items-center gap-4'
-                                    onSubmit={(e) => e.preventDefault()}>
+                                <form className='flex w-full max-w-sm flex-col items-center gap-4' onSubmit={onSubmit}>
                                     <Input
                                         type='email'
                                         placeholder={p('insertEmail')}
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         className='rounded-full border-gray-400 bg-white/10 text-sm text-white placeholder:text-slate-400 focus-visible:ring-slate-400'
                                     />
                                     <Button
                                         type='submit'
                                         variant='secondary'
-                                        className='w-full rounded-full transition-all focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:outline-none'>
-                                        {b('subscribe')}
-                                        <ArrowRight />
+                                        className='w-full rounded-full transition-all focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:outline-none'
+                                        disabled={isLoading}>
+                                        {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : b('subscribe')}
+                                        {!isLoading && <ArrowRight className='ml-2 h-4 w-4' />}
                                     </Button>
                                 </form>
                             </div>

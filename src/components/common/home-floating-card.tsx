@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
-import { ArrowRight, Mail, X } from 'lucide-react';
+import { ArrowRight, Loader2, Mail, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
@@ -19,6 +19,8 @@ export default function HomeFloatingCard() {
     const [isVisible, setIsVisible] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
     const [isOnHomePage, setIsOnHomePage] = useState(false);
+    const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const t = useTranslations('home-floating');
     const p = useTranslations('placeholder');
@@ -48,10 +50,41 @@ export default function HomeFloatingCard() {
         }
     };
 
-    const onSubmit = (e: React.FormEvent) => {
+    const onSubmit = async (e: any) => {
         e.preventDefault();
-        toast.success('Berhasil berlangganan!');
-        handleToggle(false);
+        setIsLoading(true);
+
+        const DATACENTER = 'us4';
+        const LIST_ID = 'da78e43b10';
+        const API_KEY = '8aae71abf28b9b22b1d2bfc0bd1acfe9-us4';
+
+        try {
+            const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Basic ${btoa(`user:${API_KEY}`)}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email_address: email,
+                    status: 'subscribed'
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success('Success subscribe!');
+                handleToggle(false);
+                setEmail('');
+            } else {
+                console.error('Mailchimp Error:', data);
+            }
+        } catch (err) {
+            console.error('Network Error:', err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     if (!isMounted) return null;
@@ -88,12 +121,20 @@ export default function HomeFloatingCard() {
                                 <Input
                                     type='email'
                                     required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     placeholder={p('insertEmail')}
                                     className='rounded-full border-slate-200 bg-slate-50'
+                                    disabled={isLoading}
                                 />
-                                <Button type='submit' size='sm' variant='secondary' className='w-full rounded-full'>
-                                    {b('subscribe')}
-                                    <ArrowRight className='ml-2 h-4 w-4' />
+                                <Button
+                                    type='submit'
+                                    size='sm'
+                                    variant='secondary'
+                                    className='w-full rounded-full'
+                                    disabled={isLoading}>
+                                    {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : b('subscribe')}
+                                    {!isLoading && <ArrowRight className='ml-2 h-4 w-4' />}
                                 </Button>
                             </form>
                         </div>

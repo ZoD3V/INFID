@@ -84,7 +84,7 @@ const AboutUsSection = () => {
 
                     {/* Right Side - Content */}
                     <div>
-                        <div className='text-primary mb-4 flex items-center gap-2 text-xs font-medium tracking-wider'>
+                        <div className='text-primary mb-4 flex items-center gap-2 text-base font-medium tracking-wider'>
                             <span className='bg-primary h-px w-4'></span>
                             {t('aboutUsTag')}
                             <span className='bg-primary h-px w-4'></span>
