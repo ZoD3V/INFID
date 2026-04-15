@@ -11,14 +11,13 @@ import { PageHeaderSearch } from '@/components/common/background-news-section';
 import EmptyState from '@/components/common/empty-state';
 import { FeaturedNewsSkeleton } from '@/components/common/featured-news-skeleton';
 import { Button } from '@/components/ui/button';
-import { Link } from '@/i18n/navigation';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { Post } from '@/types/posts';
 
 import { FeaturedNews } from './_components/featured-news';
-import { authorsNews, yearsNews } from './data/data';
+import { yearsNews } from './data/data';
 import { useTranslations } from 'next-intl';
 
 const PAGE_SIZE = 8;
@@ -52,7 +51,14 @@ export default function NewsFromUsPage() {
             try {
                 setIsCategoriesLoading(true);
                 const res = await apiRequest.get<any>(API_ENDPOINTS.categories);
-                const allowedCategories = ['Kegiatan', 'Bergerak', 'Berdampak', 'Siaran Pers', 'Laporan Tahunan'];
+                const allowedCategories = [
+                    'Kegiatan',
+                    'Bergerak',
+                    'Berdampak',
+                    'Siaran Pers',
+                    'Laporan Tahunan',
+                    'Bergerak, Berdampak!'
+                ];
                 const data = res.data || res;
                 const filteredNames = data
                     .filter((cat: any) => allowedCategories.includes(cat.name))
@@ -108,7 +114,7 @@ export default function NewsFromUsPage() {
                     }
                 });
 
-                const data = res.data.filter((item) => item.status == 'Published') || [];
+                const data = res.data.filter((item) => item.status.toLowerCase() == 'published') || [];
                 setFeaturedArticles(data);
             } catch (error) {
                 console.error('Gagal load featured:', error);
@@ -179,6 +185,17 @@ export default function NewsFromUsPage() {
             setCurrentPage((prev) => prev + 1);
         }
     };
+
+    const handleArticleClick = async (article: Post) => {
+        try {
+            await apiRequest.get<Post>(`${API_ENDPOINTS.posts}/${article.id}/view`);
+        } catch (error) {
+            console.error('Failed to track view:', error);
+        }
+
+        router.push(`/news-from-us/${article.id}-${article.translations[0]?.slug}`);
+    };
+
     return (
         <section className='w-full bg-slate-50'>
             <PageHeaderSearch
@@ -206,32 +223,38 @@ export default function NewsFromUsPage() {
             </div>
 
             <div className='container pt-12 pb-16'>
-                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>{t('content.latest_articles')}</h3>
-
                 {/* Featured */}
                 {isFeaturedLoading ? (
                     <FeaturedNewsSkeleton />
-                ) : featuredArticles.length > 0 ? (
-                    <FeaturedNews items={featuredArticles} />
                 ) : (
-                    isMounted && (
-                        <div className='mb-8 flex h-40 w-full flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50'>
-                            <p className='text-sm text-slate-500'>{t('content.newest_article')}</p>
-                        </div>
+                    featuredArticles.length > 0 && (
+                        <>
+                            <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
+                                {filters.category == 'Semua'
+                                    ? `${t('content.all')} ${t('content.article')}`
+                                    : `${t('content.all')} ${filters.category}`}
+                            </h3>
+
+                            {featuredArticles.length > 0 && <FeaturedNews items={featuredArticles} />}
+                        </>
                     )
                 )}
 
                 {/* Grid Artikel */}
-                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>{t('content.all_article')}</h3>
+                <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
+                    {filters.category == 'Semua'
+                        ? `${t('content.all')} ${t('content.article')}`
+                        : `${t('content.all')} ${filters.category}`}
+                </h3>
                 <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                     {isLoading && articles.length === 0 ? (
                         Array.from({ length: PAGE_SIZE }).map((_, i) => <ArticleCardSkeleton key={i} />)
                     ) : (
                         <>
                             {articles.map((article, index) => (
-                                <Link key={index} href={`/news-from-us/${article.id}-${article.translations[0]?.slug}`}>
+                                <div key={index} onClick={() => handleArticleClick(article)} className='cursor-pointer'>
                                     <ArticleCard article={article} imageClassName='h-67' />
-                                </Link>
+                                </div>
                             ))}
 
                             {isLoading &&

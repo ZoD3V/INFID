@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { ArticleContent } from '@/components/common/article-content';
 import EmptyState from '@/components/common/empty-state';
 import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
@@ -9,10 +10,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { LTPeople, LeadershipTimeline } from '@/types/leadership-timeline';
 
 import { PeopleGrid } from './people-grid';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) => {
     const t = useTranslations('profile.timeline_section');
+    const locale = useLocale();
 
     if (!initialData || initialData.length === 0) {
         return (
@@ -26,6 +28,12 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
     const [selectedTimeline, setSelectedTimeline] = useState<LeadershipTimeline>(initialData[0]);
     const [selectedPerson, setSelectedPerson] = useState<LTPeople | null>(null);
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+
+    const [langIndex, setLangIndex] = useState(0);
+
+    useEffect(() => {
+        setLangIndex(locale === 'id' ? 0 : 1);
+    }, [locale]);
 
     const handleTimelineClick = (item: LeadershipTimeline): void => {
         setActiveTimelineId(item.id);
@@ -94,10 +102,7 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
                         <div className='max-w-full xl:max-w-4xl'>
                             <h2 className='text-primary-500 mb-6 text-2xl font-bold'>{selectedTimeline.title}</h2>
                             <div className='flex flex-col items-start gap-8'>
-                                <article
-                                    className='prose prose-slate w-full max-w-none'
-                                    dangerouslySetInnerHTML={{ __html: selectedTimeline.description || '' }}
-                                />
+                                <ArticleContent content={selectedTimeline.description[langIndex]?.text ?? ''} />
                             </div>
                         </div>
                     )}

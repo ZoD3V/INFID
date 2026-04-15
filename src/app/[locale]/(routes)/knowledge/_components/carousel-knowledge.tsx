@@ -3,56 +3,33 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { apiRequest } from '@/lib/api-request';
 import { formatArticleDate } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
-import { ArrowRight, Calendar, Eye, MessageSquareMore, Pencil } from 'lucide-react';
-
-const articles = [
-    {
-        id: 1,
-        category: 'RISET',
-        date: '12 Januari 2025',
-        title: 'Menakar Masa Depan Demokrasi Indonesia Pasca 2024',
-        description:
-            'Analisis komprehensif mengenai peta politik, tantangan elektoral, dan peran masyarakat sipil dalam menjaga integritas demokrasi Indonesia.',
-        author: 'Samantha',
-        views: 345,
-        comments: 10,
-        image: '/images/poster-infid-1.png'
-    },
-    {
-        id: 2,
-        category: 'RISET',
-        date: '20 Februari 2025',
-        title: 'Program Sosial di Indonesia: Meningkat Tetap Belum Optimal',
-        description:
-            'Laporan ini mengulas efektivitas program sosial nasional berdasarkan pengukuran indeks barometer sosial terbaru.',
-        author: 'Michael',
-        views: 289,
-        comments: 6,
-        image: '/images/poster-infid-2.png'
-    },
-    {
-        id: 3,
-        category: 'RISET',
-        date: '5 Maret 2025',
-        title: 'Pembangunan Inklusif dan Tantangan Ketimpangan Regional',
-        description:
-            'Studi tentang ketimpangan pembangunan antar wilayah dan rekomendasi kebijakan untuk mendorong pertumbuhan yang lebih merata.',
-        author: 'Andreas',
-        views: 198,
-        comments: 4,
-        image: '/images/poster-infid-1.png'
-    }
-];
+import { ArrowRight, Eye, MessageSquareMore, Pencil } from 'lucide-react';
 
 interface FeaturedNewsProps {
     items: Post[];
 }
 
 export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
+    const router = useRouter();
+
+    const handleNavigation = async (e: React.MouseEvent, item: any) => {
+        e.preventDefault();
+
+        try {
+            apiRequest.get(`${API_ENDPOINTS.posts}/${item.id}/view`);
+        } catch (error) {
+            console.error('Tracking error:', error);
+        }
+
+        router.push(`/knowledge/${item.id}-${item.translations[0]?.slug}`);
+    };
+
     return (
         <Carousel
             opts={{
@@ -66,7 +43,7 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                         item.translations?.find((t: any) => t.language === 'id') || item.translations?.[0];
 
                     const title = translation?.title || 'No Title';
-                    const seen = item.seen || 0;
+                    const seen = item.views || 0;
                     const comments = item.comments.length || 0;
                     const description = translation?.content || '';
                     const categoryName = item.category?.name || 'Featured';
@@ -119,14 +96,12 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                                             </div>
                                         </div>
 
-                                        <Link
-                                            href={`/knowledge/${item.id}-${item.translations[0]?.slug}`}
-                                            className='block'>
+                                        <div onClick={(e) => handleNavigation(e, item)} className='block'>
                                             <Button size='sm' className='w-fit rounded-full'>
                                                 Baca Selengkapnya
                                                 <ArrowRight className='ml-2 h-4 w-4' />
                                             </Button>
-                                        </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </article>

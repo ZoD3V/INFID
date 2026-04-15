@@ -24,13 +24,13 @@ const Footer = () => {
             { name: t('links.partners'), href: '/about/partner' }
         ],
         advocacy: [
+            { name: t('links.articles'), href: '/knowledge?category=Artikel' },
             { name: t('links.research'), href: '/knowledge?category=Riset' },
             { name: t('links.policy'), href: '/knowledge?category=Kertas+Kebijakan' },
             {
                 name: t('links.modules'),
-                href: '/knowledge?category=Modul+dan+Panduan'
-            },
-            { name: t('links.articles'), href: '/knowledge?category=Artikel' }
+                href: '/knowledge?category=Modul+%26+Panduan'
+            }
         ]
     };
 

@@ -8,16 +8,15 @@ import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
 import { Post } from '@/types/posts';
 
-import Cookies from 'js-cookie';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export const ProgramInfidContent = ({ programData }: { programData: Post[] }) => {
     const t = useTranslations('profile.program_section');
+    const locale = useLocale();
 
     const [langIndex, setLangIndex] = useState(0);
 
     useEffect(() => {
-        const locale = Cookies.get('NEXT_LOCALE') || 'id';
         setLangIndex(locale === 'id' ? 0 : 1);
     }, []);
 

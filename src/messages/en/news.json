@@ -19,7 +19,9 @@
     },
     "content": {
         "article_share": "Support our message and share it",
+        "article": "Article",
         "search": "Search",
+        "all": "All",
         "all_year": "All Years",
         "year": "Year",
         "writer": "Writer",

@@ -1,6 +1,8 @@
 import Image from 'next/image';
 
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { apiRequest } from '@/lib/api-request';
 import { formatDateShort } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
@@ -11,6 +13,20 @@ interface FeaturedNewsProps {
 }
 
 export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
+    const router = useRouter();
+
+    const handleNavigation = async (e: React.MouseEvent, item: any) => {
+        e.preventDefault();
+
+        try {
+            apiRequest.get(`${API_ENDPOINTS.posts}/${item.id}/view`);
+        } catch (error) {
+            console.error('Tracking error:', error);
+        }
+
+        router.push(`/knowledge/${item.id}-${item.translations[0]?.slug}`);
+    };
+
     return (
         <div className='mb-8 grid gap-4 md:grid-cols-2'>
             {items.map((item, index) => {
@@ -20,7 +36,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                 const description = translation?.content || '';
                 const categoryName = item.category?.name || 'Featured';
                 const authorName = item.author?.name || 'Admin';
-                const seen = item?.seen || 0;
+                const seen = item?.views || 0;
                 const comments = item.comments.length > 0 ? item.comments.length : 0;
                 const dateRaw = item.published_at || item.created_at;
 
@@ -28,7 +44,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                 const dateParts = formattedDate.split(' ');
 
                 return (
-                    <Link key={index} href={`/news-from-us/${item.id}-${item.translations[0]?.slug}`}>
+                    <div key={index} onClick={(e) => handleNavigation(e, item)}>
                         <div className='group cursor-pointer rounded-xl border border-slate-200 bg-white p-3'>
                             {/* Image Section */}
                             <div className='relative mb-6 h-70 overflow-hidden rounded-lg lg:h-80 xl:h-88'>
@@ -93,7 +109,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                                 </div>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 );
             })}
         </div>

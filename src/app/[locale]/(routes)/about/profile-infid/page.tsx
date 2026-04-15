@@ -11,7 +11,8 @@ import VisiMisiInfidSection from './_components/visi-misi-section';
 async function getLeadershipTimeline() {
     try {
         const res = await apiRequest.get<LeadershipTimeline[]>(API_ENDPOINTS.leadershipTimeline);
-        return res.data || res;
+        const data = res.data || res;
+        return data.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     } catch (error) {
         console.error('Failed to fetch timeline:', error);
         return [];

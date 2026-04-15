@@ -1,6 +1,8 @@
 {
     "ui": {
         "label": "QUIZ",
+        "empty_title": "Quiz Not Available",
+        "empty_description": "Sorry, there are no questions available for this quiz at the moment. Our team is preparing interesting materials for you. Please check back later!",
         "progress": "{current} of {total}",
         "continue": "Continue",
         "loading": "Load questions...",

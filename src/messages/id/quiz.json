@@ -1,6 +1,8 @@
 {
     "ui": {
         "label": "KUIS",
+        "empty_title": "Kuis Belum Tersedia",
+        "empty_description": "Maaf, saat ini belum ada pertanyaan untuk kuis ini. Tim kami sedang menyiapkan materi menarik untuk Anda. Silakan kembali lagi nanti!",
         "progress": "{current} dari {total}",
         "continue": "Lanjutkan",
         "loading": "Memuat Pertanyaan...",

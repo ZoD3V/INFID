@@ -3,7 +3,7 @@ export interface LTPeople {
     name: string;
     occupation: string;
     image: string | null;
-    description: string | null;
+    description: string;
     email: string | null;
     phone: string | null;
 }
@@ -11,7 +11,15 @@ export interface LTPeople {
 export interface LeadershipTimeline {
     id: number;
     title: string;
-    description: string | null;
+    description: DescriptionTranslation[];
     order: number;
     peoples: LTPeople[];
+}
+
+export interface DescriptionTranslation {
+    id: number;
+    language: string;
+    text: string;
+    created_at: string;
+    updated_at: string;
 }

@@ -52,7 +52,14 @@ export default function KnowledgePage() {
             try {
                 setIsCategoriesLoading(true);
                 const res = await apiRequest.get<any>(API_ENDPOINTS.categories);
-                const allowedCategories = ['Kertas Kebijakan', 'Modul dan Panduan', 'Artikel', 'Riset'];
+                const allowedCategories = [
+                    'Riset',
+                    'Kertas Kebijakan',
+                    'Modul dan Panduan',
+                    'Artikel',
+                    'Riset & Kertas Kebijakan',
+                    'Modul & Panduan'
+                ];
                 const data = res.data || res;
                 const filteredNames = data
                     .filter((cat: any) => allowedCategories.includes(cat.name))
@@ -108,7 +115,7 @@ export default function KnowledgePage() {
                     }
                 });
 
-                const data = res.data.filter((item) => item.status == 'Published') || [];
+                const data = res.data.filter((item) => item.status.toLowerCase() == 'published') || [];
                 setFeaturedArticles(data);
             } catch (error) {
                 console.error('Gagal load featured:', error);
@@ -180,6 +187,16 @@ export default function KnowledgePage() {
         }
     };
 
+    const handleArticleClick = async (article: Post) => {
+        try {
+            await apiRequest.get<Post>(`${API_ENDPOINTS.posts}/${article.id}/view`);
+        } catch (error) {
+            console.error('Failed to track view:', error);
+        }
+
+        router.push(`/knowledge/${article.id}-${article.translations[0]?.slug}`);
+    };
+
     return (
         <section className='relative w-full bg-stone-50'>
             <PageHeaderSearch
@@ -212,7 +229,9 @@ export default function KnowledgePage() {
                     featuredArticles.length > 0 && (
                         <>
                             <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                                {filters.category == 'Semua' ? 'Highlight Publikasi' : `Highlight ${filters.category}`}
+                                {filters.category == 'Semua'
+                                    ? `Highlight ${t('content.publish')}`
+                                    : `Highlight ${filters.category}`}
                             </h3>
 
                             <ArticleCarousel items={featuredArticles} />
@@ -230,9 +249,9 @@ export default function KnowledgePage() {
                     ) : (
                         <>
                             {articles.map((article, index) => (
-                                <Link key={index} href={`/knowledge/${article.id}-${article.translations[0]?.slug}`}>
+                                <div key={index} onClick={() => handleArticleClick(article)} className='cursor-pointer'>
                                     <ArticleCard article={article} imageClassName='h-67' />
-                                </Link>
+                                </div>
                             ))}
 
                             {isLoading &&

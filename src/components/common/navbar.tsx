@@ -47,8 +47,22 @@ export function Navbar() {
         return `${basePath}?${params.toString()}`;
     };
 
-    const knowledgeCategories = ['Riset', 'Kertas Kebijakan', 'Modul dan Panduan', 'Artikel'];
-    const newsCategories = ['Kegiatan', 'Bergerak', 'Berdampak', 'Siaran Pers', 'Laporan Tahunan'];
+    const knowledgeCategories = [
+        'Riset',
+        'Kertas Kebijakan',
+        'Modul dan Panduan',
+        'Artikel',
+        'Riset & Kertas Kebijakan',
+        'Modul & Panduan'
+    ];
+    const newsCategories = [
+        'Kegiatan',
+        'Bergerak',
+        'Berdampak',
+        'Siaran Pers',
+        'Laporan Tahunan',
+        'Bergerak, Berdampak!'
+    ];
 
     React.useEffect(() => {
         const handleScroll = () => {

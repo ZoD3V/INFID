@@ -41,7 +41,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ data, translation 
                 {/* Views */}
                 <div className='flex items-center gap-1'>
                     <Eye className='h-3 w-3' />
-                    {data?.seen || 0} Dilihat
+                    {data?.views || 0} Dilihat
                 </div>
 
                 <span className='h-1 w-1 rounded-full bg-slate-500' />

@@ -18,7 +18,7 @@ async function getInitialPublications() {
                 limit: 3
             }
         });
-        return res.data.filter((item) => item.status == 'Published') || [];
+        return res.data.filter((item) => item.status.toLowerCase() == 'published') || [];
     } catch (err) {
         return [];
     }

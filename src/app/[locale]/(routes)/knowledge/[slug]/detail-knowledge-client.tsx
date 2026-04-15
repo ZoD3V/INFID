@@ -12,7 +12,7 @@ import PageHeader from '@/components/common/background-section';
 import CommentSection from '@/components/common/comment-article';
 import { LatestArticleCard } from '@/components/common/latest-article-card';
 import { Button } from '@/components/ui/button';
-import { Link as Navigate } from '@/i18n/navigation';
+import { Link as Navigate, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { Post } from '@/types/posts';
@@ -29,6 +29,7 @@ interface Props {
 
 const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
     const t = useTranslations('knowledge');
+    const router = useRouter();
 
     const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
     const [latestArticles, setLatestArticles] = useState<any[]>([]);
@@ -67,7 +68,7 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                 ]);
 
                 const filteredRelated = (relatedRes.data || relatedRes).filter(
-                    (item: Post) => item.id !== initialData?.id && item.status === 'Published'
+                    (item: Post) => item.id !== initialData?.id && item.status.toLowerCase() == 'published'
                 );
                 setRelatedArticles(filteredRelated);
                 setLatestArticles(latestRes.data || latestRes);
@@ -102,6 +103,16 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
         } catch (error: any) {
             toast.error(error.response?.data?.message);
         }
+    };
+
+    const handleArticleClick = async (article: Post) => {
+        try {
+            await apiRequest.get<Post>(`${API_ENDPOINTS.posts}/${article.id}/view`);
+        } catch (error) {
+            console.error('Failed to track view:', error);
+        }
+
+        router.push(`/knowledge/${article.id}-${article.translations[0]?.slug}`);
     };
 
     return (
@@ -156,12 +167,12 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                             <h3 className='pb-5 text-xl font-bold'>{t('content.latest_articles')}</h3>
                             <div className='flex w-full flex-col gap-4'>
                                 {latestArticles.map((article) => (
-                                    <Navigate
+                                    <div
                                         key={article.id}
-                                        href={`/news-from-us/${article.id}-${article.translations[0]?.slug}`}
-                                        className='group block'>
+                                        onClick={() => handleArticleClick(article)}
+                                        className='cursor-pointer'>
                                         <LatestArticleCard article={article} />
-                                    </Navigate>
+                                    </div>
                                 ))}
                             </div>
                         </div>
@@ -188,10 +199,13 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                 <div className='flex flex-col pt-16'>
                     <h3 className='pb-5 text-xl font-bold'>{t('content.related_articles')}</h3>
                     <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-                        {relatedArticles.map((article, index) => (
-                            <Navigate key={index} href={`/news-from-us/${article.id}-${article.translations[0]?.slug}`}>
+                        {relatedArticles.map((article) => (
+                            <div
+                                key={article.id}
+                                onClick={() => handleArticleClick(article)}
+                                className='cursor-pointer'>
                                 <ArticleCard article={article} />
-                            </Navigate>
+                            </div>
                         ))}
                     </div>
                 </div>

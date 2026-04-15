@@ -50,6 +50,7 @@ export interface Post {
     status: 'published' | 'draft' | string;
     featured: boolean;
     seen?: number;
+    views?: number;
     published_at: string;
     cover: string;
     translations: PostTranslation[];
