@@ -121,6 +121,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
             <PageHeader
                 title='Kabar dari Kami'
                 showTitle={false}
+                article={true}
                 backgroundImage='/images/background-about-us.webp'
                 breadcrumbs={[
                     { label: t('breadcrumb.home'), href: '/' },

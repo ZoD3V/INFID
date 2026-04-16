@@ -120,10 +120,11 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
             <PageHeader
                 title='Advokasi Berbasis Bukti'
                 showTitle={false}
+                article={true}
                 backgroundImage='/images/background-about-us.webp'
                 breadcrumbs={[
                     { label: t('breadcrumb.home'), href: '/' },
-                    { label: t('breadcrumb.about'), href: '/' },
+                    { label: t('breadcrumb.about'), href: '/knowledge' },
                     { label: translation?.title ?? '', active: true }
                 ]}
                 containerClassName='h-38 pt-14'

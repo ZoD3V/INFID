@@ -1,21 +1,52 @@
+'use client';
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 
+import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogClose, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { Link, useRouter } from '@/i18n/navigation';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { apiRequest } from '@/lib/api-request';
+import { formatArticleDate } from '@/lib/utils';
+import { Post } from '@/types/posts';
 import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import { Eye, Pencil, Play } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
-const RealImpactSection = () => {
+const RealImpactSection = ({ programData }: { programData: Post[] }) => {
     const t = useTranslations('home.hero_section');
     const b = useTranslations('button');
     const c = useTranslations('card');
     const videoId = '6KJBSilT76k';
     const startTime = 10;
     const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
+    const locale = useLocale();
+    const router = useRouter();
+
+    const [langIndex, setLangIndex] = useState(0);
+
+    useEffect(() => {
+        setLangIndex(locale === 'id' ? 0 : 1);
+    }, []);
+
+    const firstTranslation = programData[0]?.translations?.[langIndex] || programData[0]?.translations?.[0];
+    const secondTranslation = programData[1]?.translations?.[langIndex] || programData[1]?.translations?.[0];
+    const thirdTranslation = programData[2]?.translations?.[langIndex] || programData[2]?.translations?.[0];
+
+    const handleArticleClick = async (article: Post) => {
+        try {
+            await apiRequest.get<Post>(`${API_ENDPOINTS.posts}/${article.id}/view`);
+        } catch (error) {
+            console.error('Failed to track view:', error);
+        }
+
+        router.push(`/knowledge/${article.id}-${article.translations[0]?.slug}`);
+    };
 
     return (
         <section
@@ -107,36 +138,45 @@ const RealImpactSection = () => {
                     </Dialog>
 
                     {/* 2. Kartu Artikel (HARMONI)  */}
-                    <div className='group col-span-1 flex cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-2 transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-5 lg:min-h-112.5'>
+                    <div
+                        onClick={() => handleArticleClick(programData[0])}
+                        className='group col-span-1 flex cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-2 transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-5 lg:min-h-112.5'>
                         <Image
-                            src='/images/background-about-us.webp'
-                            alt='Harmoni'
+                            src={programData[0].cover}
+                            alt={firstTranslation.title}
                             width={600}
                             height={400}
                             className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-87'
                         />
                         <div className='px-1 pb-2'>
                             <div className='flex items-center gap-2 py-4'>
-                                <span className='text-secondary-300 text-xs font-medium uppercase'>HARMONI</span>
+                                <span className='text-secondary-300 text-xs font-medium uppercase'>
+                                    {programData[0]?.category.name ?? ''}
+                                </span>
                                 <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-                                <span className='text-xs text-slate-500'>15 Feb 2025</span>
+                                <span className='text-xs text-slate-500'>
+                                    {programData[0].created_at
+                                        ? formatArticleDate(programData[0].created_at)
+                                        : 'No Date'}
+                                </span>
                             </div>
 
-                            <div className='space-y-3'>
+                            <div className='space-y-3 overflow-hidden'>
                                 <h3 className='group-hover:text-primary-500 line-clamp-2 text-xl leading-snug font-bold transition-colors lg:text-2xl'>
-                                    Dari ketegangan menjadi ruang dialog warga
+                                    {firstTranslation?.title}
                                 </h3>
-                                <p className='mb-2 line-clamp-2 hidden text-sm leading-relaxed text-slate-600 lg:block'>
-                                    Cerita singkat bagaimana fasilitasi dialog membantu komunitas membangun kesepakatan
-                                    dan meredam konflik.
-                                </p>
-                                {/* Info tambahan tetap di bawah karena justify-between */}
+
+                                <div
+                                    className='mb-2 hidden text-sm leading-snug text-slate-600 lg:line-clamp-2'
+                                    dangerouslySetInnerHTML={{ __html: firstTranslation?.content || '' }}
+                                />
                                 <div className='flex items-center gap-3 text-xs text-slate-500'>
                                     <div className='flex items-center gap-1'>
-                                        <Pencil size={14} /> By Joko
+                                        <Pencil size={14} /> By {programData[0].author?.name || 'Admin'}
                                     </div>
                                     <div className='flex items-center gap-1'>
-                                        <Eye size={14} /> 200 Dilihat
+                                        <Eye size={14} /> {programData[0].views ?? 0}{' '}
+                                        {locale == 'id' ? 'Dilihat' : 'Seen'}
                                     </div>
                                 </div>
                             </div>
@@ -144,31 +184,41 @@ const RealImpactSection = () => {
                     </div>
 
                     {/* 3. Riset Statistik */}
-                    <div className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
+                    <div
+                        onClick={() => handleArticleClick(programData[1])}
+                        className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
                         <Image
-                            src='/images/background-about-us.webp'
-                            alt='Harmoni'
+                            src={programData[1].cover}
+                            alt={secondTranslation.title}
                             width={600}
                             height={400}
                             className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-57'
                         />
+
                         <div className='px-1 pb-2'>
                             <div className='flex items-center gap-2 py-4'>
-                                <span className='text-secondary-300 text-xs font-medium uppercase'>HARMONI</span>
+                                <span className='text-secondary-300 text-xs font-medium uppercase'>
+                                    {programData[0]?.category.name ?? ''}
+                                </span>
                                 <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-                                <span className='text-xs text-slate-500'>15 Feb 2025</span>
+                                <span className='text-xs text-slate-500'>
+                                    {programData[0].created_at
+                                        ? formatArticleDate(programData[0].created_at)
+                                        : 'No Date'}
+                                </span>
                             </div>
 
                             <div className='space-y-3'>
                                 <h3 className='group-hover:text-primary-500 line-clamp-2 text-base leading-snug font-bold transition-colors lg:text-lg'>
-                                    Dari ketegangan menjadi ruang dialog warga
+                                    {secondTranslation?.title}
                                 </h3>
                                 <div className='flex items-center gap-3 text-xs text-slate-500'>
                                     <div className='flex items-center gap-1'>
-                                        <Pencil size={14} /> By Joko
+                                        <Pencil size={14} /> By {programData[1].author?.name || 'Admin'}
                                     </div>
                                     <div className='flex items-center gap-1'>
-                                        <Eye size={14} /> 200 Dilihat
+                                        <Eye size={14} /> {programData[1].views ?? 0}{' '}
+                                        {locale == 'id' ? 'Dilihat' : 'Seen'}
                                     </div>
                                 </div>
                             </div>
@@ -176,31 +226,41 @@ const RealImpactSection = () => {
                     </div>
 
                     {/* 4. Provinsi Dijangkau */}
-                    <div className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
+                    <div
+                        onClick={() => handleArticleClick(programData[2])}
+                        className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
                         <Image
-                            src='/images/background-about-us.webp'
-                            alt='Harmoni'
+                            src={programData[2]?.cover}
+                            alt={thirdTranslation?.title ?? ''}
                             width={600}
                             height={400}
                             className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-57'
                         />
-                        <div className='px-1 pb-3'>
+
+                        <div className='px-1 pb-2'>
                             <div className='flex items-center gap-2 py-4'>
-                                <span className='text-secondary-300 text-xs font-medium uppercase'>HARMONI</span>
+                                <span className='text-secondary-300 text-xs font-medium uppercase'>
+                                    {programData[2]?.category.name ?? ''}
+                                </span>
                                 <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-                                <span className='text-xs text-slate-500'>15 Feb 2025</span>
+                                <span className='text-xs text-slate-500'>
+                                    {programData[2]?.created_at
+                                        ? formatArticleDate(programData[2]?.created_at)
+                                        : 'No Date'}
+                                </span>
                             </div>
 
                             <div className='space-y-3'>
                                 <h3 className='group-hover:text-primary-500 line-clamp-2 text-base leading-snug font-bold transition-colors lg:text-lg'>
-                                    Dari ketegangan menjadi ruang dialog warga
+                                    {thirdTranslation?.title}
                                 </h3>
                                 <div className='flex items-center gap-3 text-xs text-slate-500'>
                                     <div className='flex items-center gap-1'>
-                                        <Pencil size={14} /> By Joko
+                                        <Pencil size={14} /> By {programData[2]?.author?.name || 'Admin'}
                                     </div>
                                     <div className='flex items-center gap-1'>
-                                        <Eye size={14} /> 200 Dilihat
+                                        <Eye size={14} /> {programData[2]?.views ?? 0}{' '}
+                                        {locale == 'id' ? 'Dilihat' : 'Seen'}
                                     </div>
                                 </div>
                             </div>

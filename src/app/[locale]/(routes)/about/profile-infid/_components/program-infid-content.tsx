@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
+import CardContent from '@/components/common/card-content';
 import EmptyState from '@/components/common/empty-state';
 import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
@@ -76,9 +77,10 @@ export const ProgramInfidContent = ({ programData }: { programData: Post[] }) =>
                                             <h3 className='mb-3 text-xl leading-tight font-bold lg:text-2xl'>
                                                 {translation.title}
                                             </h3>
-                                            <div
-                                                className='prose prose-invert mb-4 line-clamp-3 text-sm leading-relaxed text-gray-200'
-                                                dangerouslySetInnerHTML={{ __html: translation?.content || '' }}
+
+                                            <CardContent
+                                                className='line-clamp-3 text-gray-200'
+                                                content={translation?.content}
                                             />
                                         </div>
                                     </div>

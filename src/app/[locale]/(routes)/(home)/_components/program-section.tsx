@@ -8,7 +8,7 @@ async function getInitialPublications() {
     try {
         const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
             params: {
-                category: '',
+                category: 'Kegiatan',
                 search: '',
                 author: '',
                 tags: '',

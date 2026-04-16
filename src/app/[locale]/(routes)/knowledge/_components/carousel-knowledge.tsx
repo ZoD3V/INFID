@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import CardContent from '@/components/common/card-content';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
@@ -75,9 +76,8 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                                         <div className='mb-4 min-h-0 space-y-2'>
                                             <h3 className='line-clamp-2 text-xl font-bold md:text-2xl'>{title}</h3>
-                                            <p className='line-clamp-2 text-sm leading-relaxed text-slate-600 md:text-base'>
-                                                {description}
-                                            </p>
+
+                                            <CardContent content={description} />
                                         </div>
                                     </div>
                                     <div className='mt-auto space-y-4'>

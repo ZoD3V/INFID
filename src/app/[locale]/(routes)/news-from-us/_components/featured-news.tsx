@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import CardContent from '@/components/common/card-content';
 import { Link, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
@@ -24,7 +25,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
             console.error('Tracking error:', error);
         }
 
-        router.push(`/knowledge/${item.id}-${item.translations[0]?.slug}`);
+        router.push(`/news-from-us/${item.id}-${item.translations[0]?.slug}`);
     };
 
     return (
@@ -80,9 +81,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                                         {title}
                                     </h2>
 
-                                    <p className='mb-2 line-clamp-2 text-sm leading-relaxed text-slate-600'>
-                                        {description.replace(/[#*`]/g, '')}
-                                    </p>
+                                    <CardContent content={description} />
 
                                     {/* Meta Information */}
                                     <div className='mt-1 flex flex-wrap items-center gap-2 text-xs text-slate-500'>

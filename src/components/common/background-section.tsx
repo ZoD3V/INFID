@@ -23,6 +23,7 @@ interface PageHeaderProps {
     breadcrumbs: BreadcrumbItemType[];
     showTitle?: boolean;
     showDescription?: boolean;
+    article?: boolean;
     containerClassName?: string;
 }
 
@@ -32,6 +33,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
     backgroundImage,
     breadcrumbs,
     showTitle = true,
+    article = false,
     showDescription = false,
     containerClassName = 'h-48 md:h-52 lg:h-67 pt-8'
 }) => {
@@ -51,7 +53,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
                                 {breadcrumbs.map((item, index) => (
                                     <React.Fragment key={index}>
                                         <BreadcrumbItem>
-                                            {index !== 1 && !item.active ? (
+                                            {!item.active && item?.href !== '/' && article ? (
                                                 <BreadcrumbLink
                                                     asChild
                                                     className='text-secondary-200 hover:text-secondary-300'>

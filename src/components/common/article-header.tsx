@@ -41,7 +41,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ data, translation 
                 {/* Views */}
                 <div className='flex items-center gap-1'>
                     <Eye className='h-3 w-3' />
-                    {data?.views || 0} Dilihat
+                    {data?.views || 0} {locale == 'id' ? 'Dilihat' : 'Seen'}
                 </div>
 
                 <span className='h-1 w-1 rounded-full bg-slate-500' />
@@ -49,7 +49,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ data, translation 
                 {/* Comments */}
                 <div className='flex items-center gap-1'>
                     <MessageSquareMore className='h-3 w-3' />
-                    {data?.comments?.length || 0} Komentar
+                    {data?.comments?.length || 0} {locale == 'id' ? 'Komentar' : 'Comments'}
                 </div>
             </div>
         </div>

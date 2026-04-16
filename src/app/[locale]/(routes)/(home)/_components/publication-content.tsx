@@ -227,7 +227,7 @@ export const PublicationContent = ({
 
                                                     <div className='flex items-center gap-2 text-xs text-slate-500'>
                                                         <div className='flex items-center gap-1'>
-                                                            <Eye className='h-4 w-4' /> 200 Dilihat
+                                                            <Eye className='h-4 w-4' /> {article.views ?? 0} Dilihat
                                                         </div>
 
                                                         <span className='h-1 w-1 rounded-full bg-slate-500'></span>

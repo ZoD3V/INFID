@@ -127,7 +127,7 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
 
             {/* Form Section */}
             <div className='rounded-2xl border bg-white p-5'>
-                <h3 className='mb-6 text-xl font-bold'>Tulis Komentar</h3>
+                <h3 className='mb-6 text-xl font-bold'>{t('comments.form_title')}</h3>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleFormSubmit)} className='space-y-6'>
                         <div className='grid grid-cols-1 items-start gap-6 md:grid-cols-2'>
