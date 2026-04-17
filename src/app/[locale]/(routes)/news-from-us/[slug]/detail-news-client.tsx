@@ -125,7 +125,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                 backgroundImage='/images/background-about-us.webp'
                 breadcrumbs={[
                     { label: t('breadcrumb.home'), href: '/' },
-                    { label: t('breadcrumb.about'), href: '/' },
+                    { label: t('breadcrumb.about'), href: '/news-from-us' },
                     { label: translation?.title ?? '', active: true }
                 ]}
                 containerClassName='h-38 pt-14'

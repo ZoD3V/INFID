@@ -57,25 +57,32 @@ export const PageHeaderSearch: React.FC<PageHeaderSearchProps> = ({
                     </p>
                 )}
 
-                {/* Search */}
+                {/* Search Form */}
                 <form
+                    role='search'
+                    aria-label='Sitewide search'
                     className='w-full'
                     onSubmit={(e) => {
                         e.preventDefault();
                         onSearch?.(value);
                     }}>
-                    <div className='mx-auto mt-10 flex w-full max-w-xl items-center gap-2 rounded-full border border-gray-400 bg-white/10 p-1.5 backdrop-blur-sm'>
+                    <div className='group mx-auto mt-10 flex w-full max-w-xl items-center gap-2 rounded-full border border-gray-400 bg-white/10 p-1.5 backdrop-blur-sm transition-all focus-within:border-white focus-within:ring-2 focus-within:ring-white'>
                         <div className='flex flex-1 items-center gap-2 pl-3'>
-                            <Search className='h-5 w-5 text-white' />
+                            <Search className='h-5 w-5 text-white' aria-hidden='true' />
                             <Input
                                 value={value}
                                 onChange={(e) => setValue(e.target.value)}
                                 placeholder={placeholder}
-                                className='rounded-full border-none bg-transparent text-sm text-white shadow-none placeholder:text-white focus-visible:ring-0 focus-visible:ring-offset-0'
+                                aria-label={placeholder}
+                                className='rounded-full border-none bg-transparent text-sm text-white shadow-none placeholder:text-white/70 focus-visible:ring-0 focus-visible:ring-offset-0'
                             />
                         </div>
 
-                        <Button type='submit' variant='secondary' className='rounded-full px-6'>
+                        <Button
+                            type='submit'
+                            variant='secondary'
+                            aria-label='Submit search'
+                            className='focus-visible:ring-offset-primary-500 rounded-full px-6 transition-all focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none'>
                             Cari
                         </Button>
                     </div>
