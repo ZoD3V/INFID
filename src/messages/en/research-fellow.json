@@ -1,0 +1,17 @@
+{
+    "fellow_section": {
+        "header": {
+            "title": "INFID Research Fellow",
+            "breadcrumb": {
+                "home": "Home",
+                "about": "About Us",
+                "active": "INFID Research Fellow"
+            }
+        },
+        "content": {
+            "badge": "Research Fellow",
+            "title": "INFID Research Fellow",
+            "description": "We collaborate with various national and international organizations to achieve inclusive and sustainable development."
+        }
+    }
+}

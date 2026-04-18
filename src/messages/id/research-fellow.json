@@ -1,0 +1,17 @@
+{
+    "fellow_section": {
+        "header": {
+            "title": "INFID Research Fellow",
+            "breadcrumb": {
+                "home": "Beranda",
+                "about": "Tentang Kami",
+                "active": "INFID Research Fellow"
+            }
+        },
+        "content": {
+            "badge": "Research Fellow",
+            "title": "INFID Research Fellow",
+            "description": "Kami bekerja sama dengan berbagai organisasi nasional dan internasional untuk mewujudkan pembangunan yang inklusif dan berkelanjutan."
+        }
+    }
+}

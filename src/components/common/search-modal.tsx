@@ -1,29 +1,47 @@
 import { useEffect, useState } from 'react';
 
+import { useRouter } from '@/i18n/navigation';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { apiRequest } from '@/lib/api-request';
+import { GlobalSearch } from '@/types/global-search';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 import { Search } from 'lucide-react';
+import { useLocale } from 'next-intl';
 
 export default function SearchModal() {
     const [isOpen, setIsOpen] = useState(false);
     const [keyword, setKeyword] = useState('');
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState<GlobalSearch | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const locale = useLocale();
+    const router = useRouter();
+
+    const [langIndex, setLangIndex] = useState(0);
+
+    useEffect(() => {
+        setLangIndex(locale === 'id' ? 0 : 1);
+    }, [locale]);
 
     useEffect(() => {
         if (!isOpen) return;
 
-        const timer = setTimeout(() => {
-            setIsLoading(true);
+        const timer = setTimeout(async () => {
             if (keyword.trim()) {
                 setIsLoading(true);
 
-                // axios
-                //     .get('/api/search', { params: { keyword } })
-                //     .then((res) => setResults(res.data.results))
-                //     .finally(() => setIsLoading(false));
+                const res = await apiRequest
+                    .get<GlobalSearch>(API_ENDPOINTS.globalSearch, {
+                        params: {
+                            limit: '',
+                            search: keyword
+                        }
+                    })
+                    .finally(() => setIsLoading(false));
+
+                setResults(res.data ?? null);
             }
         }, 300);
 
@@ -32,10 +50,6 @@ export default function SearchModal() {
 
     useEffect(() => {
         const handleKeyDown = (event: any) => {
-            // if (event.key === '/' && !isOpen) {
-            //     event.preventDefault();
-            //     setIsOpen(true);
-            // }
             if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
                 setIsOpen(true);
             }
@@ -48,14 +62,38 @@ export default function SearchModal() {
         };
     }, [isOpen]);
 
-    // Fungsi highlight keyword
-    const highlightText = (text: any, highlight: any) => {
+    const handleNavigate = (type: 'post' | 'job' | 'people', data: any) => {
+        switch (type) {
+            case 'post':
+                router.push(`/news-from-us/${data.id}-${data.translations[0]?.slug}`);
+                break;
+            case 'job':
+                router.push(`/involved/career`);
+                break;
+            case 'people':
+                router.push(`/about/profile-infid`);
+                break;
+        }
+
+        setIsOpen(false);
+    };
+
+    const highlightText = (text: string, highlight: string) => {
         if (!text) return '';
         if (!highlight) return text;
 
         const regex = new RegExp(`(${highlight})`, 'gi');
-        return text.split(regex).map((part: any, i: any) => (regex.test(part) ? <mark key={i}>{part}</mark> : part));
+
+        return text
+            .split(regex)
+            .map((part, i) => (part.toLowerCase() === highlight.toLowerCase() ? <mark key={i}>{part}</mark> : part));
     };
+
+    const posts = results?.posts ?? [];
+    const jobs = results?.jobs ?? [];
+    const people = results?.people ?? [];
+
+    const isEmpty = posts.length === 0 && jobs.length === 0 && people.length === 0;
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -108,105 +146,116 @@ export default function SearchModal() {
                             </span>
                         </div>
                     </form>
-                    <ScrollArea.Root className='max-h-[calc(85vh-44px)]'>
-                        <ScrollArea.Viewport className='h-full w-full'>
+                    <ScrollArea.Root className='max-h-[60vh] overflow-y-auto'>
+                        <ScrollArea.Viewport className='h-full w-full pr-2' role='listbox' aria-label='Search results'>
                             <div className='space-y-4 px-2 py-4'>
-                                <div>
-                                    <div className='mb-2 px-2 text-xs font-semibold text-gray-400 uppercase'>
-                                        Suggestions
+                                {/* RESULTS */}
+                                {(posts.length > 0 || jobs.length > 0 || people.length > 0) && (
+                                    <div className='space-y-4'>
+                                        {/* POSTS */}
+                                        {posts.length > 0 && (
+                                            <section aria-labelledby='section-posts'>
+                                                <div
+                                                    id='section-posts'
+                                                    className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                                    Posts
+                                                </div>
+
+                                                <ul role='group' aria-label='Post results'>
+                                                    {posts.map((post) => {
+                                                        const title = post.translations?.[langIndex]?.title ?? '';
+
+                                                        return (
+                                                            <li key={`post-${post.id}`}>
+                                                                <button
+                                                                    type='button'
+                                                                    role='option'
+                                                                    aria-label={`Open post: ${title}`}
+                                                                    onClick={() => handleNavigate('post', post)}
+                                                                    className='flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                    <span className='line-clamp-1'>
+                                                                        {highlightText(title, keyword)}
+                                                                    </span>
+                                                                </button>
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
+                                            </section>
+                                        )}
+
+                                        {/* JOBS */}
+                                        {jobs.length > 0 && (
+                                            <section aria-labelledby='section-jobs'>
+                                                <div
+                                                    id='section-jobs'
+                                                    className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                                    Jobs
+                                                </div>
+
+                                                <ul role='group' aria-label='Job results'>
+                                                    {jobs.map((job) => (
+                                                        <li key={`job-${job.id}`}>
+                                                            <button
+                                                                type='button'
+                                                                role='option'
+                                                                aria-label={`Open job: ${job.title}`}
+                                                                onClick={() => handleNavigate('job', job)}
+                                                                className='flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                <span className='line-clamp-1'>
+                                                                    {highlightText(job.title, keyword)}
+                                                                </span>
+                                                            </button>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </section>
+                                        )}
+
+                                        {/* PEOPLE */}
+                                        {people.length > 0 && (
+                                            <section aria-labelledby='section-people'>
+                                                <div
+                                                    id='section-people'
+                                                    className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                                    People
+                                                </div>
+
+                                                <ul role='group' aria-label='People results'>
+                                                    {people.map((person) => (
+                                                        <li key={`person-${person.id}`}>
+                                                            <button
+                                                                type='button'
+                                                                role='option'
+                                                                aria-label={`Open profile: ${person.name}`}
+                                                                onClick={() => handleNavigate('people', person)}
+                                                                className='flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                <span className='line-clamp-1'>
+                                                                    {highlightText(person.name, keyword)}
+                                                                </span>
+                                                            </button>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </section>
+                                        )}
                                     </div>
-                                    {/* {results.length > 0 && (
-                                        <ul>
-                                            {results.map((product) => (
-                                                <li key={product.id}>
-                                                    <a
-                                                        className='flex items-center rounded-lg px-2 py-1 text-sm leading-6 text-slate-700 outline-none focus-within:bg-slate-100 hover:bg-slate-100'
-                                                        href={'/product/' + product.id}>
-                                                        <svg
-                                                            className='mr-3 h-3 w-3 shrink-0 fill-slate-400'
-                                                            width='12'
-                                                            height='12'
-                                                            viewBox='0 0 12 12'>
-                                                            <path d='M11.953 4.29a.5.5 0 0 0-.454-.292H6.14L6.984.62A.5.5 0 0 0 6.12.173l-6 7a.5.5 0 0 0 .379.825h5.359l-.844 3.38a.5.5 0 0 0 .864.445l6-7a.5.5 0 0 0 .075-.534Z' />
-                                                        </svg>
-                                                        <span>{highlightText(product.name, keyword)}</span>
-                                                    </a>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )} */}
+                                )}
 
-                                    {keyword.length == 0 && results.length == 0 && (
-                                        <p className='mx-4 mt-2 py-10 text-center text-gray-500'>No recent searches</p>
-                                    )}
+                                {/* EMPTY STATES */}
+                                {keyword.length === 0 && isEmpty && (
+                                    <p className='mx-4 mt-2 py-10 text-center text-gray-500' role='status'>
+                                        No recent searches
+                                    </p>
+                                )}
 
-                                    {keyword && !isLoading && results.length === 0 && (
-                                        <p className='mx-4 mt-2 py-10 text-center text-gray-500'>No results</p>
-                                    )}
-                                    {/* <ul>
-                                        <li>
-                                            <a
-                                                className="flex items-center rounded-lg px-2 py-1 text-sm leading-6 text-slate-700 outline-none focus-within:bg-slate-100 hover:bg-slate-100"
-                                                href="#0"
-                                            >
-                                                <svg
-                                                    className="mr-3 h-3 w-3 shrink-0 fill-slate-400"
-                                                    width="12"
-                                                    height="12"
-                                                    viewBox="0 0 12 12"
-                                                >
-                                                    <path d="M11.953 4.29a.5.5 0 0 0-.454-.292H6.14L6.984.62A.5.5 0 0 0 6.12.173l-6 7a.5.5 0 0 0 .379.825h5.359l-.844 3.38a.5.5 0 0 0 .864.445l6-7a.5.5 0 0 0 .075-.534Z" />
-                                                </svg>
-                                                <span>Flexbox and Grid</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                className="flex items-center rounded-lg px-2 py-1 text-sm leading-6 text-slate-700 outline-none focus-within:bg-slate-100 hover:bg-slate-100"
-                                                href="#0"
-                                            >
-                                                <svg
-                                                    className="mr-3 h-3 w-3 shrink-0 fill-slate-400"
-                                                    width="12"
-                                                    height="12"
-                                                    viewBox="0 0 12 12"
-                                                >
-                                                    <path d="M11.953 4.29a.5.5 0 0 0-.454-.292H6.14L6.984.62A.5.5 0 0 0 6.12.173l-6 7a.5.5 0 0 0 .379.825h5.359l-.844 3.38a.5.5 0 0 0 .864.445l6-7a.5.5 0 0 0 .075-.534Z" />
-                                                </svg>
-                                                <span>API Reference</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                className="flex items-center rounded-lg px-2 py-1 text-sm leading-6 text-slate-700 outline-none focus-within:bg-slate-100 hover:bg-slate-100"
-                                                href="#0"
-                                            >
-                                                <svg
-                                                    className="mr-3 h-3 w-3 shrink-0 fill-slate-400"
-                                                    width="12"
-                                                    height="12"
-                                                    viewBox="0 0 12 12"
-                                                >
-                                                    <path d="M11.953 4.29a.5.5 0 0 0-.454-.292H6.14L6.984.62A.5.5 0 0 0 6.12.173l-6 7a.5.5 0 0 0 .379.825h5.359l-.844 3.38a.5.5 0 0 0 .864.445l6-7a.5.5 0 0 0 .075-.534Z" />
-                                                </svg>
-                                                <span>Authentication</span>
-                                            </a>
-                                        </li>
-                                    </ul> */}
-                                </div>
+                                {keyword && !isLoading && isEmpty && (
+                                    <p className='mx-4 mt-2 py-10 text-center text-gray-500' role='status'>
+                                        No results
+                                    </p>
+                                )}
                             </div>
                         </ScrollArea.Viewport>
-                        <ScrollArea.Scrollbar
-                            className='flex h-full w-2 touch-none border-l border-l-transparent p-px transition-colors select-none'
-                            orientation='vertical'>
-                            <ScrollArea.Thumb className='relative flex-1 rounded-full bg-slate-300' />
-                        </ScrollArea.Scrollbar>
-                        <ScrollArea.Scrollbar
-                            className='flex h-2.5 touch-none flex-col border-t border-t-transparent p-px transition-colors select-none'
-                            orientation='horizontal'>
-                            <ScrollArea.Thumb className='relative flex-1 rounded-full bg-slate-300' />
-                        </ScrollArea.Scrollbar>
-                        <ScrollArea.Corner className='bg-blackA5' />
                     </ScrollArea.Root>
                 </Dialog.Content>
             </Dialog.Portal>

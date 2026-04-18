@@ -11,5 +11,6 @@ export const API_ENDPOINTS = {
     organizationalStructure: '/v1/organizational-structure',
     people: '/v1/people',
     jobRecruitments: '/v1/job-recruitments',
-    inquiry: '/v1/inquiry'
+    inquiry: '/v1/inquiry',
+    globalSearch: '/v1/global-search'
 };
