@@ -106,12 +106,13 @@ export default function KnowledgePage() {
             try {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
-                        limit: 8,
+                        limit: '',
                         category: filters.category === 'Semua' || filters.category === 'all' ? '' : filters.category,
                         search: filters.search,
                         year: filters.year === 'all' ? '' : filters.year,
                         author: filters.author === 'all' ? '' : filters.author,
-                        tags: ''
+                        tags: '',
+                        featured: true
                     }
                 });
 

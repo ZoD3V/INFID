@@ -12,16 +12,16 @@ import { Job } from '@/types/job';
 
 import { format, parseISO } from 'date-fns';
 import { id } from 'date-fns/locale';
-import Cookies from 'js-cookie';
 import { FileText } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export function JobAccordion({ data }: { data: Job[] }) {
     const t = useTranslations('button');
+    const j = useTranslations('job');
     const [langIndex, setLangIndex] = useState(0);
+    const locale = useLocale();
 
     useEffect(() => {
-        const locale = Cookies.get('NEXT_LOCALE') || 'id';
         setLangIndex(locale === 'id' ? 0 : 1);
     }, []);
 
@@ -82,25 +82,31 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                     </div>
 
                                     <div className='space-y-6 md:col-span-8'>
-                                        <Section title='Deskripsi Pekerjaan'>
+                                        <Section title={j('description_work')}>
                                             <ArticleContent content={translation.text} />
                                         </Section>
 
-                                        {item.position && <Section title='Posisi'>{item.position}</Section>}
+                                        {item.position && <Section title={j('position')}>{item.position}</Section>}
 
                                         <div className='flex flex-col items-start justify-between border-t border-t-slate-200 pt-4 lg:flex-row lg:items-center'>
-                                            <h3 className='text-base font-bold md:text-lg'>Apply Sekarang!</h3>
+                                            <h3 className='text-base font-bold md:text-lg'>{j('cta')}</h3>
                                             <div className='flex flex-wrap gap-3 pt-4'>
-                                                {/* Action Buttons with Focus States */}
                                                 <Button
+                                                    asChild
                                                     variant='outline'
                                                     className='focus-visible:ring-primary-500 rounded-full focus-visible:ring-2 focus-visible:ring-offset-2'
                                                     aria-label={`Download job description for ${item.title} as PDF`}>
-                                                    <FileText className='mr-2 h-4 w-4' />
-                                                    PDF
+                                                    <a
+                                                        href={item.attachment}
+                                                        download
+                                                        target='_blank'
+                                                        rel='noopener noreferrer'>
+                                                        <FileText className='mr-2 h-4 w-4' />
+                                                        PDF
+                                                    </a>
                                                 </Button>
 
-                                                {item.link ? (
+                                                {item.link && (
                                                     <Button
                                                         className='bg-primary-500 hover:bg-primary-600 focus-visible:ring-primary-500 rounded-full text-white focus-visible:ring-2 focus-visible:ring-offset-2'
                                                         asChild>
@@ -109,14 +115,8 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                                             target='_blank'
                                                             rel='noopener noreferrer'
                                                             aria-label={`Submit application for ${item.title} via external link`}>
-                                                            Submit via Link
+                                                            {locale == 'id' ? 'Info Lebih Lanjut' : 'Find Out More'}
                                                         </a>
-                                                    </Button>
-                                                ) : (
-                                                    <Button
-                                                        className='bg-primary-500 hover:bg-primary-600 focus-visible:ring-primary-500 rounded-full text-white focus-visible:ring-2 focus-visible:ring-offset-2'
-                                                        aria-label={`Apply for ${item.title} via Email`}>
-                                                        Kirim Email
                                                     </Button>
                                                 )}
                                             </div>

@@ -62,7 +62,7 @@ export function ArticleFilters({
                             'focus-visible:ring-primary-500 focus-visible:ring-2 focus-visible:ring-inset',
                             selectedCategory === item
                                 ? 'bg-primary-500 hover:bg-primary-600 text-white'
-                                : 'border-none bg-slate-100 text-slate-600 shadow-none hover:bg-slate-200'
+                                : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none'
                         )}
                         variant={selectedCategory === item ? 'default' : 'outline'}
                         onClick={() => onCategoryChange(item)}>

@@ -11,6 +11,7 @@ import { formatArticleDate } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import { ArrowRight, Eye, MessageSquareMore, Pencil } from 'lucide-react';
+import { useLocale } from 'next-intl';
 
 interface FeaturedNewsProps {
     items: Post[];
@@ -18,6 +19,7 @@ interface FeaturedNewsProps {
 
 export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
     const router = useRouter();
+    const locale = useLocale();
 
     const handleNavigation = async (e: React.MouseEvent, item: any) => {
         e.preventDefault();
@@ -88,11 +90,11 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                                             </div>
                                             <div className='flex items-center gap-1'>
                                                 <Eye className='h-3 w-3' />
-                                                {seen}
+                                                {seen} {locale == 'id' ? 'Dilihat' : 'Seen'}
                                             </div>
                                             <div className='flex items-center gap-1'>
                                                 <MessageSquareMore className='h-3 w-3' />
-                                                {comments}
+                                                {comments} {locale == 'id' ? 'Komentar' : 'Comment'}
                                             </div>
                                         </div>
 

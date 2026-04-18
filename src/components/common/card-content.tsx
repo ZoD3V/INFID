@@ -13,23 +13,24 @@ const CardContent = ({ content, className = 'line-clamp-2' }: { content: string;
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
                 components={{
-                    p: ({ children }) => {
-                        const hasPreviewer = React.Children.toArray(children).some((child) => {
-                            if (React.isValidElement(child)) {
-                                const props = child.props as { href?: string };
-                                return props.href?.toLowerCase().endsWith('.pdf');
-                            }
-                            return false;
-                        });
+                    img: () => null,
 
-                        return hasPreviewer ? <div className='mb-4'>{children}</div> : <p>{children}</p>;
-                    },
                     a: ({ href, children }) => {
+                        const isPdf = href?.toLowerCase().endsWith('.pdf');
+
+                        if (isPdf) {
+                            return null;
+                        }
+
                         return (
                             <a href={href} target='_blank' rel='noopener noreferrer'>
                                 {children}
                             </a>
                         );
+                    },
+
+                    p: ({ children }) => {
+                        return <p>{children}</p>;
                     }
                 }}>
                 {content}

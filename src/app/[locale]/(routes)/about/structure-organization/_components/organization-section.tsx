@@ -7,10 +7,12 @@ import { formatLabel } from '@/lib/utils';
 import { OrganizationPeople, OrganizationPublication, OrganizationStructureProps } from '@/types/organization';
 
 import { Eye, MessageSquare } from 'lucide-react';
+import { useLocale } from 'next-intl';
 
 export default function OrganizationStructure({ data, activeTitle }: OrganizationStructureProps) {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedPerson, setSelectedPerson] = useState<OrganizationPeople | null>(null);
+    const locale = useLocale();
 
     const handleOpenDialog = (person: OrganizationPeople) => {
         setSelectedPerson(person);
@@ -111,7 +113,8 @@ export default function OrganizationStructure({ data, activeTitle }: Organizatio
 
                                                     <div className='mt-2 flex items-center gap-4 text-[11px] text-slate-400'>
                                                         <div className='flex items-center gap-1'>
-                                                            <Eye size={14} /> {pub.views} Dilihat
+                                                            <Eye size={14} /> {pub.views}{' '}
+                                                            {locale == 'id' ? 'Dilihat' : 'Seen'}
                                                         </div>
                                                         <div className='flex items-center gap-1'>
                                                             <MessageSquare size={14} /> {pub.comments} Komentar

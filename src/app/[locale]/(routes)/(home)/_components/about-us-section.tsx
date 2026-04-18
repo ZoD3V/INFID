@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Link } from '@/i18n/navigation';
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
+import BentoAboutUs from './bento-about-us';
 import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
@@ -11,9 +10,6 @@ const AboutUsSection = () => {
     const t = useTranslations('home.hero_section');
 
     const b = useTranslations('button');
-    const videoId = 'U0t1MvVi-9I';
-    const startTime = 74;
-    const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
 
     return (
         <section className='bg-secondary-100 relative py-24' id='about-us'>
@@ -25,7 +21,7 @@ const AboutUsSection = () => {
                 className='absolute top-10 right-10 hidden h-auto w-auto xl:block'
             />
             <div className='container'>
-                <div className='grid items-center gap-10 lg:grid-cols-2 lg:gap-12'>
+                <div className='grid items-center gap-10 lg:gap-10 xl:grid-cols-2'>
                     {/* Left Side - Images */}
                     <div className='relative'>
                         {/* Main Image */}
@@ -34,41 +30,16 @@ const AboutUsSection = () => {
                             alt='images'
                             width={100}
                             height={100}
-                            className='absolute -top-10 left-10 hidden xl:block'
+                            className='absolute -top-10 left-10 z-10 hidden xl:block'
                         />
-                        <Image
+                        {/* <Image
                             src='/images/about-us.webp'
                             alt='images'
                             width={500}
                             height={500}
                             className='z-1 h-auto w-full'
-                        />
-
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                {/* Play Button */}
-                                <div className='group absolute bottom-10 left-10 z-0 h-50 w-50 cursor-pointer sm:bottom-15 sm:left-15 md:bottom-15 md:left-25 xl:bottom-15 xl:left-25'></div>
-                            </DialogTrigger>
-
-                            {/* Video Popup Modal */}
-                            <DialogContent className='max-w-[calc(100%-2rem)] overflow-hidden border-none bg-black p-0 md:max-w-184 [&>button]:hidden'>
-                                <VisuallyHidden>
-                                    <DialogHeader>
-                                        <DialogTitle>Video Perjalanan SDGs Tangerang - INFID</DialogTitle>
-                                    </DialogHeader>
-                                </VisuallyHidden>
-                                <div className='aspect-video w-full'>
-                                    <iframe
-                                        width='100%'
-                                        height='100%'
-                                        src={videoSrc}
-                                        title='YouTube video player'
-                                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                                        allowFullScreen
-                                        className='border-none'></iframe>
-                                </div>
-                            </DialogContent>
-                        </Dialog>
+                        /> */}
+                        <BentoAboutUs />
 
                         {/* Decorative Logo */}
                         <div className='pointer-events-none absolute -bottom-20 -left-20 z-0 hidden xl:block'>

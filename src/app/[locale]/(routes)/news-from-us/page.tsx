@@ -105,12 +105,13 @@ export default function NewsFromUsPage() {
             try {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
-                        limit: 2,
+                        limit: '',
                         category: filters.category === 'Semua' ? '' : filters.category,
                         search: filters.search,
                         year: filters.year === 'all' ? '' : filters.year,
                         author: filters.author === 'all' ? '' : filters.author,
-                        tags: ''
+                        tags: '',
+                        featured: true
                     }
                 });
 
@@ -231,8 +232,8 @@ export default function NewsFromUsPage() {
                         <>
                             <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
                                 {filters.category == 'Semua'
-                                    ? `${t('content.all')} ${t('content.article')}`
-                                    : `${t('content.all')} ${filters.category}`}
+                                    ? `Highlight ${t('content.article')}`
+                                    : `Highlight ${filters.category}`}
                             </h3>
 
                             {featuredArticles.length > 0 && <FeaturedNews items={featuredArticles} />}

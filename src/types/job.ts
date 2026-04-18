@@ -5,6 +5,8 @@ export interface Job {
     position: string | null;
     description: Description[];
     location: string;
+    category: string;
+    attachment: string;
     work_location_type: string;
     employment_type: string;
     closing_date: string;

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
+import CardContent from '@/components/common/card-content';
 import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
 import { Button } from '@/components/ui/button';
@@ -25,6 +26,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
     const videoId = '6KJBSilT76k';
     const startTime = 10;
     const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     const locale = useLocale();
     const router = useRouter();
 
@@ -70,16 +72,19 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                                 {/* Image Container */}
                                 <div className='relative mb-4 h-70 overflow-hidden rounded-lg lg:h-80 xl:h-87'>
                                     <Image
-                                        src='/images/background-about-us.webp'
-                                        alt='featured'
+                                        src={thumbnailUrl}
+                                        alt='Video Thumbnail Perjalanan SDGs Tangerang'
                                         fill
                                         sizes='50vw'
                                         className='object-cover transition-all duration-300'
                                     />
 
                                     <div className='absolute inset-0 flex items-center justify-center bg-black/20 transition-all'>
-                                        <div className='rounded-full bg-white/90 p-3 shadow-lg'>
-                                            <Play />
+                                        <div className='rounded-full bg-white/90 p-3 transition-transform group-hover:scale-110 md:p-4'>
+                                            <Play
+                                                className='text-secondary-200 h-8 w-8 md:h-12 md:w-12'
+                                                fill='currentColor'
+                                            />
                                         </div>
                                     </div>
 
@@ -166,10 +171,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                                     {firstTranslation?.title}
                                 </h3>
 
-                                <div
-                                    className='mb-2 hidden text-sm leading-snug text-slate-600 lg:line-clamp-2'
-                                    dangerouslySetInnerHTML={{ __html: firstTranslation?.content || '' }}
-                                />
+                                <CardContent content={firstTranslation?.content || ''} />
                                 <div className='flex items-center gap-3 text-xs text-slate-500'>
                                     <div className='flex items-center gap-1'>
                                         <Pencil size={14} /> By {programData[0].author?.name || 'Admin'}
@@ -268,7 +270,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                     </div>
 
                     {/* 5. Organisasi Anggota */}
-                    <div className='order bg-secondary-100 col-span-1 flex flex-col items-center justify-between gap-4 rounded-xl border-slate-200 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
+                    <div className='order bg-secondary-100 col-span-1 flex flex-col items-center justify-between gap-4 overflow-hidden rounded-xl border-slate-200 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
                         <Image
                             src='/images/decoration-footer-1.png'
                             alt='decoration'

@@ -42,7 +42,7 @@ export const Maps: React.FC<MapsProps> = ({ data, onRegionClick, isLoading }) =>
     };
 
     return (
-        <div className='w-87.5 sm:w-100 md:w-153.75 lg:w-200 xl:w-full'>
+        <div className='w-full sm:w-100 md:w-153.75 lg:w-200 xl:w-full'>
             <svg onClick={handleClick} id='map' viewBox='0 0 1200 480' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <g clipPath='url(#clip0_40000873_5171)'>
                     <path

@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 
+import { ArticleCard } from '@/components/common/article-card';
+import CardContent from '@/components/common/card-content';
 import EmptyState from '@/components/common/empty-state';
 import PublicationsSkeleton from '@/components/common/publication-skeleton';
-import { Link, useRouter } from '@/i18n/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { formatDateShort, formatFullDate } from '@/lib/utils';
@@ -92,7 +94,7 @@ export const PublicationContent = ({
 
     return (
         <>
-            <h1 className='text-primary-900 mb-8 max-w-sm text-4xl font-bold lg:text-5xl'>{t('title')}</h1>
+            <h1 className='text-primary-900 mb-8 max-w-sm text-3xl font-bold md:text-4xl lg:text-5xl'>{t('title')}</h1>
 
             {categoriesData.length > 0 && (
                 <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
@@ -152,9 +154,7 @@ export const PublicationContent = ({
                                                 {translation?.title}
                                             </h2>
 
-                                            <p className='mb-2 line-clamp-3 text-sm leading-snug text-slate-600'>
-                                                {translation?.content}
-                                            </p>
+                                            <CardContent content={translation?.content} />
 
                                             <div className='mt-1 flex items-center gap-2 text-xs text-slate-500'>
                                                 <div className='flex items-center gap-1'>
@@ -164,14 +164,16 @@ export const PublicationContent = ({
                                                 <span className='h-1 w-1 rounded-full bg-slate-500'></span>
 
                                                 <div className='flex items-center gap-1'>
-                                                    <Eye className='h-3 w-3' /> {featured.views ?? 0} Dilihat
+                                                    <Eye className='h-3 w-3' /> {featured.views ?? 0}{' '}
+                                                    {locale == 'id' ? 'Dilihat' : 'Seen'}
                                                 </div>
 
                                                 <span className='h-1 w-1 rounded-full bg-slate-500'></span>
 
                                                 <div className='flex items-center gap-1'>
-                                                    <MessageSquareMore className='h-3 w-3' />{' '}
-                                                    {featured.comments?.length || 0} Komentar
+                                                    <MessageSquareMore className='h-3 w-3' />
+                                                    {featured.comments?.length || 0}{' '}
+                                                    {locale == 'id' ? 'Komentar' : 'Comment'}
                                                 </div>
                                             </div>
                                         </div>
@@ -227,14 +229,16 @@ export const PublicationContent = ({
 
                                                     <div className='flex items-center gap-2 text-xs text-slate-500'>
                                                         <div className='flex items-center gap-1'>
-                                                            <Eye className='h-4 w-4' /> {article.views ?? 0} Dilihat
+                                                            <Eye className='h-4 w-4' /> {article.views ?? 0}{' '}
+                                                            {locale == 'id' ? 'Dilihat' : 'Seen'}
                                                         </div>
 
                                                         <span className='h-1 w-1 rounded-full bg-slate-500'></span>
 
                                                         <div className='flex items-center gap-1'>
                                                             <MessageSquareMore className='h-4 w-4' />{' '}
-                                                            {article.comments?.length || 0} Komentar
+                                                            {article.comments?.length || 0}{' '}
+                                                            {locale == 'id' ? 'Komentar' : 'Comment'}
                                                         </div>
                                                     </div>
                                                 </div>

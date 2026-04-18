@@ -49,7 +49,6 @@ export interface Post {
     category: Category;
     status: 'published' | 'draft' | string;
     featured: boolean;
-    seen?: number;
     views?: number;
     published_at: string;
     cover: string;

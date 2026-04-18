@@ -2,35 +2,19 @@ import Image from 'next/image';
 
 import { formatArticleDate } from '@/lib/utils';
 import { cn } from '@/lib/utils';
+import { Post } from '@/types/posts';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
 import { useLocale } from 'next-intl';
 
-export interface BaseArticle {
-    id: number;
-    cover: string;
-    category: {
-        name: string;
-    };
-    published_at: string;
-    comments: any;
-    author: {
-        name: string | null;
-    };
-    translations: {
-        title: string;
-        slug: string;
-    }[];
-}
-
-interface ArticleCardProps<T extends BaseArticle> {
+interface ArticleCardProps<T extends Post> {
     article: T;
     className?: string;
     imageClassName?: string;
     aspectRatio?: 'video' | 'square' | 'auto';
 }
 
-export function ArticleCard<T extends BaseArticle>({ article, className, imageClassName }: ArticleCardProps<T>) {
+export function ArticleCard<T extends Post>({ article, className, imageClassName }: ArticleCardProps<T>) {
     const locale = useLocale();
 
     const langIndex = locale === 'id' ? 0 : 1;
@@ -41,6 +25,7 @@ export function ArticleCard<T extends BaseArticle>({ article, className, imageCl
     const authorName = article.author?.name || 'Admin';
     const publishedDate = article.published_at;
     const comments = article.comments;
+    const seen = article.views;
 
     return (
         <div
@@ -77,7 +62,7 @@ export function ArticleCard<T extends BaseArticle>({ article, className, imageCl
 
                     <div className='flex items-center gap-2 text-xs text-slate-500'>
                         <div className='flex items-center gap-1'>
-                            <Eye className='h-3 w-3' /> 0 {locale == 'id' ? 'Dilihat' : 'Seen'}
+                            <Eye className='h-3 w-3' /> {seen ?? 0} {locale == 'id' ? 'Dilihat' : 'Seen'}
                         </div>
                         <span className='h-1 w-1 rounded-full bg-slate-500'></span>
 
