@@ -4,8 +4,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import { Play } from 'lucide-react';
+import { useLocale } from 'next-intl';
 
 export default function BentoAboutUs() {
+    const locale = useLocale();
     const videoId = 'U0t1MvVi-9I';
     const startTime = 74;
     const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
@@ -63,9 +65,12 @@ export default function BentoAboutUs() {
                 {/* Card 3 */}
                 <div className='absolute right-0 bottom-7.5 z-20 flex h-27.5 w-27.5 flex-col items-center justify-center rounded-xl rounded-tl-none bg-[#F59E42] p-4 text-center text-white sm:bottom-15 sm:h-32.5 sm:w-32.5 md:bottom-15 md:h-45 md:w-45'>
                     <h2 className='text-4xl font-bold md:text-6xl'>40+</h2>
-                    <p className='text-xs leading-tight font-medium md:text-lg'>
-                        Tahun <br /> Perjalanan
-                    </p>
+                    <p
+                        className='text-xs leading-tight font-medium md:text-lg'
+                        dangerouslySetInnerHTML={{
+                            __html: locale == 'id' ? 'Tahun <br /> Perjalanan' : 'Years <br /> of Journey'
+                        }}
+                    />
                 </div>
             </div>
         </div>
