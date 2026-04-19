@@ -6,8 +6,10 @@ import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { subscribeAction } from '@/hooks/subscribe';
 import { cn } from '@/lib/utils';
 
+import SubmitButton from './submit-button';
 import { ArrowRight, Loader2, Mail, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
@@ -50,42 +52,17 @@ export default function HomeFloatingCard() {
         }
     };
 
-    const onSubmit = async (e: any) => {
-        e.preventDefault();
+    async function handleAction(formData: FormData) {
         setIsLoading(true);
+        const result = await subscribeAction(formData);
 
-        const API_KEY = process.env.NEXT_MAILCHIMP_API_KEY;
-        const LIST_ID = process.env.NEXT_MAILCHIMP_LIST_ID;
-        const DATACENTER = process.env.NEXT_MAILCHIMP_DATACENTER;
-
-        try {
-            const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Basic ${btoa(`user:${API_KEY}`)}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email_address: email,
-                    status: 'subscribed'
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                toast.success('Success subscribe!');
-                handleToggle(false);
-                setEmail('');
-            } else {
-                console.error('Mailchimp Error:', data);
-            }
-        } catch (err) {
-            console.error('Network Error:', err);
-        } finally {
-            setIsLoading(false);
+        if (result?.error) {
+            toast.success(result.error);
+        } else {
+            toast.success('Success Subscribe');
         }
-    };
+        setIsLoading(false);
+    }
 
     if (!isMounted) return null;
 
@@ -117,8 +94,9 @@ export default function HomeFloatingCard() {
 
                             <p className='text-primary-900 mb-6 text-center text-sm font-semibold'>{t('home')}</p>
 
-                            <form className='flex w-full flex-col items-center gap-3' onSubmit={onSubmit}>
+                            <form className='flex w-full flex-col items-center gap-3' action={handleAction}>
                                 <Input
+                                    name='email'
                                     type='email'
                                     required
                                     value={email}
@@ -127,15 +105,8 @@ export default function HomeFloatingCard() {
                                     className='rounded-full border-slate-200 bg-slate-50'
                                     disabled={isLoading}
                                 />
-                                <Button
-                                    type='submit'
-                                    size='sm'
-                                    variant='secondary'
-                                    className='w-full rounded-full'
-                                    disabled={isLoading}>
-                                    {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : b('subscribe')}
-                                    {!isLoading && <ArrowRight className='ml-2 h-4 w-4' />}
-                                </Button>
+
+                                <SubmitButton label={b('subscribe')} />
                             </form>
                         </div>
                     ) : (
@@ -146,11 +117,6 @@ export default function HomeFloatingCard() {
                                 'animate-in fade-in slide-in-from-bottom-4'
                             )}>
                             <Mail className='text-white' size={24} />
-                            {/* Dot Notifikasi (Opsional) */}
-                            {/* <span className='absolute top-0 right-0 flex h-3 w-3'>
-                                <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75'></span>
-                                <span className='relative inline-flex h-3 w-3 rounded-full bg-red-500'></span>
-                            </span> */}
                         </button>
                     )}
                 </div>

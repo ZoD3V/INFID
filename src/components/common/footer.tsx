@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 
+import { subscribeAction } from '@/hooks/subscribe';
 import { Link, usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
+import SubmitButton from './submit-button';
 import { ArrowRight, ChevronUp, Loader2, MailIcon, PhoneCall } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { BsTwitterX, BsWhatsapp } from 'react-icons/bs';
@@ -38,41 +40,17 @@ const Footer = () => {
         ]
     };
 
-    const onSubmit = async (e: any) => {
-        e.preventDefault();
+    async function handleAction(formData: FormData) {
         setIsLoading(true);
+        const result = await subscribeAction(formData);
 
-        const API_KEY = process.env.NEXT_MAILCHIMP_API_KEY;
-        const LIST_ID = process.env.NEXT_MAILCHIMP_LIST_ID;
-        const DATACENTER = process.env.NEXT_MAILCHIMP_DATACENTER;
-
-        try {
-            const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Basic ${btoa(`user:${API_KEY}`)}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email_address: email,
-                    status: 'subscribed'
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                toast.success('Success subscribe!');
-                setEmail('');
-            } else {
-                console.error('Mailchimp Error:', data);
-            }
-        } catch (err) {
-            console.error('Network Error:', err);
-        } finally {
-            setIsLoading(false);
+        if (result?.error) {
+            toast.success(result.error);
+        } else {
+            toast.success('Success Subscribe');
         }
-    };
+        setIsLoading(false);
+    }
 
     return (
         <footer className='bg-primary-500'>
@@ -179,22 +157,18 @@ const Footer = () => {
                                     <p className='text-sm font-normal text-slate-200'>{t('newsletter.description')}</p>
                                 </div>
 
-                                <form className='flex w-full max-w-sm flex-col items-center gap-4' onSubmit={onSubmit}>
+                                <form
+                                    className='flex w-full max-w-sm flex-col items-center gap-4'
+                                    action={handleAction}>
                                     <Input
+                                        name='email'
                                         type='email'
-                                        placeholder={p('insertEmail')}
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                        placeholder='Masukkan email'
                                         className='rounded-full border-gray-400 bg-white/10 text-sm text-white placeholder:text-slate-400 focus-visible:ring-slate-400'
                                     />
-                                    <Button
-                                        type='submit'
-                                        variant='secondary'
-                                        className='w-full rounded-full transition-all focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:outline-none'
-                                        disabled={isLoading}>
-                                        {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : b('subscribe')}
-                                        {!isLoading && <ArrowRight className='ml-2 h-4 w-4' />}
-                                    </Button>
+
+                                    <SubmitButton label='Subscribe' />
                                 </form>
                             </div>
                         </div>
