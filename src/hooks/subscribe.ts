@@ -17,13 +17,21 @@ export async function subscribeAction(formData: FormData) {
             body: JSON.stringify({ email_address: email, status: 'subscribed' })
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-            const errorData = await response.json();
-            return { error: errorData.detail || 'Failed subscribe.' };
+            return {
+                success: false,
+                error: data.detail || 'Failed to subscribe. Please check your email and try again.'
+            };
         }
 
         return { success: true };
-    } catch (err) {
-        return { error: err };
+    } catch (err: any) {
+        console.error('Mailchimp Server Error:', err);
+        return {
+            success: false,
+            error: 'Internal server error. Please try again later.'
+        };
     }
 }
