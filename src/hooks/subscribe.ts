@@ -19,11 +19,11 @@ export async function subscribeAction(formData: FormData) {
 
         if (!response.ok) {
             const errorData = await response.json();
-            return { error: errorData.detail || 'Gagal subscribe.' };
+            return { error: errorData.detail || 'Failed subscribe.' };
         }
 
         return { success: true };
     } catch (err) {
-        return { error: 'Terjadi kesalahan koneksi.' };
+        return { error: err };
     }
 }
