@@ -163,7 +163,9 @@ export default function SearchModal() {
 
                                                 <ul role='group' aria-label='Post results'>
                                                     {posts.map((post) => {
-                                                        const title = post.translations?.[langIndex]?.title ?? '';
+                                                        const title =
+                                                            post.translations?.[langIndex]?.title ??
+                                                            post.translations?.[0]?.title;
 
                                                         return (
                                                             <li key={`post-${post.id}`}>
