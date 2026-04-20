@@ -49,11 +49,11 @@ export interface Post {
     category: Category;
     status: 'published' | 'draft' | string;
     featured: boolean;
-    views?: number;
     published_at: string;
     cover: string;
     translations: PostTranslation[];
     tags: Tags[];
+    views?: number;
     comments: Comment[];
     assets: { file_path: string }[];
     created_at: string;
