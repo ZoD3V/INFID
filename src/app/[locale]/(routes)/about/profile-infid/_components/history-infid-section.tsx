@@ -101,8 +101,15 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
                     ) : (
                         <div className='max-w-full xl:max-w-4xl'>
                             <h2 className='text-primary-500 mb-6 text-2xl font-bold'>{selectedTimeline.title}</h2>
-                            <div className='flex flex-col items-start gap-8'>
-                                <ArticleContent content={selectedTimeline.description[langIndex]?.text ?? ''} />
+                            <div className='flex flex-col items-start gap-8 md:flex-row'>
+                                <div className='flex w-full flex-col gap-2 md:w-1/3'>
+                                    {selectedTimeline.images.map((item, index) => (
+                                        <img src={item} alt='People' key={index} />
+                                    ))}
+                                </div>
+                                <div className='w-full md:w-3/4'>
+                                    <ArticleContent content={selectedTimeline.description[langIndex]?.text ?? ''} />
+                                </div>
                             </div>
                         </div>
                     )}
@@ -134,7 +141,7 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
                                             {selectedPerson.occupation}
                                         </p>
                                         <div className='prose prose-sm mt-4 text-slate-700'>
-                                            {selectedPerson.description || 'Tidak ada informasi detail tersedia.'}
+                                            {selectedPerson.description || 'No detailed information available.'}
                                         </div>
                                     </div>
                                 </div>

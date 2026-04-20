@@ -29,19 +29,24 @@ export default function SearchModal() {
         if (!isOpen) return;
 
         const timer = setTimeout(async () => {
-            if (keyword.trim()) {
+            if (keyword.trim() && keyword.trim().length > 3) {
                 setIsLoading(true);
 
-                const res = await apiRequest
-                    .get<GlobalSearch>(API_ENDPOINTS.globalSearch, {
+                try {
+                    const res = await apiRequest.get<GlobalSearch>(API_ENDPOINTS.globalSearch, {
                         params: {
                             limit: '',
                             search: keyword
                         }
-                    })
-                    .finally(() => setIsLoading(false));
-
-                setResults(res.data ?? null);
+                    });
+                    setResults(res.data ?? null);
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    setIsLoading(false);
+                }
+            } else {
+                setResults(null);
             }
         }, 300);
 

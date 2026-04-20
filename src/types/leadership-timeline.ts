@@ -14,6 +14,7 @@ export interface LeadershipTimeline {
     description: DescriptionTranslation[];
     order: number;
     peoples: LTPeople[];
+    images: string[];
 }
 
 export interface DescriptionTranslation {
