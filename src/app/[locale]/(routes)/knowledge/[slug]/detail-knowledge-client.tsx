@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Link as Navigate, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { Post } from '@/types/posts';
+import { Post, PostTranslation } from '@/types/posts';
 
 import { Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -34,8 +34,10 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
     const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
     const [latestArticles, setLatestArticles] = useState<any[]>([]);
 
-    const langIndex = locale === 'id' ? 0 : 1;
-    const translation = initialData?.translations?.[langIndex] || initialData?.translations?.[0];
+    const translation =
+        initialData?.translations?.find((t: PostTranslation) => t.language === locale) ||
+        initialData?.translations?.find((t: PostTranslation) => t.language === 'id') ||
+        initialData?.translations?.[0];
 
     useEffect(() => {
         const fetchSuggestions = async () => {

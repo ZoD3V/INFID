@@ -33,7 +33,10 @@ export function JobAccordion({ data }: { data: Job[] }) {
         <div className='space-y-6'>
             <Accordion type='single' collapsible className='space-y-4'>
                 {data.map((item) => {
-                    const translation = item?.description?.[langIndex] || item?.description?.[0];
+                    const translation =
+                        item?.description?.find((t) => t.language === locale) ||
+                        item?.description?.find((t) => t.language === 'id') ||
+                        item?.description?.[0];
                     return (
                         <AccordionItem
                             key={item.id}

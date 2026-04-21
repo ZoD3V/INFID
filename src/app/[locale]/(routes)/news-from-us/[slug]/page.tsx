@@ -29,8 +29,10 @@ export async function generateMetadata({
     const data = await getPostDetail(id);
     if (!data) return { title: 'News Not Found' };
 
-    const langIndex = locale === 'id' ? 0 : 1;
-    const translation = data?.translations?.[langIndex] || data?.translations?.[0];
+    const translation =
+        data?.translations?.find((t) => t.language === locale) ||
+        data?.translations?.find((t) => t.language === 'id') ||
+        data?.translations?.[0];
 
     const title = translation?.title || 'Detail Berita';
     const description = translation?.content?.substring(0, 160).replace(/<[^>]*>/g, '') || '';
@@ -41,7 +43,7 @@ export async function generateMetadata({
         openGraph: {
             title: title,
             description: description,
-            images: [data?.cover || '/images/placeholder-square.png'],
+            images: [data?.cover],
             type: 'article'
         },
         twitter: {

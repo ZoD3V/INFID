@@ -15,12 +15,6 @@ export const ProgramInfidContent = ({ programData }: { programData: Post[] }) =>
     const t = useTranslations('profile.program_section');
     const locale = useLocale();
 
-    const [langIndex, setLangIndex] = useState(0);
-
-    useEffect(() => {
-        setLangIndex(locale === 'id' ? 0 : 1);
-    }, []);
-
     return (
         <div className='bg-secondary-100 relative min-h-screen py-24' id='program-infid'>
             <Image
@@ -56,8 +50,10 @@ export const ProgramInfidContent = ({ programData }: { programData: Post[] }) =>
                             className='absolute -right-15 -bottom-5 z-30 hidden xl:block'
                         />
                         {programData.map((program, index) => {
-                            const translation = program?.translations?.[langIndex] || program?.translations?.[0];
-
+                            const translation =
+                                program?.translations?.find((t) => t.language === locale) ||
+                                program?.translations?.find((t) => t.language === 'id') ||
+                                program?.translations?.[0];
                             return (
                                 <div
                                     key={index}

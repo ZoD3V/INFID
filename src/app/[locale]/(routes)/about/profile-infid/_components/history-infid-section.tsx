@@ -121,7 +121,13 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
                                     ))}
                                 </div>
                                 <div className='w-full md:w-3/4'>
-                                    <ArticleContent content={selectedTimeline.description[langIndex]?.text ?? ''} />
+                                    <ArticleContent
+                                        content={
+                                            selectedTimeline.description?.find((d) => d.language === locale)?.text ||
+                                            selectedTimeline.description?.[0]?.text ||
+                                            ''
+                                        }
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -171,8 +177,10 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
 
                                 <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
                                     {selectedPerson.publications.map((pub: Publication, index) => {
-                                        const translation = pub?.translations?.[langIndex] || pub?.translations?.[0];
-
+                                        const translation =
+                                            pub?.translations?.find((t) => t.language === locale) ||
+                                            pub?.translations?.find((t) => t.language === 'id') ||
+                                            pub?.translations?.[0];
                                         return (
                                             <div key={index} className='group flex cursor-pointer gap-4'>
                                                 <div className='h-20 w-20 shrink-0 overflow-hidden rounded-md bg-slate-100'>

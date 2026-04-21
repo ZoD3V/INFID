@@ -12,7 +12,7 @@ import { Link, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { formatArticleDate } from '@/lib/utils';
-import { Post } from '@/types/posts';
+import { Post, PostTranslation } from '@/types/posts';
 import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
@@ -30,15 +30,14 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
     const locale = useLocale();
     const router = useRouter();
 
-    const [langIndex, setLangIndex] = useState(0);
+    const getTranslation = (item: Post, targetLang: string) => {
+        if (!item?.translations) return null;
+        return item.translations.find((t) => t.language === targetLang) || item.translations[0];
+    };
 
-    useEffect(() => {
-        setLangIndex(locale === 'id' ? 0 : 1);
-    }, []);
-
-    const firstTranslation = programData[0]?.translations?.[langIndex] || programData[0]?.translations?.[0];
-    const secondTranslation = programData[1]?.translations?.[langIndex] || programData[1]?.translations?.[0];
-    const thirdTranslation = programData[2]?.translations?.[langIndex] || programData[2]?.translations?.[0];
+    const firstTranslation = getTranslation(programData[0], locale);
+    const secondTranslation = getTranslation(programData[1], locale);
+    const thirdTranslation = getTranslation(programData[2], locale);
 
     const handleArticleClick = async (article: Post) => {
         try {
@@ -148,7 +147,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                         className='group col-span-1 flex cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-2 transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-5 lg:min-h-112.5'>
                         <Image
                             src={programData[0].cover}
-                            alt={firstTranslation.title}
+                            alt={firstTranslation?.title ?? 'image'}
                             width={600}
                             height={400}
                             className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-87'
@@ -191,7 +190,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                         className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
                         <Image
                             src={programData[1].cover}
-                            alt={secondTranslation.title}
+                            alt={secondTranslation?.title ?? 'image'}
                             width={600}
                             height={400}
                             className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-57'

@@ -15,12 +15,6 @@ const ProgramContent = ({ programData }: { programData: Post[] }) => {
     const t = useTranslations('home.program_us');
     const locale = useLocale();
 
-    const [langIndex, setLangIndex] = useState(0);
-
-    useEffect(() => {
-        setLangIndex(locale === 'id' ? 0 : 1);
-    }, []);
-
     return (
         <section id='program-us' className='bg-secondary-100 relative py-24'>
             <Image
@@ -64,7 +58,10 @@ const ProgramContent = ({ programData }: { programData: Post[] }) => {
                     {programData && programData.length > 0 ? (
                         <div className='space-y-6'>
                             {programData.map((program, index) => {
-                                const translation = program?.translations?.[langIndex] || program?.translations?.[0];
+                                const translation =
+                                    program?.translations?.find((t) => t.language === locale) ||
+                                    program?.translations?.find((t) => t.language === 'id') ||
+                                    program?.translations?.[0];
 
                                 return (
                                     <div

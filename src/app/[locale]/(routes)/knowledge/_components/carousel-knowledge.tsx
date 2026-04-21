@@ -25,12 +25,6 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
     const locale = useLocale();
     const b = useTranslations('button');
 
-    const [langIndex, setLangIndex] = useState(0);
-
-    useEffect(() => {
-        setLangIndex(locale === 'id' ? 0 : 1);
-    }, []);
-
     const handleNavigation = async (e: React.MouseEvent, item: any) => {
         e.preventDefault();
 
@@ -52,7 +46,10 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
             className='relative mb-5 w-full overflow-visible'>
             <CarouselContent className='-ml-4'>
                 {items.map((item) => {
-                    const translation = item?.translations?.[langIndex] || item?.translations?.[0];
+                    const translation =
+                        item?.translations?.find((t) => t.language === locale) ||
+                        item?.translations?.find((t) => t.language === 'id') ||
+                        item?.translations?.[0];
 
                     const title = translation?.title || 'No Title';
                     const seen = item.views || 0;

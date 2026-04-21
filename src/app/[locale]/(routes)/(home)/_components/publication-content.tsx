@@ -120,7 +120,10 @@ export const PublicationContent = ({
                     {/* Featured Article */}
                     {featured &&
                         (() => {
-                            const translation = featured.translations?.[langIndex] || featured.translations?.[0];
+                            const translation =
+                                featured?.translations?.find((t) => t.language === locale) ||
+                                featured?.translations?.find((t) => t.language === 'id') ||
+                                featured?.translations?.[0];
                             const dateParts = featured.published_at
                                 ? formatDateShort(featured.published_at).split(' ')
                                 : ['01', 'Jan', '2026'];
@@ -185,7 +188,10 @@ export const PublicationContent = ({
                     {/* Side Articles */}
                     <div className='grid grid-rows-3 gap-5'>
                         {sideArticles.map((article, index) => {
-                            const translation = article.translations?.[langIndex] || article.translations?.[0];
+                            const translation =
+                                article?.translations?.find((t) => t.language === locale) ||
+                                article?.translations?.find((t) => t.language === 'id') ||
+                                article?.translations?.[0];
 
                             return (
                                 <div
