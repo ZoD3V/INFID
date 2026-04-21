@@ -31,7 +31,8 @@
         "load_more": "Muat Lebih Banyak",
         "latest_articles": "Artikel Terbaru",
         "related_articles": "Artikel Terkait",
-        "comments": "Komentar"
+        "comments": "Komentar",
+        "attachments": "Unduh Lampiran"
     },
     "form": {
         "placeholder_name": "Masukan Nama Lengkap",

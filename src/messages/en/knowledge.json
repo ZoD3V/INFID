@@ -31,7 +31,8 @@
         "load_more": "Load More",
         "latest_articles": "Latest Articles",
         "related_articles": "Related Articles",
-        "comments": "Comments"
+        "comments": "Comments",
+        "attachments": "Download Attachments"
     },
     "form": {
         "placeholder_name": "Enter Full Name",

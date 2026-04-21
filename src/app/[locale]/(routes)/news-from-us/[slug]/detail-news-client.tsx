@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
+import AttachmentList from '@/components/common/article-attachment-list';
 import { ArticleCard } from '@/components/common/article-card';
 import { ArticleContent } from '@/components/common/article-content';
 import { ArticleHeader } from '@/components/common/article-header';
@@ -15,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Link as Navigate, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { Post, PostTranslation } from '@/types/posts';
+import { Post, PostTranslation, Tags } from '@/types/posts';
 
 import { Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -28,11 +29,12 @@ interface Props {
 }
 
 const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
+    console.log(initialData);
     const t = useTranslations('news');
     const router = useRouter();
 
-    const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
-    const [latestArticles, setLatestArticles] = useState<any[]>([]);
+    const [relatedArticles, setRelatedArticles] = useState<Post[]>([]);
+    const [latestArticles, setLatestArticles] = useState<Post[]>([]);
 
     const translation =
         initialData?.translations?.find((t: PostTranslation) => t.language === locale) ||
@@ -84,11 +86,11 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
     }, [initialData.id, initialData.category?.name]);
 
     const handleDownload = () => {
-        const filePath = translation?.assets?.[0]?.file_path;
+        const filePath = translation?.attachments?.[0]?.file_path;
         if (filePath) {
             window.open(filePath, '_blank');
         } else {
-            toast.error('Lampiran tidak tersedia');
+            toast.error('Attachments not available');
         }
     };
 
@@ -135,16 +137,15 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
 
             <div className='container py-16'>
                 <div className='flex w-full flex-col items-start justify-center gap-10 xl:flex-row'>
-                    {/* Konten Utama */}
                     <div className='flex w-full flex-col gap-8'>
                         <ArticleHeader data={initialData} translation={translation} />
 
                         <div className='flex items-center justify-between gap-4'>
                             <h3 className='text-secondary-300 font-bold uppercase'>{initialData?.category?.name}</h3>
-                            {(translation?.assets?.length ?? 0) > 0 && (
+                            {translation?.attachments?.length > 0 && (
                                 <Button className='rounded-full' size={'sm'} onClick={handleDownload}>
                                     <Download className='mr-2 h-4 w-4' />
-                                    Unduh Lampiran
+                                    {t('content.attachments')}
                                 </Button>
                             )}
                         </div>
@@ -159,6 +160,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                         />
 
                         <ArticleContent content={translation?.content || ''} />
+                        {/* <AttachmentList attachments={translation?.attachments ?? []} /> */}
 
                         <ArticleShareBar categoryName={initialData?.category?.name} title={translation?.title} />
 
@@ -185,7 +187,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                             <div className='flex flex-col pt-5'>
                                 <h3 className='pb-5 text-xl font-bold'>Tag</h3>
                                 <div className='flex flex-wrap gap-2'>
-                                    {initialData.tags.map((tag: any) => (
+                                    {initialData.tags.map((tag: Tags) => (
                                         <Navigate
                                             key={tag.id}
                                             href={`/news-from-us?category=${tag.name}`}

@@ -31,8 +31,8 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
     const t = useTranslations('knowledge');
     const router = useRouter();
 
-    const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
-    const [latestArticles, setLatestArticles] = useState<any[]>([]);
+    const [relatedArticles, setRelatedArticles] = useState<Post[]>([]);
+    const [latestArticles, setLatestArticles] = useState<Post[]>([]);
 
     const translation =
         initialData?.translations?.find((t: PostTranslation) => t.language === locale) ||
@@ -134,16 +134,15 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
 
             <div className='container py-16'>
                 <div className='flex w-full flex-col items-start justify-center gap-10 xl:flex-row'>
-                    {/* Konten Utama */}
                     <div className='flex w-full flex-col gap-8'>
                         <ArticleHeader data={initialData} translation={translation} />
 
                         <div className='flex items-center justify-between gap-4'>
                             <h3 className='text-secondary-300 font-bold uppercase'>{initialData?.category?.name}</h3>
-                            {(translation?.assets?.length ?? 0) > 0 && (
+                            {translation!.attachments?.length > 0 && (
                                 <Button className='rounded-full' size={'sm'} onClick={handleDownload}>
                                     <Download className='mr-2 h-4 w-4' />
-                                    Unduh Lampiran
+                                    {t('content.attachments')}
                                 </Button>
                             )}
                         </div>

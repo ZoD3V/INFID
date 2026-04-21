@@ -1,3 +1,18 @@
+export type AttachmentFileType = 'audio' | 'pdf' | 'image' | 'video' | string;
+
+export interface Attachment {
+    id: number;
+    file_path: string;
+    aria: string | null;
+    type: AttachmentFileType;
+    role: 'attachment' | string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface AttachmentListProps {
+    attachments: Attachment[];
+}
 export interface Author {
     id: number | null;
     name: string | null;
@@ -22,6 +37,7 @@ export interface PostTranslation {
     created_at: string;
     updated_at: string;
     assets: { file_path: string }[];
+    attachments: Attachment[];
 }
 
 export interface Tags {
