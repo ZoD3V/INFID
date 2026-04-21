@@ -28,7 +28,8 @@ export const ProgramInfidContent = ({ programData }: { programData: Post[] }) =>
                 alt='decoration'
                 width={200}
                 height={200}
-                className='absolute top-0 left-0 hidden xl:block'
+                sizes='100%'
+                className='absolute top-0 left-0 hidden h-auto w-auto xl:block'
             />
             <div className='container'>
                 {/* Header */}

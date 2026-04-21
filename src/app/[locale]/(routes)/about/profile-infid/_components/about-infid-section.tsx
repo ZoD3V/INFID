@@ -131,6 +131,7 @@ const AboutInfid = () => {
                                         src='/images/background-section.webp'
                                         alt='Focus Discussion'
                                         fill
+                                        sizes='100%'
                                         className='rounded-xl object-cover'
                                     />
                                 </div>

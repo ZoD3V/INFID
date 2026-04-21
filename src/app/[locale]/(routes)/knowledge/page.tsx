@@ -11,7 +11,6 @@ import { PageHeaderSearch } from '@/components/common/background-news-section';
 import EmptyState from '@/components/common/empty-state';
 import { FeaturedNewsSkeleton } from '@/components/common/featured-news-skeleton';
 import { Button } from '@/components/ui/button';
-import { Link } from '@/i18n/navigation';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';

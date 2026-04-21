@@ -4,7 +4,14 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog';
 import { Link } from '@/i18n/navigation';
 import { useRouter } from '@/i18n/routing';
 
@@ -63,6 +70,7 @@ const Home = () => {
                 <DialogContent className='sm:max-w-106.25'>
                     <DialogHeader>
                         <DialogTitle>{d('title')}</DialogTitle>
+                        <DialogDescription></DialogDescription>
                     </DialogHeader>
 
                     <DialogFooter className='mt-4 flex gap-2 sm:justify-end'>

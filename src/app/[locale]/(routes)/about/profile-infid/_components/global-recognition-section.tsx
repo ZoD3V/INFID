@@ -25,7 +25,8 @@ const GlobalRecognitionSection = () => {
                 alt='images'
                 width={80}
                 height={80}
-                className='absolute -top-20 right-10 hidden xl:block'
+                sizes='100%'
+                className='absolute -top-20 right-10 hidden h-auto w-auto xl:block'
             />
             <div className='container'>
                 <div className='grid items-start gap-12 lg:grid-cols-2 lg:gap-16'>

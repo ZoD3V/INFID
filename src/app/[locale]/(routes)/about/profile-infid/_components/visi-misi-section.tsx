@@ -25,7 +25,8 @@ const VisiMisiInfidSection = () => {
                 alt='images'
                 width={150}
                 height={150}
-                className='absolute top-5 right-5 hidden -rotate-180 xl:block'
+                sizes='100%'
+                className='absolute top-5 right-5 hidden h-auto w-auto -rotate-180 xl:block'
             />
             <div className='container'>
                 {/* Header */}

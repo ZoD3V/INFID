@@ -47,7 +47,8 @@ const StructureOrganizationPage = ({ initialData }: { initialData: OrganizationS
                     alt='decoration'
                     width={80}
                     height={80}
-                    className='absolute top-10 right-0 hidden xl:block'
+                    sizes='100%'
+                    className='absolute top-10 right-0 hidden h-auto w-auto xl:block'
                 />
 
                 <SectionHeader

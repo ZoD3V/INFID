@@ -11,7 +11,7 @@ import { formatArticleDate } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import { ArrowRight, Eye, MessageSquareMore, Pencil } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface FeaturedNewsProps {
     items: Post[];
@@ -20,6 +20,7 @@ interface FeaturedNewsProps {
 export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
     const router = useRouter();
     const locale = useLocale();
+    const b = useTranslations('button');
 
     const handleNavigation = async (e: React.MouseEvent, item: any) => {
         e.preventDefault();
@@ -100,7 +101,7 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                                         <div onClick={(e) => handleNavigation(e, item)} className='block'>
                                             <Button size='sm' className='w-fit rounded-full'>
-                                                Baca Selengkapnya
+                                                {b('readMore')}
                                                 <ArrowRight className='ml-2 h-4 w-4' />
                                             </Button>
                                         </div>

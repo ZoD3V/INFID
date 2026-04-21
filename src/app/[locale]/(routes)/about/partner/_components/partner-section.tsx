@@ -38,7 +38,8 @@ const PartnersSection = ({ initialData }: Props) => {
                     alt='decoration'
                     width={80}
                     height={80}
-                    className='absolute top-10 right-0 z-20 hidden xl:block'
+                    sizes='100%'
+                    className='absolute top-10 right-0 z-20 hidden h-auto w-auto xl:block'
                 />
 
                 <SectionHeader
