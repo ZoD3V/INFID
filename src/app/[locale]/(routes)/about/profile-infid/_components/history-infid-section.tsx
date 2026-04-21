@@ -237,7 +237,7 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
             <div
                 className='from-secondary-100 relative mt-12 h-115.5 bg-linear-to-t to-transparent'
                 style={{
-                    backgroundImage: `url('/images/bg-garden.webp'), linear-gradient(180deg, #FAF5E3 0%, rgba(250, 245, 227, 0) 100%)`,
+                    backgroundImage: `url('/images/timeline.webp'), linear-gradient(180deg, #FAF5E3 0%, rgba(250, 245, 227, 0) 100%)`,
                     backgroundBlendMode: 'overlay',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'

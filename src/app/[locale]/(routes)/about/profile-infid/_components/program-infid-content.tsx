@@ -54,25 +54,33 @@ export const ProgramInfidContent = ({ programData }: { programData: Post[] }) =>
                                 program?.translations?.find((t) => t.language === locale) ||
                                 program?.translations?.find((t) => t.language === 'id') ||
                                 program?.translations?.[0];
+
+                            const title = translation?.title || 'No Title';
+
                             return (
                                 <div
                                     key={index}
-                                    className='group relative overflow-hidden rounded-2xl border bg-slate-100 p-2'>
+                                    role='button'
+                                    tabIndex={0}
+                                    aria-labelledby={`prog-card-title-${index}`}
+                                    className='group relative cursor-pointer overflow-hidden rounded-2xl border bg-slate-100 p-2 outline-none'>
                                     <div className='relative flex min-h-125 flex-col overflow-hidden rounded-xl md:min-h-139.5'>
                                         <div className='absolute inset-0 z-0'>
                                             <OptimizedImage
                                                 src={program.cover}
-                                                alt={translation.title}
-                                                className='h-full w-full object-cover'
+                                                alt=''
+                                                aria-hidden='true'
+                                                className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
                                                 placeholderType='portrait'
                                             />
-                                            {/* Overlay Gradient */}
                                             <div className='from-primary-500/80 via-primary-500/40 absolute inset-0 bg-linear-to-t to-transparent' />
                                         </div>
 
                                         <div className='relative z-10 mt-auto flex h-full flex-col justify-end p-5 text-white'>
-                                            <h3 className='mb-3 text-xl leading-tight font-bold lg:text-2xl'>
-                                                {translation.title}
+                                            <h3
+                                                id={`prog-card-title-${index}`}
+                                                className='group-focus:text-primary-900 mb-3 -ml-1 rounded-sm px-1 text-xl leading-tight font-bold decoration-white underline-offset-4 transition-all duration-200 group-focus:bg-blue-100 group-focus:underline lg:text-2xl'>
+                                                {title}
                                             </h3>
 
                                             <CardContent

@@ -67,12 +67,17 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                     {/* 1. Rekomendasi Kebijakan  */}
                     <Dialog>
                         <DialogTrigger asChild>
-                            <div className='group col-span-1 cursor-pointer rounded-xl border border-slate-200 bg-white p-2 transition-all duration-300 md:col-span-12 lg:col-span-7'>
+                            <div
+                                role='button'
+                                tabIndex={0}
+                                aria-labelledby='video-title-1'
+                                className='group col-span-1 cursor-pointer rounded-xl border border-slate-200 bg-white p-2 transition-all duration-300 outline-none focus:ring-0 md:col-span-12 lg:col-span-7'>
                                 {/* Image Container */}
                                 <div className='relative mb-4 h-70 overflow-hidden rounded-lg lg:h-80 xl:h-87'>
                                     <Image
                                         src={thumbnailUrl}
-                                        alt='Video Thumbnail Perjalanan SDGs Tangerang'
+                                        alt=''
+                                        aria-hidden='true'
                                         fill
                                         sizes='50vw'
                                         className='object-cover transition-all duration-300'
@@ -87,7 +92,6 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                                         </div>
                                     </div>
 
-                                    {/* Badge */}
                                     <div className='absolute top-3 left-3'>
                                         <span className='bg-secondary-300 rounded-full px-3 py-1.5 text-xs font-medium text-white shadow-sm'>
                                             Video
@@ -97,15 +101,15 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
 
                                 {/* Content */}
                                 <div className='flex items-start gap-4 px-1 pb-2 lg:px-4'>
-                                    {/* Date */}
-                                    <div className='mb-4 hidden flex-col items-center lg:flex'>
+                                    <div className='mb-4 hidden flex-col items-center lg:flex' aria-hidden='true'>
                                         <div className='text-primary-900 text-5xl font-bold'>24</div>
                                         <div className='text-xs font-semibold text-slate-600 uppercase'>OKT 23</div>
                                     </div>
 
-                                    {/* Text */}
                                     <div className='flex flex-col pb-2 lg:pb-0'>
-                                        <h3 className='group-hover:text-primary-500 line-clamp-2 text-xl leading-snug font-bold transition-colors lg:text-2xl'>
+                                        <h3
+                                            id='video-title-1'
+                                            className='group-hover:text-primary-500 decoration-primary-500 -ml-1 line-clamp-2 rounded-sm px-1 text-xl leading-snug font-bold underline-offset-4 transition-all group-focus:bg-blue-100 group-focus:underline lg:text-2xl'>
                                             Perjalanan SDGs Tangerang - INFID
                                         </h3>
 
@@ -143,17 +147,24 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
 
                     {/* 2. Kartu Artikel (HARMONI)  */}
                     <div
+                        role='button'
+                        tabIndex={0}
+                        aria-labelledby='card-title-harmoni'
                         onClick={() => handleArticleClick(programData[0])}
-                        className='group col-span-1 flex cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-2 transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-5 lg:min-h-112.5'>
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') handleArticleClick(programData[0]);
+                        }}
+                        className='group col-span-1 flex cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-2 transition-all duration-300 outline-none hover:shadow-md md:col-span-6 lg:col-span-5 lg:min-h-112.5'>
                         <Image
                             src={programData[0].cover}
-                            alt={firstTranslation?.title ?? 'image'}
+                            alt=''
+                            aria-hidden='true'
                             width={600}
                             height={400}
                             className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-87'
                         />
                         <div className='px-1 pb-2'>
-                            <div className='flex items-center gap-2 py-4'>
+                            <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                 <span className='text-secondary-300 text-xs font-medium uppercase'>
                                     {programData[0]?.category.name ?? ''}
                                 </span>
@@ -166,17 +177,24 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                             </div>
 
                             <div className='space-y-3 overflow-hidden'>
-                                <h3 className='group-hover:text-primary-500 line-clamp-2 text-xl leading-snug font-bold transition-colors lg:text-2xl'>
+                                <h3
+                                    id='card-title-harmoni'
+                                    className='group-hover:text-primary-500 decoration-primary-500 -ml-1 line-clamp-2 rounded-sm px-1 text-xl leading-snug font-bold underline-offset-4 transition-all group-focus:bg-blue-100 group-focus:underline lg:text-2xl'>
                                     {firstTranslation?.title}
                                 </h3>
 
                                 <CardContent content={firstTranslation?.content || ''} />
                                 <div className='flex items-center gap-3 text-xs text-slate-500'>
-                                    <div className='flex items-center gap-1'>
-                                        <Pencil size={14} /> By {programData[0].author?.name || 'Admin'}
+                                    <div
+                                        className='flex items-center gap-1'
+                                        aria-label={`Penulis: ${programData[0].author?.name || 'Admin'}`}>
+                                        <Pencil size={14} aria-hidden='true' /> By{' '}
+                                        {programData[0].author?.name || 'Admin'}
                                     </div>
-                                    <div className='flex items-center gap-1'>
-                                        <Eye size={14} /> {programData[0].views ?? 0}{' '}
+                                    <div
+                                        className='flex items-center gap-1'
+                                        aria-label={`${programData[0].views ?? 0} tampilan`}>
+                                        <Eye size={14} aria-hidden='true' /> {programData[0].views ?? 0}{' '}
                                         {locale == 'id' ? 'Dilihat' : 'Seen'}
                                     </div>
                                 </div>
@@ -186,18 +204,25 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
 
                     {/* 3. Riset Statistik */}
                     <div
+                        role='button'
+                        tabIndex={0}
+                        aria-labelledby='card-title-riset'
                         onClick={() => handleArticleClick(programData[1])}
-                        className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') handleArticleClick(programData[1]);
+                        }}
+                        className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 outline-none hover:shadow-md md:col-span-6 lg:col-span-4'>
                         <Image
                             src={programData[1].cover}
-                            alt={secondTranslation?.title ?? 'image'}
+                            alt=''
+                            aria-hidden='true'
                             width={600}
                             height={400}
                             className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-57'
                         />
 
                         <div className='px-1 pb-2'>
-                            <div className='flex items-center gap-2 py-4'>
+                            <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                 <span className='text-secondary-300 text-xs font-medium uppercase'>
                                     {programData[0]?.category.name ?? ''}
                                 </span>
@@ -210,15 +235,22 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                             </div>
 
                             <div className='space-y-3'>
-                                <h3 className='group-hover:text-primary-500 line-clamp-2 text-base leading-snug font-bold transition-colors lg:text-lg'>
+                                <h3
+                                    id='card-title-riset'
+                                    className='group-hover:text-primary-500 decoration-primary-500 -ml-1 line-clamp-2 rounded-sm px-1 text-base leading-snug font-bold underline-offset-4 transition-all group-focus:bg-blue-100 group-focus:underline lg:text-lg'>
                                     {secondTranslation?.title}
                                 </h3>
                                 <div className='flex items-center gap-3 text-xs text-slate-500'>
-                                    <div className='flex items-center gap-1'>
-                                        <Pencil size={14} /> By {programData[1].author?.name || 'Admin'}
+                                    <div
+                                        className='flex items-center gap-1'
+                                        aria-label={`Penulis: ${programData[1].author?.name || 'Admin'}`}>
+                                        <Pencil size={14} aria-hidden='true' /> By{' '}
+                                        {programData[1].author?.name || 'Admin'}
                                     </div>
-                                    <div className='flex items-center gap-1'>
-                                        <Eye size={14} /> {programData[1].views ?? 0}{' '}
+                                    <div
+                                        className='flex items-center gap-1'
+                                        aria-label={`${programData[1].views ?? 0} tampilan`}>
+                                        <Eye size={14} aria-hidden='true' /> {programData[1].views ?? 0}{' '}
                                         {locale == 'id' ? 'Dilihat' : 'Seen'}
                                     </div>
                                 </div>
@@ -228,18 +260,25 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
 
                     {/* 4. Provinsi Dijangkau */}
                     <div
+                        role='button'
+                        tabIndex={0}
+                        aria-labelledby='card-title-jangkau'
                         onClick={() => handleArticleClick(programData[2])}
-                        className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') handleArticleClick(programData[2]);
+                        }}
+                        className='group col-span-1 flex cursor-pointer flex-col rounded-xl border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 outline-none hover:shadow-md md:col-span-6 lg:col-span-4'>
                         <Image
                             src={programData[2]?.cover}
-                            alt={thirdTranslation?.title ?? ''}
+                            alt=''
+                            aria-hidden='true'
                             width={600}
                             height={400}
                             className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-57'
                         />
 
                         <div className='px-1 pb-2'>
-                            <div className='flex items-center gap-2 py-4'>
+                            <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                 <span className='text-secondary-300 text-xs font-medium uppercase'>
                                     {programData[2]?.category.name ?? ''}
                                 </span>
@@ -252,15 +291,22 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                             </div>
 
                             <div className='space-y-3'>
-                                <h3 className='group-hover:text-primary-500 line-clamp-2 text-base leading-snug font-bold transition-colors lg:text-lg'>
+                                <h3
+                                    id='card-title-jangkau'
+                                    className='group-hover:text-primary-500 decoration-primary-500 -ml-1 line-clamp-2 rounded-sm px-1 text-base leading-snug font-bold underline-offset-4 transition-all group-focus:bg-blue-100 group-focus:underline lg:text-lg'>
                                     {thirdTranslation?.title}
                                 </h3>
                                 <div className='flex items-center gap-3 text-xs text-slate-500'>
-                                    <div className='flex items-center gap-1'>
-                                        <Pencil size={14} /> By {programData[2]?.author?.name || 'Admin'}
+                                    <div
+                                        className='flex items-center gap-1'
+                                        aria-label={`Penulis: ${programData[2]?.author?.name || 'Admin'}`}>
+                                        <Pencil size={14} aria-hidden='true' /> By{' '}
+                                        {programData[2]?.author?.name || 'Admin'}
                                     </div>
-                                    <div className='flex items-center gap-1'>
-                                        <Eye size={14} /> {programData[2]?.views ?? 0}{' '}
+                                    <div
+                                        className='flex items-center gap-1'
+                                        aria-label={`${programData[2]?.views ?? 0} tampilan`}>
+                                        <Eye size={14} aria-hidden='true' /> {programData[2]?.views ?? 0}{' '}
                                         {locale == 'id' ? 'Dilihat' : 'Seen'}
                                     </div>
                                 </div>
@@ -272,7 +318,8 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                     <div className='order bg-secondary-100 col-span-1 flex flex-col items-center justify-between gap-4 overflow-hidden rounded-xl border-slate-200 backdrop-blur-sm transition-all duration-300 hover:shadow-md md:col-span-6 lg:col-span-4'>
                         <Image
                             src='/images/decoration-footer-1.png'
-                            alt='decoration'
+                            alt=''
+                            aria-hidden='true'
                             width={175}
                             height={175}
                             className='ml-24 h-auto w-auto rounded-xl'

@@ -253,9 +253,12 @@ export default function NewsFromUsPage() {
                     ) : (
                         <>
                             {articles.map((article, index) => (
-                                <div key={index} onClick={() => handleArticleClick(article)} className='cursor-pointer'>
-                                    <ArticleCard article={article} imageClassName='h-67' />
-                                </div>
+                                <ArticleCard
+                                    key={article.id || index}
+                                    article={article}
+                                    imageClassName='h-67'
+                                    onClick={() => handleArticleClick(article)}
+                                />
                             ))}
 
                             {isLoading &&

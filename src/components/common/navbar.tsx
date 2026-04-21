@@ -175,11 +175,16 @@ export function Navbar() {
                                 href={item.href}
                                 aria-label={item.title}
                                 aria-current={pathname === item.href ? 'page' : undefined}
+                                aria-haspopup={item.children ? 'true' : undefined}
                                 className={cn(
-                                    'focus-visible:ring-primary-500 flex cursor-pointer items-center gap-1 rounded-md text-sm font-medium transition-colors duration-300 outline-none focus-visible:ring-2',
+                                    'flex cursor-pointer items-center gap-1 rounded-md text-sm font-medium transition-all duration-300 outline-none',
+
                                     isScrolled
                                         ? 'hover:text-primary-500 text-slate-900'
                                         : 'text-gray-100 hover:text-white',
+
+                                    'focus-visible:text-primary-900 decoration-primary-500 underline-offset-4 focus-visible:bg-blue-100 focus-visible:underline',
+
                                     pathname === item.href ? 'font-extrabold' : ''
                                 )}>
                                 {item.title}
@@ -205,7 +210,7 @@ export function Navbar() {
                                     <div
                                         role='menu'
                                         aria-label={`Submenu ${item.title}`}
-                                        className='relative overflow-hidden rounded-lg border border-gray-100 bg-white py-2 shadow-2xl'>
+                                        className='relative overflow-hidden rounded-lg border border-gray-100 bg-white/95 py-2 shadow-2xl backdrop-blur-md'>
                                         {item.children.map((child) => {
                                             const active = isChildActive(child.href);
 
@@ -215,10 +220,13 @@ export function Navbar() {
                                                     href={child.href}
                                                     role='menuitem'
                                                     className={cn(
-                                                        'focus:text-primary-500 block px-4 py-2 text-sm font-medium transition-all duration-200 outline-none focus:bg-gray-100',
+                                                        'block px-4 py-2 text-sm font-medium transition-all duration-200 outline-none',
+
                                                         active
                                                             ? 'bg-brand-50 text-brand-900 font-bold'
-                                                            : 'hover:text-primary-500 text-slate-700 hover:bg-gray-50'
+                                                            : 'hover:text-primary-500 text-slate-700 hover:bg-gray-50',
+
+                                                        'focus:text-primary-900 underline-offset-2 focus:bg-blue-100 focus:underline'
                                                     )}>
                                                     {child.title}
                                                 </Link>
@@ -265,7 +273,7 @@ export function Navbar() {
                                                     className='border-none'>
                                                     {item.children ? (
                                                         <>
-                                                            <AccordionTrigger className='flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-start text-sm text-black hover:no-underline [&[data-state=open]>svg]:rotate-90'>
+                                                            <AccordionTrigger className='hover:text-primary-500 flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-start text-sm text-black hover:no-underline [&[data-state=open]>svg]:rotate-90'>
                                                                 {item.title}
                                                                 {item.children && (
                                                                     <ChevronRight className='h-4 w-4 transition-transform' />
@@ -308,7 +316,7 @@ export function Navbar() {
                                     {/* Footer Sidebar */}
                                     <div className='border-t p-5'>
                                         <Button className='w-full gap-2'>
-                                            Bergabung <ExternalLink className='h-4 w-4' />
+                                            {t('join')} <ExternalLink className='h-4 w-4' />
                                         </Button>
                                     </div>
                                 </SheetContent>

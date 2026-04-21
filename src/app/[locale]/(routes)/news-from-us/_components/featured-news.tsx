@@ -22,7 +22,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
     const router = useRouter();
     const locale = useLocale();
 
-    const handleNavigation = async (e: React.MouseEvent, item: any) => {
+    const handleNavigation = (e: React.SyntheticEvent | React.MouseEvent | React.KeyboardEvent, item: any) => {
         e.preventDefault();
 
         try {
@@ -54,7 +54,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                         const categoryName = item.category?.name || 'Featured';
                         const authorName = item.author?.name || 'Admin';
                         const seen = item?.views || 0;
-                        const comments = item.comments.length > 0 ? item.comments.length : 0;
+                        const comments = item.comments?.length || 0;
                         const dateRaw = item.published_at || item.created_at;
 
                         const formattedDate = formatDateShort(dateRaw);
@@ -62,16 +62,27 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                         return (
                             <CarouselItem key={index} className='pl-4 md:basis-1/2 lg:basis-1/2'>
-                                <div onClick={(e) => handleNavigation(e, item)} className='h-full'>
-                                    <div className='group h-full cursor-pointer rounded-xl border border-slate-200 bg-white p-3 transition-all hover:shadow-md'>
+                                <div
+                                    onClick={(e) => handleNavigation(e, item)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            handleNavigation(e, item);
+                                        }
+                                    }}
+                                    className='group h-full focus:outline-none'
+                                    role='button'
+                                    tabIndex={0}
+                                    aria-labelledby={`title-${index}`}>
+                                    <div className='h-full cursor-pointer rounded-xl border border-slate-200 bg-white p-3 transition-all hover:shadow-md'>
                                         {/* Image Section */}
                                         <div className='relative mb-6 h-64 overflow-hidden rounded-lg lg:h-72 xl:h-80'>
                                             <Image
                                                 src={item.cover || '/images/placeholder-square.png'}
-                                                alt={title}
+                                                alt={`Cover for ${title}`}
                                                 fill
                                                 sizes='(max-width: 768px) 100vw, 50vw'
-                                                className='object-cover transition-transform duration-500 group-hover:scale-105'
+                                                className='object-cover transition-transform duration-500'
                                             />
                                             <div className='absolute top-3 left-3'>
                                                 <span className='bg-secondary-300 rounded-full px-3 py-1.5 text-xs font-medium text-white'>
@@ -83,7 +94,9 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                                         {/* Content Section */}
                                         <div className='flex items-start gap-4 px-1 pb-2 lg:px-4'>
                                             {/* Date Box */}
-                                            <div className='mb-4 hidden flex-col items-center lg:flex'>
+                                            <div
+                                                className='mb-4 hidden flex-col items-center lg:flex'
+                                                aria-hidden='true'>
                                                 <div className='text-primary-900 text-5xl font-bold'>
                                                     {dateParts[0]}
                                                 </div>
@@ -94,7 +107,9 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                                             {/* Text Content */}
                                             <div className='flex flex-col pb-2 lg:pb-0'>
-                                                <h2 className='text-primary-900 group-hover:text-primary-500 mb-2 line-clamp-2 text-xl font-bold lg:text-2xl'>
+                                                <h2
+                                                    id={`title-${index}`}
+                                                    className='text-primary-900 decoration-primary-500 mb-2 -ml-1 line-clamp-2 rounded-sm px-1 text-xl font-bold underline-offset-4 transition-all duration-200 group-focus:bg-blue-100 group-focus:underline lg:text-2xl'>
                                                     {title}
                                                 </h2>
 
@@ -102,19 +117,21 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                                                 {/* Meta Information */}
                                                 <div className='mt-3 flex flex-wrap items-center gap-2 text-xs text-slate-500'>
-                                                    <div className='flex items-center gap-1'>
-                                                        <Pencil className='h-3 w-3' />
+                                                    <div
+                                                        className='flex items-center gap-1'
+                                                        aria-label={`Penulis: ${authorName}`}>
+                                                        <Pencil className='h-3 w-3' aria-hidden='true' />
                                                         By {authorName}
                                                     </div>
-                                                    <span className='h-1 w-1 rounded-full bg-slate-500' />
-                                                    <div className='flex items-center gap-1'>
-                                                        <Eye className='h-3 w-3' />
+                                                    <span
+                                                        className='h-1 w-1 rounded-full bg-slate-500'
+                                                        aria-hidden='true'
+                                                    />
+                                                    <div
+                                                        className='flex items-center gap-1'
+                                                        aria-label={`${seen} tampilan`}>
+                                                        <Eye className='h-3 w-3' aria-hidden='true' />
                                                         {seen} {locale == 'id' ? 'Dilihat' : 'Seen'}
-                                                    </div>
-                                                    <span className='h-1 w-1 rounded-full bg-slate-500' />
-                                                    <div className='flex items-center gap-1'>
-                                                        <MessageSquareMore className='h-3 w-3' />
-                                                        {comments} {locale == 'id' ? 'Komentar' : 'Comment'}
                                                     </div>
                                                 </div>
                                             </div>

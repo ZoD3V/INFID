@@ -31,6 +31,7 @@ export const PublicationContent = ({
     initialData: Post[];
     categoriesData: Article[];
 }) => {
+    const locale = useLocale();
     const t = useTranslations('home.publications');
     const [activeTab, setActiveTab] = useState('');
     const [publications, setPublications] = useState<Post[]>(initialData);
@@ -86,9 +87,6 @@ export const PublicationContent = ({
         router.push(`/knowledge/${article.id}-${article.translations[0]?.slug}`);
     };
 
-    const locale = useLocale();
-    const langIndex = locale === 'id' ? 0 : 1;
-
     const featured = publications[0];
     const sideArticles = publications.slice(1, 4);
 
@@ -129,14 +127,25 @@ export const PublicationContent = ({
                                 : ['01', 'Jan', '2026'];
 
                             return (
-                                <div onClick={() => handleArticleClick(featured)} className='group cursor-pointer'>
+                                <div
+                                    onClick={() => handleArticleClick(featured)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            handleArticleClick(featured);
+                                        }
+                                    }}
+                                    role='button'
+                                    tabIndex={0}
+                                    aria-labelledby='featured-title'
+                                    className='group cursor-pointer outline-none'>
                                     <div className='relative mb-6 h-80 overflow-hidden rounded-lg lg:h-96'>
                                         <img
                                             src={featured.cover || '/images/placeholder-square.jpg'}
-                                            alt={translation?.title}
-                                            className='h-full w-full object-cover'
+                                            alt=''
+                                            aria-hidden='true'
+                                            className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
                                         />
-
                                         <div className='absolute top-3 left-3'>
                                             <span className='rounded-full bg-orange-500 px-3 py-1.5 text-xs font-medium text-white'>
                                                 {featured.category?.name || 'Featured'}
@@ -145,7 +154,7 @@ export const PublicationContent = ({
                                     </div>
 
                                     <div className='flex items-start gap-4'>
-                                        <div className='mb-4 hidden flex-col items-center lg:flex'>
+                                        <div className='mb-4 hidden flex-col items-center lg:flex' aria-hidden='true'>
                                             <div className='text-primary-900 text-5xl font-bold'>{dateParts[0]}</div>
                                             <div className='text-xs whitespace-nowrap text-slate-600 uppercase'>
                                                 {dateParts[1]} {dateParts[2]}
@@ -153,28 +162,37 @@ export const PublicationContent = ({
                                         </div>
 
                                         <div className='flex min-w-0 flex-1 flex-col'>
-                                            <h2 className='text-primary-900 mb-2 line-clamp-3 text-xl leading-snug font-bold lg:text-2xl'>
+                                            <h2
+                                                id='featured-title'
+                                                className='text-primary-900 decoration-primary-500 mb-2 -ml-1 line-clamp-3 rounded-sm px-1 text-xl leading-snug font-bold underline-offset-4 transition-all duration-200 group-focus:bg-blue-100 group-focus:underline lg:text-2xl'>
                                                 {translation?.title}
                                             </h2>
 
                                             <CardContent content={translation?.content} />
 
                                             <div className='mt-1 flex items-center gap-2 text-xs text-slate-500'>
-                                                <div className='flex items-center gap-1'>
-                                                    <Pencil className='h-3 w-3' /> By {featured.author?.name || 'Admin'}
+                                                <div
+                                                    className='flex items-center gap-1'
+                                                    aria-label={`Penulis: ${featured.author?.name || 'Admin'}`}>
+                                                    <Pencil className='h-3 w-3' aria-hidden='true' /> By{' '}
+                                                    {featured.author?.name || 'Admin'}
                                                 </div>
-
-                                                <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-
-                                                <div className='flex items-center gap-1'>
-                                                    <Eye className='h-3 w-3' /> {featured.views ?? 0}{' '}
+                                                <span
+                                                    className='h-1 w-1 rounded-full bg-slate-500'
+                                                    aria-hidden='true'></span>
+                                                <div
+                                                    className='flex items-center gap-1'
+                                                    aria-label={`${featured.views ?? 0} dilihat`}>
+                                                    <Eye className='h-3 w-3' aria-hidden='true' /> {featured.views ?? 0}{' '}
                                                     {locale == 'id' ? 'Dilihat' : 'Seen'}
                                                 </div>
-
-                                                <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-
-                                                <div className='flex items-center gap-1'>
-                                                    <MessageSquareMore className='h-3 w-3' />
+                                                <span
+                                                    className='h-1 w-1 rounded-full bg-slate-500'
+                                                    aria-hidden='true'></span>
+                                                <div
+                                                    className='flex items-center gap-1'
+                                                    aria-label={`${featured.comments?.length || 0} komentar`}>
+                                                    <MessageSquareMore className='h-3 w-3' aria-hidden='true' />{' '}
                                                     {featured.comments?.length || 0}{' '}
                                                     {locale == 'id' ? 'Komentar' : 'Comment'}
                                                 </div>
@@ -196,26 +214,34 @@ export const PublicationContent = ({
                             return (
                                 <div
                                     key={index}
-                                    onClick={() => handleArticleClick(featured)}
-                                    className='group cursor-pointer'>
-                                    <div className='cursor-pointer overflow-hidden rounded-lg transition-shadow'>
+                                    onClick={() => handleArticleClick(article)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            handleArticleClick(article);
+                                        }
+                                    }}
+                                    role='button'
+                                    tabIndex={0}
+                                    aria-labelledby={`side-title-${index}`}
+                                    className='group cursor-pointer outline-none'>
+                                    <div className='overflow-hidden rounded-lg transition-shadow'>
                                         <div className='flex h-full flex-col items-start gap-3 md:flex-row md:items-center lg:gap-5'>
                                             <div className='h-52 w-full shrink-0 overflow-hidden rounded-lg md:h-38 md:w-42 lg:h-48'>
                                                 <img
                                                     src={article.cover || '/images/placeholder-square.png'}
-                                                    alt={translation?.title}
-                                                    className='h-full w-full object-cover transition-transform duration-300'
+                                                    alt=''
+                                                    aria-hidden='true'
+                                                    className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
                                                 />
                                             </div>
 
                                             <div className='flex h-full flex-1 flex-col justify-evenly'>
-                                                <div className='flex items-center gap-2'>
+                                                <div className='flex items-center gap-2' aria-hidden='true'>
                                                     <span className='text-secondary-300 text-xs font-medium uppercase lg:text-sm'>
                                                         {article.category?.name}
                                                     </span>
-
                                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-
                                                     <span className='text-xs text-slate-500'>
                                                         {article.published_at
                                                             ? formatFullDate(article.published_at, locale)
@@ -224,25 +250,33 @@ export const PublicationContent = ({
                                                 </div>
 
                                                 <div className='flex flex-col gap-2'>
-                                                    <h3 className='text-primary-900 line-clamp-2 text-lg leading-tight font-bold lg:text-xl'>
+                                                    <h3
+                                                        id={`side-title-${index}`}
+                                                        className='text-primary-900 decoration-primary-500 -ml-1 line-clamp-2 rounded-sm px-1 text-lg leading-tight font-bold underline-offset-4 transition-all duration-200 group-focus:bg-blue-100 group-focus:underline lg:text-xl'>
                                                         {translation?.title}
                                                     </h3>
 
-                                                    <div className='flex items-center gap-1 text-xs text-gray-500'>
-                                                        <Pencil className='h-3 w-3' /> By{' '}
+                                                    <div
+                                                        className='flex items-center gap-1 text-xs text-gray-500'
+                                                        aria-label={`Penulis: ${article.author?.name || 'Admin'}`}>
+                                                        <Pencil className='h-3 w-3' aria-hidden='true' /> By{' '}
                                                         {article.author?.name || 'Admin'}
                                                     </div>
 
                                                     <div className='flex items-center gap-2 text-xs text-slate-500'>
-                                                        <div className='flex items-center gap-1'>
-                                                            <Eye className='h-4 w-4' /> {article.views ?? 0}{' '}
-                                                            {locale == 'id' ? 'Dilihat' : 'Seen'}
+                                                        <div
+                                                            className='flex items-center gap-1'
+                                                            aria-label={`${article.views ?? 0} dilihat`}>
+                                                            <Eye className='h-4 w-4' aria-hidden='true' />{' '}
+                                                            {article.views ?? 0} {locale == 'id' ? 'Dilihat' : 'Seen'}
                                                         </div>
-
-                                                        <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-
-                                                        <div className='flex items-center gap-1'>
-                                                            <MessageSquareMore className='h-4 w-4' />{' '}
+                                                        <span
+                                                            className='h-1 w-1 rounded-full bg-slate-500'
+                                                            aria-hidden='true'></span>
+                                                        <div
+                                                            className='flex items-center gap-1'
+                                                            aria-label={`${article.comments?.length || 0} komentar`}>
+                                                            <MessageSquareMore className='h-4 w-4' aria-hidden='true' />{' '}
                                                             {article.comments?.length || 0}{' '}
                                                             {locale == 'id' ? 'Komentar' : 'Comment'}
                                                         </div>

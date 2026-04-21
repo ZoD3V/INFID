@@ -29,7 +29,6 @@ interface Props {
 }
 
 const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
-    console.log(initialData);
     const t = useTranslations('news');
     const router = useRouter();
 
