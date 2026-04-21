@@ -1,8 +1,11 @@
+'use client';
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 
 import CardContent from '@/components/common/card-content';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Link, useRouter } from '@/i18n/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { formatDateShort } from '@/lib/utils';
@@ -18,6 +21,12 @@ interface FeaturedNewsProps {
 export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
     const router = useRouter();
     const locale = useLocale();
+
+    const [langIndex, setLangIndex] = useState(0);
+
+    useEffect(() => {
+        setLangIndex(locale === 'id' ? 0 : 1);
+    }, []);
 
     const handleNavigation = async (e: React.MouseEvent, item: any) => {
         e.preventDefault();
@@ -41,8 +50,8 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                 className='w-full'>
                 <CarouselContent className='-ml-4'>
                     {items.map((item, index) => {
-                        const translation =
-                            item.translations?.find((t: any) => t.language === 'id') || item.translations?.[0];
+                        const translation = item?.translations?.[langIndex] || item?.translations?.[0];
+
                         const title = translation?.title || 'No Title';
                         const description = translation?.content || '';
                         const categoryName = item.category?.name || 'Featured';

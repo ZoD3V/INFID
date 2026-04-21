@@ -1,10 +1,13 @@
+'use client';
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 
 import CardContent from '@/components/common/card-content';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Link, useRouter } from '@/i18n/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { formatArticleDate } from '@/lib/utils';
@@ -21,6 +24,12 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
     const router = useRouter();
     const locale = useLocale();
     const b = useTranslations('button');
+
+    const [langIndex, setLangIndex] = useState(0);
+
+    useEffect(() => {
+        setLangIndex(locale === 'id' ? 0 : 1);
+    }, []);
 
     const handleNavigation = async (e: React.MouseEvent, item: any) => {
         e.preventDefault();
@@ -43,8 +52,7 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
             className='relative mb-5 w-full overflow-visible'>
             <CarouselContent className='-ml-4'>
                 {items.map((item) => {
-                    const translation =
-                        item.translations?.find((t: any) => t.language === 'id') || item.translations?.[0];
+                    const translation = item?.translations?.[langIndex] || item?.translations?.[0];
 
                     const title = translation?.title || 'No Title';
                     const seen = item.views || 0;
