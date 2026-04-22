@@ -1,15 +1,18 @@
+import { cn } from '@/lib/utils';
 import { LTPeople } from '@/types/leadership-timeline';
 
 interface PeopleGridProps {
+    className?: string;
+    hideTitle?: boolean;
     title: string;
     data: LTPeople[];
     onItemClick: (person: LTPeople) => void;
 }
 
-export const PeopleGrid = ({ title, data, onItemClick }: PeopleGridProps) => {
+export const PeopleGrid = ({ title, data, onItemClick, className = '', hideTitle = false }: PeopleGridProps) => {
     return (
-        <div className='flex flex-col'>
-            <h2 className='text-primary-500 mb-8 text-3xl font-bold'>{title}</h2>
+        <div className={cn('flex flex-col', className)}>
+            {hideTitle && <h2 className='text-primary-500 mb-8 text-3xl font-bold'>{title}</h2>}
 
             <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4'>
                 {data.map((person) => {

@@ -7,10 +7,12 @@ import EmptyState from '@/components/common/empty-state';
 import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { formatArticleDate } from '@/lib/utils';
 import { LTPeople, LeadershipTimeline, Publication } from '@/types/leadership-timeline';
+import { Post } from '@/types/posts';
 
 import { PeopleGrid } from './people-grid';
 import { Eye, MessageSquare } from 'lucide-react';
@@ -19,6 +21,7 @@ import { useLocale, useTranslations } from 'next-intl';
 const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) => {
     const t = useTranslations('profile.timeline_section');
     const locale = useLocale();
+    const router = useRouter();
 
     if (!initialData || initialData.length === 0) {
         return (
@@ -47,6 +50,16 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
         }
 
         setDialogOpen(true);
+    };
+
+    const handleArticleClick = async (article: Publication) => {
+        try {
+            await apiRequest.get<Post>(`${API_ENDPOINTS.posts}/${article.id}/view`);
+        } catch (error) {
+            console.error('Failed to track view:', error);
+        }
+
+        router.push(`/knowledge/${article.id}-${article.translations[0]?.slug}`);
     };
 
     return (
@@ -99,32 +112,33 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
 
                 {/* Content Area */}
                 <div className='mt-8'>
-                    {selectedTimeline.people && selectedTimeline.people.length > 0 ? (
+                    <div className='max-w-full xl:max-w-4xl'>
+                        <h2 className='text-primary-500 mb-6 text-2xl font-bold'>{selectedTimeline.title}</h2>
+                        <div className='flex flex-col items-start gap-8 md:flex-row'>
+                            <div className='flex w-full flex-col gap-2 md:w-1/3'>
+                                {selectedTimeline.images.map((item, index) => (
+                                    <img src={item} alt='People' key={index} />
+                                ))}
+                            </div>
+                            <div className='w-full md:w-3/4'>
+                                <ArticleContent
+                                    content={
+                                        selectedTimeline.description?.find((d) => d.language === locale)?.text ||
+                                        selectedTimeline.description?.[0]?.text ||
+                                        ''
+                                    }
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    {selectedTimeline.people && selectedTimeline.people.length > 0 && (
                         <PeopleGrid
                             title={selectedTimeline.title}
                             data={selectedTimeline.people}
                             onItemClick={handlePersonClick}
+                            hideTitle={selectedTimeline.people.length < 0}
+                            className={selectedTimeline.people.length > 0 ? 'py-8' : ''}
                         />
-                    ) : (
-                        <div className='max-w-full xl:max-w-4xl'>
-                            <h2 className='text-primary-500 mb-6 text-2xl font-bold'>{selectedTimeline.title}</h2>
-                            <div className='flex flex-col items-start gap-8 md:flex-row'>
-                                <div className='flex w-full flex-col gap-2 md:w-1/3'>
-                                    {selectedTimeline.images.map((item, index) => (
-                                        <img src={item} alt='People' key={index} />
-                                    ))}
-                                </div>
-                                <div className='w-full md:w-3/4'>
-                                    <ArticleContent
-                                        content={
-                                            selectedTimeline.description?.find((d) => d.language === locale)?.text ||
-                                            selectedTimeline.description?.[0]?.text ||
-                                            ''
-                                        }
-                                    />
-                                </div>
-                            </div>
-                        </div>
                     )}
                 </div>
 
@@ -176,7 +190,10 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
                                             pub?.translations?.find((t) => t.language === 'id') ||
                                             pub?.translations?.[0];
                                         return (
-                                            <div key={index} className='group flex cursor-pointer gap-4'>
+                                            <div
+                                                onClick={() => handleArticleClick(pub)}
+                                                key={index}
+                                                className='group flex cursor-pointer gap-4'>
                                                 <div className='h-20 w-20 shrink-0 overflow-hidden rounded-md bg-slate-100'>
                                                     <img
                                                         src={pub?.cover ?? ''}

@@ -19,12 +19,6 @@ export default function SearchModal() {
     const locale = useLocale();
     const router = useRouter();
 
-    const [langIndex, setLangIndex] = useState(0);
-
-    useEffect(() => {
-        setLangIndex(locale === 'id' ? 0 : 1);
-    }, [locale]);
-
     useEffect(() => {
         if (!isOpen) return;
 
@@ -54,6 +48,14 @@ export default function SearchModal() {
     }, [keyword, isOpen]);
 
     useEffect(() => {
+        if (!isOpen) {
+            setKeyword('');
+            setResults(null);
+            setIsLoading(false);
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
         const handleKeyDown = (event: any) => {
             if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
                 setIsOpen(true);
@@ -76,7 +78,7 @@ export default function SearchModal() {
                 router.push(`/involved/career`);
                 break;
             case 'people':
-                router.push(`/about/profile-infid`);
+                router.push(`/about/research`);
                 break;
         }
 
@@ -125,7 +127,7 @@ export default function SearchModal() {
                         Type your search query below to find articles or information.
                     </p>
                     <form className='border-b border-slate-200'>
-                        <div className='flex items-center'>
+                        <div className='relative flex items-center'>
                             <VisuallyHidden.Root>
                                 <label htmlFor='search-modal'>Search</label>
                             </VisuallyHidden.Root>
@@ -154,6 +156,20 @@ export default function SearchModal() {
                     <ScrollArea.Root className='max-h-[60vh] overflow-y-auto'>
                         <ScrollArea.Viewport className='h-full w-full pr-2' role='listbox' aria-label='Search results'>
                             <div className='space-y-4 px-2 py-4'>
+                                {/* --- LOADING STATE --- */}
+                                {isLoading && (
+                                    <div className='flex flex-col items-center justify-center py-20 text-slate-500'>
+                                        <div className='flex items-baseline gap-1 text-slate-500'>
+                                            <p className='text-base font-medium'>Loading</p>
+                                            <div className='loading-dots flex gap-0.5 text-xl leading-none font-bold'>
+                                                <span>.</span>
+                                                <span>.</span>
+                                                <span>.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
                                 {/* RESULTS */}
                                 {(posts.length > 0 || jobs.length > 0 || people.length > 0) && (
                                     <div className='space-y-4'>

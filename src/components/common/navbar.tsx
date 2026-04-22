@@ -13,6 +13,7 @@ import { Link } from '@/i18n/routing';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { cn } from '@/lib/utils';
+import { Category } from '@/types/posts';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 
 import LanguageSwitcher from './language-switcher';
@@ -26,7 +27,7 @@ export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false);
     const t = useTranslations('navigation');
     const [isScrolled, setIsScrolled] = React.useState(false);
-    const [categories, setCategories] = React.useState<any[]>([]);
+    const [categories, setCategories] = React.useState<Category[]>([]);
 
     React.useEffect(() => {
         const fetchNavCategories = async () => {
@@ -88,7 +89,6 @@ export function Navbar() {
                 { title: t('about_mitra'), href: '/about/partner' }
             ]
         },
-
         {
             title: t('knowledge'),
             href: '/knowledge',
@@ -99,6 +99,26 @@ export function Navbar() {
                     href: createCategoryHref('/knowledge', cat.name)
                 }))
         },
+        //     {
+        //     title: t('knowledge'),
+        //     href: '/knowledge',
+        //     children: categories
+        //         .filter((cat) => {
+        //             const catName = cat.translations?.find(t => t.language === locale)?.title
+        //                             || cat.translations?.[0]?.title;
+
+        //             return knowledgeCategories.includes(catName);
+        //         })
+        //         .map((cat) => {
+        //             const translatedTitle = cat.translations?.find(t => t.language === locale)?.title
+        //                                     || cat.translations?.[0]?.title;
+
+        //             return {
+        //                 title: translatedTitle,
+        //                 href: createCategoryHref('/knowledge', translatedTitle)
+        //             };
+        //         })
+        // }
         {
             title: t('news'),
             href: '/news-from-us',
