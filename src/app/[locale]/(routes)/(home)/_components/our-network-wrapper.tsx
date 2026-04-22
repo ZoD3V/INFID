@@ -24,8 +24,6 @@ const OurNetworkWrapper = ({ regions }: { regions: Region[] }) => {
             const res = await apiRequest.get<RegionDetail>(`${API_ENDPOINTS.regions}/${region.id}/members`);
             setSelectedRegion(res.data);
             setOpen(true);
-
-            // console.log(`Berhasil mengambil data untuk: ${region.name}`);
         } catch (error) {
             console.error(error);
         } finally {

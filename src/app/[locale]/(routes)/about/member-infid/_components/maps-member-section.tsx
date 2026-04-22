@@ -35,8 +35,6 @@ export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }
 
             setSelectedRegion(res.data);
             setOpen(true);
-
-            // console.log(`Berhasil mengambil data untuk: ${region.name}`);
         } catch (error) {
             toast.error('Gagal mengambil data member');
             console.error(error);

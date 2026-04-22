@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Link as Navigate, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { convertToEmbedUrl } from '@/lib/utils';
 import { Post, PostTranslation, Tags } from '@/types/posts';
 
 import { Download } from 'lucide-react';
@@ -23,7 +24,7 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 interface Props {
-    initialData: any;
+    initialData: Post | null;
     locale: string;
     postId: string;
 }
@@ -46,7 +47,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                 const [relatedRes, latestRes] = await Promise.all([
                     apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                         params: {
-                            category: initialData.category?.name || '',
+                            category: initialData?.category?.name || '',
                             limit: 3,
                             page: 1,
                             search: '',
@@ -71,7 +72,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                 ]);
 
                 const filteredRelated = (relatedRes.data || relatedRes).filter(
-                    (item: Post) => item.id !== initialData.id && item.status.toLowerCase() == 'published'
+                    (item: Post) => item.id !== initialData?.id && item.status.toLowerCase() == 'published'
                 );
 
                 setRelatedArticles(filteredRelated);
@@ -82,7 +83,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
         };
 
         fetchSuggestions();
-    }, [initialData.id, initialData.category?.name]);
+    }, [initialData?.id, initialData?.category?.name]);
 
     const handleDownload = () => {
         const filePath = translation?.attachments?.[0]?.file_path;
@@ -141,7 +142,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
 
                         <div className='flex items-center justify-between gap-4'>
                             <h3 className='text-secondary-300 font-bold uppercase'>{initialData?.category?.name}</h3>
-                            {translation?.attachments?.length > 0 && (
+                            {translation?.attachments !== undefined && translation?.attachments?.length > 0 && (
                                 <Button className='rounded-full' size={'sm'} onClick={handleDownload}>
                                     <Download className='mr-2 h-4 w-4' />
                                     {t('content.attachments')}
@@ -157,6 +158,19 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                             className='h-auto w-full rounded-lg object-cover'
                             priority
                         />
+
+                        {initialData?.youtube_link && (
+                            <div className='mt-4 aspect-video w-full overflow-hidden rounded-lg'>
+                                <iframe
+                                    className='h-full w-full'
+                                    src={convertToEmbedUrl(initialData.youtube_link)}
+                                    title='YouTube video'
+                                    frameBorder='0'
+                                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                                    allowFullScreen
+                                />
+                            </div>
+                        )}
 
                         <ArticleContent content={translation?.content || ''} />
                         {/* <AttachmentList attachments={translation?.attachments ?? []} /> */}

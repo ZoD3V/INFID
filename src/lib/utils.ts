@@ -94,3 +94,24 @@ export const formatDateTime = (dateString: string, locale: string = 'id-ID') => 
         // minute: '2-digit'
     }).format(date);
 };
+
+export const convertToEmbedUrl = (url: string) => {
+    try {
+        const parsed = new URL(url);
+
+        // ex: https://www.youtube.com/watch?v=xxxx
+        if (parsed.hostname.includes('youtube.com')) {
+            const videoId = parsed.searchParams.get('v');
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+
+        // ex: https://youtu.be/xxxx
+        if (parsed.hostname.includes('youtu.be')) {
+            return `https://www.youtube.com/embed/${parsed.pathname.slice(1)}`;
+        }
+
+        return url;
+    } catch {
+        return '';
+    }
+};

@@ -25,7 +25,7 @@ const PartnersSection = ({ initialData }: Props) => {
         <section className='bg-gray-50'>
             <PageHeader
                 title={t('header.title')}
-                backgroundImage='/images/background-about-us.webp'
+                backgroundImage='/images/background-meeting.webp'
                 breadcrumbs={[
                     { label: t('header.breadcrumb.home'), href: '/' },
                     { label: t('header.breadcrumb.about'), href: '/' },

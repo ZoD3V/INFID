@@ -52,7 +52,7 @@ const MemberSection = () => {
         <div>
             <PageHeader
                 title={t('header.title')}
-                backgroundImage='/images/background-about-us.webp'
+                backgroundImage='/images/background-meeting.webp'
                 breadcrumbs={[
                     { label: t('header.breadcrumb.home'), href: '/' },
                     { label: t('header.breadcrumb.about'), href: '/' },

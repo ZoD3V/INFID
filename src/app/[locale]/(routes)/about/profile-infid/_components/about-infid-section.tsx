@@ -35,7 +35,7 @@ const AboutInfid = () => {
         <section
             className='bg-hero relative z-20 h-127.5 bg-cover bg-center bg-no-repeat py-24'
             style={{
-                backgroundImage: `url('/images/background-section.webp')`
+                backgroundImage: `url('/images/background-section-profile.webp')`
             }}>
             <div className='from-primary-500/80 via-primary-500/80 to-primary-500/20 absolute inset-0 bg-linear-to-b' />
 
@@ -128,7 +128,7 @@ const AboutInfid = () => {
                             <div className='p-4 lg:p-5'>
                                 <div className='relative h-55 w-full lg:h-72.75'>
                                     <Image
-                                        src='/images/background-section.webp'
+                                        src='/images/background-card-profile.webp'
                                         alt='Focus Discussion'
                                         fill
                                         sizes='100%'

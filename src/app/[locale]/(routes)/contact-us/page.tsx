@@ -69,7 +69,7 @@ const ContactUs = () => {
         <section className='bg-gray-50'>
             <div
                 className='relative z-20 h-68 bg-cover bg-center bg-no-repeat pt-8 lg:h-125'
-                style={{ backgroundImage: `url('/images/background-about-us.webp')` }}>
+                style={{ backgroundImage: `url('/images/background-contact-us.webp')` }}>
                 {/* Overlay */}
                 <div className='from-primary-500/80 via-primary-500/80 to-primary-500/20 absolute inset-0 bg-linear-to-b' />
 

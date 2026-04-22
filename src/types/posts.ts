@@ -68,6 +68,7 @@ export interface Post {
     published_at: string;
     cover: string;
     translations: PostTranslation[];
+    youtube_link?: string;
     tags: Tags[];
     views?: number;
     comments: Comment[];

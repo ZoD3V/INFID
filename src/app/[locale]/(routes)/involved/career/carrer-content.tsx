@@ -77,7 +77,7 @@ const CareerContent = ({ categories, initialJobs, categoryFilter, translations }
                 title={translations.title}
                 showDescription={true}
                 description={translations.description}
-                backgroundImage='/images/background-about-us.webp'
+                backgroundImage='/images/background-carrer.webp'
                 breadcrumbs={[
                     { label: translations.breadcrumbHome, href: '/' },
                     { label: translations.breadcrumbActive, active: true }

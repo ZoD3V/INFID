@@ -33,12 +33,6 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
     const [selectedPerson, setSelectedPerson] = useState<LTPeople | null>(null);
     const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
-    const [langIndex, setLangIndex] = useState(0);
-
-    useEffect(() => {
-        setLangIndex(locale === 'id' ? 0 : 1);
-    }, [locale]);
-
     const handleTimelineClick = (item: LeadershipTimeline): void => {
         setActiveTimelineId(item.id);
         setSelectedTimeline(item);

@@ -19,7 +19,6 @@ async function getInitialResearchFellow() {
 
 const ResearchPage = async () => {
     const initialData = await getInitialResearchFellow();
-
     return (
         <>
             <ResearchFellowSection initialData={initialData} />
