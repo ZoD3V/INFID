@@ -8,7 +8,8 @@ async function getInitialPublications() {
     try {
         const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
             params: {
-                category: 'Kegiatan',
+                featured: '',
+                category: '',
                 search: '',
                 author: '',
                 tags: '',
@@ -17,7 +18,7 @@ async function getInitialPublications() {
                 limit: 3
             }
         });
-        return res.data.filter((item) => item.status.toLowerCase() == 'published') || [];
+        return res.data;
     } catch (err) {
         return [];
     }
