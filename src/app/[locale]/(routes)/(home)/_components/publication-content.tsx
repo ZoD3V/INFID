@@ -9,7 +9,7 @@ import PublicationsSkeleton from '@/components/common/publication-skeleton';
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { formatDateShort, formatFullDate } from '@/lib/utils';
+import { formatDateShort, formatFullDate, getShortDescription } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
@@ -168,7 +168,7 @@ export const PublicationContent = ({
                                                 {translation?.title}
                                             </h2>
 
-                                            <CardContent content={translation?.content} />
+                                            <CardContent content={getShortDescription(translation?.content)} />
 
                                             <div className='mt-1 flex items-center gap-2 text-xs text-slate-500'>
                                                 <div

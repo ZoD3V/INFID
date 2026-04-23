@@ -9,7 +9,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { formatArticleDate } from '@/lib/utils';
+import { formatArticleDate, getShortDescription } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import { ArrowRight, Eye, MessageSquareMore, Pencil } from 'lucide-react';
@@ -44,7 +44,7 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                 align: 'start',
                 slidesToScroll: 1
             }}
-            className='relative mb-5 w-full overflow-visible'>
+            className='relative mb-8 w-full overflow-visible'>
             <CarouselContent className='-ml-4'>
                 {items.map((item) => {
                     const translation =
@@ -55,7 +55,7 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                     const title = translation?.title || 'No Title';
                     const seen = item.views || 0;
                     const comments = item.comments.length || 0;
-                    const description = translation?.content || '';
+                    const description = getShortDescription(translation?.content);
                     const categoryName = item.category?.name || 'Featured';
                     const authorName = item.author?.name || 'Admin';
                     const publishedDate = item.published_at || item.created_at;
@@ -123,15 +123,12 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                                             </div>
                                         </div>
 
-                                        {/* Button sekarang bersifat visual saja karena parent sudah interaktif, 
-                                            atau kita bisa biarkan Button menangani kliknya.
-                                         */}
                                         <div>
                                             <Button
                                                 size='sm'
                                                 className='pointer-events-none w-fit rounded-full'
                                                 tabIndex={-1}
-                                                aria-hidden='true'>
+                                                aria-label={b('readMore')}>
                                                 {b('readMore')}
                                                 <ArrowRight className='ml-2 h-4 w-4' />
                                             </Button>

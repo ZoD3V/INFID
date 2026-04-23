@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { getShortDescription } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import DetailKnowledgeClient from './detail-knowledge-client';
@@ -35,7 +36,7 @@ export async function generateMetadata({
         data?.translations?.[0];
 
     const title = translation?.title || 'Detail Berita';
-    const description = translation?.content?.substring(0, 160).replace(/<[^>]*>/g, '') || '';
+    const description = getShortDescription(translation?.content);
 
     return {
         title: title,

@@ -8,7 +8,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { formatDateShort } from '@/lib/utils';
+import { formatDateShort, getShortDescription } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
@@ -35,7 +35,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
     };
 
     return (
-        <div className='w-full'>
+        <div className='mb-8 w-full'>
             <Carousel
                 opts={{
                     align: 'start',
@@ -50,7 +50,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                             item?.translations?.[0];
 
                         const title = translation?.title || 'No Title';
-                        const description = translation?.content || '';
+                        const description = getShortDescription(translation?.content);
                         const categoryName = item.category?.name || 'Featured';
                         const authorName = item.author?.name || 'Admin';
                         const seen = item?.views || 0;

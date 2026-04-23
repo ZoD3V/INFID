@@ -39,7 +39,7 @@ const ResearchFellowSection = ({ initialData }: { initialData: Research[] }) => 
         <section className='w-full bg-gray-50'>
             <PageHeader
                 title={t('header.title')}
-                backgroundImage='/images/background-about-us.webp'
+                backgroundImage='/images/background-meeting.webp'
                 breadcrumbs={[
                     { label: t('header.breadcrumb.home'), href: '/' },
                     { label: t('header.breadcrumb.about'), href: '/' },
@@ -103,10 +103,7 @@ const ResearchFellowSection = ({ initialData }: { initialData: Research[] }) => 
                                             {selectedPerson.occupation}
                                         </p>
 
-                                        <AttachmentList
-                                            attachments={selectedPerson?.attachments ?? []}
-                                            // attachments={dummyAttachments}
-                                        />
+                                        <AttachmentList attachments={selectedPerson?.attachments ?? []} />
                                     </div>
                                 </div>
                             </>

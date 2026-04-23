@@ -22,10 +22,10 @@ import z from 'zod';
 
 const contactSchema = z.object({
     senderType: z.enum(['organization', 'individual']),
-    organizationName: z.string().min(2, 'Name is too short'),
-    organizationEmail: z.string().email('Invalid email address'),
-    subject: z.string().min(5, 'Subject must be at least 5 characters'),
-    message: z.string().min(10, 'Message is too short'),
+    organizationName: z.string().min(2, 'Name is too short').max(100),
+    organizationEmail: z.string().email('Invalid email address').max(255),
+    subject: z.string().min(5, 'Subject must be at least 5 characters').max(150),
+    message: z.string().min(10, 'Message is too short').max(1000),
     agreeToPrivacy: z.literal(true, {
         message: 'You must agree to the privacy policy'
     })

@@ -115,3 +115,7 @@ export const convertToEmbedUrl = (url: string) => {
         return '';
     }
 };
+
+export const getShortDescription = (content: string) => {
+    return content?.replace(/<[^>]*>/g, '').substring(0, 120) || '';
+};

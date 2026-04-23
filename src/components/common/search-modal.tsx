@@ -117,7 +117,7 @@ export default function SearchModal() {
             <Dialog.Portal>
                 <Dialog.Overlay className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 fixed inset-0 z-50 bg-black/50' />
                 <Dialog.Content
-                    className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white shadow-lg duration-200'
+                    className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white shadow-lg duration-200 focus:outline-none'
                     aria-describedby='search-description'>
                     <VisuallyHidden.Root>
                         <Dialog.Title>Search</Dialog.Title>
@@ -136,6 +136,7 @@ export default function SearchModal() {
                                 width='16'
                                 height='16'
                                 viewBox='0 0 16 16'
+                                aria-hidden='true'
                                 xmlns='http://www.w3.org/2000/svg'>
                                 <path d='m14.707 13.293-1.414 1.414-2.4-2.4 1.414-1.414 2.4 2.4ZM6.8 12.6A5.8 5.8 0 1 1 6.8 1a5.8 5.8 0 0 1 0 11.6Zm0-2a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6Z' />
                             </svg>
@@ -148,7 +149,9 @@ export default function SearchModal() {
                                 placeholder='Search'
                                 autoFocus
                             />
-                            <span className='mr-4 cursor-default rounded-md border border-slate-300 px-1 py-[0.10px] text-sm text-gray-500'>
+                            <span
+                                className='mr-4 cursor-default rounded-md border border-slate-300 px-1 py-[0.10px] text-sm text-gray-500'
+                                aria-hidden='true'>
                                 esc
                             </span>
                         </div>
@@ -158,10 +161,15 @@ export default function SearchModal() {
                             <div className='space-y-4 px-2 py-4'>
                                 {/* --- LOADING STATE --- */}
                                 {isLoading && (
-                                    <div className='flex flex-col items-center justify-center py-20 text-slate-500'>
+                                    <div
+                                        className='flex flex-col items-center justify-center py-20 text-slate-500'
+                                        role='status'
+                                        aria-live='polite'>
                                         <div className='flex items-baseline gap-1 text-slate-500'>
                                             <p className='text-base font-medium'>Loading</p>
-                                            <div className='loading-dots flex gap-0.5 text-xl leading-none font-bold'>
+                                            <div
+                                                className='loading-dots flex gap-0.5 text-xl leading-none font-bold'
+                                                aria-hidden='true'>
                                                 <span>.</span>
                                                 <span>.</span>
                                                 <span>.</span>
@@ -182,7 +190,7 @@ export default function SearchModal() {
                                                     Posts
                                                 </div>
 
-                                                <ul role='group' aria-label='Post results'>
+                                                <ul role='none'>
                                                     {posts.map((post) => {
                                                         const title =
                                                             post?.translations?.find((t) => t.language === locale)
@@ -192,14 +200,14 @@ export default function SearchModal() {
                                                             post?.translations?.[0].title;
 
                                                         return (
-                                                            <li key={`post-${post.id}`}>
+                                                            <li key={`post-${post.id}`} role='none'>
                                                                 <button
                                                                     type='button'
                                                                     role='option'
-                                                                    aria-label={`Open post: ${title}`}
+                                                                    aria-selected='false'
                                                                     onClick={() => handleNavigate('post', post)}
-                                                                    className='flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
-                                                                    <span className='line-clamp-1'>
+                                                                    className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-blue-100 focus:outline-none'>
+                                                                    <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-blue-100 group-focus:underline'>
                                                                         {highlightText(title, keyword)}
                                                                     </span>
                                                                 </button>
@@ -219,16 +227,16 @@ export default function SearchModal() {
                                                     Jobs
                                                 </div>
 
-                                                <ul role='group' aria-label='Job results'>
+                                                <ul role='none'>
                                                     {jobs.map((job) => (
-                                                        <li key={`job-${job.id}`}>
+                                                        <li key={`job-${job.id}`} role='none'>
                                                             <button
                                                                 type='button'
                                                                 role='option'
-                                                                aria-label={`Open job: ${job.title}`}
+                                                                aria-selected='false'
                                                                 onClick={() => handleNavigate('job', job)}
-                                                                className='flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
-                                                                <span className='line-clamp-1'>
+                                                                className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-blue-100 focus:outline-none'>
+                                                                <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-blue-100 group-focus:underline'>
                                                                     {highlightText(job.title, keyword)}
                                                                 </span>
                                                             </button>
@@ -247,16 +255,16 @@ export default function SearchModal() {
                                                     People
                                                 </div>
 
-                                                <ul role='group' aria-label='People results'>
+                                                <ul role='none'>
                                                     {people.map((person) => (
-                                                        <li key={`person-${person.id}`}>
+                                                        <li key={`person-${person.id}`} role='none'>
                                                             <button
                                                                 type='button'
                                                                 role='option'
-                                                                aria-label={`Open profile: ${person.name}`}
+                                                                aria-selected='false'
                                                                 onClick={() => handleNavigate('people', person)}
-                                                                className='flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
-                                                                <span className='line-clamp-1'>
+                                                                className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-blue-100 focus:outline-none'>
+                                                                <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-blue-100 group-focus:underline'>
                                                                     {highlightText(person.name, keyword)}
                                                                 </span>
                                                             </button>
@@ -270,14 +278,20 @@ export default function SearchModal() {
 
                                 {/* EMPTY STATES */}
                                 {keyword.length === 0 && isEmpty && (
-                                    <p className='mx-4 mt-2 py-10 text-center text-gray-500' role='status'>
+                                    <p
+                                        className='mx-4 mt-2 py-10 text-center text-gray-500'
+                                        role='status'
+                                        aria-live='polite'>
                                         No recent searches
                                     </p>
                                 )}
 
                                 {keyword && !isLoading && isEmpty && (
-                                    <p className='mx-4 mt-2 py-10 text-center text-gray-500' role='status'>
-                                        No results
+                                    <p
+                                        className='mx-4 mt-2 py-10 text-center text-gray-500'
+                                        role='status'
+                                        aria-live='polite'>
+                                        No results for "{keyword}"
                                     </p>
                                 )}
                             </div>

@@ -3,32 +3,25 @@
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { cn } from '@/lib/utils';
+import { AnsweredStatus, MultilanguageText, QuizData, UserAnswers } from '@/types/quiz';
 
 import { ArrowRight, CheckCircle2, ChevronLeft, Inbox, Loader2, XCircle } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-
-const STORAGE_KEY = 'quiz_dialog_status';
 
 export default function QuizPage() {
     const t = useTranslations('quiz');
     const router = useRouter();
+    const locale = useLocale();
 
     // --- Core States ---
-    const [quizData, setQuizData] = useState<any>(null);
+    const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [loading, setLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -36,42 +29,43 @@ export default function QuizPage() {
     const [userName, setUserName] = useState('');
     const [isNameDialogOpen, setIsNameDialogOpen] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
-
-    // Perbaikan Tipe Data: Menggunakan number untuk single choice
-    const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
-    const [answeredQuestions, setAnsweredQuestions] = useState<Record<number, boolean>>({});
+    const [userAnswers, setUserAnswers] = useState<UserAnswers>({});
+    const [answeredQuestions, setAnsweredQuestions] = useState<AnsweredStatus>({});
 
     // --- Feedback & Review States ---
     const [isReviewMode, setIsReviewMode] = useState(false);
     const [showScorePage, setShowScorePage] = useState(false);
     const [finalScore, setFinalScore] = useState(0);
 
+    // Helper Multilanguage
+    const getTranslation = (dataArray: MultilanguageText[]) => {
+        return (
+            dataArray?.find((item) => item.language === locale)?.text ||
+            dataArray?.find((item) => item.language === 'id')?.text ||
+            dataArray?.[0]?.text ||
+            ''
+        );
+    };
+
     // 1. Fetch Data
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const res = await apiRequest.get<any>(API_ENDPOINTS.quiz);
-                if (res.data && res.data.questions && res.data.questions.length > 0) {
-                    setQuizData(res.data);
+                const res = await apiRequest.get<QuizData>(API_ENDPOINTS.quiz);
+                const actualData = res.data || res;
+                if (res.status_code == 200) {
+                    setQuizData(actualData);
                 } else {
-                    const mockQuestions = t.raw('questions');
-                    if (mockQuestions && mockQuestions.length > 0) {
-                        setQuizData({
-                            title: t('ui.label'),
-                            questions: mockQuestions
-                        });
-                    } else {
-                        setQuizData(null);
-                    }
+                    setQuizData(null);
                 }
             } catch (error) {
-                toast.error('Failed load quiz.');
+                console.error(error);
             } finally {
                 setLoading(false);
             }
         };
         fetchQuiz();
-    }, []);
+    }, [t]);
 
     const questions = quizData?.questions || [];
     const currentQuestion = questions[currentIndex];
@@ -79,7 +73,6 @@ export default function QuizPage() {
     // 2. Logic: Handle Choice (Lock Instantly)
     const handleChoice = (qId: number, optId: number) => {
         if (answeredQuestions[qId] || isReviewMode) return;
-
         setUserAnswers((prev) => ({ ...prev, [qId]: optId }));
         setAnsweredQuestions((prev) => ({ ...prev, [qId]: true }));
     };
@@ -91,7 +84,7 @@ export default function QuizPage() {
         questions.forEach((q: any) => {
             const selected = userAnswers[q.id];
             const correctOpt = q.options.find((o: any) => o.is_correct);
-            if (selected === correctOpt?.id) total += q.weight || 10;
+            if (selected === correctOpt?.id) total += q.weight || 0;
         });
         setFinalScore(total);
 
@@ -99,11 +92,11 @@ export default function QuizPage() {
             await apiRequest.post(API_ENDPOINTS.quiz, {
                 name: userName,
                 score: total,
-                followed_quiz: quizData?.title
+                followed_quiz: getTranslation(quizData?.title as any)
             });
             setShowScorePage(true);
         } catch (error) {
-            toast.error('Failed sent answer.');
+            toast.error('Failed to send answers.');
         } finally {
             setIsSubmitting(false);
         }
@@ -126,32 +119,21 @@ export default function QuizPage() {
     // --- RENDER STATES ---
 
     if (loading) return <LoaderState t={t} />;
+
     if (!quizData || questions.length === 0) {
-        return (
-            <section className='min-h-screen bg-slate-50'>
-                <div className='bg-primary-500 h-35 w-full' />
-                <div className='flex h-[calc(100vh-140px)] flex-col items-center justify-center px-4 text-center'>
-                    <div className='mb-4 rounded-full bg-slate-100 p-6 text-slate-400'>
-                        <Inbox size={48} />
-                    </div>
-                    <h2 className='text-xl font-bold text-slate-900'>{t('ui.empty_title') || 'Kuis Belum Tersedia'}</h2>
-                    <p className='mt-2 max-w-xs text-slate-500'>
-                        {t('ui.empty_description') ||
-                            'Saat ini belum ada pertanyaan untuk kuis ini. Silakan kembali lagi nanti.'}
-                    </p>
-                    <Button variant='outline' className='mt-8 rounded-full' onClick={() => router.push('/')}>
-                        {t('score.button_beranda')}
-                    </Button>
-                </div>
-            </section>
-        );
+        return <EmptyState t={t} router={router} />;
     }
 
-    if (showScorePage)
+    if (showScorePage) {
+        const matchedFeedback = quizData.feedbacks
+            ? [...quizData.feedbacks].sort((a, b) => b.min_score - a.min_score).find((f) => finalScore >= f.min_score)
+            : null;
+
         return (
             <ScoreState
                 t={t}
                 score={finalScore}
+                narrative={getTranslation(matchedFeedback?.narrative as any)}
                 onReview={() => {
                     setShowScorePage(false);
                     setIsReviewMode(true);
@@ -160,10 +142,10 @@ export default function QuizPage() {
                 onHome={() => router.push('/')}
             />
         );
+    }
 
     return (
         <section className='min-h-screen w-full bg-slate-50 pb-20'>
-            {/* Name Dialog */}
             <Dialog open={isNameDialogOpen}>
                 <DialogContent className='[&>button]:hidden' onPointerDownOutside={(e) => e.preventDefault()}>
                     <DialogHeader>
@@ -185,6 +167,7 @@ export default function QuizPage() {
                 </DialogContent>
             </Dialog>
 
+            {/* Header: Fixed Horizontal Scroll Only */}
             <div className='bg-primary-500 flex h-35 w-full items-center justify-center border-b px-3'>
                 <div className='no-scrollbar flex max-w-full gap-2 overflow-x-auto overflow-y-hidden px-4 pt-16 pb-2'>
                     {questions.map((_: any, i: number) => (
@@ -197,7 +180,7 @@ export default function QuizPage() {
                                 i === currentIndex
                                     ? 'bg-secondary-200 scale-110 text-white shadow-lg'
                                     : i < currentIndex
-                                      ? 'bg-secondary-200 text-white'
+                                      ? 'bg-secondary-200/50 text-white'
                                       : 'border-secondary-200 text-secondary-200 border'
                             )}>
                             {i + 1}
@@ -215,13 +198,17 @@ export default function QuizPage() {
                     )}
 
                     <div className='flex items-center justify-between'>
-                        <span className='text-primary-500 text-xs font-bold uppercase'>{quizData?.title}</span>
+                        <span className='text-primary-500 text-xs font-bold uppercase'>
+                            {getTranslation(quizData.title as any)}
+                        </span>
                         <span className='text-xs text-gray-400'>
                             {currentIndex + 1} / {questions.length}
                         </span>
                     </div>
 
-                    <h3 className='text-lg font-bold text-slate-900'>{currentQuestion?.question}</h3>
+                    <h3 className='text-lg font-bold text-slate-900'>
+                        {getTranslation(currentQuestion?.question as any)}
+                    </h3>
 
                     <div className='flex flex-col gap-3'>
                         {currentQuestion?.options.map((opt: any, i: number) => {
@@ -249,7 +236,7 @@ export default function QuizPage() {
                                     key={opt.id}
                                     onClick={() => handleChoice(currentQuestion.id, opt.id)}
                                     className={cn(
-                                        'flex items-center rounded-full border-2 p-1 transition-all',
+                                        'flex items-center rounded-xl border-2 p-1 transition-all',
                                         isAnswered ? 'cursor-default' : 'cursor-pointer',
                                         cardStyle
                                     )}>
@@ -266,7 +253,7 @@ export default function QuizPage() {
                                             getOptionLabel(i)
                                         )}
                                     </div>
-                                    <span className='text-sm font-semibold'>{opt.option}</span>
+                                    <span className='text-sm font-semibold'>{getTranslation(opt.option as any)}</span>
                                 </div>
                             );
                         })}
@@ -274,10 +261,8 @@ export default function QuizPage() {
                 </div>
             </div>
 
-            {/* Navigation Bar */}
             <div className='fixed bottom-0 left-0 flex w-full items-center justify-center border-t bg-white px-4 py-4 shadow-lg'>
                 <div className='flex w-full max-w-2xl items-center gap-4'>
-                    {/* Tombol Back hanya muncul di Review Mode */}
                     {isReviewMode && (
                         <Button
                             variant='outline'
@@ -287,11 +272,10 @@ export default function QuizPage() {
                             <ChevronLeft size={24} />
                         </Button>
                     )}
-
                     <Button
                         onClick={handleNext}
                         disabled={!canContinue || isSubmitting}
-                        className='h-12 flex-1 rounded-full text-base font-bold'>
+                        className='h-12 flex-1 rounded-full text-base font-bold transition-all'>
                         {isSubmitting ? (
                             <Loader2 className='mr-2 animate-spin' />
                         ) : isReviewMode && currentIndex === questions.length - 1 ? (
@@ -309,7 +293,7 @@ export default function QuizPage() {
     );
 }
 
-// --- Internal UI Components ---
+// --- Sub-components for Clean Code ---
 
 function LoaderState({ t }: any) {
     return (
@@ -323,32 +307,43 @@ function LoaderState({ t }: any) {
     );
 }
 
-function ScoreState({ t, score, onReview, onHome }: any) {
-    const getGrade = (s: number) => {
-        if (s >= 80) return { label: 'Sangat Paham', color: 'text-green-600' };
-        if (s >= 60) return { label: 'Paham', color: 'text-teal-600' };
-        return { label: 'Perlu Belajar Lagi', color: 'text-amber-600' };
-    };
-    const grade = getGrade(score);
+function EmptyState({ t, router }: any) {
+    return (
+        <section className='min-h-screen bg-slate-50'>
+            <div className='bg-primary-500 h-35 w-full' />
+            <div className='flex h-[calc(100vh-140px)] flex-col items-center justify-center px-4 text-center'>
+                <div className='mb-4 rounded-full bg-slate-100 p-6 text-slate-400'>
+                    <Inbox size={48} />
+                </div>
+                <h2 className='text-xl font-bold text-slate-900'>{t('ui.empty_title') || 'Kuis Belum Tersedia'}</h2>
+                <p className='mt-2 max-w-xs text-slate-500'>{t('ui.empty_description')}</p>
+                <Button variant='outline' className='mt-8 rounded-full px-8' onClick={() => router.push('/')}>
+                    {t('score.button_beranda')}
+                </Button>
+            </div>
+        </section>
+    );
+}
 
+function ScoreState({ t, score, narrative, onReview, onHome }: any) {
     return (
         <section className='min-h-screen bg-slate-50'>
             <div className='bg-primary-500 h-35 w-full' />
             <div className='flex flex-col items-center justify-center px-4 py-12'>
-                <div className='flex w-full max-w-md flex-col gap-6 rounded-3xl bg-white p-8 text-center shadow'>
+                <div className='flex w-full max-w-md flex-col gap-6 rounded-3xl border bg-white p-8 text-center shadow-xl'>
                     <div className='mx-auto rounded-full bg-green-100 p-4 text-green-600'>
                         <CheckCircle2 size={48} />
                     </div>
                     <h2 className='text-2xl font-bold'>{t('score.status')}</h2>
-                    <div className='rounded-2xl border bg-slate-50 py-6'>
+                    <div className='rounded-2xl border-2 border-dashed border-slate-100 bg-slate-50 px-4 py-6'>
                         <span className='text-xs font-bold tracking-widest text-gray-400 uppercase'>
                             {t('score.title')}
                         </span>
-                        <div className='text-primary-500 text-6xl font-black'>{score}</div>
-                        <div className={cn('mt-2 text-lg font-bold', grade.color)}>{grade.label}</div>
+                        <div className='text-primary-500 my-2 text-7xl font-black'>{score}</div>
+                        <p className='mt-2 leading-relaxed font-bold text-teal-600'>{narrative}</p>
                     </div>
                     <div className='flex flex-col gap-3'>
-                        <Button className='h-12 rounded-full font-bold' onClick={onReview}>
+                        <Button className='h-12 rounded-full text-base font-bold' onClick={onReview}>
                             Review Jawaban
                         </Button>
                         <Button variant='ghost' className='rounded-full' onClick={onHome}>

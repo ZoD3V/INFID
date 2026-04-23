@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { subscribeAction } from '@/hooks/subscribe';
 import { cn } from '@/lib/utils';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import SubmitButton from './submit-button';
 import { ArrowRight, Loader2, Mail, X } from 'lucide-react';
@@ -69,9 +70,12 @@ export default function HomeFloatingCard() {
     return (
         <>
             {isOnHomePage && (
-                <div className='fixed right-5.5 bottom-20 z-50' aria-label='Subscription Newsletter button'>
+                <aside className='fixed right-5.5 bottom-20 z-50' aria-label='Subscription Newsletter'>
                     {isVisible ? (
                         <div
+                            role='dialog'
+                            aria-modal='false'
+                            aria-labelledby='newsletter-title'
                             className={cn(
                                 'w-80 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl',
                                 'animate-in fade-in zoom-in duration-300'
@@ -79,47 +83,63 @@ export default function HomeFloatingCard() {
                             {/* Close Button */}
                             <button
                                 onClick={() => handleToggle(false)}
-                                aria-label='Close button'
-                                className='absolute top-3 right-3 p-2 text-slate-400 transition-colors hover:text-slate-600'>
-                                <X size={20} />
+                                aria-label='Close subscription card'
+                                className='focus-visible:ring-primary-500 absolute top-3 right-3 rounded-full p-2 text-slate-400 transition-colors outline-none hover:text-slate-600 focus-visible:ring-2'>
+                                <X size={20} aria-hidden='true' />
                             </button>
 
                             <div className='mb-4 flex justify-center pt-8'>
                                 <img
                                     src='/logo/logo-floating-card.png'
-                                    alt='Logo'
+                                    alt=''
+                                    aria-hidden='true'
                                     className='h-10 w-auto object-contain'
                                 />
                             </div>
 
-                            <p className='text-primary-900 mb-6 text-center text-sm font-semibold'>{t('home')}</p>
+                            <p
+                                id='newsletter-title'
+                                className='text-primary-900 mb-6 text-center text-sm font-semibold'>
+                                {t('home')}
+                            </p>
 
                             <form className='flex w-full flex-col items-center gap-3' action={handleAction}>
-                                <Input
-                                    name='email'
-                                    type='email'
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder={p('insertEmail')}
-                                    className='rounded-full border-slate-200 bg-slate-50'
-                                    disabled={isLoading}
-                                />
+                                <div className='w-full'>
+                                    <VisuallyHidden>
+                                        <label htmlFor='newsletter-email'>Email Address</label>
+                                    </VisuallyHidden>
+                                    <Input
+                                        id='newsletter-email'
+                                        name='email'
+                                        type='email'
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder={p('insertEmail')}
+                                        className='focus-visible:ring-primary-500 rounded-full border-slate-200 bg-slate-50'
+                                        disabled={isLoading}
+                                    />
+                                </div>
 
-                                <SubmitButton label={b('subscribe')} />
+                                <SubmitButton
+                                    label={b('subscribe')}
+                                    className='group focus-visible:text-primary-900 underline-offset-2 focus-visible:bg-blue-100 focus-visible:underline'
+                                />
                             </form>
                         </div>
                     ) : (
                         <button
                             onClick={() => handleToggle(true)}
+                            aria-label='Open newsletter subscription'
+                            aria-expanded='false'
                             className={cn(
-                                'bg-primary flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full shadow-lg transition-all hover:scale-110 active:scale-95',
+                                'bg-primary focus-visible:ring-primary-500 flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full shadow-lg transition-all outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-95',
                                 'animate-in fade-in slide-in-from-bottom-4'
                             )}>
-                            <Mail className='text-white' size={24} />
+                            <Mail className='text-white' size={24} aria-hidden='true' />
                         </button>
                     )}
-                </div>
+                </aside>
             )}
         </>
     );

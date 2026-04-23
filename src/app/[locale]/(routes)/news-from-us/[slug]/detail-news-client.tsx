@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
-import AttachmentList from '@/components/common/article-attachment-list';
 import { ArticleCard } from '@/components/common/article-card';
 import { ArticleContent } from '@/components/common/article-content';
 import { ArticleHeader } from '@/components/common/article-header';

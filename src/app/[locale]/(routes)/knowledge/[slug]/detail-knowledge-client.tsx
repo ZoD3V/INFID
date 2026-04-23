@@ -147,6 +147,16 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                             )}
                         </div>
 
+                        {initialData?.audio_link && (
+                            <div className='mt-4 w-full rounded-xl border border-slate-200 bg-slate-50 p-4'>
+                                <p className='mb-2 text-xs font-medium text-slate-500'>Audio Attachment:</p>
+                                <audio controls className='w-full'>
+                                    <source src={initialData.audio_link} type='audio/mpeg' />
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        )}
+
                         <Image
                             width={1200}
                             height={630}

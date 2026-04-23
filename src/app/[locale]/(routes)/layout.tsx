@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
             description: t('description'),
             images: [
                 {
-                    url: '/images/background-home.webp',
+                    url: 'https://ibb.co.com/tTS5jYhH',
                     width: 1200,
                     height: 630,
                     alt: t('ogImageAlt')

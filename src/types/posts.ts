@@ -69,6 +69,8 @@ export interface Post {
     cover: string;
     translations: PostTranslation[];
     youtube_link?: string;
+    audio_link?: string;
+    audio?: string;
     tags: Tags[];
     views?: number;
     comments: Comment[];
