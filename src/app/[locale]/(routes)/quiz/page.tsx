@@ -279,7 +279,7 @@ export default function QuizPage() {
                         {isSubmitting ? (
                             <Loader2 className='mr-2 animate-spin' />
                         ) : isReviewMode && currentIndex === questions.length - 1 ? (
-                            'Selesai Review'
+                            t('ui.review')
                         ) : currentIndex === questions.length - 1 ? (
                             t('ui.submit')
                         ) : (
@@ -330,7 +330,7 @@ function ScoreState({ t, score, narrative, onReview, onHome }: any) {
         <section className='min-h-screen bg-slate-50'>
             <div className='bg-primary-500 h-35 w-full' />
             <div className='flex flex-col items-center justify-center px-4 py-12'>
-                <div className='flex w-full max-w-md flex-col gap-6 rounded-3xl border bg-white p-8 text-center shadow-xl'>
+                <div className='flex w-full max-w-md flex-col gap-6 rounded-3xl border bg-white p-8 text-center shadow'>
                     <div className='mx-auto rounded-full bg-green-100 p-4 text-green-600'>
                         <CheckCircle2 size={48} />
                     </div>

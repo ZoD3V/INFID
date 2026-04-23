@@ -29,7 +29,7 @@ export default function SearchModal() {
                 try {
                     const res = await apiRequest.get<GlobalSearch>(API_ENDPOINTS.globalSearch, {
                         params: {
-                            limit: '',
+                            limit: 3,
                             search: keyword
                         }
                     });

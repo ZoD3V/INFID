@@ -6,7 +6,8 @@
         "progress": "{current} dari {total}",
         "continue": "Lanjutkan",
         "loading": "Memuat Pertanyaan...",
-        "submit": "Kirim Jawaban"
+        "submit": "Kirim Jawaban",
+        "review": "Selesai Review"
     },
     "score": {
         "status": " Kuis Selesai!",

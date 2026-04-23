@@ -6,7 +6,8 @@
         "progress": "{current} of {total}",
         "continue": "Continue",
         "loading": "Load questions...",
-        "submit": "Submit Answers"
+        "submit": "Submit Answers",
+        "review": "Completed Review"
     },
     "score": {
         "status": "Quiz Completed!",
