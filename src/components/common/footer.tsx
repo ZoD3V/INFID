@@ -168,7 +168,7 @@ const Footer = () => {
                                         className='rounded-full border-gray-400 bg-white/10 text-sm text-white placeholder:text-slate-400 focus-visible:ring-slate-400'
                                     />
 
-                                    <SubmitButton label='Subscribe' />
+                                    <SubmitButton label='Subscribe' className={''} />
                                 </form>
                             </div>
                         </div>
