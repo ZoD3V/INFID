@@ -9,7 +9,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { formatArticleDate, getShortDescription } from '@/lib/utils';
+import { formatArticleDate, getLangText, getShortDescription } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import { ArrowRight, Eye, MessageSquareMore, Pencil } from 'lucide-react';
@@ -56,7 +56,7 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                     const seen = item.views || 0;
                     const comments = item.comments.length || 0;
                     const description = getShortDescription(translation?.content);
-                    const categoryName = item.category?.name || 'Featured';
+                    const categoryName = getLangText(item.category.name, locale);
                     const authorName = item.author?.name || 'Admin';
                     const publishedDate = item.published_at || item.created_at;
 

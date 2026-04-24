@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
+import { cn, getLangText } from '@/lib/utils';
+import { Category } from '@/types/posts';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export interface FilterOption {
     label: string;
@@ -10,7 +11,7 @@ export interface FilterOption {
 }
 
 interface ArticleFiltersProps {
-    categories: string[];
+    categories: Category[];
     selectedCategory: string;
     onCategoryChange: (value: string) => void;
 
@@ -38,6 +39,7 @@ export function ArticleFilters({
     className
 }: ArticleFiltersProps) {
     const t = useTranslations('news');
+    const locale = useLocale();
 
     return (
         <div
@@ -49,26 +51,35 @@ export function ArticleFilters({
                 className={cn(
                     'scrollbar-none flex items-center gap-2 overflow-x-auto px-1 py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
                 )}
-                role='group'
+                role='tablist'
                 aria-label='Filter news by category'>
-                {categories.map((item) => (
-                    <Button
-                        key={item}
-                        size='sm'
-                        aria-label={`Category ${item}`}
-                        aria-pressed={selectedCategory === item}
-                        className={cn(
-                            'rounded-full transition-all focus-visible:outline-none',
-                            'focus-visible:ring-primary-500 focus-visible:ring-2 focus-visible:ring-inset',
-                            selectedCategory === item
-                                ? 'bg-primary-500 hover:bg-primary-600 text-white'
-                                : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none'
-                        )}
-                        variant={selectedCategory === item ? 'default' : 'outline'}
-                        onClick={() => onCategoryChange(item)}>
-                        {item}
-                    </Button>
-                ))}
+                {categories.map((item, index) => {
+                    const label = getLangText(item.name, locale);
+                    const labelId = getLangText(item.name, locale);
+
+                    const isActive = selectedCategory === labelId;
+
+                    return (
+                        <Button
+                            key={index}
+                            size='sm'
+                            role='tab'
+                            id={`tab-news-${item.slug}`}
+                            aria-selected={isActive}
+                            aria-label={locale === 'en' ? `Filter by ${label}` : `Filter berdasarkan ${label}`}
+                            className={cn(
+                                'rounded-full transition-all focus-visible:outline-none',
+                                'focus-visible:ring-primary-500 focus-visible:ring-2 focus-visible:ring-inset',
+                                isActive
+                                    ? 'bg-primary-500 hover:bg-primary-600 text-white'
+                                    : 'hover:bg-primary-600 border-none bg-slate-100 text-slate-600 shadow-none hover:text-white'
+                            )}
+                            variant={isActive ? 'default' : 'outline'}
+                            onClick={() => onCategoryChange(labelId)}>
+                            {label}
+                        </Button>
+                    );
+                })}
             </div>
             <div className='flex flex-wrap gap-2'>
                 {/* YEAR SELECT */}

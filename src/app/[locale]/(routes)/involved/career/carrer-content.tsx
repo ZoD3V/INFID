@@ -12,13 +12,14 @@ import { Button } from '@/components/ui/button';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { Category } from '@/types/job';
+import { cn } from '@/lib/utils';
 
 import { JobAccordion } from './_components/job-accordion';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
-const CareerContent = ({ categories, initialJobs, categoryFilter, translations }: any) => {
+const CareerContent = ({ categories, initialJobs, translations }: any) => {
     const t = useTranslations('button');
+    const locale = useLocale();
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -87,37 +88,52 @@ const CareerContent = ({ categories, initialJobs, categoryFilter, translations }
 
             <div className='sticky top-16 z-20 w-full border bg-white py-4'>
                 <div className='container flex flex-wrap items-center justify-between gap-4'>
-                    <div className='flex flex-wrap gap-2' role='group' aria-label='Job category filters'>
+                    <div
+                        className='flex flex-wrap gap-2'
+                        role='tablist'
+                        aria-label='Filter lowongan berdasarkan kategori'>
                         <Button
                             size='sm'
-                            aria-label='Show all job categories'
-                            aria-pressed={activeCategory === 'all'}
-                            className={`focus-visible:ring-primary-500 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                            role='tab'
+                            aria-selected={activeCategory === 'all'}
+                            aria-label={
+                                locale === 'en' ? 'Show all job categories' : 'Tampilkan semua kategori lowongan'
+                            }
+                            className={cn(
+                                'focus-visible:ring-primary-500 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
                                 activeCategory === 'all'
                                     ? 'bg-primary-500 hover:bg-primary-600 text-white'
-                                    : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none'
-                            }`}
+                                    : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none hover:text-white'
+                            )}
                             variant={activeCategory === 'all' ? 'default' : 'outline'}
                             onClick={() => handleCategoryChange('all')}>
-                            Semua
+                            {locale === 'en' ? 'All' : 'Semua'}
                         </Button>
 
-                        {categories.map((cat: any) => (
-                            <Button
-                                key={cat.id}
-                                size='sm'
-                                aria-label={`Filter by ${cat.name}`}
-                                aria-pressed={activeCategory === cat.name}
-                                className={`focus-visible:ring-primary-500 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
-                                    activeCategory === cat.name
-                                        ? 'bg-primary-500 hover:bg-primary-600 text-white'
-                                        : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none'
-                                }`}
-                                variant={activeCategory === cat.name ? 'default' : 'outline'}
-                                onClick={() => handleCategoryChange(cat.name)}>
-                                {cat.name}
-                            </Button>
-                        ))}
+                        {categories[locale as 'id' | 'en']?.map((label: string, index: number) => {
+                            const categoryId = categories.id[index];
+                            const isActive = activeCategory === categoryId;
+
+                            return (
+                                <Button
+                                    key={index}
+                                    size='sm'
+                                    role='tab'
+                                    id={`job-cat-${index}`}
+                                    aria-selected={isActive}
+                                    aria-label={locale === 'en' ? `Filter by ${label}` : `Filter berdasarkan ${label}`}
+                                    className={cn(
+                                        'focus-visible:ring-primary-500 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+                                        isActive
+                                            ? 'bg-primary-500 hover:bg-primary-600 text-white'
+                                            : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none hover:text-white'
+                                    )}
+                                    variant={isActive ? 'default' : 'outline'}
+                                    onClick={() => handleCategoryChange(categoryId)}>
+                                    {label}
+                                </Button>
+                            );
+                        })}
                     </div>
 
                     <div className='flex items-center gap-2 text-sm'>

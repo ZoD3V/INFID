@@ -7,12 +7,15 @@ import { SectionHeader } from '@/components/common/section-header';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { getLangText } from '@/lib/utils';
 import { RegionDetail } from '@/types/region';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const OurNetworkWrapper = ({ regions }: { regions: Region[] }) => {
     const t = useTranslations('home.our_network');
+    const locale = useLocale();
     const [open, setOpen] = useState<boolean>(false);
     const [selectedRegion, setSelectedRegion] = useState<RegionDetail | null>(null);
     const [loading, setLoading] = useState(false);
@@ -50,22 +53,21 @@ const OurNetworkWrapper = ({ regions }: { regions: Region[] }) => {
             <Maps data={regions} onRegionClick={handleRegionClick} isLoading={loading} />
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className='max-w-[calc(100%-2rem)] md:max-w-150'>
-                    <DialogHeader>
-                        <DialogTitle>
-                            {/* <div className='flex flex-col items-start justify-between gap-2 lg:flex-row'>
-                                <h2 className='text-left text-xl font-bold text-gray-900'>Detail Daerah</h2>
-                            </div> */}
-                        </DialogTitle>
-                        <DialogDescription />
-                    </DialogHeader>
+                    <VisuallyHidden>
+                        <DialogHeader>
+                            <DialogTitle>{getLangText(selectedRegion?.name, locale)}</DialogTitle>
+                        </DialogHeader>
+                    </VisuallyHidden>
 
                     {/* Organization List */}
                     <div className='flex max-h-[60vh] flex-col gap-4 overflow-y-auto pr-1'>
-                        <div className='flex flex-col gap-1.5'>
-                            <p className='text-lg font-bold text-slate-900'>{selectedRegion?.name}</p>
+                        <div className='flex flex-col gap-1'>
+                            <p className='text-lg font-bold text-slate-900'>
+                                {getLangText(selectedRegion?.name, locale)}
+                            </p>
                             <p className='text-slate-900'>{selectedRegion?.description}</p>
                             <p className='text-lg text-slate-900'>
-                                Jumlah Member: <span className='text-base'>{selectedRegion?.members.length}</span>
+                                Total Members: <span className='text-base'>{selectedRegion?.members.length}</span>
                             </p>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import { Link, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { formatArticleDate, getShortDescription } from '@/lib/utils';
+import { formatArticleDate, getLangText, getShortDescription } from '@/lib/utils';
 import { Post, PostTranslation } from '@/types/posts';
 import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
@@ -169,7 +169,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                             <div className='px-1 pb-2'>
                                 <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                     <span className='text-secondary-300 text-xs font-medium uppercase'>
-                                        {programData[0]?.category?.name ?? 'Category'}
+                                        {getLangText(programData[0]?.category?.name, locale) || 'Category'}
                                     </span>
                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
                                     <span className='text-xs text-slate-500'>
@@ -225,7 +225,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                             <div className='px-1 pb-2'>
                                 <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                     <span className='text-secondary-300 text-xs font-medium uppercase'>
-                                        {programData[1]?.category?.name ?? 'Category'}
+                                        {getLangText(programData[1]?.category?.name, locale) || 'Category'}
                                     </span>
                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
                                     <span className='text-xs text-slate-500'>
@@ -278,7 +278,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                             <div className='px-1 pb-2'>
                                 <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                     <span className='text-secondary-300 text-xs font-medium uppercase'>
-                                        {programData[2]?.category?.name ?? 'Category'}
+                                        {getLangText(programData[2]?.category?.name, locale) || 'Category'}
                                     </span>
                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
                                     <span className='text-xs text-slate-500'>

@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Link as Navigate, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { getLangText } from '@/lib/utils';
 import { Post, PostTranslation } from '@/types/posts';
 
 import { Download } from 'lucide-react';
@@ -45,7 +46,7 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                 const [relatedRes, latestRes] = await Promise.all([
                     apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                         params: {
-                            category: initialData?.category?.name || '',
+                            category: getLangText(initialData?.category.name, 'id') || '',
                             limit: 3,
                             page: 1,
                             search: '',
@@ -138,7 +139,9 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                         <ArticleHeader data={initialData} translation={translation} />
 
                         <div className='flex items-center justify-between gap-4'>
-                            <h3 className='text-secondary-300 font-bold uppercase'>{initialData?.category?.name}</h3>
+                            <h3 className='text-secondary-300 font-bold uppercase'>
+                                {getLangText(initialData?.category.name, locale)}
+                            </h3>
                             {translation!.attachments?.length > 0 && (
                                 <Button className='rounded-full' size={'sm'} onClick={handleDownload}>
                                     <Download className='mr-2 h-4 w-4' />
@@ -168,7 +171,10 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
 
                         <ArticleContent content={translation?.content || ''} />
 
-                        <ArticleShareBar categoryName={initialData?.category?.name} title={translation?.title} />
+                        <ArticleShareBar
+                            categoryName={getLangText(initialData?.category.name, locale)}
+                            title={translation?.title}
+                        />
 
                         <CommentSection comments={initialData?.comments || []} onSubmit={handleAddComment} />
                     </div>

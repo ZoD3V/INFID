@@ -1,46 +1,40 @@
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { Category, Job } from '@/types/job';
+import { JobsResponse } from '@/types/job';
 
 import CareerContent from './carrer-content';
 import { getTranslations } from 'next-intl/server';
 
-async function getCategories() {
+async function getInitialJobs(): Promise<JobsResponse> {
     try {
-        const res = await apiRequest.get<Category[]>(API_ENDPOINTS.categories);
-        return res.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-async function getInitialJobs() {
-    try {
-        const res = await apiRequest.get<Job[]>(API_ENDPOINTS.jobRecruitments, {
-            params: {
-                limit: 10
-            }
+        const res = await apiRequest.get<JobsResponse>(API_ENDPOINTS.jobRecruitments, {
+            params: { limit: 10 }
         });
 
-        return res;
-    } catch (err) {
-        return [];
+        return res as any;
+    } catch {
+        return {
+            data: [],
+            category_filter: { id: [], en: [] },
+            status_code: 500,
+            message: 'error'
+        } as any;
     }
 }
 
 export default async function CareerPage() {
     const t = await getTranslations('career');
 
-    const [categoriesData, initialJobsResponse] = await Promise.all<any[]>([getCategories(), getInitialJobs()]);
+    const fullResponse = await getInitialJobs();
 
-    const validCategoryNames = initialJobsResponse?.category_filter || [];
+    const jobs = fullResponse.data;
 
-    const filteredCategories = categoriesData.filter((cat: Category) => validCategoryNames.includes(cat.name));
+    const categories = fullResponse.category_filter;
 
     return (
         <CareerContent
-            categories={filteredCategories}
-            initialJobs={initialJobsResponse?.data ?? []}
+            categories={categories}
+            initialJobs={jobs}
             translations={{
                 title: t('header.title'),
                 description: t('header.description'),

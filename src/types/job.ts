@@ -1,3 +1,8 @@
+export interface LanguageText {
+    language: string;
+    text: string;
+}
+
 export interface Job {
     id: number;
     title: string;
@@ -18,16 +23,23 @@ export interface Description {
     text: string;
 }
 
-export interface PaginatedResponse<T> {
-    data: T[];
-    meta: {
-        total: number;
-        current_page: number;
+export interface JobsResponse {
+    data: Job[];
+    links: {
+        first: string;
+        last: string;
+        prev: string | null;
+        next: string | null;
     };
-}
-
-export interface Category {
-    id: number;
-    name: string;
-    slug: string;
+    meta: {
+        current_page: number;
+        last_page: number;
+        total: number;
+    };
+    category_filter: {
+        id: string[];
+        en: string[];
+    };
+    status_code: number;
+    message: string;
 }

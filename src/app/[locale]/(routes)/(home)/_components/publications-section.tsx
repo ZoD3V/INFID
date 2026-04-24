@@ -1,6 +1,6 @@
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { Post } from '@/types/posts';
+import { Category, Post } from '@/types/posts';
 
 import { PublicationContent } from './publication-content';
 
@@ -26,7 +26,7 @@ async function getInitialPublications() {
 
 async function getInitialCategoryPublications() {
     try {
-        const res = await apiRequest.get<any[]>(API_ENDPOINTS.categories);
+        const res = await apiRequest.get<Category[]>(API_ENDPOINTS.categories);
         return res.data;
     } catch (err) {
         return [];

@@ -18,12 +18,7 @@ import { useLocale, useTranslations } from 'next-intl';
 export function JobAccordion({ data }: { data: Job[] }) {
     const t = useTranslations('button');
     const j = useTranslations('job');
-    const [langIndex, setLangIndex] = useState(0);
     const locale = useLocale();
-
-    useEffect(() => {
-        setLangIndex(locale === 'id' ? 0 : 1);
-    }, []);
 
     if (!data.length) {
         return <EmptyState />;
@@ -49,7 +44,7 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                     <div className='space-y-1 text-left'>
                                         <div className='flex items-center gap-2'>
                                             <Badge className='bg-secondary-300 rounded-full text-xs font-medium'>
-                                                {item.employment_type}
+                                                {item?.employment_type ?? '-'}
                                             </Badge>
                                             <span className='text-sm text-slate-500'>
                                                 {t('deadline')}{' '}
@@ -75,12 +70,12 @@ export function JobAccordion({ data }: { data: Job[] }) {
 
                             <AccordionContent className='px-6 pb-6'>
                                 <div className='grid grid-cols-1 gap-6 md:grid-cols-12'>
-                                    <div className='relative md:col-span-4'>
+                                    <div className='relative h-80 md:col-span-4'>
                                         <OptimizedImage
                                             src={item.image}
                                             alt={`Banner image for ${item.title}`}
                                             className='h-full w-full rounded-xl border object-cover'
-                                            placeholderType='portrait'
+                                            placeholderType='square'
                                         />
                                     </div>
 

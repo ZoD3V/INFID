@@ -20,11 +20,16 @@ export interface Author {
 
 export interface Category {
     id: number;
-    name: string;
+    name: CategoryTranslation[];
     slug: string;
     description: string | null;
     created_at: string;
     updated_at: string;
+}
+
+export interface CategoryTranslation {
+    language: string;
+    text: string;
 }
 
 export interface PostTranslation {

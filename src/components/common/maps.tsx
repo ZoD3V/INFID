@@ -1,10 +1,12 @@
-import { slugify } from '@/lib/utils';
+import { getLangText, slugify } from '@/lib/utils';
+import { CategoryTranslation } from '@/types/posts';
 
 import clsx from 'clsx';
+import { useLocale } from 'next-intl';
 
 export interface Region {
     id: number;
-    name: string;
+    name: CategoryTranslation[];
     description: string | null;
     total_member: number;
 }
@@ -16,8 +18,10 @@ interface MapsProps {
 }
 
 export const Maps: React.FC<MapsProps> = ({ data, onRegionClick, isLoading }) => {
+    const locale = useLocale();
+
     const getRegionBySlug = (slug: string) => {
-        return data.find((r) => slugify(r.name) === slug);
+        return data.find((r) => slugify(getLangText(r.name, locale)) === slug);
     };
 
     const getFillColor = (slug: string) => {
@@ -34,7 +38,7 @@ export const Maps: React.FC<MapsProps> = ({ data, onRegionClick, isLoading }) =>
         if (!target.classList.contains('region')) return;
 
         const slug = target.getAttribute('data-name') || target.id;
-        const foundRegion = data.find((r) => slugify(r.name) === slug);
+        const foundRegion = data.find((r) => slugify(getLangText(r.name, locale)) === slug);
 
         if (foundRegion && !isLoading) {
             onRegionClick(foundRegion);

@@ -1,3 +1,5 @@
+import { CategoryTranslation } from './posts';
+
 export interface Member {
     id: number;
     name: string;
@@ -10,7 +12,7 @@ export interface Member {
 
 export interface RegionDetail {
     id: number;
-    name: string;
+    name: CategoryTranslation[];
     description: string | null;
     members: Member[];
 }

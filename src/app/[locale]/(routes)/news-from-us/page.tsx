@@ -14,16 +14,18 @@ import { Button } from '@/components/ui/button';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { Post } from '@/types/posts';
+import { allowedNewsCategories } from '@/types/categories';
+import { Category, Post } from '@/types/posts';
 
 import { FeaturedNews } from './_components/featured-news';
 import { yearsNews } from './data/data';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const PAGE_SIZE = 8;
 
 export default function NewsFromUsPage() {
     const t = useTranslations('news');
+    const locale = useLocale();
     const [filters, setFilters] = useState({
         category: 'Semua',
         year: 'all',
@@ -42,7 +44,7 @@ export default function NewsFromUsPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
-    const [categoriesNews, setCategoriesNews] = useState<any[]>(['Semua']);
+    const [categoriesNews, setCategoriesNews] = useState<Category[]>([]);
     const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
     const [isFeaturedLoading, setIsFeaturedLoading] = useState(true);
 
@@ -50,28 +52,49 @@ export default function NewsFromUsPage() {
         const fetchCategories = async () => {
             try {
                 setIsCategoriesLoading(true);
-                const res = await apiRequest.get<any>(API_ENDPOINTS.categories);
-                const allowedCategories = [
-                    'Kegiatan',
-                    'Bergerak',
-                    'Berdampak',
-                    'Siaran Pers',
-                    'Laporan Tahunan',
-                    'Bergerak, Berdampak!'
-                ];
+
+                const res = await apiRequest.get<Category[]>(API_ENDPOINTS.categories);
+
                 const data = res.data || res;
-                const filteredNames = data
-                    .filter((cat: any) => allowedCategories.includes(cat.name))
-                    .map((cat: any) => cat.name);
-                setCategoriesNews(['Semua', ...filteredNames]);
+
+                const filteredData = data.filter((cat: Category) => {
+                    return cat.name.some((translation) =>
+                        allowedNewsCategories.some((c) => c.id === translation.text || c.en === translation.text)
+                    );
+                });
+
+                const allCategory: Category = {
+                    id: 0,
+                    slug: 'all',
+                    name: [
+                        { language: 'id', text: 'Semua' },
+                        { language: 'en', text: 'All' }
+                    ],
+                    description: null,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                };
+
+                setCategoriesNews([allCategory, ...filteredData]);
             } catch (error) {
-                setCategoriesNews(['Semua']);
+                const allCategory: Category = {
+                    id: 0,
+                    slug: 'all',
+                    name: [
+                        { language: 'id', text: 'Semua' },
+                        { language: 'en', text: 'All' }
+                    ],
+                    description: null,
+                    created_at: '',
+                    updated_at: ''
+                };
+                setCategoriesNews([allCategory]);
             } finally {
                 setIsCategoriesLoading(false);
             }
         };
         fetchCategories();
-    }, []);
+    }, [locale]);
 
     useEffect(() => {
         const categoryFromUrl = searchParams.get('category') || 'Semua';
@@ -212,7 +235,7 @@ export default function NewsFromUsPage() {
 
             <div className='sticky top-16 z-20 w-full border bg-white py-5'>
                 <ArticleFilters
-                    categories={isCategoriesLoading ? ['Semua'] : categoriesNews}
+                    categories={categoriesNews}
                     years={yearsNews}
                     selectedCategory={filters.category}
                     onCategoryChange={(v) => setFilters((f) => ({ ...f, category: v }))}

@@ -1,5 +1,4 @@
 'use client';
-import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -8,10 +7,10 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { formatDateShort, getShortDescription } from '@/lib/utils';
+import { formatDateShort, getLangText, getShortDescription } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
-import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
+import { Eye, Pencil } from 'lucide-react';
 import { useLocale } from 'next-intl';
 
 interface FeaturedNewsProps {
@@ -51,7 +50,7 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                         const title = translation?.title || 'No Title';
                         const description = getShortDescription(translation?.content);
-                        const categoryName = item.category?.name || 'Featured';
+                        const categoryName = getLangText(item.category.name, locale);
                         const authorName = item.author?.name || 'Admin';
                         const seen = item?.views || 0;
                         const comments = item.comments?.length || 0;

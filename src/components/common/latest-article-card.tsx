@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { formatFullDate } from '@/lib/utils';
+import { formatFullDate, getLangText } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
@@ -19,7 +19,7 @@ export const LatestArticleCard: React.FC<LatestArticleCardProps> = ({ article })
         article?.translations?.[0];
 
     const title = translation?.title || 'No Title';
-    const categoryName = article.category?.name || 'News';
+    const categoryName = getLangText(article.category.name, locale);
     const authorName = article.author?.name || 'Admin';
     const publishedDate = article.published_at || article.created_at;
 

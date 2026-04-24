@@ -13,17 +13,19 @@ import { Link } from '@/i18n/routing';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { cn } from '@/lib/utils';
+import { allowedKnowledgeCategories, allowedNewsCategories } from '@/types/categories';
 import { Category } from '@/types/posts';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 
 import LanguageSwitcher from './language-switcher';
 import SearchModal from './search-modal';
 import { ChevronDown, ChevronRight, ExternalLink, Menu } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export function Navbar() {
     const pathname = usePathname();
     const isMobile = useIsMobile();
+    const locale = useLocale();
     const [isOpen, setIsOpen] = React.useState(false);
     const t = useTranslations('navigation');
     const [isScrolled, setIsScrolled] = React.useState(false);
@@ -47,23 +49,6 @@ export function Navbar() {
         params.set('category', categoryName);
         return `${basePath}?${params.toString()}`;
     };
-
-    const knowledgeCategories = [
-        'Riset',
-        'Kertas Kebijakan',
-        'Modul dan Panduan',
-        'Artikel',
-        'Riset & Kertas Kebijakan',
-        'Modul & Panduan'
-    ];
-    const newsCategories = [
-        'Kegiatan',
-        'Bergerak',
-        'Berdampak',
-        'Siaran Pers',
-        'Laporan Tahunan',
-        'Bergerak, Berdampak!'
-    ];
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -93,41 +78,37 @@ export function Navbar() {
             title: t('knowledge'),
             href: '/knowledge',
             children: categories
-                .filter((cat) => knowledgeCategories.includes(cat.name))
-                .map((cat) => ({
-                    title: cat.name,
-                    href: createCategoryHref('/knowledge', cat.name)
-                }))
+                .filter((cat) => {
+                    const catName = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+
+                    return allowedKnowledgeCategories.some((c) => c.id === catName || c.en === catName);
+                })
+                .map((cat) => {
+                    const translatedTitle = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+
+                    return {
+                        title: translatedTitle,
+                        href: createCategoryHref('/knowledge', translatedTitle)
+                    };
+                })
         },
-        //     {
-        //     title: t('knowledge'),
-        //     href: '/knowledge',
-        //     children: categories
-        //         .filter((cat) => {
-        //             const catName = cat.translations?.find(t => t.language === locale)?.title
-        //                             || cat.translations?.[0]?.title;
-
-        //             return knowledgeCategories.includes(catName);
-        //         })
-        //         .map((cat) => {
-        //             const translatedTitle = cat.translations?.find(t => t.language === locale)?.title
-        //                                     || cat.translations?.[0]?.title;
-
-        //             return {
-        //                 title: translatedTitle,
-        //                 href: createCategoryHref('/knowledge', translatedTitle)
-        //             };
-        //         })
-        // }
         {
             title: t('news'),
             href: '/news-from-us',
             children: categories
-                .filter((cat) => newsCategories.includes(cat.name))
-                .map((cat) => ({
-                    title: cat.name,
-                    href: createCategoryHref('/news-from-us', cat.name)
-                }))
+                .filter((cat) => {
+                    const catName = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+
+                    return allowedNewsCategories.some((c) => c.id === catName || c.en === catName);
+                })
+                .map((cat) => {
+                    const translatedTitle = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+
+                    return {
+                        title: translatedTitle,
+                        href: createCategoryHref('/news-from-us', translatedTitle)
+                    };
+                })
         },
         {
             title: t('involved'),

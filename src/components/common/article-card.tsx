@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { formatArticleDate } from '@/lib/utils';
+import { formatArticleDate, getLangText } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
@@ -23,7 +23,8 @@ export function ArticleCard<T extends Post>({ article, className, imageClassName
         article?.translations?.[0];
 
     const title = translation?.title || 'No Title';
-    const categoryName = article.category?.name || 'Uncategorized';
+    const categoryName = getLangText(article.category.name, locale);
+
     const authorName = article.author?.name || 'Admin';
     const publishedDate = article.published_at;
     const comments = article.comments;

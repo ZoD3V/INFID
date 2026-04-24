@@ -1,3 +1,5 @@
+import { CategoryTranslation } from '@/types/posts';
+
 import { type ClassValue, clsx } from 'clsx';
 import { format, isValid, parseISO } from 'date-fns';
 import { id } from 'date-fns/locale/id';
@@ -62,7 +64,7 @@ export const getInitials = (name: string) => {
     return name.substring(0, 2).toUpperCase();
 };
 
-export const slugify = (text: string) => {
+export const slugify = (text: string = '') => {
     return text
         .toLowerCase()
         .replace(/\s+/g, '-')
@@ -118,4 +120,12 @@ export const convertToEmbedUrl = (url: string) => {
 
 export const getShortDescription = (content: string) => {
     return content?.replace(/<[^>]*>/g, '').substring(0, 120) || '';
+};
+
+export const getLangText = (translations: CategoryTranslation[] | undefined, langCode: string = 'id'): string => {
+    if (!translations || translations.length === 0) return '';
+
+    const translation = translations.find((t) => t.language === langCode);
+
+    return translation?.text || translations[0].text || '';
 };

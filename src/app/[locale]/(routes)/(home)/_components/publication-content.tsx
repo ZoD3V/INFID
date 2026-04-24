@@ -9,8 +9,8 @@ import PublicationsSkeleton from '@/components/common/publication-skeleton';
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { formatDateShort, formatFullDate, getShortDescription } from '@/lib/utils';
-import { Post } from '@/types/posts';
+import { formatDateShort, formatFullDate, getLangText, getShortDescription } from '@/lib/utils';
+import { Category, Post } from '@/types/posts';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
@@ -29,7 +29,7 @@ export const PublicationContent = ({
     categoriesData
 }: {
     initialData: Post[];
-    categoriesData: Article[];
+    categoriesData: Category[];
 }) => {
     const locale = useLocale();
     const t = useTranslations('home.publications');
@@ -96,17 +96,27 @@ export const PublicationContent = ({
 
             {categoriesData.length > 0 && (
                 <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
-                    <div className='flex flex-wrap gap-3'>
-                        {categoriesData.map((tab, index) => (
-                            <button
-                                id={`tab-${tab.id}`}
-                                key={tab.id}
-                                onClick={() => handleTabChange(tab.name)}
-                                onKeyDown={(e) => handleKeyDown(e, index)}
-                                className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:outline-none ${activeTab === tab.name ? 'bg-teal-600 text-white' : 'bg-slate-200 text-slate-700'} `}>
-                                {tab.name}
-                            </button>
-                        ))}
+                    <div className='flex flex-wrap gap-3' role='tablist' aria-label='Kategori Program'>
+                        {categoriesData.map((tab, index) => {
+                            const label = getLangText(tab.name, locale);
+                            const isActive = activeTab === tab.slug;
+
+                            return (
+                                <button
+                                    key={tab.id}
+                                    id={`tab-${tab.id}`}
+                                    type='button'
+                                    role='tab'
+                                    aria-selected={isActive}
+                                    aria-controls={`panel-${tab.id}`}
+                                    tabIndex={isActive ? 0 : -1}
+                                    onClick={() => handleTabChange(tab.slug)}
+                                    onKeyDown={(e) => handleKeyDown(e, index)}
+                                    className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:outline-none ${isActive ? 'bg-teal-600 text-white' : 'bg-slate-200 text-slate-700'} `}>
+                                    {label || 'Category'}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             )}
@@ -148,7 +158,7 @@ export const PublicationContent = ({
                                         />
                                         <div className='absolute top-3 left-3'>
                                             <span className='rounded-full bg-orange-500 px-3 py-1.5 text-xs font-medium text-white'>
-                                                {featured.category?.name || 'Featured'}
+                                                {getLangText(featured.category?.name, locale) || 'Featured'}
                                             </span>
                                         </div>
                                     </div>
@@ -239,7 +249,7 @@ export const PublicationContent = ({
                                             <div className='flex h-full flex-1 flex-col justify-evenly'>
                                                 <div className='flex items-center gap-2' aria-hidden='true'>
                                                     <span className='text-secondary-300 text-xs font-medium uppercase lg:text-sm'>
-                                                        {article.category?.name}
+                                                        {getLangText(article.category?.name, locale) || 'Category'}
                                                     </span>
                                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
                                                     <span className='text-xs text-slate-500'>

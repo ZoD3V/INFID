@@ -32,7 +32,6 @@ async function getInitialPublications() {
 
 const HomePage = async () => {
     const programData = await getInitialPublications();
-
     return (
         <>
             <Home />
