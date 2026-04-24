@@ -9,11 +9,12 @@ import SectionBadge from '@/components/common/section-badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { getLangText } from '@/lib/utils';
 import { RegionDetail } from '@/types/region';
 
 import CommunitySection from '../../../(home)/_components/community-section';
 import { Link2, Mail, MapPin, Phone } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 interface MapsSectionProps {
@@ -22,7 +23,7 @@ interface MapsSectionProps {
 
 export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }) => {
     const t = useTranslations('member');
-
+    const locale = useLocale();
     const [open, setOpen] = useState<boolean>(false);
     const [selectedRegion, setSelectedRegion] = useState<RegionDetail | null>(null);
     const [loading, setLoading] = useState(false);
@@ -68,7 +69,7 @@ export const MapsMemberSection: React.FC<MapsSectionProps> = ({ initialRegions }
                         <DialogTitle>
                             <div className='flex flex-col items-start justify-between gap-2 lg:flex-row'>
                                 <h2 className='text-left text-xl font-bold text-gray-900'>
-                                    {selectedRegion?.name ?? 'Detail Daerah'}
+                                    {getLangText(selectedRegion?.name, locale)}
                                 </h2>
                             </div>
                         </DialogTitle>
