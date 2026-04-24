@@ -32,13 +32,7 @@ const AboutUsSection = () => {
                             height={100}
                             className='absolute -top-10 left-10 z-10 hidden xl:block'
                         />
-                        {/* <Image
-                            src='/images/about-us.webp'
-                            alt='images'
-                            width={500}
-                            height={500}
-                            className='z-1 h-auto w-full'
-                        /> */}
+
                         <BentoAboutUs />
 
                         {/* Decorative Logo */}
