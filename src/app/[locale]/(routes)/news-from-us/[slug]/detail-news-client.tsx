@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Link as Navigate, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { convertToEmbedUrl } from '@/lib/utils';
+import { convertToEmbedUrl, getLangText } from '@/lib/utils';
 import { Post, PostTranslation, Tags } from '@/types/posts';
 
 import { Download } from 'lucide-react';
@@ -85,11 +85,14 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
     }, [initialData?.id, initialData?.category?.name]);
 
     const handleDownload = () => {
-        const filePath = translation?.attachments?.[0]?.file_path;
+        const pdfAttachment = translation?.attachments?.find((item) => item.type === 'pdf');
+
+        const filePath = pdfAttachment?.file_path;
+
         if (filePath) {
             window.open(filePath, '_blank');
         } else {
-            toast.error('Attachments not available');
+            toast.error('PDF attachment not available');
         }
     };
 
@@ -140,8 +143,10 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                         <ArticleHeader data={initialData} translation={translation} />
 
                         <div className='flex items-center justify-between gap-4'>
-                            <h3 className='text-secondary-300 font-bold uppercase'>{initialData?.category?.name}</h3>
-                            {translation?.attachments !== undefined && translation?.attachments?.length > 0 && (
+                            <h3 className='text-secondary-300 font-bold uppercase'>
+                                {getLangText(initialData?.category.name, locale)}
+                            </h3>
+                            {translation?.attachments?.some((item) => item.type === 'pdf') && (
                                 <Button className='rounded-full' size={'sm'} onClick={handleDownload}>
                                     <Download className='mr-2 h-4 w-4' />
                                     {t('content.attachments')}
@@ -172,9 +177,11 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                         )}
 
                         <ArticleContent content={translation?.content || ''} />
-                        {/* <AttachmentList attachments={translation?.attachments ?? []} /> */}
 
-                        <ArticleShareBar categoryName={initialData?.category?.name} title={translation?.title} />
+                        <ArticleShareBar
+                            categoryName={getLangText(initialData?.category.name, locale)}
+                            title={translation?.title}
+                        />
 
                         <CommentSection comments={initialData?.comments || []} onSubmit={handleAddComment} />
                     </div>

@@ -84,11 +84,14 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
     }, [initialData?.id, initialData?.category?.name]);
 
     const handleDownload = () => {
-        const filePath = translation?.assets?.[0]?.file_path;
+        const pdfAttachment = translation?.attachments?.find((item) => item.type === 'pdf');
+
+        const filePath = pdfAttachment?.file_path;
+
         if (filePath) {
             window.open(filePath, '_blank');
         } else {
-            toast.error('Lampiran tidak tersedia');
+            toast.error('PDF attachment not available');
         }
     };
 
@@ -142,7 +145,7 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                             <h3 className='text-secondary-300 font-bold uppercase'>
                                 {getLangText(initialData?.category.name, locale)}
                             </h3>
-                            {translation!.attachments?.length > 0 && (
+                            {translation?.attachments?.some((item) => item.type === 'pdf') && (
                                 <Button className='rounded-full' size={'sm'} onClick={handleDownload}>
                                     <Download className='mr-2 h-4 w-4' />
                                     {t('content.attachments')}
@@ -150,15 +153,21 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                             )}
                         </div>
 
-                        {initialData?.audio_link && (
-                            <div className='mt-4 w-full rounded-xl border border-slate-200 bg-slate-50 p-4'>
-                                <p className='mb-2 text-xs font-medium text-slate-500'>Audio Attachment:</p>
-                                <audio controls className='w-full'>
-                                    <source src={initialData.audio_link} type='audio/mpeg' />
-                                    Your browser does not support the audio element.
-                                </audio>
-                            </div>
-                        )}
+                        {(() => {
+                            const audioFile = translation?.attachments?.find((item) => item.type === 'audio');
+
+                            if (!audioFile) return null;
+
+                            return (
+                                <div className='mt-4 w-full rounded-xl border border-slate-200 bg-slate-50 p-4'>
+                                    <p className='mb-2 text-xs font-medium text-slate-500'>Audio Attachment:</p>
+                                    <audio controls className='w-full'>
+                                        <source src={audioFile.file_path} type='audio/mpeg' />
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            );
+                        })()}
 
                         <Image
                             width={1200}
