@@ -1,18 +1,16 @@
 'use client';
-import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
 import CardContent from '@/components/common/card-content';
-import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
-import { Link, useRouter } from '@/i18n/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { formatArticleDate, getLangText, getShortDescription } from '@/lib/utils';
-import { Post, PostTranslation } from '@/types/posts';
+import { Post } from '@/types/posts';
 import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
@@ -26,7 +24,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
     const videoId = '6KJBSilT76k';
     const startTime = 10;
     const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
-    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
     const locale = useLocale();
     const router = useRouter();
 

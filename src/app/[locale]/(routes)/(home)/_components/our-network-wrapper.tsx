@@ -67,7 +67,8 @@ const OurNetworkWrapper = ({ regions }: { regions: Region[] }) => {
                             </p>
                             <p className='text-slate-900'>{selectedRegion?.description}</p>
                             <p className='text-lg text-slate-900'>
-                                Total Members: <span className='text-base'>{selectedRegion?.members.length}</span>
+                                {locale == 'id' ? 'Jumlah Member' : 'Total Members'} :{' '}
+                                <span className='text-base'>{selectedRegion?.members.length}</span>
                             </p>
                         </div>
                     </div>

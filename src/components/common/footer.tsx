@@ -1,16 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-
+import { useCategories } from '@/context/category-context';
 import { subscribeAction } from '@/hooks/subscribe';
 import { Link, usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
+import { allowedKnowledgeCategories } from '@/types/categories';
 
-import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import SubmitButton from './submit-button';
-import { ArrowRight, ChevronUp, Loader2, MailIcon, PhoneCall } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { ChevronUp, MailIcon, PhoneCall } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import { BsTwitterX, BsWhatsapp } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { toast } from 'sonner';
@@ -18,30 +17,40 @@ import { toast } from 'sonner';
 const Footer = () => {
     const pathname = usePathname();
     const t = useTranslations('footer');
-    const b = useTranslations('button');
-    const p = useTranslations('placeholder');
-    const [email, setEmail] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const locale = useLocale();
+
+    const { categories } = useCategories();
+
+    const createCategoryHref = (basePath: string, categoryName: string) => {
+        const params = new URLSearchParams();
+        params.set('category', categoryName);
+        return `${basePath}?${params.toString()}`;
+    };
+
     const footerLinks = {
         about: [
             { name: t('links.structure'), href: '/about/profile-infid' },
-            // { name: 'INFID Research Fellow', href: '/program-kami/umkm' },
+            { name: 'INFID Research Fellow', href: '/about/research' },
             { name: t('links.members'), href: '/about/member-infid' },
             { name: t('links.partners'), href: '/about/partner' }
         ],
-        advocacy: [
-            { name: t('links.articles'), href: '/knowledge?category=Artikel' },
-            { name: t('links.research'), href: '/knowledge?category=Riset' },
-            { name: t('links.policy'), href: '/knowledge?category=Kertas+Kebijakan' },
-            {
-                name: t('links.modules'),
-                href: '/knowledge?category=Modul+%26+Panduan'
-            }
-        ]
+        advocacy: categories
+            .filter((cat) => {
+                const catName = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+
+                return allowedKnowledgeCategories.some((c) => c.id === catName || c.en === catName);
+            })
+            .map((cat) => {
+                const translatedTitle = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+
+                return {
+                    name: translatedTitle,
+                    href: createCategoryHref('/knowledge', translatedTitle)
+                };
+            })
     };
 
     async function handleAction(formData: FormData) {
-        setIsLoading(true);
         const result = await subscribeAction(formData);
 
         if (result?.error) {
@@ -49,7 +58,6 @@ const Footer = () => {
         } else {
             toast.success('Success Subscribe');
         }
-        setIsLoading(false);
     }
 
     return (

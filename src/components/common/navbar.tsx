@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { useCategories } from '@/context/category-context';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { usePathname } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
@@ -29,20 +30,7 @@ export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false);
     const t = useTranslations('navigation');
     const [isScrolled, setIsScrolled] = React.useState(false);
-    const [categories, setCategories] = React.useState<Category[]>([]);
-
-    React.useEffect(() => {
-        const fetchNavCategories = async () => {
-            try {
-                const res = await apiRequest.get<any[]>(API_ENDPOINTS.categories);
-                const data = res.data || [];
-                setCategories(data);
-            } catch (error) {
-                console.error('Error fetching nav categories', error);
-            }
-        };
-        fetchNavCategories();
-    }, []);
+    const { categories } = useCategories();
 
     const createCategoryHref = (basePath: string, categoryName: string) => {
         const params = new URLSearchParams();

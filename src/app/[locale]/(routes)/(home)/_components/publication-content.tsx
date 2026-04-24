@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { ArticleCard } from '@/components/common/article-card';
 import CardContent from '@/components/common/card-content';
 import EmptyState from '@/components/common/empty-state';
 import PublicationsSkeleton from '@/components/common/publication-skeleton';
+import { useCategories } from '@/context/category-context';
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
@@ -15,23 +15,10 @@ import { Category, Post } from '@/types/posts';
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
-interface Article {
-    id: number;
-    name: string;
-    slug: string;
-    description: string | null;
-    created_at: string;
-    updated_at: string;
-}
-
-export const PublicationContent = ({
-    initialData,
-    categoriesData
-}: {
-    initialData: Post[];
-    categoriesData: Category[];
-}) => {
+export const PublicationContent = ({ initialData }: { initialData: Post[] }) => {
     const locale = useLocale();
+    const { categories } = useCategories();
+
     const t = useTranslations('home.publications');
     const [activeTab, setActiveTab] = useState('');
     const [publications, setPublications] = useState<Post[]>(initialData);
@@ -67,16 +54,6 @@ export const PublicationContent = ({
         }
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
-        if (e.key === 'ArrowRight') {
-            const nextIndex = (index + 1) % categoriesData.length;
-            document.getElementById(`tab-${categoriesData[nextIndex].id}`)?.focus();
-        } else if (e.key === 'ArrowLeft') {
-            const prevIndex = (index - 1 + categoriesData.length) % categoriesData.length;
-            document.getElementById(`tab-${categoriesData[prevIndex].id}`)?.focus();
-        }
-    };
-
     const handleArticleClick = async (article: Post) => {
         try {
             await apiRequest.get<Post>(`${API_ENDPOINTS.posts}/${article.id}/view`);
@@ -94,10 +71,10 @@ export const PublicationContent = ({
         <>
             <h1 className='text-primary-900 mb-8 max-w-sm text-3xl font-bold md:text-4xl lg:text-5xl'>{t('title')}</h1>
 
-            {categoriesData.length > 0 && (
+            {categories.length > 0 && (
                 <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
                     <div className='flex flex-wrap gap-3' role='tablist' aria-label='Kategori Program'>
-                        {categoriesData.map((tab, index) => {
+                        {categories.map((tab, index) => {
                             const label = getLangText(tab.name, locale);
                             const isActive = activeTab === tab.slug;
 
@@ -108,10 +85,8 @@ export const PublicationContent = ({
                                     type='button'
                                     role='tab'
                                     aria-selected={isActive}
-                                    aria-controls={`panel-${tab.id}`}
-                                    tabIndex={isActive ? 0 : -1}
+                                    aria-label={locale === 'en' ? `Filter by ${label}` : `Filter berdasarkan ${label}`}
                                     onClick={() => handleTabChange(tab.slug)}
-                                    onKeyDown={(e) => handleKeyDown(e, index)}
                                     className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:outline-none ${isActive ? 'bg-teal-600 text-white' : 'bg-slate-200 text-slate-700'} `}>
                                     {label || 'Category'}
                                 </button>
