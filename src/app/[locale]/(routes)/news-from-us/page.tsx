@@ -16,9 +16,9 @@ import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { allowedNewsCategories } from '@/types/categories';
 import { Category, Post } from '@/types/posts';
+import { yearArticle } from '@/types/years';
 
 import { FeaturedNews } from './_components/featured-news';
-import { yearsNews } from './data/data';
 import { useLocale, useTranslations } from 'next-intl';
 
 const PAGE_SIZE = 8;
@@ -236,7 +236,7 @@ export default function NewsFromUsPage() {
             <div className='sticky top-16 z-20 w-full border bg-white py-5'>
                 <ArticleFilters
                     categories={categoriesNews}
-                    years={yearsNews}
+                    years={yearArticle}
                     selectedCategory={filters.category}
                     onCategoryChange={(v) => setFilters((f) => ({ ...f, category: v }))}
                     selectedYear={filters.year}

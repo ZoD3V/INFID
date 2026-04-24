@@ -16,9 +16,9 @@ import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { allowedKnowledgeCategories } from '@/types/categories';
 import { Category, Post } from '@/types/posts';
+import { yearArticle } from '@/types/years';
 
 import { ArticleCarousel } from './_components/carousel-knowledge';
-import { yearsKnowledge } from './data/data';
 import { useLocale, useTranslations } from 'next-intl';
 
 const PAGE_SIZE = 8;
@@ -236,7 +236,7 @@ export default function KnowledgePage() {
             <div className='sticky top-16 z-20 w-full border bg-white py-5'>
                 <ArticleFilters
                     categories={categoriesNews}
-                    years={yearsKnowledge}
+                    years={yearArticle}
                     selectedCategory={filters.category}
                     onCategoryChange={(v) => setFilters((f) => ({ ...f, category: v }))}
                     selectedYear={filters.year}
