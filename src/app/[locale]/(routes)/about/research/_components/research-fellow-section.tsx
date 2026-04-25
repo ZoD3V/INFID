@@ -104,7 +104,6 @@ const ResearchFellowSection = ({ initialData }: { initialData: Research[] }) => 
                                                     />
                                                 </div>
 
-                                                {/* Konten Teks */}
                                                 <div className='flex flex-1 flex-col items-center text-center md:items-start md:text-left'>
                                                     <h3 className='text-2xl font-bold text-gray-900'>
                                                         {selectedPerson.name}
