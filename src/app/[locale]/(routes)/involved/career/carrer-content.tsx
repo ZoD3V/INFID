@@ -111,8 +111,9 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
                         </Button>
 
                         {categories[locale as 'id' | 'en']?.map((label: string, index: number) => {
-                            const categoryId = categories.id[index];
-                            const isActive = activeCategory === categoryId;
+                            const currentCategoryValue = categories[locale as 'id' | 'en'][index];
+
+                            const isActive = activeCategory === currentCategoryValue;
 
                             return (
                                 <Button
@@ -129,7 +130,7 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
                                             : 'hover:bg-primary-500 border-none bg-slate-100 text-slate-600 shadow-none hover:text-white'
                                     )}
                                     variant={isActive ? 'default' : 'outline'}
-                                    onClick={() => handleCategoryChange(categoryId)}>
+                                    onClick={() => handleCategoryChange(currentCategoryValue)}>
                                     {label}
                                 </Button>
                             );
