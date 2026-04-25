@@ -46,7 +46,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                 const [relatedRes, latestRes] = await Promise.all([
                     apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                         params: {
-                            category: initialData?.category?.name || '',
+                            category: getLangText(initialData?.category.name, locale) || '',
                             limit: 3,
                             page: 1,
                             search: '',

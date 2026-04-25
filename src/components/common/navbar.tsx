@@ -11,11 +11,8 @@ import { useCategories } from '@/context/category-context';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { usePathname } from '@/i18n/routing';
 import { Link } from '@/i18n/routing';
-import { API_ENDPOINTS } from '@/lib/api-endpoints';
-import { apiRequest } from '@/lib/api-request';
 import { cn } from '@/lib/utils';
 import { allowedKnowledgeCategories, allowedNewsCategories } from '@/types/categories';
-import { Category } from '@/types/posts';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 
 import LanguageSwitcher from './language-switcher';

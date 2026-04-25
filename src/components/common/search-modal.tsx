@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
@@ -9,15 +9,74 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 import { Search } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function SearchModal() {
     const [isOpen, setIsOpen] = useState(false);
+    const t = useTranslations('navigation');
+
     const [keyword, setKeyword] = useState('');
     const [results, setResults] = useState<GlobalSearch | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const locale = useLocale();
     const router = useRouter();
+
+    const navItems = [
+        {
+            title: t('about'),
+            href: '',
+            children: [
+                { title: t('about_profile'), href: '/about/profile-infid' },
+                { title: t('about_structure'), href: '/about/structure-organization' },
+                { title: t('about_member'), href: '/about/member-infid' },
+                { title: t('about_research'), href: '/about/research' },
+                { title: t('about_mitra'), href: '/about/partner' }
+            ]
+        },
+        {
+            title: t('knowledge'),
+            href: '/knowledge',
+            children: []
+        },
+        {
+            title: t('news'),
+            href: '/news-from-us',
+            children: []
+        },
+        {
+            title: t('involved'),
+            href: '',
+            children: [
+                { title: t('involved_career'), href: '/involved/career' }
+                // { title: t('involved_member'), href: '/involved/become-member' }
+            ]
+        },
+        { title: t('contact'), href: '/contact-us' }
+    ];
+
+    const filteredNavItems = useMemo(() => {
+        if (!keyword.trim()) return navItems;
+
+        const searchLower = keyword.toLowerCase();
+
+        return navItems
+            .map((group) => {
+                const matchedChildren =
+                    group.children?.filter((child) => child.title.toLowerCase().includes(searchLower)) || [];
+
+                const isGroupMatched = group.title.toLowerCase().includes(searchLower);
+
+                if (isGroupMatched || matchedChildren.length > 0) {
+                    return {
+                        ...group,
+
+                        children: matchedChildren.length > 0 ? matchedChildren : group.children
+                    };
+                }
+                return null;
+            })
+            .filter(Boolean);
+    }, [keyword, navItems]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -100,7 +159,7 @@ export default function SearchModal() {
     const jobs = results?.jobs ?? [];
     const people = results?.people ?? [];
 
-    const isEmpty = posts.length === 0 && jobs.length === 0 && people.length === 0;
+    const isEmpty = posts.length === 0 && jobs.length === 0 && people.length === 0 && filteredNavItems.length === 0;
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -178,8 +237,56 @@ export default function SearchModal() {
                                     </div>
                                 )}
 
+                                {!isLoading && filteredNavItems.length > 0 && (
+                                    <section aria-labelledby='section-pages'>
+                                        <div
+                                            id='section-pages'
+                                            className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                            Pages & Sections
+                                        </div>
+
+                                        <ul role='listbox' className='mt-1'>
+                                            {filteredNavItems.map((group, idx) => {
+                                                const renderButton = (title: string, href: string, key: string) => (
+                                                    <li key={key} role='none'>
+                                                        <button
+                                                            type='button'
+                                                            role='option'
+                                                            aria-selected='false'
+                                                            onClick={() => {
+                                                                router.push(href);
+                                                                setIsOpen(false);
+                                                            }}
+                                                            className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                            <span className='line-clamp-1'>
+                                                                {highlightText(title, keyword)}
+                                                            </span>
+                                                        </button>
+                                                    </li>
+                                                );
+
+                                                if (group?.children && group.children.length > 0) {
+                                                    return group.children.map((child, cIdx) =>
+                                                        renderButton(
+                                                            child.title,
+                                                            child.href,
+                                                            `nav-child-${idx}-${cIdx}`
+                                                        )
+                                                    );
+                                                }
+
+                                                if (group?.href) {
+                                                    return renderButton(group.title, group.href, `nav-group-${idx}`);
+                                                }
+
+                                                return null;
+                                            })}
+                                        </ul>
+                                    </section>
+                                )}
+
                                 {/* RESULTS */}
-                                {(posts.length > 0 || jobs.length > 0 || people.length > 0) && (
+                                {((!isLoading && posts.length > 0) || jobs.length > 0 || people.length > 0) && (
                                     <div className='space-y-4'>
                                         {/* POSTS */}
                                         {posts.length > 0 && (
@@ -206,8 +313,8 @@ export default function SearchModal() {
                                                                     role='option'
                                                                     aria-selected='false'
                                                                     onClick={() => handleNavigate('post', post)}
-                                                                    className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-blue-100 focus:outline-none'>
-                                                                    <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-blue-100 group-focus:underline'>
+                                                                    className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                    <span className='decoration-primary-500 line-clamp-1 transition-all group-focus:bg-slate-100'>
                                                                         {highlightText(title, keyword)}
                                                                     </span>
                                                                 </button>
@@ -235,8 +342,8 @@ export default function SearchModal() {
                                                                 role='option'
                                                                 aria-selected='false'
                                                                 onClick={() => handleNavigate('job', job)}
-                                                                className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-blue-100 focus:outline-none'>
-                                                                <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-blue-100 group-focus:underline'>
+                                                                className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-slate-100 group-focus:underline'>
                                                                     {highlightText(job.title, keyword)}
                                                                 </span>
                                                             </button>
@@ -263,8 +370,8 @@ export default function SearchModal() {
                                                                 role='option'
                                                                 aria-selected='false'
                                                                 onClick={() => handleNavigate('people', person)}
-                                                                className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-blue-100 focus:outline-none'>
-                                                                <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-blue-100 group-focus:underline'>
+                                                                className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-slate-100 group-focus:underline'>
                                                                     {highlightText(person.name, keyword)}
                                                                 </span>
                                                             </button>
@@ -274,16 +381,6 @@ export default function SearchModal() {
                                             </section>
                                         )}
                                     </div>
-                                )}
-
-                                {/* EMPTY STATES */}
-                                {keyword.length === 0 && isEmpty && (
-                                    <p
-                                        className='mx-4 mt-2 py-10 text-center text-gray-500'
-                                        role='status'
-                                        aria-live='polite'>
-                                        No recent searches
-                                    </p>
                                 )}
 
                                 {keyword && !isLoading && isEmpty && (
