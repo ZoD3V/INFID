@@ -146,13 +146,13 @@ const Home = () => {
                                 {/* Stat 1 */}
                                 <div className='space-y-2'>
                                     <div className='text-3xl font-bold text-white'>80</div>
-                                    <div className='text-sm text-gray-400 lg:text-base'>{t('memberOrganizations')}</div>
+                                    <div className='text-sm text-gray-100 lg:text-base'>{t('memberOrganizations')}</div>
                                 </div>
 
                                 {/* Stat 2 */}
                                 <div className='space-y-2'>
                                     <div className='text-3xl font-bold text-white'>200+</div>
-                                    <div className='text-sm text-gray-400 lg:text-base'>
+                                    <div className='text-sm text-gray-100 lg:text-base'>
                                         {t('policyRecommendations')}
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@ const Home = () => {
                                 {/* Stat 3 */}
                                 <div className='space-y-2'>
                                     <div className='text-3xl font-bold text-white'>ECOSOC</div>
-                                    <div className='text-sm text-gray-400 lg:text-base'>{t('consultativeStatus')}</div>
+                                    <div className='text-sm text-gray-100 lg:text-base'>{t('consultativeStatus')}</div>
                                 </div>
                             </div>
                         </div>

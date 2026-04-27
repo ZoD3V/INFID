@@ -12,7 +12,6 @@ import { Eye, MessageSquare } from 'lucide-react';
 import { useLocale } from 'next-intl';
 
 export default function OrganizationStructure({ data, activeTitle }: OrganizationStructureProps) {
-    console.log(data);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
     const locale = useLocale();
@@ -77,7 +76,7 @@ export default function OrganizationStructure({ data, activeTitle }: Organizatio
                                     <p className='text-primary-500 text-sm font-medium'>{selectedPerson.occupation}</p>
 
                                     <p className='mt-4 text-center leading-relaxed text-gray-700 md:text-left'>
-                                        {selectedPerson.description || 'No profile address.'}
+                                        {selectedPerson.address || 'No profile address.'}
                                     </p>
 
                                     {(selectedPerson.email || selectedPerson.phone) && (
