@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { useRouter } from '@/i18n/navigation';
-import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { API_BASE_URL, API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { cn } from '@/lib/utils';
 import { AnsweredStatus, MultilanguageText, QuizData, UserAnswers } from '@/types/quiz';
@@ -14,6 +14,7 @@ import { AnsweredStatus, MultilanguageText, QuizData, UserAnswers } from '@/type
 import { ArrowRight, CheckCircle2, ChevronLeft, Inbox, Loader2, XCircle } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
+import axios from 'axios';
 
 export default function QuizPage() {
     const t = useTranslations('quiz');
@@ -51,9 +52,9 @@ export default function QuizPage() {
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const res = await apiRequest.get<QuizData>(API_ENDPOINTS.quiz);
-                const actualData = res.data || res;
-                if (res.status_code == 200) {
+                const res =  await axios.get<QuizData>(`${API_BASE_URL}${API_ENDPOINTS.quiz}`);
+                const actualData = res.data || [];
+                if (res.status == 200) {
                     setQuizData(actualData);
                 } else {
                     setQuizData(null);

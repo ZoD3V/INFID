@@ -28,7 +28,7 @@ apiBase.interceptors.response.use(
     (response) => response,
     (error) => {
         if (typeof window !== 'undefined') {
-            const errorMessage = error.response?.data?.message || 'An error occurred';
+            const errorMessage = error.response?.data?.errors?.detail || error.response?.data?.message || 'An error occurred';
             toast.error('Error', { description: errorMessage });
         }
         return Promise.reject(error);

@@ -60,6 +60,5 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     const { locale, slug } = resolvedParams;
     const id = slug.split('-')[0];
     const data = await getPostDetail(id);
-
     return <DetailNewsClient initialData={data} locale={locale} postId={id} />;
 }

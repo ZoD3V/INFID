@@ -138,8 +138,6 @@ const ResearchFellowSection = ({ initialData }: { initialData: Research[] }) => 
                                                         )}
                                                     </nav>
 
-                                                    <hr className='my-5 w-full border-gray-100' aria-hidden='true' />
-
                                                     <CardContent
                                                         className='mt-4 text-gray-700'
                                                         content={translation.text ?? ''}
