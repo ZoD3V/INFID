@@ -322,44 +322,58 @@ export default function SearchModal() {
 
                                 {/* --- API RESULTS --- */}
                                 {!isLoading && keyword.length > 3 && (
-                                    <div className='space-y-4'>
-                                        {/* POSTS */}
-                                        {posts.map((post) => {
-                                            const postTrans =
-                                                post.translations?.find((t) => t.language === locale) ||
-                                                post.translations?.find((t) => t.language === 'id') ||
-                                                post.translations?.[0];
+                                    <div className='space-y-4' role='group' aria-label='Search Results'>
+                                        {/* --- POSTS --- */}
+                                        {posts.length > 0 && (
+                                            <section aria-labelledby='section-posts'>
+                                                <div
+                                                    id='section-posts'
+                                                    className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                                    Posts
+                                                </div>
+                                                <ul role='listbox' className='mt-1'>
+                                                    {posts.map((post) => {
+                                                        const postTrans =
+                                                            post.translations?.find((t) => t.language === locale) ||
+                                                            post.translations?.find((t) => t.language === 'id') ||
+                                                            post.translations?.[0];
+                                                        const title = postTrans?.title || '';
+                                                        return (
+                                                            <li key={`post-${post.id}`} role='none'>
+                                                                <button
+                                                                    type='button'
+                                                                    role='option'
+                                                                    aria-selected='false'
+                                                                    onClick={() => handleNavigate('post', post)}
+                                                                    className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                    <span className='line-clamp-1'>
+                                                                        {highlightText(title, keyword)}
+                                                                    </span>
+                                                                </button>
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
+                                            </section>
+                                        )}
 
-                                            const title = postTrans?.title || '';
-
-                                            return (
-                                                <li key={`post-${post.id}`} role='none'>
-                                                    <button
-                                                        type='button'
-                                                        role='option'
-                                                        aria-selected='false'
-                                                        onClick={() => handleNavigate('post', post)}
-                                                        className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
-                                                        <span className='line-clamp-1'>
-                                                            {highlightText(title, keyword)}
-                                                        </span>
-                                                    </button>
-                                                </li>
-                                            );
-                                        })}
-
-                                        {/* PEOPLE (Gabungan Organization, Fellow, Historical) */}
+                                        {/* --- PEOPLE --- */}
                                         {peopleList.length > 0 && (
-                                            <section>
-                                                <div className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                            <section aria-labelledby='section-people'>
+                                                <div
+                                                    id='section-people'
+                                                    className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
                                                     People
                                                 </div>
-                                                <ul>
+                                                <ul role='listbox' className='mt-1'>
                                                     {peopleList.map((person) => (
-                                                        <li key={`person-${person.id}`}>
+                                                        <li key={`person-${person.id}`} role='none'>
                                                             <button
+                                                                type='button'
+                                                                role='option'
+                                                                aria-selected='false'
                                                                 onClick={() => handleNavigate('people', person)}
-                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 hover:bg-slate-100'>
+                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
                                                                 <div className='flex flex-col'>
                                                                     <span className='line-clamp-1 font-medium'>
                                                                         {highlightText(person.name, keyword)}
@@ -375,19 +389,26 @@ export default function SearchModal() {
                                             </section>
                                         )}
 
-                                        {/* PARTNERS */}
+                                        {/* --- PARTNERS --- */}
                                         {partners.length > 0 && (
-                                            <section>
-                                                <div className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                            <section aria-labelledby='section-partners'>
+                                                <div
+                                                    id='section-partners'
+                                                    className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
                                                     Partners
                                                 </div>
-                                                <ul>
+                                                <ul role='listbox' className='mt-1'>
                                                     {partners.map((p) => (
-                                                        <li key={`partner-${p.id}`}>
+                                                        <li key={`partner-${p.id}`} role='none'>
                                                             <button
+                                                                type='button'
+                                                                role='option'
+                                                                aria-selected='false'
                                                                 onClick={() => handleNavigate('partners', p)}
-                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 hover:bg-slate-100'>
-                                                                {highlightText(p.name, keyword)}
+                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                <span className='line-clamp-1'>
+                                                                    {highlightText(p.name, keyword)}
+                                                                </span>
                                                             </button>
                                                         </li>
                                                     ))}
@@ -395,20 +416,27 @@ export default function SearchModal() {
                                             </section>
                                         )}
 
-                                        {/* MEMBERS */}
+                                        {/* --- MEMBERS --- */}
                                         {members.length > 0 && (
-                                            <section>
-                                                <div className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                            <section aria-labelledby='section-members'>
+                                                <div
+                                                    id='section-members'
+                                                    className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
                                                     Members
                                                 </div>
-                                                <ul>
+                                                <ul role='listbox' className='mt-1'>
                                                     {members.map((m) => (
-                                                        <li key={`member-${m.id}`}>
+                                                        <li key={`member-${m.id}`} role='none'>
                                                             <button
+                                                                type='button'
+                                                                role='option'
+                                                                aria-selected='false'
                                                                 onClick={() => handleNavigate('members', m)}
-                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 hover:bg-slate-100'>
+                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
                                                                 <div className='flex flex-col'>
-                                                                    <span>{highlightText(m.name, keyword)}</span>
+                                                                    <span className='line-clamp-1'>
+                                                                        {highlightText(m.name, keyword)}
+                                                                    </span>
                                                                     <span className='text-xs text-slate-400'>
                                                                         {m.region}
                                                                     </span>

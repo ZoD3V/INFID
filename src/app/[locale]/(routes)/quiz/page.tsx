@@ -344,7 +344,7 @@ function ScoreState({ t, score, narrative, onReview, onHome }: any) {
                     </div>
                     <div className='flex flex-col gap-3'>
                         <Button className='h-12 rounded-full text-base font-bold' onClick={onReview}>
-                            Review Jawaban
+                            {t('review_mode.title')}
                         </Button>
                         <Button variant='ghost' className='rounded-full' onClick={onHome}>
                             {t('score.button_beranda')}

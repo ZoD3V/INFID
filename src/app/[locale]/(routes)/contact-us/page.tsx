@@ -40,6 +40,7 @@ const ContactUs = () => {
         handleSubmit,
         setValue,
         watch,
+        reset,
         formState: { errors, isSubmitting }
     } = useForm<ContactFormData>({
         resolver: zodResolver(contactSchema),
@@ -55,14 +56,21 @@ const ContactUs = () => {
     const senderType = watch('senderType');
 
     const onSubmit = async (data: ContactFormData) => {
-        const res = await apiRequest.post(API_ENDPOINTS.inquiry, {
-            message: data.message,
-            email: data.organizationEmail,
-            name: data.organizationName,
-            subject: data.subject,
-            type: data.senderType
-        });
-        toast.success(res.message ?? 'The form has been successfully sent.');
+        try {
+            const res = await apiRequest.post(API_ENDPOINTS.inquiry, {
+                message: data.message,
+                email: data.organizationEmail,
+                name: data.organizationName,
+                subject: data.subject,
+                type: data.senderType
+            });
+
+            toast.success(res.message ?? 'The form has been successfully sent.');
+
+            reset();
+        } catch (error) {
+            toast.error('Failed to send message');
+        }
     };
 
     return (
