@@ -1,12 +1,15 @@
 'use client';
 
-import Footer from '@/components/common/footer';
-import { usePathname } from '@/i18n/routing';
+import { usePathname } from 'next/navigation';
+
+import { Footer } from 'react-day-picker';
 
 export default function FooterWrapper() {
     const pathname = usePathname();
 
-    if (pathname === '/quiz') return null;
+    const hideFooter = pathname.includes('/quiz') || pathname.endsWith('/404') || pathname.includes('/not-found');
+
+    if (hideFooter) return null;
 
     return <Footer />;
 }

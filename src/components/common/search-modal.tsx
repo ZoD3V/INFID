@@ -198,28 +198,27 @@ export default function SearchModal() {
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-            <div className='text-center'>
-                <Dialog.Trigger asChild>
-                    <button
-                        type='button'
-                        aria-label='Open search'
-                        className='border-secondary-300 text-secondary-300 hover:bg-secondary-300 focus-visible:border-secondary-100 focus-visible:ring-secondary-300 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-colors duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'>
-                        <Search className='h-4 w-4' aria-hidden='true' />
-                    </button>
-                </Dialog.Trigger>
-            </div>
+            <Dialog.Trigger asChild>
+                <button
+                    type='button'
+                    aria-label='Open search dialog'
+                    aria-haspopup='dialog'
+                    aria-expanded={isOpen}
+                    className='border-secondary-300 text-secondary-300 hover:bg-secondary-300 focus-visible:border-secondary-100 focus-visible:ring-secondary-300 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-colors duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'>
+                    <Search className='h-4 w-4' aria-hidden='true' />
+                </button>
+            </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 fixed inset-0 z-50 bg-black/50' />
-                <Dialog.Content
-                    className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white shadow-lg duration-200 focus:outline-none'
-                    aria-describedby='search-description'>
-                    <VisuallyHidden.Root>
-                        <Dialog.Title>Search</Dialog.Title>
-                        <Dialog.Description>Start typing to search the documentation</Dialog.Description>
-                    </VisuallyHidden.Root>
-                    <p id='search-description' className='sr-only'>
-                        Type your search query below to find articles or information.
-                    </p>
+                <Dialog.Content className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white shadow-lg duration-200 focus:outline-none'>
+                    <Dialog.Title asChild>
+                        <VisuallyHidden.Root>Search</VisuallyHidden.Root>
+                    </Dialog.Title>
+                    <Dialog.Description asChild>
+                        <VisuallyHidden.Root>
+                            Type your search query below to find articles or information.
+                        </VisuallyHidden.Root>
+                    </Dialog.Description>
                     <form className='border-b border-slate-200'>
                         <div className='relative flex items-center'>
                             <VisuallyHidden.Root>

@@ -1,0 +1,12 @@
+{
+    "title": "Halaman tidak ditemukan",
+    "description": "Oops — halaman yang Anda cari tidak ada atau telah dipindahkan. Cobalah kembali ke beranda atau gunakan navigasi di atas.",
+    "goHome": "Ke beranda",
+    "goBack": "Kembali",
+    "links": {
+        "about": "Tentang kami",
+        "news": "Berita",
+        "events": "Partner",
+        "contact": "Kontak"
+    }
+}

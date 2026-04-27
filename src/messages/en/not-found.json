@@ -1,0 +1,12 @@
+{
+    "title": "Page not found",
+    "description": "Oops — the page you were looking for doesn't exist or has been moved. Try returning to the homepage or using the navigation above.",
+    "goHome": "Go to homepage",
+    "goBack": "Go back",
+    "links": {
+        "about": "About us",
+        "news": "News",
+        "events": "Partners",
+        "contact": "Contact"
+    }
+}

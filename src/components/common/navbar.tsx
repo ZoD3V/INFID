@@ -20,7 +20,7 @@ import SearchModal from './search-modal';
 import { ChevronDown, ChevronRight, ExternalLink, Menu } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
-export function Navbar() {
+export function Navbar({ className = '' }: { className?: string }) {
     const pathname = usePathname();
     const isMobile = useIsMobile();
     const locale = useLocale();
@@ -133,15 +133,16 @@ export function Navbar() {
         <header
             className={cn(
                 'fixed top-0 z-50 w-full transition-all duration-300',
+                className,
                 isScrolled ? 'bg-white shadow' : 'bg-transparent'
             )}>
             <nav className='container flex h-16 items-center justify-between'>
-                {/* Logo/Brand */}
                 <Link href='/' className='text-2xl font-bold text-gray-900'>
+                    <span className='sr-only'>Infid Logo</span>
                     <Image
                         src={isScrolled ? '/logo/logo-infid-black.png' : '/logo/logo.png'}
                         loading='eager'
-                        alt='Infid Logo'
+                        alt=''
                         width={100}
                         height={100}
                         className='h-8 w-19.75'
