@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Maps, Region } from '@/components/common/maps';
 import SectionBadge from '@/components/common/section-badge';
 import { SectionHeader } from '@/components/common/section-header';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { getLangText } from '@/lib/utils';

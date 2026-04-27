@@ -1,26 +1,4 @@
-export interface GlobalSearch {
-    posts: Post[];
-    jobs: Job[];
-    people: Person[];
-}
-
-export interface Post {
-    id: number;
-    category_id: number;
-    category: Category;
-    translations: Translation[];
-}
-
-export interface Category {
-    id: number;
-    name: string;
-    slug: string;
-    description: string | null;
-    created_at: string;
-    updated_at: string;
-}
-
-export interface Translation {
+interface PostTranslation {
     id: number;
     post_id: number;
     language: string;
@@ -28,13 +6,59 @@ export interface Translation {
     slug: string;
 }
 
-export interface Job {
+interface Category {
     id: number;
-    title: string;
+    name: string;
+    slug: string;
 }
 
-export interface Person {
+interface Post {
+    id: number;
+    category_id: number;
+    category: Category;
+    translations: PostTranslation[];
+}
+
+export type PeopleType = 'organization' | 'research_fellow' | 'historical';
+
+interface Person {
     id: number;
     name: string;
     occupation: string;
+    type: PeopleType;
+    row_num: number;
+}
+
+interface Partner {
+    id: number;
+    name: string;
+}
+
+interface Member {
+    id: number;
+    name: string;
+    region: string;
+}
+
+export interface GlobalSearch {
+    posts: Post[];
+    jobs: { id: number; title: string }[];
+    people: {
+        organization?: Person[];
+        research_fellow?: Person[];
+        historical?: Person[];
+    };
+    partners: Partner[];
+    members: Member[];
+}
+
+export interface NavChild {
+    title: string;
+    href: string;
+}
+
+export interface NavItem {
+    title: string;
+    href: string;
+    children?: NavChild[];
 }

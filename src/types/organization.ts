@@ -36,3 +36,15 @@ export interface OrganizationStructureProps {
     data: OrganizationPeople[];
     activeTitle: string;
 }
+
+export interface Person {
+    id: number;
+    name: string;
+    occupation: string;
+    email: string | null;
+    phone: string | null;
+    address: string | null;
+    description: string;
+    image: string;
+    publications: OrganizationPublication[];
+}

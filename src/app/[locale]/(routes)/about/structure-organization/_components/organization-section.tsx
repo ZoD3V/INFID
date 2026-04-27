@@ -3,19 +3,27 @@ import { useState } from 'react';
 
 import OptimizedImage from '@/components/common/optimized-image';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { API_ENDPOINTS } from '@/lib/api-endpoints';
+import { apiRequest } from '@/lib/api-request';
 import { formatLabel } from '@/lib/utils';
-import { OrganizationPeople, OrganizationPublication, OrganizationStructureProps } from '@/types/organization';
+import { OrganizationPeople, OrganizationPublication, OrganizationStructureProps, Person } from '@/types/organization';
 
 import { Eye, MessageSquare } from 'lucide-react';
 import { useLocale } from 'next-intl';
 
 export default function OrganizationStructure({ data, activeTitle }: OrganizationStructureProps) {
+    console.log(data);
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [selectedPerson, setSelectedPerson] = useState<OrganizationPeople | null>(null);
+    const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
     const locale = useLocale();
 
-    const handleOpenDialog = (person: OrganizationPeople) => {
-        setSelectedPerson(person);
+    const handleOpenDialog = async (person: OrganizationPeople) => {
+        const res = await apiRequest.get<Person>(`${API_ENDPOINTS.people}/${person.id}`);
+        if (res.status_code == 200) {
+            setSelectedPerson(res.data);
+        } else {
+            setSelectedPerson(null);
+        }
         setDialogOpen(true);
     };
 

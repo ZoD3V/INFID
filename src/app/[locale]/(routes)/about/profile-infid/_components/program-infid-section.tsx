@@ -6,7 +6,7 @@ import EmptyState from '@/components/common/empty-state';
 import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 export const ProgramINFIDSection = () => {
     const t = useTranslations('profile.program_section');
@@ -29,7 +29,6 @@ export const ProgramINFIDSection = () => {
             image: '/images/bg-program-1.webp'
         }
     ];
-    const locale = useLocale();
 
     return (
         <div className='bg-secondary-100 relative min-h-screen py-24' id='program-infid'>
@@ -72,7 +71,7 @@ export const ProgramINFIDSection = () => {
                                     role='button'
                                     tabIndex={0}
                                     aria-labelledby={`prog-card-title-${index}`}
-                                    className='group relative cursor-pointer overflow-hidden rounded-2xl border bg-slate-100 p-2 outline-none'>
+                                    className='group relative overflow-hidden rounded-2xl border bg-slate-100 p-2 outline-none'>
                                     <div className='relative flex min-h-125 flex-col overflow-hidden rounded-xl md:min-h-139.5'>
                                         <div className='absolute inset-0 z-0'>
                                             <OptimizedImage

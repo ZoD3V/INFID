@@ -128,19 +128,39 @@ export default function SearchModal() {
         };
     }, [isOpen]);
 
-    const handleNavigate = (type: 'post' | 'job' | 'people', data: any) => {
+    const handleNavigate = (type: 'post' | 'job' | 'people' | 'partners' | 'members', data: any) => {
         switch (type) {
-            case 'post':
-                router.push(`/news-from-us/${data.id}-${data.translations[0]?.slug}`);
+            case 'post': {
+                const postTrans =
+                    data.translations?.find((t: any) => t.language === locale) ||
+                    data.translations?.find((t: any) => t.language === 'id') ||
+                    data.translations?.[0];
+
+                const slug = postTrans?.slug || '';
+                router.push(`/news-from-us/${data.id}-${slug}`);
                 break;
+            }
             case 'job':
                 router.push(`/involved/career`);
                 break;
             case 'people':
-                router.push(`/about/research`);
+                if (data.type === 'historical') {
+                    router.push(`/about/profile-infid`);
+                } else if (data.type === 'organization') {
+                    router.push(`/about/structure-organization`);
+                } else if (data.type === 'research_fellow') {
+                    router.push(`/about/research`);
+                } else {
+                    router.push(`/about/profile-infid`);
+                }
+                break;
+            case 'partners':
+                router.push(`/about/partner`);
+                break;
+            case 'members':
+                router.push(`/about/member-infid`);
                 break;
         }
-
         setIsOpen(false);
     };
 
@@ -155,11 +175,26 @@ export default function SearchModal() {
             .map((part, i) => (part.toLowerCase() === highlight.toLowerCase() ? <mark key={i}>{part}</mark> : part));
     };
 
+    const peopleList = results?.people
+        ? [
+              ...(results.people.organization || []),
+              ...(results.people.research_fellow || []),
+              ...(results.people.historical || [])
+          ]
+        : [];
+
     const posts = results?.posts ?? [];
     const jobs = results?.jobs ?? [];
-    const people = results?.people ?? [];
+    const partners = results?.partners ?? [];
+    const members = results?.members ?? [];
 
-    const isEmpty = posts.length === 0 && jobs.length === 0 && people.length === 0 && filteredNavItems.length === 0;
+    const isEmpty =
+        posts.length === 0 &&
+        jobs.length === 0 &&
+        peopleList.length === 0 &&
+        partners.length === 0 &&
+        members.length === 0 &&
+        filteredNavItems.length === 0;
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -285,67 +320,54 @@ export default function SearchModal() {
                                     </section>
                                 )}
 
-                                {/* RESULTS */}
-                                {((!isLoading && posts.length > 0) || jobs.length > 0 || people.length > 0) && (
+                                {/* --- API RESULTS --- */}
+                                {!isLoading && keyword.length > 3 && (
                                     <div className='space-y-4'>
                                         {/* POSTS */}
-                                        {posts.length > 0 && (
-                                            <section aria-labelledby='section-posts'>
-                                                <div
-                                                    id='section-posts'
-                                                    className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
-                                                    Posts
+                                        {posts.map((post) => {
+                                            const postTrans =
+                                                post.translations?.find((t) => t.language === locale) ||
+                                                post.translations?.find((t) => t.language === 'id') ||
+                                                post.translations?.[0];
+
+                                            const title = postTrans?.title || '';
+
+                                            return (
+                                                <li key={`post-${post.id}`} role='none'>
+                                                    <button
+                                                        type='button'
+                                                        role='option'
+                                                        aria-selected='false'
+                                                        onClick={() => handleNavigate('post', post)}
+                                                        className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                        <span className='line-clamp-1'>
+                                                            {highlightText(title, keyword)}
+                                                        </span>
+                                                    </button>
+                                                </li>
+                                            );
+                                        })}
+
+                                        {/* PEOPLE (Gabungan Organization, Fellow, Historical) */}
+                                        {peopleList.length > 0 && (
+                                            <section>
+                                                <div className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                                    People
                                                 </div>
-
-                                                <ul role='none'>
-                                                    {posts.map((post) => {
-                                                        const title =
-                                                            post?.translations?.find((t) => t.language === locale)
-                                                                ?.title ||
-                                                            post?.translations?.find((t) => t.language === 'id')
-                                                                ?.title ||
-                                                            post?.translations?.[0].title;
-
-                                                        return (
-                                                            <li key={`post-${post.id}`} role='none'>
-                                                                <button
-                                                                    type='button'
-                                                                    role='option'
-                                                                    aria-selected='false'
-                                                                    onClick={() => handleNavigate('post', post)}
-                                                                    className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
-                                                                    <span className='decoration-primary-500 line-clamp-1 transition-all group-focus:bg-slate-100'>
-                                                                        {highlightText(title, keyword)}
-                                                                    </span>
-                                                                </button>
-                                                            </li>
-                                                        );
-                                                    })}
-                                                </ul>
-                                            </section>
-                                        )}
-
-                                        {/* JOBS */}
-                                        {jobs.length > 0 && (
-                                            <section aria-labelledby='section-jobs'>
-                                                <div
-                                                    id='section-jobs'
-                                                    className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
-                                                    Jobs
-                                                </div>
-
-                                                <ul role='none'>
-                                                    {jobs.map((job) => (
-                                                        <li key={`job-${job.id}`} role='none'>
+                                                <ul>
+                                                    {peopleList.map((person) => (
+                                                        <li key={`person-${person.id}`}>
                                                             <button
-                                                                type='button'
-                                                                role='option'
-                                                                aria-selected='false'
-                                                                onClick={() => handleNavigate('job', job)}
-                                                                className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
-                                                                <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-slate-100 group-focus:underline'>
-                                                                    {highlightText(job.title, keyword)}
-                                                                </span>
+                                                                onClick={() => handleNavigate('people', person)}
+                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 hover:bg-slate-100'>
+                                                                <div className='flex flex-col'>
+                                                                    <span className='line-clamp-1 font-medium'>
+                                                                        {highlightText(person.name, keyword)}
+                                                                    </span>
+                                                                    <span className='text-xs text-slate-400'>
+                                                                        {person.occupation}
+                                                                    </span>
+                                                                </div>
                                                             </button>
                                                         </li>
                                                     ))}
@@ -353,27 +375,44 @@ export default function SearchModal() {
                                             </section>
                                         )}
 
-                                        {/* PEOPLE */}
-                                        {people.length > 0 && (
-                                            <section aria-labelledby='section-people'>
-                                                <div
-                                                    id='section-people'
-                                                    className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
-                                                    People
+                                        {/* PARTNERS */}
+                                        {partners.length > 0 && (
+                                            <section>
+                                                <div className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                                    Partners
                                                 </div>
-
-                                                <ul role='none'>
-                                                    {people.map((person) => (
-                                                        <li key={`person-${person.id}`} role='none'>
+                                                <ul>
+                                                    {partners.map((p) => (
+                                                        <li key={`partner-${p.id}`}>
                                                             <button
-                                                                type='button'
-                                                                role='option'
-                                                                aria-selected='false'
-                                                                onClick={() => handleNavigate('people', person)}
-                                                                className='group flex w-full items-center rounded-lg px-2 py-1 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
-                                                                <span className='decoration-primary-500 line-clamp-1 underline-offset-2 transition-all group-focus:bg-slate-100 group-focus:underline'>
-                                                                    {highlightText(person.name, keyword)}
-                                                                </span>
+                                                                onClick={() => handleNavigate('partners', p)}
+                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 hover:bg-slate-100'>
+                                                                {highlightText(p.name, keyword)}
+                                                            </button>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </section>
+                                        )}
+
+                                        {/* MEMBERS */}
+                                        {members.length > 0 && (
+                                            <section>
+                                                <div className='sticky top-0 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                                    Members
+                                                </div>
+                                                <ul>
+                                                    {members.map((m) => (
+                                                        <li key={`member-${m.id}`}>
+                                                            <button
+                                                                onClick={() => handleNavigate('members', m)}
+                                                                className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 hover:bg-slate-100'>
+                                                                <div className='flex flex-col'>
+                                                                    <span>{highlightText(m.name, keyword)}</span>
+                                                                    <span className='text-xs text-slate-400'>
+                                                                        {m.region}
+                                                                    </span>
+                                                                </div>
                                                             </button>
                                                         </li>
                                                     ))}
