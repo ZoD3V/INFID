@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Link as Navigate, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { getLangText } from '@/lib/utils';
+import { convertToEmbedUrl, getLangText } from '@/lib/utils';
 import { Post, PostTranslation } from '@/types/posts';
 
 import { Download } from 'lucide-react';
@@ -29,6 +29,8 @@ interface Props {
 }
 
 const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
+    console.log(initialData);
+
     const t = useTranslations('knowledge');
     const router = useRouter();
 
@@ -83,7 +85,18 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
         fetchSuggestions();
     }, [initialData?.id, initialData?.category?.name]);
 
-    const handleDownload = () => {
+    const handleDownload = async (article: Post | null) => {
+        if (!article?.id) {
+            toast.error('Invalid article');
+            return;
+        }
+
+        try {
+            await apiRequest.get(`${API_ENDPOINTS.postsAttachment}/${article.id}/download`);
+        } catch (error) {
+            console.error('Failed to track download:', error);
+        }
+
         const pdfAttachment = translation?.attachments?.find((item) => item.type === 'pdf');
 
         const filePath = pdfAttachment?.file_path;
@@ -146,7 +159,10 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                                 {getLangText(initialData?.category.name, locale)}
                             </h3>
                             {translation?.attachments?.some((item) => item.type === 'pdf') && (
-                                <Button className='rounded-full' size={'sm'} onClick={handleDownload}>
+                                <Button
+                                    className='rounded-full'
+                                    size={'sm'}
+                                    onClick={() => handleDownload(initialData)}>
                                     <Download className='mr-2 h-4 w-4' />
                                     {t('content.attachments')}
                                 </Button>
@@ -177,6 +193,19 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                             className='h-auto w-full rounded-lg object-cover'
                             priority
                         />
+
+                        {initialData?.youtube_link && (
+                            <div className='mt-4 aspect-video w-full overflow-hidden rounded-lg'>
+                                <iframe
+                                    className='h-full w-full'
+                                    src={convertToEmbedUrl(initialData.youtube_link)}
+                                    title='YouTube video'
+                                    frameBorder='0'
+                                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                                    allowFullScreen
+                                />
+                            </div>
+                        )}
 
                         <ArticleContent content={translation?.content || ''} />
 
