@@ -1,6 +1,6 @@
 export const allowedKnowledgeCategories = [
     { id: 'Riset', en: 'Research' },
-    { id: 'Kertas Kebijakan', en: 'Policy Papers' },
+    { id: 'Kertas Kebijakan', en: 'Policy Paper' },
     { id: 'Artikel', en: 'Articles' },
     { id: 'Riset & Kertas Kebijakan', en: 'Research & Policy Paper' },
     { id: 'Riset', en: 'Research' },

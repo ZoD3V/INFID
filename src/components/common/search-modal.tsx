@@ -276,7 +276,7 @@ export default function SearchModal() {
                                         <div
                                             id='section-pages'
                                             className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
-                                            Pages & Sections
+                                            Pages
                                         </div>
 
                                         <ul role='listbox' className='mt-1'>

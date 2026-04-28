@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import { Footer } from 'react-day-picker';
+import Footer from '@/components/common/footer';
 
 export default function FooterWrapper() {
     const pathname = usePathname();
