@@ -83,15 +83,27 @@ export function Navbar({ className = '' }: { className?: string }) {
             children: categories
                 .filter((cat) => {
                     const catName = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
-
                     return allowedNewsCategories.some((c) => c.id === catName || c.en === catName);
                 })
                 .map((cat) => {
                     const translatedTitle = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+                    const STORIES_OF_CHANGE_TITLES = ['Cerita Perubahan', 'Stories of Change'];
+
+                    const isStoriesOfChange = STORIES_OF_CHANGE_TITLES.some(
+                        (s) => translatedTitle?.toLowerCase() === s.toLowerCase()
+                    );
+
+                    const displayTitle = isStoriesOfChange
+                        ? locale === 'en'
+                            ? 'In Action, Making Impact!'
+                            : 'Bergerak, Berdampak!'
+                        : translatedTitle;
+
+                    const hrefTitle = cat.name?.find((t) => t.language === 'id')?.text || cat.name?.[0]?.text;
 
                     return {
-                        title: translatedTitle,
-                        href: createCategoryHref('/news-from-us', translatedTitle)
+                        title: displayTitle,
+                        href: createCategoryHref('/news-from-us', hrefTitle)
                     };
                 })
         },
@@ -190,7 +202,7 @@ export function Navbar({ className = '' }: { className?: string }) {
                             {item.children && (
                                 <div
                                     className={cn(
-                                        'invisible absolute top-full left-1/2 w-48 -translate-x-1/2 pt-2 opacity-0 transition-all',
+                                        'invisible absolute top-full left-1/2 w-50 -translate-x-1/2 pt-2 opacity-0 transition-all',
                                         'group-hover:visible group-hover:opacity-100',
                                         'group-focus-within:visible group-focus-within:opacity-100'
                                     )}>
@@ -211,7 +223,7 @@ export function Navbar({ className = '' }: { className?: string }) {
 
                                                         active
                                                             ? 'bg-brand-50 text-brand-900 font-bold'
-                                                            : 'hover:text-primary-500 text-slate-700 hover:bg-gray-50',
+                                                            : 'hover:text-primary-500 hover:bg-primary-100 text-slate-700',
 
                                                         'focus:text-primary-900 underline-offset-2 focus:bg-blue-100 focus:underline'
                                                     )}>
@@ -237,21 +249,38 @@ export function Navbar({ className = '' }: { className?: string }) {
                                     <Button
                                         variant='outline'
                                         size='icon'
-                                        className='hover:text-primary-900 bg-white hover:bg-white'>
-                                        <Menu className='h-6 w-6' />
+                                        className='hover:text-primary-900 bg-white hover:bg-white'
+                                        aria-label={isOpen ? t('close_menu') : t('open_menu')}
+                                        aria-expanded={isOpen}
+                                        aria-controls='mobile-navigation'>
+                                        <Menu className='h-6 w-6' aria-hidden='true' />
                                     </Button>
                                 </SheetTrigger>
-                                <SheetContent side='left' className='flex w-75 flex-col p-0'>
-                                    {/* Header Sidebar Logo */}
+
+                                <SheetContent
+                                    side='left'
+                                    className='flex w-75 flex-col p-0'
+                                    role='dialog'
+                                    aria-modal='true'
+                                    aria-label={t('navigation_menu')}>
                                     <SheetHeader className='border-b text-left'>
                                         <SheetTitle className='flex items-center gap-2'>
-                                            <Image src='/logo/logo-infid-black.png' alt='Logo' width={70} height={70} />
+                                            <Image
+                                                src='/logo/logo-infid-black.png'
+                                                alt='INFID Logo'
+                                                width={70}
+                                                height={70}
+                                            />
                                         </SheetTitle>
-                                        <SheetDescription></SheetDescription>
+                                        <SheetDescription className='sr-only'>
+                                            {t('navigation_description')}
+                                        </SheetDescription>
                                     </SheetHeader>
 
-                                    {/* Area Scrollable Navigasi */}
-                                    <div className='flex-1 overflow-y-auto px-4 py-2'>
+                                    <nav
+                                        id='mobile-navigation'
+                                        className='flex-1 overflow-y-auto px-4 py-2'
+                                        aria-label={t('main_navigation')}>
                                         <Accordion type='single' collapsible className='w-full'>
                                             {navItems.map((item) => (
                                                 <AccordionItem
@@ -260,13 +289,22 @@ export function Navbar({ className = '' }: { className?: string }) {
                                                     className='border-none'>
                                                     {item.children ? (
                                                         <>
-                                                            <AccordionTrigger className='hover:text-primary-500 flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-start text-sm text-black hover:no-underline [&[data-state=open]>svg]:rotate-90'>
+                                                            <AccordionTrigger
+                                                                className='hover:text-primary-500 flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-start text-sm text-black hover:no-underline [&[data-state=open]>svg]:rotate-90'
+                                                                aria-label={`${item.title}, ${t('has_submenu')}`}>
                                                                 {item.title}
                                                                 {item.children && (
-                                                                    <ChevronRight className='h-4 w-4 transition-transform' />
+                                                                    <ChevronRight
+                                                                        className='h-4 w-4 transition-transform'
+                                                                        aria-hidden='true'
+                                                                    />
                                                                 )}
                                                             </AccordionTrigger>
-                                                            <AccordionContent className='flex flex-col gap-1 border-l py-1 pl-3'>
+
+                                                            <AccordionContent
+                                                                className='flex flex-col gap-1 border-l py-1 pl-3'
+                                                                role='region'
+                                                                aria-label={`${item.title} submenu`}>
                                                                 {item.children.map((child) => {
                                                                     const active = isChildActive(child.href);
                                                                     return (
@@ -274,6 +312,7 @@ export function Navbar({ className = '' }: { className?: string }) {
                                                                             key={child.title}
                                                                             href={child.href}
                                                                             onClick={() => setIsOpen(false)}
+                                                                            aria-current={active ? 'page' : undefined}
                                                                             className={cn(
                                                                                 'rounded-md px-3 py-1 text-sm transition-colors hover:bg-gray-100',
                                                                                 active ? 'font-semibold' : ''
@@ -288,6 +327,7 @@ export function Navbar({ className = '' }: { className?: string }) {
                                                         <Link
                                                             href={item.href}
                                                             onClick={() => setIsOpen(false)}
+                                                            aria-current={pathname === item.href ? 'page' : undefined}
                                                             className={cn(
                                                                 'block py-2 text-sm text-black transition-colors',
                                                                 pathname === item.href ? 'font-semibold' : ''
@@ -298,12 +338,12 @@ export function Navbar({ className = '' }: { className?: string }) {
                                                 </AccordionItem>
                                             ))}
                                         </Accordion>
-                                    </div>
+                                    </nav>
 
                                     {/* Footer Sidebar */}
                                     <div className='border-t p-5'>
-                                        <Button className='w-full gap-2'>
-                                            {t('join')} <ExternalLink className='h-4 w-4' />
+                                        <Button className='w-full gap-2' aria-label={t('join_community')}>
+                                            {t('join')} <ExternalLink className='h-4 w-4' aria-hidden='true' />
                                         </Button>
                                     </div>
                                 </SheetContent>

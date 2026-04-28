@@ -1,4 +1,11 @@
 {
+    "open_menu": "Buka menu navigasi",
+    "close_menu": "Tutup menu navigasi",
+    "navigation_menu": "Menu Navigasi",
+    "navigation_description": "Menu navigasi utama situs web",
+    "main_navigation": "Navigasi Utama",
+    "has_submenu": "memiliki submenu",
+    "join_community": "Bergabung dengan komunitas kami",
     "home": "Beranda",
     "about": "Tentang Kami",
     "about_profile": "Profil INFID",

@@ -191,7 +191,7 @@ export default function CommentSection({ comments, onSubmit }: CommentSectionPro
                                     <FormControl>
                                         <Textarea
                                             placeholder={t('comments.comment_placeholder')}
-                                            className='min-h-30 resize-none bg-slate-50/50'
+                                            className='h-40 max-h-40 w-full max-w-full resize-none overflow-x-hidden overflow-y-auto'
                                             {...field}
                                         />
                                     </FormControl>

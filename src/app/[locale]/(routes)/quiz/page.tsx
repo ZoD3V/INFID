@@ -11,10 +11,10 @@ import { apiRequest } from '@/lib/api-request';
 import { cn } from '@/lib/utils';
 import { AnsweredStatus, MultilanguageText, QuizData, UserAnswers } from '@/types/quiz';
 
+import axios from 'axios';
 import { ArrowRight, CheckCircle2, ChevronLeft, Inbox, Loader2, XCircle } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import axios from 'axios';
 
 export default function QuizPage() {
     const t = useTranslations('quiz');
@@ -52,8 +52,8 @@ export default function QuizPage() {
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const res =  await axios.get<QuizData>(`${API_BASE_URL}${API_ENDPOINTS.quiz}`);
-                const actualData = res.data || [];
+                const res = await axios.get(`${API_BASE_URL}${API_ENDPOINTS.quiz}`);
+                const actualData = res.data.data;
                 if (res.status == 200) {
                     setQuizData(actualData);
                 } else {

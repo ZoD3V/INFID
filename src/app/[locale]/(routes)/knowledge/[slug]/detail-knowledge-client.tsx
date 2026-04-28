@@ -29,8 +29,6 @@ interface Props {
 }
 
 const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
-    console.log(initialData);
-
     const t = useTranslations('knowledge');
     const router = useRouter();
 

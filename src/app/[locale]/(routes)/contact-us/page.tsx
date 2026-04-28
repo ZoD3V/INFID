@@ -26,7 +26,7 @@ const contactSchema = z.object({
     organizationEmail: z.string().email('Invalid email address').max(255),
     subject: z.string().min(5, 'Subject must be at least 5 characters').max(150),
     message: z.string().min(10, 'Message is too short').max(1000),
-    agreeToPrivacy: z.literal(true, {
+    agreeToPrivacy: z.boolean().refine((val) => val === true, {
         message: 'You must agree to the privacy policy'
     })
 });
@@ -49,11 +49,13 @@ const ContactUs = () => {
             organizationName: '',
             organizationEmail: '',
             subject: '',
-            message: ''
+            message: '',
+            agreeToPrivacy: false
         }
     });
 
     const senderType = watch('senderType');
+    const agreeToPrivacy = watch('agreeToPrivacy');
 
     const onSubmit = async (data: ContactFormData) => {
         try {
@@ -67,7 +69,22 @@ const ContactUs = () => {
 
             toast.success(res.message ?? 'The form has been successfully sent.');
 
-            reset();
+            reset(
+                {
+                    senderType: 'organization',
+                    organizationName: '',
+                    organizationEmail: '',
+                    subject: '',
+                    message: '',
+                    agreeToPrivacy: false
+                },
+                {
+                    keepErrors: false,
+                    keepDirty: false,
+                    keepTouched: false,
+                    keepIsSubmitted: false
+                }
+            );
         } catch (error) {
             toast.error('Failed to send message');
         }
@@ -183,7 +200,7 @@ const ContactUs = () => {
                 </div>
 
                 {/* Right Section - Contact Form */}
-                <div className='rounded-xl border border-slate-200 bg-white p-8'>
+                <div className='w-full rounded-xl border border-slate-200 bg-white p-8'>
                     <h2 className='mb-8 text-lg font-bold text-gray-800 lg:text-xl'>{t('form.title')}</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -275,7 +292,7 @@ const ContactUs = () => {
                                 id='message'
                                 {...register('message')}
                                 placeholder={t('form.placeholder_message')}
-                                className='min-h-30 resize-none'
+                                className='h-40 max-h-40 w-full max-w-full resize-none overflow-x-hidden overflow-y-auto'
                             />
                             {errors.message && <p className='mt-1 text-xs text-red-500'>{errors.message.message}</p>}
                         </div>
@@ -285,6 +302,7 @@ const ContactUs = () => {
                             <div className='flex items-center gap-3'>
                                 <Checkbox
                                     id='agreeToPrivacy'
+                                    checked={agreeToPrivacy === true}
                                     onCheckedChange={(checked) => {
                                         setValue('agreeToPrivacy', checked as true, {
                                             shouldValidate: true
