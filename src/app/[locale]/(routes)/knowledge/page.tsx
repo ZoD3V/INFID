@@ -45,14 +45,11 @@ export default function KnowledgePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [hasMore, setHasMore] = useState(true);
     const [categoriesNews, setCategoriesNews] = useState<Category[]>([]);
-    const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
     const [isFeaturedLoading, setIsFeaturedLoading] = useState(true);
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                setIsCategoriesLoading(true);
-
                 const res = await apiRequest.get<Category[]>(API_ENDPOINTS.categories);
 
                 const data = res.data || res;
@@ -61,6 +58,26 @@ export default function KnowledgePage() {
                     return cat.name.some((translation) =>
                         allowedKnowledgeCategories.some((c) => c.id === translation.text || c.en === translation.text)
                     );
+                });
+
+                const STORIES_OF_CHANGE_TITLES = ['Cerita Perubahan', 'Stories of changes'];
+
+                const mappedData = filteredData.map((cat: Category) => {
+                    const translatedName = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+
+                    const isStoriesOfChange = STORIES_OF_CHANGE_TITLES.some(
+                        (s) => translatedName?.toLowerCase() === s.toLowerCase()
+                    );
+
+                    if (!isStoriesOfChange) return cat;
+
+                    return {
+                        ...cat,
+                        name: cat.name.map((n) => ({
+                            ...n,
+                            displayText: 'Bergerak, Berdampak!'
+                        }))
+                    };
                 });
 
                 const allCategory: Category = {
@@ -75,7 +92,7 @@ export default function KnowledgePage() {
                     updated_at: new Date().toISOString()
                 };
 
-                setCategoriesNews([allCategory, ...filteredData]);
+                setCategoriesNews([allCategory, ...mappedData]);
             } catch (error) {
                 const allCategory: Category = {
                     id: 0,
@@ -89,8 +106,6 @@ export default function KnowledgePage() {
                     updated_at: ''
                 };
                 setCategoriesNews([allCategory]);
-            } finally {
-                setIsCategoriesLoading(false);
             }
         };
         fetchCategories();

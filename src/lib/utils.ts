@@ -127,5 +127,5 @@ export const getLangText = (translations: CategoryTranslation[] | undefined, lan
 
     const translation = translations.find((t) => t.language === langCode);
 
-    return translation?.text || translations[0].text || '';
+    return translation?.text || translations[0].text || translations[0].displayText || '';
 };

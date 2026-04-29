@@ -93,11 +93,7 @@ export function Navbar({ className = '' }: { className?: string }) {
                         (s) => translatedTitle?.toLowerCase() === s.toLowerCase()
                     );
 
-                    const displayTitle = isStoriesOfChange
-                        ? locale === 'en'
-                            ? 'In Action, Making Impact!'
-                            : 'Bergerak, Berdampak!'
-                        : translatedTitle;
+                    const displayTitle = isStoriesOfChange ? 'Bergerak, Berdampak!' : translatedTitle;
 
                     const hrefTitle = cat.name?.find((t) => t.language === 'id')?.text || cat.name?.[0]?.text;
 
@@ -110,10 +106,7 @@ export function Navbar({ className = '' }: { className?: string }) {
         {
             title: t('involved'),
             href: '',
-            children: [
-                { title: t('involved_career'), href: '/involved/career' }
-                // { title: t('involved_member'), href: '/involved/become-member' }
-            ]
+            children: [{ title: t('involved_career'), href: '/involved/career' }]
         },
         { title: t('contact'), href: '/contact-us' }
     ];

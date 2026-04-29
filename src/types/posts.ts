@@ -30,6 +30,7 @@ export interface Category {
 export interface CategoryTranslation {
     language: string;
     text: string;
+    displayText?: string;
 }
 
 export interface PostTranslation {
