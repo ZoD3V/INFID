@@ -12,14 +12,7 @@ const CardContent = ({ content, className = 'line-clamp-2' }: { content: string;
                 rehypePlugins={[rehypeRaw]}
                 components={{
                     img: () => null,
-
                     a: ({ href, children }) => {
-                        const isPdf = href?.toLowerCase().endsWith('.pdf');
-
-                        if (isPdf) {
-                            return null;
-                        }
-
                         return (
                             <a href={href} target='_blank' rel='noopener noreferrer'>
                                 {children}

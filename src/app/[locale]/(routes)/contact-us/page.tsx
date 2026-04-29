@@ -207,20 +207,20 @@ const ContactUs = () => {
                         <div className='bg-muted mb-8 flex w-fit items-center gap-1 rounded-full p-1'>
                             <Button
                                 type='button'
-                                variant='ghost'
+                                variant={senderType === 'organization' ? 'default' : null}
                                 onClick={() => setValue('senderType', 'organization')}
                                 className={cn(
-                                    'rounded-full px-4 py-2 text-sm font-medium',
+                                    'rounded-full px-4 py-2 text-sm font-medium transition-colors',
                                     senderType === 'organization'
-                                        ? 'bg-primary text-primary-foreground hover:bg-primary'
-                                        : 'text-muted-foreground hover:text-foreground'
+                                        ? 'bg-primary text-primary-foreground'
+                                        : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground bg-transparent'
                                 )}>
                                 {t('form.tab_org')}
                             </Button>
 
                             <Button
                                 type='button'
-                                variant='ghost'
+                                variant={senderType === 'individual' ? 'default' : null}
                                 onClick={() => setValue('senderType', 'individual')}
                                 className={cn(
                                     'rounded-full px-4 py-2 text-sm font-medium',
