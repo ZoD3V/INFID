@@ -116,7 +116,7 @@ export default function HomeFloatingCard() {
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder={p('insertEmail')}
-                                        className='focus-visible:ring-primary-500 rounded-full border-slate-200 bg-slate-50'
+                                        className='rounded-full border-slate-200 bg-slate-50'
                                         disabled={isLoading}
                                     />
                                 </div>
