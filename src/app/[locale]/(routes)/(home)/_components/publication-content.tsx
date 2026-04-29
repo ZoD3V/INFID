@@ -10,7 +10,7 @@ import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { formatDateShort, formatFullDate, getLangText, getShortDescription } from '@/lib/utils';
-import {  Post } from '@/types/posts';
+import { Post } from '@/types/posts';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
@@ -126,7 +126,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                     className='group cursor-pointer outline-none'>
                                     <div className='relative mb-6 h-80 overflow-hidden rounded-lg lg:h-96'>
                                         <img
-                                            src={featured.cover || '/images/placeholder-square.jpg'}
+                                            src={featured.cover || '/images/placeholder-square.png'}
                                             alt=''
                                             aria-hidden='true'
                                             className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
