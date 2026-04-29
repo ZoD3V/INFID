@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import CardContent from '@/components/common/card-content';
 import EmptyState from '@/components/common/empty-state';
@@ -10,7 +10,7 @@ import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { formatDateShort, formatFullDate, getLangText, getShortDescription } from '@/lib/utils';
-import { Category, Post } from '@/types/posts';
+import {  Post } from '@/types/posts';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';

@@ -92,11 +92,11 @@ const RecognitionSection = () => {
                     </CarouselContent>
                     <CarouselPrevious
                         locale={locale}
-                        className='absolute top-1/2 left-0 -translate-y-1/2 bg-white/80 hover:bg-white md:-left-5'
+                        className='absolute top-1/2 left-0 -translate-y-1/2 bg-white/80 md:-left-5'
                     />
                     <CarouselNext
                         locale={locale}
-                        className='absolute top-1/2 right-0 -translate-y-1/2 bg-white/80 hover:bg-white md:-right-5'
+                        className='absolute top-1/2 right-0 -translate-y-1/2 bg-white/80 md:-right-5'
                     />
                 </Carousel>
             </div>
