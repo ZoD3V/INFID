@@ -60,14 +60,16 @@ export default function NewsFromUsPage() {
                     );
                 });
 
-                const STORIES_OF_CHANGE_TITLES = ['Cerita Perubahan', 'Stories of changes'];
+                const STORIES_OF_CHANGE_TITLES = ['cerita perubahan', 'stories of change'];
 
                 const mappedData = filteredData.map((cat: Category) => {
                     const translatedName = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
+                    console.log(translatedName);
 
                     const isStoriesOfChange = STORIES_OF_CHANGE_TITLES.some(
                         (s) => translatedName?.toLowerCase() === s.toLowerCase()
                     );
+                    console.log(isStoriesOfChange);
 
                     if (!isStoriesOfChange) return cat;
 
@@ -91,6 +93,7 @@ export default function NewsFromUsPage() {
                     created_at: new Date().toISOString(),
                     updated_at: new Date().toISOString()
                 };
+                console.log([allCategory, ...mappedData]);
 
                 setCategoriesNews([allCategory, ...mappedData]);
             } catch (error) {

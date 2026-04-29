@@ -122,10 +122,18 @@ export const getShortDescription = (content: string) => {
     return content?.replace(/<[^>]*>/g, '').substring(0, 120) || '';
 };
 
-export const getLangText = (translations: CategoryTranslation[] | undefined, langCode: string = 'id'): string => {
+export const getLangText = (
+    translations: CategoryTranslation[] | undefined,
+    langCode: string = 'id',
+    useDisplayText: boolean = true
+): string => {
     if (!translations || translations.length === 0) return '';
 
     const translation = translations.find((t) => t.language === langCode);
 
-    return translation?.displayText || translation?.text || translations[0].text || '';
+    if (useDisplayText) {
+        return translation?.displayText || translation?.text || translations[0].text || '';
+    }
+
+    return translation?.text || translations[0].text || '';
 };

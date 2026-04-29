@@ -55,8 +55,7 @@ export function ArticleFilters({
                 aria-label='Filter news by category'>
                 {categories.map((item, index) => {
                     const label = getLangText(item.name, locale);
-                    const labelId = getLangText(item.name, locale);
-
+                    const labelId = getLangText(item.name, locale, false);
                     const isActive = selectedCategory === labelId;
 
                     return (
