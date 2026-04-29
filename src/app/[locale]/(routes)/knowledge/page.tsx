@@ -60,26 +60,6 @@ export default function KnowledgePage() {
                     );
                 });
 
-                const STORIES_OF_CHANGE_TITLES = ['Cerita Perubahan', 'Stories of changes'];
-
-                const mappedData = filteredData.map((cat: Category) => {
-                    const translatedName = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
-
-                    const isStoriesOfChange = STORIES_OF_CHANGE_TITLES.some(
-                        (s) => translatedName?.toLowerCase() === s.toLowerCase()
-                    );
-
-                    if (!isStoriesOfChange) return cat;
-
-                    return {
-                        ...cat,
-                        name: cat.name.map((n) => ({
-                            ...n,
-                            displayText: 'Bergerak, Berdampak!'
-                        }))
-                    };
-                });
-
                 const allCategory: Category = {
                     id: 0,
                     slug: 'all',
@@ -92,7 +72,7 @@ export default function KnowledgePage() {
                     updated_at: new Date().toISOString()
                 };
 
-                setCategoriesNews([allCategory, ...mappedData]);
+                setCategoriesNews([allCategory, ...filteredData]);
             } catch (error) {
                 const allCategory: Category = {
                     id: 0,
