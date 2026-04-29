@@ -260,3 +260,9 @@ html {
 .loading-dots span:nth-child(3) {
     animation-delay: 0.4s;
 }
+
+textarea {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
