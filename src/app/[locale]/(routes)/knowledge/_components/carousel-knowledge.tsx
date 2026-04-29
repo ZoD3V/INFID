@@ -143,8 +143,8 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
 
             <div className='pointer-events-none absolute top-0 right-0 h-full w-20 bg-[linear-gradient(90deg,rgba(255,255,255,0)_0%,rgba(247,245,242,1)_100%)]' />
 
-            <CarouselPrevious className='left-0 md:-left-5' />
-            <CarouselNext className='right-0 md:-right-5' />
+            <CarouselPrevious className='left-0 md:-left-5' locale={locale} />
+            <CarouselNext className='right-0 md:-right-5' locale={locale} />
         </Carousel>
     );
 };
