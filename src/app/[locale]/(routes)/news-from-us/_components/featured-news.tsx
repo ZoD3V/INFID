@@ -141,8 +141,8 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                         );
                     })}
                 </CarouselContent>
-                <CarouselPrevious className='-left-1 md:-left-5' />
-                <CarouselNext className='-right-1 md:-right-5' />
+                <CarouselPrevious className='-left-1 md:-left-5' locale={locale} />
+                <CarouselNext className='-right-1 md:-right-5' locale={locale} />
             </Carousel>
         </div>
     );
