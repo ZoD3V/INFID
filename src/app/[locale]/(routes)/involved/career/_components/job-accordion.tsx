@@ -89,20 +89,22 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                         <div className='flex flex-col items-start justify-between border-t border-t-slate-200 pt-4 lg:flex-row lg:items-center'>
                                             <h3 className='text-base font-bold md:text-lg'>{j('cta')}</h3>
                                             <div className='flex flex-wrap gap-3 pt-4'>
-                                                <Button
-                                                    asChild
-                                                    variant='outline'
-                                                    className='focus-visible:ring-primary-500 rounded-full focus-visible:ring-2 focus-visible:ring-offset-2'
-                                                    aria-label={`Download job description for ${item.title} as PDF`}>
-                                                    <a
-                                                        href={item.attachment}
-                                                        download
-                                                        target='_blank'
-                                                        rel='noopener noreferrer'>
-                                                        <FileText className='mr-2 h-4 w-4' />
-                                                        PDF
-                                                    </a>
-                                                </Button>
+                                                {item.attachment && (
+                                                    <Button
+                                                        asChild
+                                                        variant='outline'
+                                                        className='focus-visible:ring-primary-500 rounded-full focus-visible:ring-2 focus-visible:ring-offset-2'
+                                                        aria-label={`Download job description for ${item.title} as PDF`}>
+                                                        <a
+                                                            href={item.attachment}
+                                                            download
+                                                            target='_blank'
+                                                            rel='noopener noreferrer'>
+                                                            <FileText className='mr-2 h-4 w-4' />
+                                                            PDF
+                                                        </a>
+                                                    </Button>
+                                                )}
 
                                                 {item.link && (
                                                     <Button
