@@ -95,7 +95,7 @@ export function Navbar({ className = '' }: { className?: string }) {
 
                     const displayTitle = isStoriesOfChange ? 'Bergerak, Berdampak!' : translatedTitle;
 
-                    const hrefTitle = cat.name?.find((t) => t.language === 'id')?.text || cat.name?.[0]?.text;
+                    const hrefTitle = cat.name?.find((t) => t.language === locale)?.text || cat.name?.[0]?.text;
 
                     return {
                         title: displayTitle,
