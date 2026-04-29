@@ -22,7 +22,8 @@ export async function subscribeAction(formData: FormData) {
         if (!response.ok) {
             return {
                 success: false,
-                error: data.detail || 'Failed to subscribe. Please check your email and try again.'
+                error:
+                    `${email} is already a list member` || 'Failed to subscribe. Please check your email and try again.'
             };
         }
 

@@ -84,13 +84,14 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
     }, [initialData?.id, initialData?.category?.name]);
 
     const handleDownload = async (article: Post | null) => {
-        if (!article?.id) {
+        const idAttachment = translation?.attachments?.filter((item) => item.type === 'pdf')[0].id;
+        if (!idAttachment) {
             toast.error('Invalid article');
             return;
         }
 
         try {
-            await apiRequest.get(`${API_ENDPOINTS.postsAttachment}/${article.id}/download`);
+            await apiRequest.get(`${API_ENDPOINTS.postsAttachment}/${idAttachment}/download`);
         } catch (error) {
             console.error('Failed to track download:', error);
         }
