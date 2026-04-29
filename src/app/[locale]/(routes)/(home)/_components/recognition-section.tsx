@@ -4,10 +4,11 @@ import SectionBadge from '@/components/common/section-badge';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 import CommunitySection from './community-section';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const RecognitionSection = () => {
     const t = useTranslations('home.recognition');
+    const locale = useLocale();
 
     const recognitions = [
         {
@@ -89,8 +90,14 @@ const RecognitionSection = () => {
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className='absolute top-1/2 left-0 -translate-y-1/2 bg-white/80 hover:bg-white md:-left-5' />
-                    <CarouselNext className='absolute top-1/2 right-0 -translate-y-1/2 bg-white/80 hover:bg-white md:-right-5' />
+                    <CarouselPrevious
+                        locale={locale}
+                        className='absolute top-1/2 left-0 -translate-y-1/2 bg-white/80 hover:bg-white md:-left-5'
+                    />
+                    <CarouselNext
+                        locale={locale}
+                        className='absolute top-1/2 right-0 -translate-y-1/2 bg-white/80 hover:bg-white md:-right-5'
+                    />
                 </Carousel>
             </div>
             <CommunitySection />

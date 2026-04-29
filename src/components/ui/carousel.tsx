@@ -30,6 +30,10 @@ type CarouselContextProps = {
 } & CarouselProps;
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
+export const translationsButton = {
+    en: { prev: 'Previous slide', next: 'Next slide' },
+    id: { prev: 'Slide sebelumnya', next: 'Slide berikutnya' }
+};
 
 function useCarousel() {
     const context = React.useContext(CarouselContext);
@@ -163,9 +167,11 @@ function CarouselPrevious({
     className,
     variant = 'outline',
     size = 'icon',
+    locale = 'en',
     ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & { locale: string }) {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+    const t = translationsButton[locale as 'id' | 'en'];
 
     return (
         <Button
@@ -183,7 +189,7 @@ function CarouselPrevious({
             onClick={scrollPrev}
             {...props}>
             <ChevronLeft className='size-6' />
-            <span className='sr-only'>Previous slide</span>
+            <span className='sr-only'>{t.prev}</span>
         </Button>
     );
 }
@@ -192,9 +198,11 @@ function CarouselNext({
     className,
     variant = 'outline',
     size = 'icon',
+    locale = 'en',
     ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & { locale: string }) {
     const { orientation, scrollNext, canScrollNext } = useCarousel();
+    const t = translationsButton[locale as 'id' | 'en'];
 
     return (
         <Button
@@ -212,7 +220,7 @@ function CarouselNext({
             onClick={scrollNext}
             {...props}>
             <ChevronRight className='size-6' />
-            <span className='sr-only'>Next slide</span>
+            <span className='sr-only'>{t.next}</span>
         </Button>
     );
 }
