@@ -76,7 +76,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                     <div className='flex flex-wrap gap-3' role='tablist' aria-label='Kategori Program'>
                         {categories.map((tab, index) => {
                             const label = getLangText(tab.name, locale);
-                            const isActive = activeTab === tab.slug;
+                            const isActive = activeTab === label;
 
                             return (
                                 <button
@@ -86,7 +86,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                     role='tab'
                                     aria-selected={isActive}
                                     aria-label={locale === 'en' ? `Filter by ${label}` : `Filter berdasarkan ${label}`}
-                                    onClick={() => handleTabChange(tab.slug)}
+                                    onClick={() => handleTabChange(label)}
                                     className={`cursor-pointer rounded-full px-6 py-2.5 text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:outline-none ${isActive ? 'bg-teal-600 text-white' : 'bg-slate-200 text-slate-700'} `}>
                                     {label || 'Category'}
                                 </button>
@@ -153,7 +153,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                                 {translation?.title}
                                             </h2>
 
-                                            <CardContent content={getShortDescription(translation?.content)} />
+                                            <CardContent content={translation?.content} />
 
                                             <div className='mt-1 flex items-center gap-2 text-xs text-slate-500'>
                                                 <div

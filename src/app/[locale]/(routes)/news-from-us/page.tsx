@@ -275,7 +275,7 @@ export default function NewsFromUsPage() {
                     featuredArticles.length > 0 && (
                         <>
                             <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                                {filters.category == 'Semua'
+                                {filters.category == 'Semua' || filters.category == 'all'
                                     ? `Highlight ${t('content.article')}`
                                     : `Highlight ${filters.category}`}
                             </h3>
@@ -287,7 +287,7 @@ export default function NewsFromUsPage() {
 
                 {/* Grid Artikel */}
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                    {filters.category == 'Semua'
+                    {filters.category == 'Semua' || filters.category == 'all'
                         ? `${t('content.all')} ${t('content.article')}`
                         : `${t('content.all')} ${filters.category}`}
                 </h3>

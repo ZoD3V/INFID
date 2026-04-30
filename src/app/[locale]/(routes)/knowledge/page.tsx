@@ -253,7 +253,7 @@ export default function KnowledgePage() {
                     featuredArticles.length > 0 && (
                         <>
                             <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                                {filters.category == 'Semua'
+                                {filters.category == 'Semua' || filters.category == 'all'
                                     ? `Highlight ${t('content.publish')}`
                                     : `Highlight ${filters.category}`}
                             </h3>
@@ -265,7 +265,9 @@ export default function KnowledgePage() {
 
                 {/* Grid Artikel */}
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                    {filters.category == 'Semua' ? t('content.all_article') : `${t('content.all')} ${filters.category}`}
+                    {filters.category == 'Semua' || filters.category == 'all'
+                        ? t('content.all_article')
+                        : `${t('content.all')} ${filters.category}`}
                 </h3>
                 <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                     {isLoading && articles.length === 0 ? (
