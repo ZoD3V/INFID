@@ -155,7 +155,10 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
 
                         <div className='flex items-center justify-between gap-4'>
                             <h3 className='text-secondary-300 font-bold uppercase'>
-                                {getLangText(initialData?.category.name, locale)}
+                                {getLangText(initialData?.category.name, locale) == 'Cerita Perubahan' ||
+                                'Stories of change'
+                                    ? 'Bergerak, Berdampak!'
+                                    : getLangText(initialData?.category.name, locale)}
                             </h3>
                             {translation?.attachments?.some((item) => item.type === 'pdf') && (
                                 <Button
@@ -209,7 +212,12 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                         <ArticleContent content={translation?.content || ''} />
 
                         <ArticleShareBar
-                            categoryName={getLangText(initialData?.category.name, locale)}
+                            categoryName={
+                                getLangText(initialData?.category.name, locale) == 'Cerita Perubahan' ||
+                                'Stories of change'
+                                    ? 'Bergerak, Berdampak!'
+                                    : getLangText(initialData?.category.name, locale)
+                            }
                             title={translation?.title}
                         />
 

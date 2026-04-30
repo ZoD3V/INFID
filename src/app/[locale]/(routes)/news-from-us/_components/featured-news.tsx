@@ -50,10 +50,12 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
 
                         const title = translation?.title || 'No Title';
                         const description = getShortDescription(translation?.content);
-                        const categoryName = getLangText(item.category.name, locale);
+                        const categoryName =
+                            getLangText(item?.category.name, locale) == 'Cerita Perubahan' || 'Stories of change'
+                                ? 'Bergerak, Berdampak!'
+                                : getLangText(item?.category.name, locale);
                         const authorName = item.author?.name || 'Admin';
                         const seen = item?.views || 0;
-                        const comments = item.comments?.length || 0;
                         const dateRaw = item.published_at || item.created_at;
 
                         const formattedDate = formatDateShort(dateRaw);

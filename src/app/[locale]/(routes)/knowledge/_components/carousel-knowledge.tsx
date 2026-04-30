@@ -56,7 +56,10 @@ export const ArticleCarousel: React.FC<FeaturedNewsProps> = ({ items }) => {
                     const seen = item.views || 0;
                     const comments = item.comments.length || 0;
                     const description = getShortDescription(translation?.content);
-                    const categoryName = getLangText(item.category.name, locale);
+                    const categoryName =
+                        getLangText(item?.category.name, locale) == 'Cerita Perubahan' || 'Stories of change'
+                            ? 'Bergerak, Berdampak!'
+                            : getLangText(item?.category.name, locale);
                     const authorName = item.author?.name || 'Admin';
                     const publishedDate = item.published_at || item.created_at;
 

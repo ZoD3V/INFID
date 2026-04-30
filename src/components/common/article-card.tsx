@@ -23,8 +23,10 @@ export function ArticleCard<T extends Post>({ article, className, imageClassName
         article?.translations?.[0];
 
     const title = translation?.title || 'No Title';
-    const categoryName = getLangText(article.category.name, locale);
-
+    const categoryName =
+        getLangText(article?.category.name, locale) == 'Cerita Perubahan' || 'Stories of change'
+            ? 'Bergerak, Berdampak!'
+            : getLangText(article?.category.name, locale);
     const authorName = article.author?.name || 'Admin';
     const publishedDate = article.published_at;
     const comments = article.comments;
