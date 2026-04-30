@@ -85,7 +85,7 @@ export default function NewsFromUsPage() {
                     slug: 'all',
                     name: [
                         { language: 'id', text: 'Semua' },
-                        { language: 'en', text: 'Semua' }
+                        { language: 'en', text: 'all' }
                     ],
                     description: null,
                     created_at: new Date().toISOString(),
@@ -99,7 +99,7 @@ export default function NewsFromUsPage() {
                     slug: 'all',
                     name: [
                         { language: 'id', text: 'Semua' },
-                        { language: 'en', text: 'All' }
+                        { language: 'en', text: 'all' }
                     ],
                     description: null,
                     created_at: '',
@@ -145,7 +145,7 @@ export default function NewsFromUsPage() {
                     params: {
                         limit: '',
                         category:
-                            filters.category === 'Semua' || filters.category === 'all'
+                            filters.category === 'Semua' || filters.category === 'All'
                                 ? 'Kegiatan|Siaran Pers|Laporan Tahunan'
                                 : filters.category,
                         search: filters.search,
@@ -173,7 +173,9 @@ export default function NewsFromUsPage() {
 
         const syncAndFetch = async () => {
             const params = new URLSearchParams();
-            if (filters.category !== 'Semua') params.set('category', filters.category);
+            if (filters.category !== 'Semua' && filters.category !== 'All') {
+                params.set('category', filters.category);
+            }
             if (filters.year !== 'all') params.set('year', filters.year);
             if (filters.author !== 'all') params.set('author', filters.author);
             if (filters.search) params.set('search', filters.search);
@@ -194,7 +196,7 @@ export default function NewsFromUsPage() {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
                         category:
-                            filters.category === 'Semua' || filters.category === 'all'
+                            filters.category === 'Semua' || filters.category === 'All'
                                 ? 'Kegiatan|Siaran Pers|Laporan Tahunan'
                                 : filters.category,
                         search: filters.search,
@@ -275,7 +277,7 @@ export default function NewsFromUsPage() {
                     featuredArticles.length > 0 && (
                         <>
                             <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                                {filters.category == 'Semua' || filters.category == 'all'
+                                {filters.category == 'Semua' || filters.category == 'All'
                                     ? `Highlight ${t('content.article')}`
                                     : `Highlight ${filters.category}`}
                             </h3>
@@ -287,7 +289,7 @@ export default function NewsFromUsPage() {
 
                 {/* Grid Artikel */}
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                    {filters.category == 'Semua' || filters.category == 'all'
+                    {filters.category == 'Semua' || filters.category == 'All'
                         ? `${t('content.all')} ${t('content.article')}`
                         : `${t('content.all')} ${filters.category}`}
                 </h3>

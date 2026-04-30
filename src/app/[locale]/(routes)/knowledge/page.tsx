@@ -92,7 +92,7 @@ export default function KnowledgePage() {
     }, [locale]);
 
     useEffect(() => {
-        const categoryFromUrl = searchParams.get('category') || 'Semua';
+        const categoryFromUrl = searchParams.get('category') || 'All';
         const yearFromUrl = searchParams.get('year') || 'all';
         const authorFromUrl = searchParams.get('author') || 'all';
         const searchFromUrl = searchParams.get('search') || '';
@@ -153,7 +153,9 @@ export default function KnowledgePage() {
 
         const syncAndFetch = async () => {
             const params = new URLSearchParams();
-            if (filters.category !== 'Semua') params.set('category', filters.category);
+            if (filters.category !== 'Semua' && filters.category !== 'All') {
+                params.set('category', filters.category);
+            }
             if (filters.year !== 'all') params.set('year', filters.year);
             if (filters.author !== 'all') params.set('author', filters.author);
             if (filters.search) params.set('search', filters.search);
@@ -174,7 +176,7 @@ export default function KnowledgePage() {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
                         category:
-                            filters.category === 'Semua' || filters.category === 'all'
+                            filters.category === 'Semua' || filters.category === 'All'
                                 ? 'Artikel|Riset|Kertas Kebijakan|Modul & Panduan'
                                 : filters.category,
                         search: filters.search,
@@ -253,7 +255,7 @@ export default function KnowledgePage() {
                     featuredArticles.length > 0 && (
                         <>
                             <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                                {filters.category == 'Semua' || filters.category == 'all'
+                                {filters.category == 'Semua' || filters.category == 'All'
                                     ? `Highlight ${t('content.publish')}`
                                     : `Highlight ${filters.category}`}
                             </h3>
@@ -265,7 +267,7 @@ export default function KnowledgePage() {
 
                 {/* Grid Artikel */}
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
-                    {filters.category == 'Semua' || filters.category == 'all'
+                    {filters.category == 'Semua' || filters.category == 'All'
                         ? t('content.all_article')
                         : `${t('content.all')} ${filters.category}`}
                 </h3>
