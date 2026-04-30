@@ -92,7 +92,8 @@ export default function KnowledgePage() {
     }, [locale]);
 
     useEffect(() => {
-        const categoryFromUrl = searchParams.get('category') || 'All';
+        const defaultCat = locale === 'id' ? 'Semua' : 'All';
+        const categoryFromUrl = searchParams.get('category') || defaultCat;
         const yearFromUrl = searchParams.get('year') || 'all';
         const authorFromUrl = searchParams.get('author') || 'all';
         const searchFromUrl = searchParams.get('search') || '';

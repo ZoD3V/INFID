@@ -99,7 +99,7 @@ export default function NewsFromUsPage() {
                     slug: 'all',
                     name: [
                         { language: 'id', text: 'Semua' },
-                        { language: 'en', text: 'all' }
+                        { language: 'en', text: 'All' }
                     ],
                     description: null,
                     created_at: '',
@@ -112,7 +112,8 @@ export default function NewsFromUsPage() {
     }, [locale]);
 
     useEffect(() => {
-        const categoryFromUrl = searchParams.get('category') || 'Semua';
+        const defaultCat = locale === 'id' ? 'Semua' : 'All';
+        const categoryFromUrl = searchParams.get('category') || defaultCat;
         const yearFromUrl = searchParams.get('year') || 'all';
         const authorFromUrl = searchParams.get('author') || 'all';
         const searchFromUrl = searchParams.get('search') || '';
