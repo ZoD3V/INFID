@@ -85,7 +85,7 @@ export default function NewsFromUsPage() {
                     slug: 'all',
                     name: [
                         { language: 'id', text: 'Semua' },
-                        { language: 'en', text: 'all' }
+                        { language: 'en', text: 'All' }
                     ],
                     description: null,
                     created_at: new Date().toISOString(),
