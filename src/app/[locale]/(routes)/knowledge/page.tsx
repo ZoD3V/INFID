@@ -124,7 +124,10 @@ export default function KnowledgePage() {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
                         limit: '',
-                        category: filters.category === 'Semua' || filters.category === 'all' ? '' : filters.category,
+                        category:
+                            filters.category === 'Semua' || filters.category === 'all'
+                                ? 'Artikel|Riset|Kertas Kebijakan|Modul & Panduan'
+                                : filters.category,
                         search: filters.search,
                         year: filters.year === 'all' ? '' : filters.year,
                         author: filters.author === 'all' ? '' : filters.author,
@@ -170,7 +173,10 @@ export default function KnowledgePage() {
             try {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
-                        category: filters.category === 'Semua' ? '' : filters.category,
+                        category:
+                            filters.category === 'Semua' || filters.category === 'all'
+                                ? 'Artikel|Riset|Kertas Kebijakan|Modul & Panduan'
+                                : filters.category,
                         search: filters.search,
                         year: filters.year === 'all' ? '' : filters.year,
                         author: filters.author === 'all' ? '' : filters.author,

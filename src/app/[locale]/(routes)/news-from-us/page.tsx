@@ -144,7 +144,10 @@ export default function NewsFromUsPage() {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
                         limit: '',
-                        category: filters.category === 'Semua' ? '' : filters.category,
+                        category:
+                            filters.category === 'Semua' || filters.category === 'all'
+                                ? 'Kegiatan|Siaran Pers|Laporan Tahunan'
+                                : filters.category,
                         search: filters.search,
                         year: filters.year === 'all' ? '' : filters.year,
                         author: filters.author === 'all' ? '' : filters.author,
@@ -190,7 +193,10 @@ export default function NewsFromUsPage() {
             try {
                 const res = await apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                     params: {
-                        category: filters.category === 'Semua' ? '' : filters.category,
+                        category:
+                            filters.category === 'Semua' || filters.category === 'all'
+                                ? 'Kegiatan|Siaran Pers|Laporan Tahunan'
+                                : filters.category,
                         search: filters.search,
                         year: filters.year === 'all' ? '' : filters.year,
                         author: filters.author === 'all' ? '' : filters.author,
