@@ -42,29 +42,34 @@ export const ArticleShareBar: React.FC<ArticleShareBarProps> = ({ categoryName, 
             <div className='flex items-center gap-4'>
                 <p className='text-primary-900 text-sm md:text-base'>{t('content.article_share')}</p>
 
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-2' role='group' aria-label='Share this article'>
                     {/* Facebook */}
                     <FacebookShareButton url={shareUrl} title={title}>
-                        <FacebookIcon size={32} round />
+                        <FacebookIcon size={32} round aria-hidden='true' />
+                        <span className='sr-only'>Share on Facebook</span>
                     </FacebookShareButton>
 
                     {/* Twitter / X */}
                     <TwitterShareButton url={shareUrl} title={title}>
-                        <XIcon size={32} round />
+                        <XIcon size={32} round aria-hidden='true' />
+                        <span className='sr-only'>Share on X (Twitter)</span>
                     </TwitterShareButton>
 
                     {/* Whatsapp */}
                     <WhatsappShareButton url={shareUrl} title={title} separator=':: '>
-                        <WhatsappIcon size={32} round />
+                        <WhatsappIcon size={32} round aria-hidden='true' />
+                        <span className='sr-only'>Share on WhatsApp</span>
                     </WhatsappShareButton>
 
                     {/* Copy Link */}
-                    <div
-                        className='cursor-pointer rounded-full bg-gray-200 p-2 transition-colors hover:bg-gray-300'
+                    <button
+                        type='button'
+                        className='focus-visible:ring-primary-500 cursor-pointer rounded-full bg-gray-200 p-2 transition-all outline-none hover:bg-gray-300 focus-visible:ring-2 focus-visible:ring-offset-2'
                         onClick={handleCopy}
-                        title='Salin Link'>
-                        <LinkIcon className='h-4 w-4 text-sm text-slate-600' />
-                    </div>
+                        title='Copy Link'>
+                        <LinkIcon className='h-4 w-4 text-slate-600' aria-hidden='true' />
+                        <span className='sr-only'>Copy link to clipboard</span>
+                    </button>
                 </div>
             </div>
         </div>

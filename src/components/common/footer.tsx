@@ -82,48 +82,60 @@ const Footer = () => {
 
                         <p className='mb-6 text-sm font-normal text-slate-200'>{t('description')}</p>
 
-                        <div className='flex gap-4'>
+                        <div className='flex gap-4' role='list' aria-label='Social media links'>
+                            {/* Instagram */}
                             <a
                                 href='https://www.instagram.com/infid_id/'
-                                aria-label='Instagram'
                                 target='_blank'
                                 rel='noreferrer'
-                                className='flex items-center justify-center text-white transition-transform hover:scale-110'>
-                                <FaInstagram className='text-2xl' />
+                                role='listitem'
+                                className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
+                                <FaInstagram className='text-2xl' aria-hidden='true' />
+                                <span className='sr-only'>Visit INFID on Instagram (opens in a new tab)</span>
                             </a>
 
+                            {/* Linkedin */}
                             <a
                                 href='https://www.linkedin.com/company/infid/'
-                                aria-label='Linkedin'
                                 target='_blank'
                                 rel='noreferrer'
-                                className='flex items-center justify-center text-white transition-transform hover:scale-110'>
-                                <FaLinkedin className='text-xl' />
+                                role='listitem'
+                                className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
+                                <FaLinkedin className='text-xl' aria-hidden='true' />
+                                <span className='sr-only'>Visit INFID on LinkedIn (opens in a new tab)</span>
                             </a>
 
+                            {/* Youtube */}
                             <a
                                 href='https://www.youtube.com/@INFIDJakarta'
-                                aria-label='Youtube'
                                 target='_blank'
                                 rel='noreferrer'
-                                className='flex items-center justify-center text-white transition-transform hover:scale-110'>
-                                <FaYoutube className='text-xl' />
+                                role='listitem'
+                                className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
+                                <FaYoutube className='text-xl' aria-hidden='true' />
+                                <span className='sr-only'>Visit INFID on YouTube (opens in a new tab)</span>
                             </a>
+
+                            {/* Facebook */}
                             <a
                                 href='https://www.facebook.com/infid'
-                                aria-label='Facebook'
                                 target='_blank'
                                 rel='noreferrer'
-                                className='flex items-center justify-center text-white transition-transform hover:scale-110'>
-                                <FaFacebook className='text-xl' />
+                                role='listitem'
+                                className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
+                                <FaFacebook className='text-xl' aria-hidden='true' />
+                                <span className='sr-only'>Visit INFID on Facebook (opens in a new tab)</span>
                             </a>
+
+                            {/* X */}
                             <a
                                 href='https://x.com/infid_ID'
-                                aria-label='X'
                                 target='_blank'
                                 rel='noreferrer'
-                                className='flex items-center justify-center text-white transition-transform hover:scale-110'>
-                                <BsTwitterX className='text-xl' />
+                                role='listitem'
+                                className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
+                                <BsTwitterX className='text-xl' aria-hidden='true' />
+                                <span className='sr-only'>Visit INFID on X(opens in a new tab)</span>
                             </a>
                         </div>
                     </div>

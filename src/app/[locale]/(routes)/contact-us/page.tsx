@@ -169,30 +169,69 @@ const ContactUs = () => {
                     {/* Social Media Section */}
                     <div className='border-t border-slate-200 pt-8'>
                         <h3 className='mb-4 text-lg font-bold text-gray-800'>{t('info.follow_us')}</h3>
-                        <div className='flex gap-4'>
-                            <Link href={'https://www.instagram.com/infid_id/'}>
-                                <div className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                    <FaInstagram className='h-6 w-6' />
+                        <div className='flex gap-4' role='list' aria-label='INFID Social Media Links'>
+                            {/* Instagram */}
+                            <Link
+                                href='https://www.instagram.com/infid_id/'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='group outline-none'
+                                role='listitem'>
+                                <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
+                                    <FaInstagram className='h-6 w-6' aria-hidden='true' />
+                                    <span className='sr-only'>Visit INFID on Instagram</span>
                                 </div>
                             </Link>
-                            <Link href={'https://www.linkedin.com/company/infid/'}>
-                                <div className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                    <FaLinkedin className='h-6 w-6' />
+
+                            {/* LinkedIn */}
+                            <Link
+                                href='https://www.linkedin.com/company/infid/'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='group outline-none'
+                                role='listitem'>
+                                <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
+                                    <FaLinkedin className='h-6 w-6' aria-hidden='true' />
+                                    <span className='sr-only'>Visit INFID on LinkedIn</span>
                                 </div>
                             </Link>
-                            <Link href={'https://www.youtube.com/@INFIDJakarta'}>
-                                <div className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                    <FaYoutube className='h-6 w-6' />
+
+                            {/* YouTube */}
+                            <Link
+                                href='https://www.youtube.com/@INFIDJakarta'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='group outline-none'
+                                role='listitem'>
+                                <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
+                                    <FaYoutube className='h-6 w-6' aria-hidden='true' />
+                                    <span className='sr-only'>Visit INFID on YouTube</span>
                                 </div>
                             </Link>
-                            <Link href={'https://www.facebook.com/infid'}>
-                                <div className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                    <FaFacebook className='h-6 w-6' />
+
+                            {/* Facebook */}
+                            <Link
+                                href='https://www.facebook.com/infid'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='group outline-none'
+                                role='listitem'>
+                                <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
+                                    <FaFacebook className='h-6 w-6' aria-hidden='true' />
+                                    <span className='sr-only'>Visit INFID on Facebook</span>
                                 </div>
                             </Link>
-                            <Link href={'https://x.com/infid_ID'}>
-                                <div className='text-primary-500 bg-transperant border-primary-200 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border p-2 font-bold transition-colors hover:bg-teal-600 hover:text-white'>
-                                    <BsTwitterX className='h-5 w-5' />
+
+                            {/* X (Twitter) */}
+                            <Link
+                                href='https://x.com/infid_ID'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='group outline-none'
+                                role='listitem'>
+                                <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
+                                    <BsTwitterX className='h-5 w-5' aria-hidden='true' />
+                                    <span className='sr-only'>Visit INFID on X</span>
                                 </div>
                             </Link>
                         </div>
