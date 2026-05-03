@@ -47,7 +47,6 @@ const CommunitySection = () => {
                             <p className='text-base leading-relaxed text-gray-700'>{t('description')}</p>
 
                             <div className='flex gap-4'>
-                                {/* <Button className='w-full rounded-full'> {t('buttons.register')}</Button> */}
                                 <Button
                                     variant='outline'
                                     asChild
