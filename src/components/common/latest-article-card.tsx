@@ -20,7 +20,8 @@ export const LatestArticleCard: React.FC<LatestArticleCardProps> = ({ article })
 
     const title = translation?.title || 'No Title';
     const categoryName =
-        getLangText(article?.category.name, locale) == 'Cerita Perubahan' || 'Stories of change'
+        getLangText(article?.category.name, locale) === 'Cerita Perubahan' ||
+        getLangText(article?.category.name, locale) === 'Stories of change'
             ? 'Bergerak, Berdampak!'
             : getLangText(article?.category.name, locale);
 

@@ -51,7 +51,8 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                         const title = translation?.title || 'No Title';
                         const description = getShortDescription(translation?.content);
                         const categoryName =
-                            getLangText(item?.category.name, locale) == 'Cerita Perubahan' || 'Stories of change'
+                            getLangText(item?.category.name, locale) === 'Cerita Perubahan' ||
+                            getLangText(item?.category.name, locale) === 'Stories of change'
                                 ? 'Bergerak, Berdampak!'
                                 : getLangText(item?.category.name, locale);
                         const authorName = item.author?.name || 'Admin';

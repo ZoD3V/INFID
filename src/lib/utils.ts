@@ -134,7 +134,6 @@ export const getLangText = (
     if (useDisplayText) {
         return translation?.displayText || translation?.text || translations[0].text || '';
     }
-
     return translation?.text || translations[0].text || '';
 };
 

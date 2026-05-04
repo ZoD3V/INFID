@@ -24,7 +24,8 @@ export function ArticleCard<T extends Post>({ article, className, imageClassName
 
     const title = translation?.title || 'No Title';
     const categoryName =
-        getLangText(article?.category.name, locale) == 'Cerita Perubahan' || 'Stories of change'
+        getLangText(article?.category.name, locale) === 'Cerita Perubahan' ||
+        getLangText(article?.category.name, locale) === 'Stories of change'
             ? 'Bergerak, Berdampak!'
             : getLangText(article?.category.name, locale);
     const authorName = article.author?.name || 'Admin';
