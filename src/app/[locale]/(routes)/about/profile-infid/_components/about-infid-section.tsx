@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 
-import { Check } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const AboutInfid = () => {

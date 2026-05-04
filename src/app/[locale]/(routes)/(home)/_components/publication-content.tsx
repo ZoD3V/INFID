@@ -9,7 +9,7 @@ import { useCategories } from '@/context/category-context';
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { formatDateShort, formatFullDate, getLangText, getShortDescription } from '@/lib/utils';
+import { formatDateShort, formatFullDate, getLangText } from '@/lib/utils';
 import { Post } from '@/types/posts';
 
 import { Eye, MessageSquareMore, Pencil } from 'lucide-react';
@@ -68,7 +68,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
     const sideArticles = publications.slice(1, 4);
 
     return (
-        <>
+        <section>
             <h1 className='text-primary-900 mb-8 max-w-sm text-3xl font-bold md:text-4xl lg:text-5xl'>{t('title')}</h1>
 
             {categories.length > 0 && (
@@ -278,6 +278,6 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
             ) : (
                 <EmptyState title='Data Not Found' description='There are no publications for this category.' />
             )}
-        </>
+        </section>
     );
 };

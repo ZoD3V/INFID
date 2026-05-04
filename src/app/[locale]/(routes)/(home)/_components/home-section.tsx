@@ -61,6 +61,13 @@ const Home = () => {
         }
     };
 
+    const scrollToProgram = () => {
+        const element = document.getElementById('program-us');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section
             className='relative min-h-screen overflow-x-hidden bg-cover bg-center bg-no-repeat'
@@ -115,11 +122,12 @@ const Home = () => {
 
                         {/* CTA Buttons */}
                         <div className='grid grid-cols-2 gap-4 md:flex'>
-                            <Button asChild variant='secondary' className='rounded-full font-semibold'>
-                                <Link href='#program-us'>
-                                    {b('exploreProgram')}
-                                    <ArrowRight />
-                                </Link>
+                            <Button
+                                variant='secondary'
+                                className='rounded-full font-semibold'
+                                onClick={scrollToProgram}>
+                                {b('exploreProgram')}
+                                <ArrowRight />
                             </Button>
                             <Button
                                 asChild

@@ -3,7 +3,7 @@
 import { useCategories } from '@/context/category-context';
 import { subscribeAction } from '@/hooks/subscribe';
 import { Link, usePathname } from '@/i18n/routing';
-import { cn } from '@/lib/utils';
+import { cn, handleMessageSocialMedia } from '@/lib/utils';
 import { allowedKnowledgeCategories } from '@/types/categories';
 
 import { Input } from '../ui/input';
@@ -91,7 +91,7 @@ const Footer = () => {
                                 role='listitem'
                                 className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
                                 <FaInstagram className='text-2xl' aria-hidden='true' />
-                                <span className='sr-only'>Visit INFID on Instagram (opens in a new tab)</span>
+                                <span className='sr-only'>{handleMessageSocialMedia('Instagram', locale)}</span>
                             </a>
 
                             {/* Linkedin */}
@@ -102,7 +102,7 @@ const Footer = () => {
                                 role='listitem'
                                 className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
                                 <FaLinkedin className='text-xl' aria-hidden='true' />
-                                <span className='sr-only'>Visit INFID on LinkedIn (opens in a new tab)</span>
+                                <span className='sr-only'>{handleMessageSocialMedia('Linkedin', locale)}</span>
                             </a>
 
                             {/* Youtube */}
@@ -113,7 +113,7 @@ const Footer = () => {
                                 role='listitem'
                                 className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
                                 <FaYoutube className='text-xl' aria-hidden='true' />
-                                <span className='sr-only'>Visit INFID on YouTube (opens in a new tab)</span>
+                                <span className='sr-only'>{handleMessageSocialMedia('Youtube', locale)}</span>
                             </a>
 
                             {/* Facebook */}
@@ -124,7 +124,7 @@ const Footer = () => {
                                 role='listitem'
                                 className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
                                 <FaFacebook className='text-xl' aria-hidden='true' />
-                                <span className='sr-only'>Visit INFID on Facebook (opens in a new tab)</span>
+                                <span className='sr-only'>{handleMessageSocialMedia('Facebook', locale)}</span>
                             </a>
 
                             {/* X */}
@@ -135,7 +135,7 @@ const Footer = () => {
                                 role='listitem'
                                 className='focus-visible:ring-offset-primary-600 flex items-center justify-center rounded-sm text-white transition-transform outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2'>
                                 <BsTwitterX className='text-xl' aria-hidden='true' />
-                                <span className='sr-only'>Visit INFID on X(opens in a new tab)</span>
+                                <span className='sr-only'>{handleMessageSocialMedia('X', locale)}</span>
                             </a>
                         </div>
                     </div>

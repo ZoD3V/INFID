@@ -9,11 +9,11 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
-import { cn } from '@/lib/utils';
+import { cn, handleMessageSocialMedia } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { ExternalLink, Mail, MapPin, Phone, Send } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { BsTwitterX } from 'react-icons/bs';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
@@ -35,6 +35,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactUs = () => {
     const t = useTranslations('contact');
+    const locale = useLocale();
     const {
         register,
         handleSubmit,
@@ -179,7 +180,7 @@ const ContactUs = () => {
                                 role='listitem'>
                                 <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
                                     <FaInstagram className='h-6 w-6' aria-hidden='true' />
-                                    <span className='sr-only'>Visit INFID on Instagram</span>
+                                    <span className='sr-only'>{handleMessageSocialMedia('Instagram', locale)}</span>
                                 </div>
                             </Link>
 
@@ -192,7 +193,7 @@ const ContactUs = () => {
                                 role='listitem'>
                                 <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
                                     <FaLinkedin className='h-6 w-6' aria-hidden='true' />
-                                    <span className='sr-only'>Visit INFID on LinkedIn</span>
+                                    <span className='sr-only'>{handleMessageSocialMedia('Linkedin', locale)}</span>
                                 </div>
                             </Link>
 
@@ -205,7 +206,7 @@ const ContactUs = () => {
                                 role='listitem'>
                                 <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
                                     <FaYoutube className='h-6 w-6' aria-hidden='true' />
-                                    <span className='sr-only'>Visit INFID on YouTube</span>
+                                    <span className='sr-only'>{handleMessageSocialMedia('Youtube', locale)}</span>
                                 </div>
                             </Link>
 
@@ -218,7 +219,7 @@ const ContactUs = () => {
                                 role='listitem'>
                                 <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
                                     <FaFacebook className='h-6 w-6' aria-hidden='true' />
-                                    <span className='sr-only'>Visit INFID on Facebook</span>
+                                    <span className='sr-only'>{handleMessageSocialMedia('Facebook', locale)}</span>
                                 </div>
                             </Link>
 
@@ -231,7 +232,7 @@ const ContactUs = () => {
                                 role='listitem'>
                                 <div className='text-primary-500 border-primary-200 flex h-12 w-12 items-center justify-center rounded-full border transition-all group-hover:bg-teal-600 group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-teal-500 group-focus-visible:ring-offset-2'>
                                     <BsTwitterX className='h-5 w-5' aria-hidden='true' />
-                                    <span className='sr-only'>Visit INFID on X</span>
+                                    <span className='sr-only'>{handleMessageSocialMedia('X', locale)}</span>
                                 </div>
                             </Link>
                         </div>

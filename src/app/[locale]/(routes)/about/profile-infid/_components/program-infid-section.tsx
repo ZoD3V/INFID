@@ -21,7 +21,7 @@ export const ProgramINFIDSection = () => {
         {
             title: p('programs.climate_governance.title'),
             description: p('programs.climate_governance.description'),
-            image: '/images/bg-program-1.webp'
+            image: '/images/program_iklim_gender.webp'
         },
         {
             title: p('programs.inclusive_development.title'),

@@ -119,7 +119,7 @@ export const convertToEmbedUrl = (url: string) => {
 };
 
 export const getShortDescription = (content: string) => {
-    return content?.replace(/<[^>]*>/g, '').substring(0, 120) || '';
+    return content?.replace(/<[^>]*>/g, '').substring(0, 280) || '';
 };
 
 export const getLangText = (
@@ -136,4 +136,11 @@ export const getLangText = (
     }
 
     return translation?.text || translations[0].text || '';
+};
+
+export const handleMessageSocialMedia = (msg: string, locale: string) => {
+    const prefix = locale === 'id' ? 'Kunjungi INFID' : 'Visit INFID on';
+    const suffix = locale === 'id' ? '(Buka di tab baru)' : '(opens in a new tab)';
+
+    return `${prefix} ${msg} ${suffix}`;
 };

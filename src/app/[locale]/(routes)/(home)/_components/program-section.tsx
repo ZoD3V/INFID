@@ -19,7 +19,7 @@ export const ProgramSection = () => {
         {
             title: p('programs.climate_governance.title'),
             description: p('programs.climate_governance.description'),
-            image: '/images/bg-program-1.webp'
+            image: '/images/program_iklim_gender.webp'
         },
         {
             title: p('programs.inclusive_development.title'),
@@ -29,7 +29,7 @@ export const ProgramSection = () => {
     ];
 
     return (
-        <div className='bg-secondary-100 relative min-h-screen py-24' id='program-infid'>
+        <div className='bg-secondary-100 relative min-h-screen py-24' id='program-us'>
             <Image
                 src='/images/decoration-program-1.png'
                 alt='decoration'
