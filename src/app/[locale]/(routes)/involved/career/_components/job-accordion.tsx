@@ -10,12 +10,13 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Job } from '@/types/job';
 
-import { format, parseISO } from 'date-fns';
+import { format, isBefore, parseISO, startOfDay } from 'date-fns';
 import { id } from 'date-fns/locale';
 import { FileText } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
 export function JobAccordion({ data }: { data: Job[] }) {
+    const today = startOfDay(new Date());
     const t = useTranslations('button');
     const j = useTranslations('job');
     const locale = useLocale();
@@ -32,6 +33,9 @@ export function JobAccordion({ data }: { data: Job[] }) {
                         item?.description?.find((t) => t.language === locale) ||
                         item?.description?.find((t) => t.language === 'id') ||
                         item?.description?.[0];
+                    const isExpired = item.closing_date
+                        ? isBefore(startOfDay(parseISO(item.closing_date)), today)
+                        : false;
                     return (
                         <AccordionItem
                             key={item.id}
@@ -46,6 +50,11 @@ export function JobAccordion({ data }: { data: Job[] }) {
                                             <Badge className='bg-secondary-300 rounded-full text-xs font-medium'>
                                                 {item?.employment_type ?? '-'}
                                             </Badge>
+                                            {isExpired && (
+                                                <span className='rounded border border-red-500 px-1.5 text-[10px] font-bold text-red-500 uppercase'>
+                                                    Closed
+                                                </span>
+                                            )}
                                             <span className='text-sm text-slate-500'>
                                                 {t('deadline')}{' '}
                                                 {item.closing_date

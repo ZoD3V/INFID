@@ -18,7 +18,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             colors: {
                 primary: '#F59D41',
                 secondary: '#ffffff'
-            }
+            },
+            enableVoiceControl: false
         };
 
         import('accessibility-widgets/widget.js');

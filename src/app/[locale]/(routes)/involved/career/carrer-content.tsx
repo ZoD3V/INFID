@@ -13,8 +13,10 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
 import { cn } from '@/lib/utils';
+import { Job } from '@/types/job';
 
 import { JobAccordion } from './_components/job-accordion';
+import { isBefore, parseISO, startOfDay } from 'date-fns';
 import { useLocale, useTranslations } from 'next-intl';
 
 const CareerContent = ({ categories, initialJobs, translations }: any) => {
@@ -32,7 +34,7 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
     const fetchJobs = useCallback(async (category: any, date: any) => {
         setIsLoading(true);
         try {
-            const res = await apiRequest.get<any[]>(API_ENDPOINTS.jobRecruitments, {
+            const res = await apiRequest.get<Job[]>(API_ENDPOINTS.jobRecruitments, {
                 params: {
                     category: category === 'all' ? undefined : category,
                     closing_date: date,
@@ -40,9 +42,28 @@ const CareerContent = ({ categories, initialJobs, translations }: any) => {
                 }
             });
 
-            setJobs(res.data);
+            const today = startOfDay(new Date());
+
+            const sortedJobs = [...res.data].sort((a, b) => {
+                if (!a.closing_date) return 1;
+                if (!b.closing_date) return -1;
+
+                const dateA = startOfDay(parseISO(a.closing_date));
+                const dateB = startOfDay(parseISO(b.closing_date));
+
+                const isExpiredA = isBefore(dateA, today);
+                const isExpiredB = isBefore(dateB, today);
+
+                if (isExpiredA !== isExpiredB) {
+                    return isExpiredA ? 1 : -1;
+                }
+
+                return dateA.getTime() - dateB.getTime();
+            });
+
+            setJobs(sortedJobs);
         } catch (error) {
-            console.error('Error fetching jobs');
+            console.error('Error fetching jobs', error);
         } finally {
             setIsLoading(false);
         }
