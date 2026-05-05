@@ -235,7 +235,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                                         key={article.id}
                                         onClick={() => handleArticleClick(article)}
                                         className='group cursor-pointer'>
-                                        <LatestArticleCard article={article} />
+                                        <LatestArticleCard article={article} basePath={'/news-from-us'} />
                                     </div>
                                 ))}
                             </div>

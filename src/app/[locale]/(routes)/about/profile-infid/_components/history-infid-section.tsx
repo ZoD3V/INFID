@@ -117,7 +117,14 @@ const InfidTimeline = ({ initialData }: { initialData: LeadershipTimeline[] }) =
                         <div className='flex flex-col items-start gap-8 md:flex-row'>
                             <div className='flex w-full flex-col gap-2 md:w-1/3'>
                                 {selectedTimeline.images.map((item, index) => (
-                                    <img src={item} alt='People' key={index} />
+                                    <img
+                                        src={item}
+                                        alt='People'
+                                        key={index}
+                                        onError={(e) => {
+                                            (e.target as HTMLImageElement).src = '/images/placeholder-square.png';
+                                        }}
+                                    />
                                 ))}
                             </div>
                             <div className='w-full md:w-3/4'>

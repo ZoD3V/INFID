@@ -26,7 +26,7 @@ export const ProgramINFIDSection = () => {
         {
             title: p('programs.inclusive_development.title'),
             description: p('programs.inclusive_development.description'),
-            image: '/images/bg-program-1.webp'
+            image: '/images/program_pembangunan_inklusif.webp'
         }
     ];
 

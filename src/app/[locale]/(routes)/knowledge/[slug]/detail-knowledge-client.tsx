@@ -228,13 +228,10 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                     <div className='w-full space-y-5 xl:w-[40%]'>
                         <div className='flex flex-col'>
                             <h3 className='pb-5 text-xl font-bold'>{t('content.latest_articles')}</h3>
-                            <div className='flex w-full flex-col gap-4'>
+                            <div className='flex w-full flex-col gap-4' role='list' aria-label='Latest Articles'>
                                 {latestArticles.map((article) => (
-                                    <div
-                                        key={article.id}
-                                        onClick={() => handleArticleClick(article)}
-                                        className='cursor-pointer'>
-                                        <LatestArticleCard article={article} />
+                                    <div key={article.id} role='listitem'>
+                                        <LatestArticleCard article={article} basePath={'/knowledge'} />
                                     </div>
                                 ))}
                             </div>

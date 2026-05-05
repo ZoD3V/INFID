@@ -280,7 +280,7 @@ export default function NewsFromUsPage() {
                             <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
                                 {filters.category == 'Semua' || filters.category == 'All'
                                     ? `Highlight ${t('content.article')}`
-                                    : `Highlight ${filters.category == 'Cerita Perubahan' || 'Stories of change' ? 'Bergerak, Berdampak!' : filters.category}`}
+                                    : `Highlight ${filters.category == 'Cerita Perubahan' || filters.category === 'Stories of change' ? 'Bergerak, Berdampak!' : filters.category}`}
                             </h3>
 
                             {featuredArticles.length > 0 && <FeaturedNews items={featuredArticles} />}
@@ -292,7 +292,7 @@ export default function NewsFromUsPage() {
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
                     {filters.category == 'Semua' || filters.category == 'All'
                         ? `${t('content.all')} ${t('content.article')}`
-                        : `${t('content.all')} ${filters.category == 'Cerita Perubahan' || 'Stories of change' ? 'Bergerak, Berdampak!' : filters.category}`}
+                        : `${t('content.all')} ${filters.category == 'Cerita Perubahan' || filters.category === 'Stories of change' ? 'Bergerak, Berdampak!' : filters.category}`}
                 </h3>
                 <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                     {isLoading && articles.length === 0 ? (

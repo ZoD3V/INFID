@@ -100,6 +100,10 @@ export default function OrganizationStructure({ data, activeTitle }: Organizatio
                                                     <img
                                                         src={pub.image}
                                                         alt={pub.title}
+                                                        onError={(e) => {
+                                                            (e.target as HTMLImageElement).src =
+                                                                '/images/placeholder-square.png';
+                                                        }}
                                                         className='h-full w-full object-cover transition-transform group-hover:scale-110'
                                                     />
                                                 </div>

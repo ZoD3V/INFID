@@ -160,7 +160,9 @@ const AboutInfid = () => {
                                             <Link
                                                 href={
                                                     'https://esango.un.org/civilsociety/consultativeStatusSummary.do?profileCode=2443'
-                                                }>
+                                                }
+                                                target='_blank'
+                                                rel='noopener noreferrer'>
                                                 {t('card.access_link')}
                                             </Link>
                                         </Button>

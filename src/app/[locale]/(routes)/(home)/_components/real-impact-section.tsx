@@ -47,6 +47,11 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
         router.push(`/knowledge/${article.id}-${article.translations[0]?.slug}`);
     };
 
+    const handleStoriesClick = async () => {
+        const categoryName = locale === 'id' ? 'Cerita Perubahan' : 'Stories of Change';
+        router.push(`/news-from-us?category=${categoryName}`);
+    };
+
     return (
         <section
             className='bg-primary relative overflow-hidden py-24'
@@ -321,7 +326,9 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                                     {c('impactCardTitle')}
                                 </h3>
                                 <p className='max-w-3xl text-sm text-slate-700'>{c('impactCardDescription')}</p>
-                                <Button className='bg-primary-600 hover:bg-primary-700 w-full rounded-full text-white'>
+                                <Button
+                                    onClick={handleStoriesClick}
+                                    className='bg-primary-600 hover:bg-primary-700 w-full rounded-full text-white'>
                                     {b('readAllStories')}
                                 </Button>
                             </div>

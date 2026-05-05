@@ -3,6 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { cn, getLangText } from '@/lib/utils';
 import { Category } from '@/types/posts';
 
+import { YearPicker } from '../ui/year-picker';
 import { useLocale, useTranslations } from 'next-intl';
 
 export interface FilterOption {
@@ -82,21 +83,8 @@ export function ArticleFilters({
             </div>
             <div className='flex flex-wrap gap-2'>
                 {/* YEAR SELECT */}
-                <Select value={selectedYear} onValueChange={onYearChange}>
-                    <SelectTrigger
-                        className='focus:ring-primary-500 w-37.5 focus:ring-2 focus:ring-offset-2'
-                        aria-label='Select publication year'>
-                        <SelectValue placeholder={t('content.year')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value='all'>{t('content.all_year')}</SelectItem>
-                        {years.map((y) => (
-                            <SelectItem key={y} value={y}>
-                                {y}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+
+                <YearPicker selectedYear={selectedYear} onYearChange={onYearChange} t={t} />
 
                 {/* AUTHOR SELECT */}
                 {authors !== undefined && authors.length > 0 && (
