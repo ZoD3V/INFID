@@ -31,10 +31,10 @@ export function YearPicker({ selectedYear, onYearChange, t }: YearPickerProps) {
                     aria-expanded={isOpen}
                     aria-label={`${t('content.year')}: ${selectedYear === 'all' ? t('content.all_year') : selectedYear}`}
                     className={cn(
-                        'text-primary-500 w-37.5 justify-between text-right font-medium focus:ring-2 focus:ring-offset-2',
+                        'text-primary-500 w-fit justify-between text-right font-medium focus:ring-2 focus:ring-offset-2',
                         !selectedYear && 'text-muted-foreground'
                     )}>
-                    <CalendarIcon className='mr-2 h-5 w-5' aria-hidden='true' />
+                    <CalendarIcon className='mr-5 h-5 w-5' aria-hidden='true' />
                     {selectedYear === 'all' ? t('content.all_year') : selectedYear || t('content.year')}
                 </Button>
             </PopoverTrigger>
