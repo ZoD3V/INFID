@@ -145,7 +145,7 @@ const Footer = () => {
                         <div className='grid grid-cols-2 gap-8 lg:flex'>
                             {Object.entries(footerLinks).map(([category, links]) => (
                                 <div key={category} className='lg:w-1/2'>
-                                    <h6 className='mb-4 text-base font-bold text-white'>{t(`sections.${category}`)}</h6>
+                                    <h4 className='mb-4 text-base font-bold text-white'>{t(`sections.${category}`)}</h4>
 
                                     <ul className='flex flex-col gap-4'>
                                         {links.map((link, index) => (
@@ -173,7 +173,7 @@ const Footer = () => {
                             ))}
                             <div className='col-span-2 flex w-full flex-col gap-4 lg:col-span-1 lg:w-fit'>
                                 <div className='flex flex-col gap-4'>
-                                    <h6 className='text-base font-bold text-white'>{t('sections.newsletter')}</h6>
+                                    <h4 className='text-base font-bold text-white'>{t('sections.newsletter')}</h4>
                                     <p className='text-sm font-normal text-slate-200'>{t('newsletter.description')}</p>
                                 </div>
 
@@ -196,7 +196,7 @@ const Footer = () => {
                 </div>
                 <div className='flex w-full flex-col items-start justify-between gap-5 md:flex-row md:items-end'>
                     <div className='flex flex-col gap-2 pt-8'>
-                        <h6 className='text-base font-bold text-white'>{t('contact.title')}</h6>
+                        <h4 className='text-base font-bold text-white'>{t('contact.title')}</h4>
                         <p className='text-sm font-normal text-slate-200'>
                             Jl. Jatipadang Raya Kav.3 No.105, Pasar Minggu, Jakarta Selatan, 12540, Indonesia
                         </p>
