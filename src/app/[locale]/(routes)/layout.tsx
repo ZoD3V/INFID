@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
 
     const t = await getTranslations({ locale, namespace: 'metadata' });
+    const baseUrl = 'https://infid-six.vercel.app/';
 
     return {
         title: t('title'),
@@ -41,10 +42,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
             type: 'website'
         },
         alternates: {
-            canonical: `/${locale}`,
+            canonical: `${baseUrl}/${locale}`,
             languages: {
-                id: '/id',
-                en: '/en'
+                'id-ID': `${baseUrl}/id`,
+                'en-US': `${baseUrl}/en`,
+                'x-default': `${baseUrl}/id`
             }
         }
     };
