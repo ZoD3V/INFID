@@ -47,7 +47,14 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                 }
             });
 
-            setPublications(res.data);
+            setPublications(
+                res.data.filter(
+                    (item) =>
+                        (item.status.toLowerCase() == 'published' &&
+                            getLangText(item.category.name) !== 'Infografis') ||
+                        getLangText(item.category.name) !== 'Infograhic'
+                ) || []
+            );
         } catch (err) {
             console.error(err);
         } finally {

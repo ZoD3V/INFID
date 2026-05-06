@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { getLangText } from '@/lib/utils';
 import { allowedNewsCategories } from '@/types/categories';
 import { Category, Post } from '@/types/posts';
 import { yearArticle } from '@/types/years';
@@ -157,7 +158,13 @@ export default function NewsFromUsPage() {
                     }
                 });
 
-                const data = res.data.filter((item) => item.status.toLowerCase() == 'published') || [];
+                const data =
+                    res.data.filter(
+                        (item) =>
+                            (item.status.toLowerCase() == 'published' &&
+                                getLangText(item.category.name) !== 'Infografis') ||
+                            getLangText(item.category.name) !== 'Infograhic'
+                    ) || [];
                 setFeaturedArticles(data);
             } catch (error) {
                 console.error('Gagal load featured:', error);
@@ -209,7 +216,13 @@ export default function NewsFromUsPage() {
                     }
                 });
 
-                const data = res.data || res;
+                const data =
+                    res.data.filter(
+                        (item) =>
+                            (item.status.toLowerCase() == 'published' &&
+                                getLangText(item.category.name) !== 'Infografis') ||
+                            getLangText(item.category.name) !== 'Infograhic'
+                    ) || [];
                 if (currentPage === 1) {
                     setArticles(data);
                 } else {
@@ -280,7 +293,7 @@ export default function NewsFromUsPage() {
                             <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
                                 {filters.category == 'Semua' || filters.category == 'All'
                                     ? `Highlight ${t('content.article')}`
-                                    : `Highlight ${filters.category == 'Cerita Perubahan' || filters.category === 'Stories of change' ? 'Bergerak, Berdampak!' : filters.category}`}
+                                    : `Highlight ${filters.category == 'Cerita Perubahan' || filters.category === 'Stories of Change' ? 'Bergerak, Berdampak!' : filters.category}`}
                             </h3>
 
                             {featuredArticles.length > 0 && <FeaturedNews items={featuredArticles} />}
@@ -292,7 +305,7 @@ export default function NewsFromUsPage() {
                 <h3 className='text-primary-500 mb-4 text-xl font-bold md:text-2xl'>
                     {filters.category == 'Semua' || filters.category == 'All'
                         ? `${t('content.all')} ${t('content.article')}`
-                        : `${t('content.all')} ${filters.category == 'Cerita Perubahan' || filters.category === 'Stories of change' ? 'Bergerak, Berdampak!' : filters.category}`}
+                        : `${t('content.all')} ${filters.category == 'Cerita Perubahan' || filters.category === 'Stories of Change' ? 'Bergerak, Berdampak!' : filters.category}`}
                 </h3>
                 <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                     {isLoading && articles.length === 0 ? (

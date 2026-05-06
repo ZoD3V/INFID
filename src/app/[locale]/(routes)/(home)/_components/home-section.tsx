@@ -143,9 +143,9 @@ const Home = () => {
                         <div className='w-full space-y-8 rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur-md lg:w-xs'>
                             {/* Header */}
                             <div className='flex items-center justify-between gap-2 border-b border-white/10 pb-8 lg:pb-4'>
-                                <h3 className='text-sm font-semibold tracking-wide text-white lg:text-xs'>
+                                <p className='text-sm font-semibold tracking-wide text-white lg:text-xs'>
                                     {t('titleImpact')}
-                                </h3>
+                                </p>
                                 <span className='h-2 w-2 rounded-full bg-orange-500'></span>
                             </div>
 

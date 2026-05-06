@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { getLangText } from '@/lib/utils';
 import { allowedKnowledgeCategories } from '@/types/categories';
 import { Category, Post } from '@/types/posts';
 import { yearArticle } from '@/types/years';
@@ -137,7 +138,13 @@ export default function KnowledgePage() {
                     }
                 });
 
-                const data = res.data.filter((item) => item.status.toLowerCase() == 'published') || [];
+                const data =
+                    res.data.filter(
+                        (item) =>
+                            (item.status.toLowerCase() == 'published' &&
+                                getLangText(item.category.name) !== 'Infografis') ||
+                            getLangText(item.category.name) !== 'Infograhic'
+                    ) || [];
                 setFeaturedArticles(data);
             } catch (error) {
                 console.error('Gagal load featured:', error);
@@ -189,7 +196,13 @@ export default function KnowledgePage() {
                     }
                 });
 
-                const data = res.data || res;
+                const data =
+                    res.data.filter(
+                        (item) =>
+                            (item.status.toLowerCase() == 'published' &&
+                                getLangText(item.category.name) !== 'Infografis') ||
+                            getLangText(item.category.name) !== 'Infograhic'
+                    ) || [];
                 if (currentPage === 1) {
                     setArticles(data);
                 } else {

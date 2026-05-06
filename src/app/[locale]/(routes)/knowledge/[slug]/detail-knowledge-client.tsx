@@ -70,11 +70,24 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                     })
                 ]);
 
-                const filteredRelated = (relatedRes.data || relatedRes).filter(
-                    (item: Post) => item.id !== initialData?.id && item.status.toLowerCase() == 'published'
-                );
+                const filteredRelated =
+                    (relatedRes.data || relatedRes).filter(
+                        (item) =>
+                            (item.status.toLowerCase() == 'published' &&
+                                getLangText(item.category.name) !== 'Infografis') ||
+                            getLangText(item.category.name) !== 'Infograhic'
+                    ) || [];
                 setRelatedArticles(filteredRelated);
-                setLatestArticles(latestRes.data || latestRes);
+                setLatestArticles(
+                    latestRes.data.filter(
+                        (item) =>
+                            (item.status.toLowerCase() == 'published' &&
+                                getLangText(item.category.name) !== 'Infografis') ||
+                            getLangText(item.category.name) !== 'Infograhic'
+                    ) ||
+                        [] ||
+                        latestRes
+                );
             } catch (error) {
                 console.error('Error fetching suggestions:', error);
             }

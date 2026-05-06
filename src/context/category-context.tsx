@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { getLangText } from '@/lib/utils';
 import { Category } from '@/types/posts';
 
 interface CategoryContextType {
@@ -21,7 +22,11 @@ export const CategoryProvider = ({ children }: { children: React.ReactNode }) =>
         const fetchNavCategories = async () => {
             try {
                 const res = await apiRequest.get<Category[]>(API_ENDPOINTS.categories);
-                const data = res.data || [];
+                const data =
+                    res.data.filter(
+                        (item) => getLangText(item.name) !== 'Infografis' && getLangText(item.name) !== 'Infograhic'
+                    ) || [];
+                console.log(data);
                 setCategories(data);
             } catch (error) {
                 console.error('Error fetching nav categories', error);
