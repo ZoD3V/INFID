@@ -47,25 +47,25 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                     apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                         params: {
                             category: getLangText(initialData?.category.name, locale) || '',
-                            limit: 3,
+                            limit: 4,
                             page: 1,
                             search: '',
                             author: '',
                             tags: '',
                             year: '',
-                            random: ''
+                            random: true
                         }
                     }),
                     apiRequest.get<Post[]>(API_ENDPOINTS.posts, {
                         params: {
-                            limit: 3,
+                            limit: 4,
                             page: 1,
                             category: '',
                             search: '',
                             author: '',
                             tags: '',
                             year: '',
-                            random: ''
+                            random: true
                         }
                     })
                 ]);

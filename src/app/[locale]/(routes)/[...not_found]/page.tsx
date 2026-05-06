@@ -1,10 +1,8 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import { Navbar } from '@/components/common/navbar';
 import { Button } from '@/components/ui/button';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 
 import { useTranslations } from 'next-intl';
 
