@@ -17,7 +17,11 @@ interface MapsProps {
 }
 
 export const Maps: React.FC<MapsProps> = ({ data, onRegionClick, isLoading }) => {
+    console.log(data);
+
     const getRegionBySlug = (slug: string) => {
+        console.log(slug);
+
         return data.find((r) => slugify(getLangText(r.name)) === slug);
     };
 
@@ -54,7 +58,7 @@ export const Maps: React.FC<MapsProps> = ({ data, onRegionClick, isLoading }) =>
                         strokeWidth='1.11836'
                         className={clsx(
                             'region cursor-pointer transition-all duration-300 hover:opacity-80',
-                            getFillColor('nusa-tenggara-timur')
+                            getFillColor('aceh')
                         )}
                     />
                     <path
@@ -384,7 +388,7 @@ export const Maps: React.FC<MapsProps> = ({ data, onRegionClick, isLoading }) =>
                         strokeWidth='1.11836'
                         className={clsx(
                             'region cursor-pointer transition-all duration-300 hover:opacity-80',
-                            getFillColor('sumatera-barat')
+                            getFillColor('sumatera-selatan')
                         )}
                     />
                     <path
