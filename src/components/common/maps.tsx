@@ -17,11 +17,7 @@ interface MapsProps {
 }
 
 export const Maps: React.FC<MapsProps> = ({ data, onRegionClick, isLoading }) => {
-    console.log(data);
-
     const getRegionBySlug = (slug: string) => {
-        console.log(slug);
-
         return data.find((r) => slugify(getLangText(r.name)) === slug);
     };
 

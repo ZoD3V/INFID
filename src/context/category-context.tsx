@@ -26,7 +26,6 @@ export const CategoryProvider = ({ children }: { children: React.ReactNode }) =>
                     res.data.filter(
                         (item) => getLangText(item.name) !== 'Infografis' && getLangText(item.name) !== 'Infograhic'
                     ) || [];
-                console.log(data);
                 setCategories(data);
             } catch (error) {
                 console.error('Error fetching nav categories', error);

@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm';
 
 export const ArticleContent = ({ content }: { content: string }) => {
     return (
-        <article className='prose prose-slate xl:prose-base max-w-none'>
+        <article className='prose prose-slate xl:prose-base'>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}

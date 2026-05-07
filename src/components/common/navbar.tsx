@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -114,18 +114,23 @@ export function Navbar({ className = '' }: { className?: string }) {
     const searchParams = useSearchParams();
     const currentCategory = searchParams.get('category');
 
+    const [openMenu, setOpenMenu] = useState<string | null>(null);
+    const timeoutRef = useRef(null);
+
     const isChildActive = (itemHref: string) => {
         const [targetPath, targetQuery] = itemHref.split('?');
         const targetParams = new URLSearchParams(targetQuery);
         const targetCategory = targetParams.get('category');
-
         const isPathMatch = pathname === targetPath;
-
-        if (targetCategory) {
-            return isPathMatch && currentCategory === targetCategory;
-        }
-
+        if (targetCategory) return isPathMatch && currentCategory === targetCategory;
         return isPathMatch && !currentCategory;
+    };
+
+    const handleItemClick = () => {
+        setOpenMenu(null);
+        if (document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur();
+        }
     };
 
     React.useEffect(() => {
@@ -158,77 +163,95 @@ export function Navbar({ className = '' }: { className?: string }) {
                 <nav
                     aria-label='Main Navigation'
                     className={cn(
-                        'hidden items-center space-x-6 rounded-full xl:flex',
+                        'hidden items-center space-x-6 rounded-full transition-all duration-300 xl:flex',
                         isScrolled ? '' : 'border border-white/10 px-4 py-3 shadow-sm backdrop-blur-sm'
                     )}>
-                    {navItems.map((item) => (
-                        <div key={item.title} className='group relative'>
-                            <Link
-                                href={item.href}
-                                aria-label={item.title}
-                                aria-current={pathname === item.href ? 'page' : undefined}
-                                aria-haspopup={item.children ? 'true' : undefined}
-                                className={cn(
-                                    'flex cursor-pointer items-center gap-1 rounded-md text-sm font-medium transition-all duration-300 outline-none',
+                    {navItems.map((item) => {
+                        const isMenuOpen = openMenu === item.title;
 
-                                    isScrolled
-                                        ? 'hover:text-primary-500 text-slate-900'
-                                        : 'text-gray-100 hover:text-white',
-
-                                    'focus-visible:text-primary-900 decoration-primary-500 underline-offset-4 focus-visible:bg-blue-100 focus-visible:underline',
-
-                                    pathname === item.href ? 'font-extrabold' : ''
-                                )}>
-                                {item.title}
-                                {item.children && (
-                                    <ChevronDown
-                                        aria-hidden='true'
-                                        className={cn(
-                                            'h-4 w-4 transition-transform duration-400 group-focus-within:rotate-180 group-hover:rotate-180',
-                                            isScrolled ? 'text-slate-900' : 'text-brand-100'
-                                        )}
-                                    />
-                                )}
-                            </Link>
-
-                            {/* Dropdown Desktop */}
-                            {item.children && (
-                                <div
+                        return (
+                            <div
+                                key={item.title}
+                                className='group relative'
+                                onMouseEnter={() => setOpenMenu(item.title)}
+                                onMouseLeave={() => setOpenMenu(null)}
+                                // Menangani navigasi Tab: Buka menu saat elemen di dalamnya mendapat fokus
+                                onFocus={() => setOpenMenu(item.title)}
+                                // Menutup menu saat fokus keluar dari area group (item + dropdown)
+                                onBlur={(e) => {
+                                    if (!e.currentTarget.contains(e.relatedTarget)) {
+                                        setOpenMenu(null);
+                                    }
+                                }}>
+                                <Link
+                                    href={item.href}
+                                    aria-label={item.title}
+                                    aria-current={pathname === item.href ? 'page' : undefined}
+                                    aria-haspopup={item.children ? 'true' : undefined}
                                     className={cn(
-                                        'invisible absolute top-full left-1/2 w-50 -translate-x-1/2 pt-2 opacity-0 transition-all',
-                                        'group-hover:visible group-hover:opacity-100',
-                                        'group-focus-within:visible group-focus-within:opacity-100'
+                                        'flex cursor-pointer items-center gap-1 rounded-md text-sm font-medium transition-all duration-300 outline-none',
+
+                                        isScrolled
+                                            ? 'hover:text-primary-500 text-slate-900'
+                                            : 'text-gray-100 hover:text-white',
+
+                                        'focus-visible:text-primary-900 decoration-primary-500 underline-offset-4 focus-visible:bg-blue-100 focus-visible:underline',
+
+                                        pathname === item.href ? 'font-extrabold' : ''
                                     )}>
+                                    {item.title}
+                                    {item.children && (
+                                        <ChevronDown
+                                            aria-hidden='true'
+                                            className={cn(
+                                                'h-4 w-4 transition-transform duration-400',
+                                                isMenuOpen ? 'rotate-180' : '',
+                                                isScrolled ? 'text-slate-900' : 'text-brand-100'
+                                            )}
+                                        />
+                                    )}
+                                </Link>
+
+                                {/* Dropdown Desktop */}
+                                {item.children && (
                                     <div
-                                        role='menu'
-                                        aria-label={`Submenu ${item.title}`}
-                                        className='relative overflow-hidden rounded-lg border border-gray-100 bg-white/95 py-2 shadow-2xl backdrop-blur-md'>
-                                        {item.children.map((child) => {
-                                            const active = isChildActive(child.href);
+                                        className={cn(
+                                            'invisible absolute top-full left-1/2 w-52 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200',
+                                            // Kontrol visibilitas melalui state agar mendukung Keyboard + Hover
+                                            isMenuOpen ? 'visible translate-y-0 opacity-100' : 'translate-y-1'
+                                        )}>
+                                        <div
+                                            role='menu'
+                                            aria-label={`Submenu ${item.title}`}
+                                            className='relative overflow-hidden rounded-lg border border-gray-100 bg-white/95 py-2 shadow-2xl backdrop-blur-md'>
+                                            {item.children.map((child) => {
+                                                const active = isChildActive(child.href);
 
-                                            return (
-                                                <Link
-                                                    key={child.title}
-                                                    href={child.href}
-                                                    role='menuitem'
-                                                    className={cn(
-                                                        'block px-4 py-2 text-sm font-medium transition-all duration-200 outline-none',
+                                                return (
+                                                    <Link
+                                                        key={child.title}
+                                                        href={child.href}
+                                                        role='menuitem'
+                                                        onClick={handleItemClick} // Fungsi blur() dan setOpenMenu(null)
+                                                        className={cn(
+                                                            'block px-4 py-2 text-sm font-medium transition-all duration-200 outline-none',
 
-                                                        active
-                                                            ? 'bg-brand-50 text-brand-900 font-bold'
-                                                            : 'hover:text-primary-500 hover:bg-primary-100 text-slate-700',
+                                                            active
+                                                                ? 'bg-brand-50 text-brand-900 font-bold'
+                                                                : 'hover:text-primary-500 hover:bg-primary-100 text-slate-700',
 
-                                                        'focus:text-primary-900 underline-offset-2 focus:bg-blue-100 focus:underline'
-                                                    )}>
-                                                    {child.title}
-                                                </Link>
-                                            );
-                                        })}
+                                                            'focus:text-primary-900 underline-offset-2 focus:bg-blue-100 focus:underline'
+                                                        )}>
+                                                        {child.title}
+                                                    </Link>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>
-                    ))}
+                                )}
+                            </div>
+                        );
+                    })}
                 </nav>
                 <div className='flex items-center gap-2'>
                     <LanguageSwitcher />

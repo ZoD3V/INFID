@@ -60,12 +60,12 @@ const DetailKnowledgeClient = ({ initialData, locale, postId }: Props) => {
                         params: {
                             limit: 4,
                             page: 1,
-                            category: '',
+                            category: getLangText(initialData?.category.name, locale) || '',
                             search: '',
                             author: '',
                             tags: '',
                             year: '',
-                            random: true
+                            random: false
                         }
                     })
                 ]);
