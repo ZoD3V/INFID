@@ -60,7 +60,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                         params: {
                             limit: 4,
                             page: 1,
-                            category: getLangText(initialData?.category.name, locale) || '',
+                            category: '',
                             search: '',
                             author: '',
                             tags: '',
