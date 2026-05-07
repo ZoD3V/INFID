@@ -63,7 +63,7 @@ export default function LanguageSwitcher() {
                         'group mr-2 cursor-pointer rounded-full transition-all outline-none',
                         locale === 'id' ? 'opacity-100' : 'opacity-60 hover:opacity-100'
                     )}>
-                    <span className='sr-only'>Indonesian</span>
+                    <span className='sr-only'>{locale == 'id' ? 'Bahasa Indonesia' : 'Indonesian'}</span>
                     <Image
                         src='/icons/ic-id.png'
                         alt=''
