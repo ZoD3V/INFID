@@ -45,7 +45,6 @@ export default function LanguageSwitcher() {
         <div className='static'>
             <div
                 role='radiogroup'
-                // aria-label harus cukup deskriptif untuk konteks
                 aria-label='Language'
                 className='flex items-center rounded-full border border-gray-200 bg-white p-1'>
                 {/* ID */}
@@ -93,7 +92,7 @@ export default function LanguageSwitcher() {
                         'group cursor-pointer rounded-full transition-all outline-none',
                         locale === 'en' ? 'opacity-100' : 'opacity-60 hover:opacity-100'
                     )}>
-                    <span className='sr-only'>English</span>
+                    <span className='sr-only'>{locale == 'id' ? 'Bahasa Inggris' : 'English'}</span>
                     <Image
                         src='/icons/ic-en.png'
                         alt=''

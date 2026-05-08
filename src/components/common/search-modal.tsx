@@ -204,7 +204,7 @@ export default function SearchModal() {
                     className='border-secondary-300 text-secondary-300 hover:bg-secondary-300 focus-visible:border-secondary-100 focus-visible:ring-secondary-300 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-colors duration-200 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'>
                     <Search className='h-4 w-4' aria-hidden='true' />
 
-                    <span className='sr-only'>Open search dialog</span>
+                    <span className='sr-only'>{locale == 'id' ? 'Buka dialog pencarian' : 'Open search dialog'}</span>
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>

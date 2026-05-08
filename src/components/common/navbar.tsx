@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -115,7 +115,6 @@ export function Navbar({ className = '' }: { className?: string }) {
     const currentCategory = searchParams.get('category');
 
     const [openMenu, setOpenMenu] = useState<string | null>(null);
-    const timeoutRef = useRef(null);
 
     const isChildActive = (itemHref: string) => {
         const [targetPath, targetQuery] = itemHref.split('?');
@@ -175,9 +174,7 @@ export function Navbar({ className = '' }: { className?: string }) {
                                 className='group relative'
                                 onMouseEnter={() => setOpenMenu(item.title)}
                                 onMouseLeave={() => setOpenMenu(null)}
-                                // Menangani navigasi Tab: Buka menu saat elemen di dalamnya mendapat fokus
                                 onFocus={() => setOpenMenu(item.title)}
-                                // Menutup menu saat fokus keluar dari area group (item + dropdown)
                                 onBlur={(e) => {
                                     if (!e.currentTarget.contains(e.relatedTarget)) {
                                         setOpenMenu(null);
@@ -217,7 +214,6 @@ export function Navbar({ className = '' }: { className?: string }) {
                                     <div
                                         className={cn(
                                             'invisible absolute top-full left-1/2 w-52 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200',
-                                            // Kontrol visibilitas melalui state agar mendukung Keyboard + Hover
                                             isMenuOpen ? 'visible translate-y-0 opacity-100' : 'translate-y-1'
                                         )}>
                                         <div
@@ -232,7 +228,7 @@ export function Navbar({ className = '' }: { className?: string }) {
                                                         key={child.title}
                                                         href={child.href}
                                                         role='menuitem'
-                                                        onClick={handleItemClick} // Fungsi blur() dan setOpenMenu(null)
+                                                        onClick={handleItemClick} 
                                                         className={cn(
                                                             'block px-4 py-2 text-sm font-medium transition-all duration-200 outline-none',
 
