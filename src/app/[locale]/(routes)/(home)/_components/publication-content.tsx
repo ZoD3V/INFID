@@ -263,9 +263,9 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                                     </span>
                                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
                                                     <span className='text-xs text-slate-500'>
-                                                        {/* {article.published_at
+                                                        {article.published_at
                                                             ? formatFullDate(article.published_at, locale)
-                                                            : '-'} */}
+                                                            : '-'}
                                                     </span>
                                                 </div>
 
