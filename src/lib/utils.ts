@@ -3,6 +3,7 @@ import { CategoryTranslation } from '@/types/posts';
 
 import { type ClassValue, clsx } from 'clsx';
 import { format, isValid, parseISO } from 'date-fns';
+import { enGB } from 'date-fns/locale/en-GB';
 import { id } from 'date-fns/locale/id';
 import { twMerge } from 'tailwind-merge';
 
@@ -22,13 +23,11 @@ export function formatLabel(key: string) {
 }
 
 export const formatDateShort = (date: string | Date) => {
-    const d = typeof date === 'string' ? Date.parse(date) : date;
+    const d = typeof date === 'string' ? parseISO(date) : date;
+    
+    if (!isValid(d)) return '01 Jan 26';
 
-    return new Intl.DateTimeFormat('id-ID', {
-        day: '2-digit',
-        month: 'short',
-        year: '2-digit'
-    }).format(d);
+    return format(d, 'dd MMM yy', { locale: id });
 };
 export function formatArticleDate(date: string | Date | null | undefined): string {
     if (!date) return '';
@@ -45,15 +44,11 @@ export function formatArticleDate(date: string | Date | null | undefined): strin
 export const formatFullDate = (dateString: string | Date, locale: string = 'id') => {
     if (!dateString) return '-';
 
-    const timestamp = typeof dateString === 'string' ? Date.parse(dateString) : dateString.getTime();
+    const timestamp = typeof dateString === 'string' ? parseISO(dateString) : new Date(dateString);
 
-    if (isNaN(timestamp)) return '-';
+    if (!isValid(timestamp)) return '-';
 
-    return new Intl.DateTimeFormat(locale === 'id' ? 'id-ID' : 'en-GB', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    }).format(timestamp);
+    return format(timestamp, 'd MMMM yyyy', { locale: locale === 'id' ? id : enGB });
 };
 
 export const getInitials = (name: string) => {
@@ -75,26 +70,18 @@ export const formatDate = (dateString: string, locale: string = 'id-ID') => {
     if (!dateString) return '-';
 
     const date = new Date(dateString);
+    if (!isValid(date)) return '-';
 
-    return new Intl.DateTimeFormat(locale, {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    }).format(date);
+    return format(date, 'd MMMM yyyy', { locale: locale.startsWith('id') ? id : enGB });
 };
 
 export const formatDateTime = (dateString: string, locale: string = 'id-ID') => {
     if (!dateString) return '-';
 
     const date = new Date(dateString);
+    if (!isValid(date)) return '-';
 
-    return new Intl.DateTimeFormat(locale, {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-        // hour: '2-digit',
-        // minute: '2-digit'
-    }).format(date);
+    return format(date, 'd MMMM yyyy', { locale: locale.startsWith('id') ? id : enGB });
 };
 
 export const convertToEmbedUrl = (url: string) => {

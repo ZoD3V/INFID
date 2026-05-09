@@ -225,7 +225,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                 article?.translations?.find((t) => t.language === locale) ||
                                 article?.translations?.find((t) => t.language === 'id') ||
                                 article?.translations?.[0];
-                            const translatedName = getLangText(featured?.category.name, locale);
+                            const translatedName = getLangText(article?.category?.name, locale);
                             const categoryName = getDisplayCategoryName(translatedName);
                             return (
                                 <div
