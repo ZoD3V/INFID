@@ -126,7 +126,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
             ) : publications && publications.length > 0 ? (
                 <div className='mt-12 grid grid-cols-1 gap-10 lg:grid-cols-2'>
                     {/* Featured Article */}
-                    {/* {featured &&
+                    {featured &&
                         (() => {
                             const translation =
                                 featured?.translations?.find((t) => t.language === locale) ||
@@ -134,9 +134,9 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                 featured?.translations?.[0];
                             const translatedName = getLangText(featured?.category.name, locale);
                             const categoryName = getDisplayCategoryName(translatedName);
-                            const dateParts = featured.published_at
-                                ? formatDateShort(featured.published_at).split(' ')
-                                : ['01', 'Jan', '2026'];
+                            // const dateParts = featured.published_at
+                            //     ? formatDateShort(featured.published_at).split(' ')
+                            //     : ['01', 'Jan', '2026'];
 
                             return (
                                 <div
@@ -172,7 +172,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                         <div className='mb-4 hidden flex-col items-center lg:flex' aria-hidden='true'>
                                             <div className='text-primary-900 text-5xl font-bold'>{dateParts[0]}</div>
                                             <div className='text-xs whitespace-nowrap text-slate-600 uppercase'>
-                                                {dateParts[1]} {dateParts[2]}
+                                                {/* {dateParts[1]} {dateParts[2]} */}
                                             </div>
                                         </div>
 
@@ -216,7 +216,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                     </div>
                                 </div>
                             );
-                        })()} */}
+                        })()}
 
                     {/* Side Articles */}
                     <div className='grid grid-rows-3 gap-5'>
@@ -263,9 +263,9 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                                     </span>
                                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
                                                     <span className='text-xs text-slate-500'>
-                                                        {article.published_at
+                                                        {/* {article.published_at
                                                             ? formatFullDate(article.published_at, locale)
-                                                            : '-'}
+                                                            : '-'} */}
                                                     </span>
                                                 </div>
 
