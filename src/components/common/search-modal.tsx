@@ -211,11 +211,13 @@ export default function SearchModal() {
                 <Dialog.Overlay className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 fixed inset-0 z-50 bg-black/50' />
                 <Dialog.Content className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white shadow-lg duration-200 focus:outline-none'>
                     <Dialog.Title asChild>
-                        <VisuallyHidden.Root>Search</VisuallyHidden.Root>
+                        <VisuallyHidden.Root>{locale == 'id' ? 'Cari' : 'Search'}</VisuallyHidden.Root>
                     </Dialog.Title>
                     <Dialog.Description asChild>
                         <VisuallyHidden.Root>
-                            Type your search query below to find articles or information.
+                            {locale == 'id'
+                                ? 'Ketikkan query pencarian Anda di bawah ini untuk menemukan artikel atau informasi.'
+                                : 'Type your search query below to find articles or information.'}
                         </VisuallyHidden.Root>
                     </Dialog.Description>
                     <form className='border-b border-slate-200'>
