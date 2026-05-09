@@ -79,13 +79,13 @@ export default function SearchModal() {
         if (!isOpen) return;
 
         const timer = setTimeout(async () => {
-            if (keyword.trim() && keyword.trim().length > 3) {
+            if (keyword.trim() && keyword.trim().length > 4) {
                 setIsLoading(true);
 
                 try {
                     const res = await apiRequest.get<GlobalSearch>(API_ENDPOINTS.globalSearch, {
                         params: {
-                            limit: 3,
+                            limit: '',
                             search: keyword
                         }
                     });

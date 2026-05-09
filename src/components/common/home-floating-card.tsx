@@ -11,13 +11,14 @@ import { cn } from '@/lib/utils';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import SubmitButton from './submit-button';
-import { ArrowRight, Loader2, Mail, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { Mail, X } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 const STORAGE_KEY = 'home-floating-card-closed';
 
 export default function HomeFloatingCard() {
+    const locale = useLocale();
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
@@ -86,7 +87,9 @@ export default function HomeFloatingCard() {
                                 aria-label='Close subscription card'
                                 className='focus-visible:ring-primary-500 absolute top-3 right-3 rounded-full p-2 text-slate-400 transition-colors outline-none hover:text-slate-600 focus-visible:ring-2'>
                                 <X size={20} aria-hidden='true' />
-                                <span className='sr-only'>Close subscription card</span>
+                                <span className='sr-only'>
+                                    {locale == 'id' ? 'Tutup dialog langganan' : 'Close subscription dialog'}
+                                </span>
                             </button>
 
                             <div className='mb-4 flex justify-center pt-8'>
@@ -138,7 +141,9 @@ export default function HomeFloatingCard() {
                                 'animate-in fade-in slide-in-from-bottom-4'
                             )}>
                             <Mail className='text-white' size={24} aria-hidden='true' />
-                            <span className='sr-only'>Open newsletter subscriptionn</span>
+                            <span className='sr-only'>
+                                {locale === 'id' ? 'Buka dialog langganan' : 'Open newsletter subscription'}
+                            </span>
                         </button>
                     )}
                 </aside>
