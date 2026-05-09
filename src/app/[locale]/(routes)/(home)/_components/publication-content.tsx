@@ -87,7 +87,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
         <section>
             <h1 className='text-primary-900 mb-8 max-w-sm text-3xl font-bold md:text-4xl lg:text-5xl'>{t('title')}</h1>
 
-            {/* {categories.length > 0 && (
+            {categories.length > 0 && (
                 <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
                     <div className='flex flex-wrap gap-3' role='tablist' aria-label='Kategori Program'>
                         {categories.map((tab) => {
@@ -119,14 +119,14 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                         })}
                     </div>
                 </div>
-            )} */}
+            )}
 
             {isLoading ? (
                 <PublicationsSkeleton />
             ) : publications && publications.length > 0 ? (
                 <div className='mt-12 grid grid-cols-1 gap-10 lg:grid-cols-2'>
                     {/* Featured Article */}
-                    {featured &&
+                    {/* {featured &&
                         (() => {
                             const translation =
                                 featured?.translations?.find((t) => t.language === locale) ||
@@ -152,7 +152,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                     aria-labelledby='featured-title'
                                     className='group cursor-pointer outline-none'>
                                     <div className='relative mb-6 h-80 overflow-hidden rounded-lg lg:h-96'>
-                                        {/* <img
+                                        <img
                                             src={featured.cover || '/images/placeholder-square.png'}
                                             alt=''
                                             aria-hidden='true'
@@ -160,7 +160,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                                 (e.target as HTMLImageElement).src = '/images/placeholder-square.png';
                                             }}
                                             className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-105'
-                                        /> */}
+                                        />
                                         <div className='absolute top-3 left-3'>
                                             <span className='rounded-full bg-orange-500 px-3 py-1.5 text-xs font-medium text-white'>
                                                 {categoryName}
@@ -216,7 +216,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                     </div>
                                 </div>
                             );
-                        })()}
+                        })()} */}
 
                     {/* Side Articles */}
                     <div className='grid grid-rows-3 gap-5'>
@@ -244,7 +244,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                     <div className='overflow-hidden rounded-lg transition-shadow'>
                                         <div className='flex h-full flex-col items-start gap-3 md:flex-row md:items-center lg:gap-5'>
                                             <div className='h-52 w-full shrink-0 overflow-hidden rounded-lg md:h-38 md:w-42 lg:h-48'>
-                                                {/* <img
+                                                <img
                                                     src={article.cover || '/images/placeholder-square.png'}
                                                     alt=''
                                                     aria-hidden='true'
@@ -253,7 +253,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                                             '/images/placeholder-square.png';
                                                     }}
                                                     className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
-                                                /> */}
+                                                />
                                             </div>
 
                                             <div className='flex h-full flex-1 flex-col justify-evenly'>
