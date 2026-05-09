@@ -36,9 +36,7 @@ const PublicationsSection = async () => {
 
     return (
         <section className='relative bg-slate-50 py-24'>
-            <div className='container'>
-                <PublicationContent initialData={initialData} />
-            </div>
+            <div className='container'>{/* <PublicationContent initialData={initialData} /> */}</div>
         </section>
     );
 };
