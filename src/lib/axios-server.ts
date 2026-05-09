@@ -1,7 +1,6 @@
 import { API_BASE_URL } from '@/lib/api-endpoints';
 
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-// import Cookies from 'js-cookie';
 import { toast } from 'sonner';
 
 export interface ApiResponse<T> {
@@ -28,7 +27,8 @@ apiBase.interceptors.response.use(
     (response) => response,
     (error) => {
         if (typeof window !== 'undefined') {
-            const errorMessage = error.response?.data?.errors?.detail || error.response?.data?.message || 'An error occurred';
+            const errorMessage =
+                error.response?.data?.errors?.detail || error.response?.data?.message || 'An error occurred';
             toast.error('Error', { description: errorMessage });
         }
         return Promise.reject(error);

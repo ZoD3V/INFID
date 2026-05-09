@@ -31,7 +31,7 @@ const Home = () => {
 
     useEffect(() => {
         const status = localStorage.getItem(STORAGE_KEY);
-        const now = new Date().getTime();
+        const now = Date.now();
 
         if (status === 'completed') return;
 
