@@ -3,6 +3,7 @@
 import Image from 'next/image';
 
 import CardContent from '@/components/common/card-content';
+import OptimizedImage from '@/components/common/optimized-image';
 import { SectionHeader } from '@/components/common/section-header';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
@@ -161,14 +162,17 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                                 if (e.key === 'Enter' || e.key === ' ') handleArticleClick(programData[0]);
                             }}
                             className='group col-span-1 flex cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-2 transition-all duration-300 outline-none hover:shadow-md md:col-span-6 lg:col-span-5 lg:min-h-112.5'>
-                            <Image
-                                src={programData[0]?.cover ?? '/images/placeholder.jpg'}
-                                alt=''
-                                aria-hidden='true'
-                                width={600}
-                                height={400}
-                                className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-87'
-                            />
+                            <div className='relative h-40 w-full lg:h-87'>
+                                <OptimizedImage
+                                    src={programData[0]?.cover ?? '/images/placeholder.jpg'}
+                                    alt=''
+                                    aria-hidden='true'
+                                    fill
+                                    sizes='100%'
+                                    className='h-40 rounded-xl object-cover transition-transform duration-500'
+                                    placeholderType='square'
+                                />
+                            </div>
                             <div className='px-1 pb-2'>
                                 <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                     <span className='text-secondary-300 text-xs font-medium uppercase'>
@@ -217,14 +221,17 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                                 if (e.key === 'Enter' || e.key === ' ') handleArticleClick(programData[1]);
                             }}
                             className='group col-span-1 flex cursor-pointer flex-col rounded-xl border border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 outline-none hover:shadow-md md:col-span-6 lg:col-span-4'>
-                            <Image
-                                src={programData[1]?.cover ?? '/images/placeholder.jpg'}
-                                alt=''
-                                aria-hidden='true'
-                                width={600}
-                                height={400}
-                                className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-57'
-                            />
+                            <div className='relative h-40 w-full lg:h-57'>
+                                <OptimizedImage
+                                    src={programData[1]?.cover ?? '/images/placeholder.jpg'}
+                                    alt=''
+                                    aria-hidden='true'
+                                    fill
+                                    sizes='100%'
+                                    className='h-40 rounded-xl object-cover transition-transform duration-500'
+                                    placeholderType='square'
+                                />
+                            </div>
                             <div className='px-1 pb-2'>
                                 <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                     <span className='text-secondary-300 text-xs font-medium uppercase'>
@@ -270,14 +277,17 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
                                 if (e.key === 'Enter' || e.key === ' ') handleArticleClick(programData[2]);
                             }}
                             className='group col-span-1 flex cursor-pointer flex-col rounded-xl border border-slate-200 bg-white p-2 backdrop-blur-sm transition-all duration-300 outline-none hover:shadow-md md:col-span-6 lg:col-span-4'>
-                            <Image
-                                src={programData[2]?.cover ?? '/images/placeholder.jpg'}
-                                alt=''
-                                aria-hidden='true'
-                                width={600}
-                                height={400}
-                                className='h-40 w-full rounded-xl object-cover transition-transform duration-500 lg:h-57'
-                            />
+                            <div className='relative h-40 w-full lg:h-57'>
+                                <OptimizedImage
+                                    src={programData[2]?.cover ?? '/images/placeholder.jpg'}
+                                    alt=''
+                                    aria-hidden='true'
+                                    fill
+                                    sizes='100%'
+                                    className='h-40 rounded-xl object-cover transition-transform duration-500'
+                                    placeholderType='square'
+                                />
+                            </div>
                             <div className='px-1 pb-2'>
                                 <div className='flex items-center gap-2 py-4' aria-hidden='true'>
                                     <span className='text-secondary-300 text-xs font-medium uppercase'>
