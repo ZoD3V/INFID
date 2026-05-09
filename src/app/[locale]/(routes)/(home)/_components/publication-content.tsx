@@ -87,7 +87,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
         <section>
             <h1 className='text-primary-900 mb-8 max-w-sm text-3xl font-bold md:text-4xl lg:text-5xl'>{t('title')}</h1>
 
-            {categories.length > 0 && (
+            {/* {categories.length > 0 && (
                 <div className='flex flex-col items-start justify-between lg:flex-row lg:items-center'>
                     <div className='flex flex-wrap gap-3' role='tablist' aria-label='Kategori Program'>
                         {categories.map((tab) => {
@@ -119,7 +119,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                         })}
                     </div>
                 </div>
-            )}
+            )} */}
 
             {isLoading ? (
                 <PublicationsSkeleton />
