@@ -271,9 +271,7 @@ export default function SearchModal() {
 
                                 {!isLoading && filteredNavItems.length > 0 && (
                                     <section>
-                                        <div
-                                            id='section-pages'
-                                            className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
+                                        <div className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
                                             Pages
                                         </div>
 
