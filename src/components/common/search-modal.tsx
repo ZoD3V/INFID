@@ -222,9 +222,6 @@ export default function SearchModal() {
                     </Dialog.Description>
                     <form className='border-b border-slate-200'>
                         <div className='relative flex items-center'>
-                            <VisuallyHidden.Root>
-                                <label htmlFor='search-modal'>Search</label>
-                            </VisuallyHidden.Root>
                             <svg
                                 className='ml-4 h-4 w-4 shrink-0 fill-slate-500'
                                 width='16'
@@ -273,7 +270,7 @@ export default function SearchModal() {
                                 )}
 
                                 {!isLoading && filteredNavItems.length > 0 && (
-                                    <section aria-labelledby='section-pages'>
+                                    <section>
                                         <div
                                             id='section-pages'
                                             className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
