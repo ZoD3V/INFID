@@ -170,7 +170,7 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
 
                                     <div className='flex items-start gap-4'>
                                         <div className='mb-4 hidden flex-col items-center lg:flex' aria-hidden='true'>
-                                            <div className='text-primary-900 text-5xl font-bold'>{dateParts[0]}</div>
+                                            {/* <div className='text-primary-900 text-5xl font-bold'>{dateParts[0]}</div> */}
                                             <div className='text-xs whitespace-nowrap text-slate-600 uppercase'>
                                                 {/* {dateParts[1]} {dateParts[2]} */}
                                             </div>
