@@ -170,9 +170,9 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
 
                                     <div className='flex items-start gap-4'>
                                         <div className='mb-4 hidden flex-col items-center lg:flex' aria-hidden='true'>
-                                            <div className='text-primary-900 text-5xl font-bold'>{dateParts[0]}</div>
-                                            <div className='text-xs whitespace-nowrap text-slate-600 uppercase'>
-                                                {dateParts[1]} {dateParts[2]}
+                                            <div className='text-primary-900 text-5xl font-bold' suppressHydrationWarning>{dateParts[0]}</div>
+                                            <div className='text-xs whitespace-nowrap text-slate-600 uppercase' suppressHydrationWarning>
+                                                {`${dateParts[1] || ''} ${dateParts[2] || ''}`}
                                             </div>
                                         </div>
 
@@ -262,10 +262,10 @@ export const PublicationContent = ({ initialData }: { initialData: Post[] }) => 
                                                         {categoryName}
                                                     </span>
                                                     <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-                                                    <span className='text-xs text-slate-500'>
-                                                        {/* {article.published_at
+                                                    <span className='text-xs text-slate-500' suppressHydrationWarning>
+                                                        {article.published_at
                                                             ? formatFullDate(article.published_at, locale)
-                                                            : '-'} */}
+                                                            : '-'}
                                                     </span>
                                                 </div>
 

@@ -65,7 +65,7 @@ export const LatestArticleCard: React.FC<LatestArticleCardProps> = ({ article, b
                                 {categoryName}
                             </span>
                             <span className='h-1 w-1 rounded-full bg-slate-500'></span>
-                            <span className='text-xs text-slate-500'>
+                            <span className='text-xs text-slate-500' suppressHydrationWarning>
                                 {publishedDate ? formatFullDate(publishedDate, locale) : '-'}
                             </span>
                         </div>

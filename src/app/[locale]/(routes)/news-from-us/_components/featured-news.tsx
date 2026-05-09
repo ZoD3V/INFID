@@ -116,10 +116,10 @@ export const FeaturedNews: React.FC<FeaturedNewsProps> = ({ items }) => {
                         className="mb-4 hidden flex-col items-center lg:flex"
                         aria-hidden="true"
                       >
-                        <div className="text-primary-900 text-5xl font-bold">
+                        <div className="text-primary-900 text-5xl font-bold" suppressHydrationWarning>
                           {dateParts[0]}
                         </div>
-                        <div className="text-center text-xs whitespace-nowrap text-slate-600 uppercase">
+                        <div className="text-center text-xs whitespace-nowrap text-slate-600 uppercase" suppressHydrationWarning>
                           {dateParts[1]} <br /> {dateParts[2]}
                         </div>
                       </div>

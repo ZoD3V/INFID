@@ -31,7 +31,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ data, translation 
                 <span className='h-1 w-1 rounded-full bg-slate-500' />
 
                 {/* Date */}
-                <div className='flex items-center gap-2 truncate'>
+                <div className='flex items-center gap-2 truncate' suppressHydrationWarning>
                     <Calendar className='h-3 w-3' />
                     {data?.published_at ? formatFullDate(data.published_at, locale) : '-'}
                 </div>
