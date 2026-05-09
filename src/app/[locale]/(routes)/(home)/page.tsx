@@ -38,7 +38,7 @@ const HomePage = async () => {
             <LogoSection />
             <AboutUsSection />
             <RealImpactSection programData={programData} />
-            {/* <PublicationsSection /> */}
+            <PublicationsSection />
             <ProgramSection />
             <OurNetworkSection />
             <RecognitionSection />

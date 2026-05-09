@@ -1,170 +1,151 @@
-import { STORIES_OF_CHANGE_KEYS } from "@/data/stories-change";
-import { CategoryTranslation } from "@/types/posts";
+import { STORIES_OF_CHANGE_KEYS } from '@/data/stories-change';
+import { CategoryTranslation } from '@/types/posts';
 
-import { type ClassValue, clsx } from "clsx";
-import { format, isValid, parseISO } from "date-fns";
-import { id } from "date-fns/locale/id";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import { format, isValid, parseISO } from 'date-fns';
+import { id } from 'date-fns/locale/id';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+    return twMerge(clsx(inputs));
 }
 
 export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
+    return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
 }
 
 export function formatLabel(key: string) {
-  return key
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    return key
+        .split('_')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
 }
 
 export const formatDateShort = (date: string | Date) => {
-  const d = new Date(date);
+    const d = typeof date === 'string' ? Date.parse(date) : date;
 
-  return d.toLocaleDateString("id-ID", {
-    day: "2-digit",
-    month: "short",
-    year: "2-digit",
-  });
+    return new Intl.DateTimeFormat('id-ID', {
+        day: '2-digit',
+        month: 'short',
+        year: '2-digit'
+    }).format(d);
 };
+export function formatArticleDate(date: string | Date | null | undefined): string {
+    if (!date) return '';
 
-export function formatArticleDate(
-  date: string | Date | null | undefined,
-): string {
-  if (!date) return "";
+    const parsedDate = typeof date === 'string' ? parseISO(date) : date;
 
-  const parsedDate = typeof date === "string" ? parseISO(date) : date;
+    if (!isValid(parsedDate)) {
+        return 'Tanggal tidak valid';
+    }
 
-  if (!isValid(parsedDate)) {
-    return "Tanggal tidak valid";
-  }
-
-  return format(parsedDate, "dd MMM yy", { locale: id });
+    return format(parsedDate, 'dd MMM yy', { locale: id });
 }
 
-export const formatFullDate = (
-  dateString: string | Date,
-  locale: string = "id",
-) => {
-  if (!dateString) return "-";
+export const formatFullDate = (dateString: string | Date, locale: string = 'id') => {
+    if (!dateString) return '-';
 
-  const date = new Date(dateString);
+    const timestamp = typeof dateString === 'string' ? Date.parse(dateString) : dateString.getTime();
 
-  if (isNaN(date.getTime())) return "-";
+    if (isNaN(timestamp)) return '-';
 
-  return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
+    return new Intl.DateTimeFormat(locale === 'id' ? 'id-ID' : 'en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    }).format(timestamp);
 };
 
 export const getInitials = (name: string) => {
-  const names = name.trim().split(" ");
-  if (names.length >= 2) {
-    return `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase();
-  }
-  return name.substring(0, 2).toUpperCase();
+    const names = name.trim().split(' ');
+    if (names.length >= 2) {
+        return `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
 };
 
-export const slugify = (text: string = "") => {
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w\-]+/g, "");
+export const slugify = (text: string = '') => {
+    return text
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '');
 };
 
-export const formatDate = (dateString: string, locale: string = "id-ID") => {
-  if (!dateString) return "-";
+export const formatDate = (dateString: string, locale: string = 'id-ID') => {
+    if (!dateString) return '-';
 
-  const date = new Date(dateString);
+    const date = new Date(dateString);
 
-  return new Intl.DateTimeFormat(locale, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
+    return new Intl.DateTimeFormat(locale, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    }).format(date);
 };
 
-export const formatDateTime = (
-  dateString: string,
-  locale: string = "id-ID",
-) => {
-  if (!dateString) return "-";
+export const formatDateTime = (dateString: string, locale: string = 'id-ID') => {
+    if (!dateString) return '-';
 
-  const date = new Date(dateString);
+    const date = new Date(dateString);
 
-  return new Intl.DateTimeFormat(locale, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    // hour: '2-digit',
-    // minute: '2-digit'
-  }).format(date);
+    return new Intl.DateTimeFormat(locale, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+        // hour: '2-digit',
+        // minute: '2-digit'
+    }).format(date);
 };
 
 export const convertToEmbedUrl = (url: string) => {
-  try {
-    const parsed = new URL(url);
+    try {
+        const parsed = new URL(url);
 
-    // ex: https://www.youtube.com/watch?v=xxxx
-    if (parsed.hostname.includes("youtube.com")) {
-      const videoId = parsed.searchParams.get("v");
-      return `https://www.youtube.com/embed/${videoId}`;
+        // ex: https://www.youtube.com/watch?v=xxxx
+        if (parsed.hostname.includes('youtube.com')) {
+            const videoId = parsed.searchParams.get('v');
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+
+        // ex: https://youtu.be/xxxx
+        if (parsed.hostname.includes('youtu.be')) {
+            return `https://www.youtube.com/embed/${parsed.pathname.slice(1)}`;
+        }
+
+        return url;
+    } catch {
+        return '';
     }
-
-    // ex: https://youtu.be/xxxx
-    if (parsed.hostname.includes("youtu.be")) {
-      return `https://www.youtube.com/embed/${parsed.pathname.slice(1)}`;
-    }
-
-    return url;
-  } catch {
-    return "";
-  }
 };
 
 export const getShortDescription = (content: string) => {
-  return content?.replace(/<[^>]*>/g, "").substring(0, 280) || "";
+    return content?.replace(/<[^>]*>/g, '').substring(0, 280) || '';
 };
 
 export const getLangText = (
-  translations: CategoryTranslation[] | undefined,
-  langCode: string = "id",
-  useDisplayText: boolean = true,
+    translations: CategoryTranslation[] | undefined,
+    langCode: string = 'id',
+    useDisplayText: boolean = true
 ): string => {
-  if (!translations || translations.length === 0) return "";
+    if (!translations || translations.length === 0) return '';
 
-  const translation = translations.find((t) => t.language === langCode);
+    const translation = translations.find((t) => t.language === langCode);
 
-  if (useDisplayText) {
-    return (
-      translation?.displayText ||
-      translation?.text ||
-      translations[0].text ||
-      ""
-    );
-  }
-  return translation?.text || translations[0].text || "";
+    if (useDisplayText) {
+        return translation?.displayText || translation?.text || translations[0].text || '';
+    }
+    return translation?.text || translations[0].text || '';
 };
 
 export const handleMessageSocialMedia = (msg: string, locale: string) => {
-  const prefix = locale === "id" ? "Kunjungi INFID" : "Visit INFID on";
-  const suffix =
-    locale === "id" ? "(Buka di tab baru)" : "(opens in a new tab)";
+    const prefix = locale === 'id' ? 'Kunjungi INFID' : 'Visit INFID on';
+    const suffix = locale === 'id' ? '(Buka di tab baru)' : '(opens in a new tab)';
 
-  return `${prefix} ${msg} ${suffix}`;
+    return `${prefix} ${msg} ${suffix}`;
 };
 
-export const getDisplayCategoryName = (
-  translatedCategory: string | undefined,
-): string => {
-  if (!translatedCategory) return "";
+export const getDisplayCategoryName = (translatedCategory: string | undefined): string => {
+    if (!translatedCategory) return '';
 
-  return STORIES_OF_CHANGE_KEYS.includes(translatedCategory)
-    ? "Bergerak, Berdampak!"
-    : translatedCategory;
+    return STORIES_OF_CHANGE_KEYS.includes(translatedCategory) ? 'Bergerak, Berdampak!' : translatedCategory;
 };
