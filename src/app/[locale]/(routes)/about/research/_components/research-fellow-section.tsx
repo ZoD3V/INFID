@@ -63,7 +63,7 @@ const ResearchFellowSection = ({ initialData }: { initialData: Research[] }) => 
                             <ProfileCard
                                 key={profile.id || index}
                                 name={profile.name}
-                                title={profile.name}
+                                title={profile.occupation}
                                 image={profile.image ?? ''}
                                 onItemClick={() => handlePersonClick(profile)}
                             />
