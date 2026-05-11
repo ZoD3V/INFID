@@ -19,6 +19,7 @@ export default function SearchModal() {
     const [keyword, setKeyword] = useState('');
     const [results, setResults] = useState<GlobalSearch | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [hasSearched, setHasSearched] = useState(false);
     const locale = useLocale();
     const router = useRouter();
 
@@ -79,10 +80,17 @@ export default function SearchModal() {
     useEffect(() => {
         if (!isOpen) return;
 
+        if (keyword.trim()) {
+            setIsLoading(true);
+            setHasSearched(false);
+        } else {
+            setIsLoading(false);
+            setResults(null);
+            setHasSearched(false);
+        }
+
         const timer = setTimeout(async () => {
             if (keyword.trim() && keyword.trim().length > 4) {
-                setIsLoading(true);
-
                 try {
                     const res = await apiRequest.get<GlobalSearch>(API_ENDPOINTS.globalSearch, {
                         params: {
@@ -93,11 +101,15 @@ export default function SearchModal() {
                     setResults(res.data ?? null);
                 } catch (error) {
                     console.error(error);
+                    setResults(null);
                 } finally {
                     setIsLoading(false);
+                    setHasSearched(true);
                 }
-            } else {
+            } else if (keyword.trim()) {
+                setIsLoading(false);
                 setResults(null);
+                setHasSearched(false);
             }
         }, 1000);
 
@@ -109,6 +121,7 @@ export default function SearchModal() {
             setKeyword('');
             setResults(null);
             setIsLoading(false);
+            setHasSearched(false);
         }
     }, [isOpen]);
 
@@ -186,13 +199,12 @@ export default function SearchModal() {
     const partners = results?.partners ?? [];
     const members = results?.members ?? [];
 
-    const isEmpty =
+    const isApiEmpty =
         posts.length === 0 &&
         jobs.length === 0 &&
         peopleList.length === 0 &&
         partners.length === 0 &&
-        members.length === 0 &&
-        filteredNavItems.length === 0;
+        members.length === 0;
 
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -251,31 +263,12 @@ export default function SearchModal() {
                     <ScrollArea.Root className='max-h-[60vh] overflow-y-auto'>
                         <ScrollArea.Viewport className='h-full w-full pr-2' role='listbox' aria-label='Search results'>
                             <div className='space-y-4 px-2 py-4'>
-                                {/* --- LOADING STATE --- */}
-                                {isLoading && (
-                                    <div
-                                        className='flex flex-col items-center justify-center py-20 text-slate-500'
-                                        role='status'
-                                        aria-live='polite'>
-                                        <div className='flex items-baseline gap-1 text-slate-500'>
-                                            <p className='text-base font-medium'>Loading</p>
-                                            <div
-                                                className='loading-dots flex gap-0.5 text-xl leading-none font-bold'
-                                                aria-hidden='true'>
-                                                <span>.</span>
-                                                <span>.</span>
-                                                <span>.</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
 
-                                {!isLoading && filteredNavItems.length > 0 && (
+                                {filteredNavItems.length > 0 && !isLoading && (
                                     <section>
                                         <div className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
                                             {locale == 'id' ? 'Halaman' : 'Pages'}
                                         </div>
-
                                         <ul role='listbox' className='mt-1'>
                                             {filteredNavItems.map((group, idx) => {
                                                 const renderButton = (title: string, href: string, key: string) => (
@@ -316,10 +309,26 @@ export default function SearchModal() {
                                     </section>
                                 )}
 
-                                {/* --- API RESULTS --- */}
-                                {!isLoading && keyword.length > 3 && (
+                                {isLoading && (
+                                    <div
+                                        className='flex flex-col items-center justify-center py-10 text-slate-500'
+                                        role='status'
+                                        aria-live='polite'>
+                                        <div className='flex items-baseline gap-1 text-slate-500'>
+                                            <p className='text-base font-medium'>Loading</p>
+                                            <div
+                                                className='loading-dots flex gap-0.5 text-xl leading-none font-bold'
+                                                aria-hidden='true'>
+                                                <span>.</span>
+                                                <span>.</span>
+                                                <span>.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {!isLoading && hasSearched && keyword.length > 4 && (
                                     <div className='space-y-4' role='group' aria-label='Search Results'>
-                                        {/* --- POSTS --- */}
                                         {posts.length > 0 && (
                                             <section aria-labelledby='section-posts'>
                                                 <div
@@ -360,7 +369,6 @@ export default function SearchModal() {
                                             </section>
                                         )}
 
-                                        {/* --- PEOPLE --- */}
                                         {peopleList.length > 0 && (
                                             <section aria-labelledby='section-people'>
                                                 <div
@@ -392,7 +400,6 @@ export default function SearchModal() {
                                             </section>
                                         )}
 
-                                        {/* --- PARTNERS --- */}
                                         {partners.length > 0 && (
                                             <section aria-labelledby='section-partners'>
                                                 <div
@@ -419,7 +426,6 @@ export default function SearchModal() {
                                             </section>
                                         )}
 
-                                        {/* --- MEMBERS --- */}
                                         {members.length > 0 && (
                                             <section aria-labelledby='section-members'>
                                                 <div
@@ -453,7 +459,7 @@ export default function SearchModal() {
                                     </div>
                                 )}
 
-                                {keyword && !isLoading && isEmpty && (
+                                {!isLoading && hasSearched && isApiEmpty && filteredNavItems.length === 0 && (
                                     <p
                                         className='mx-4 mt-2 py-10 text-center text-gray-500'
                                         role='status'
