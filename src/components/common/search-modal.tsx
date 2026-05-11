@@ -94,8 +94,9 @@ export default function SearchModal() {
                 try {
                     const res = await apiRequest.get<GlobalSearch>(API_ENDPOINTS.globalSearch, {
                         params: {
+                            search: keyword,
                             limit: 3,
-                            search: keyword
+                            limit_post: 10
                         }
                     });
                     setResults(res.data ?? null);
@@ -263,7 +264,6 @@ export default function SearchModal() {
                     <ScrollArea.Root className='max-h-[60vh] overflow-y-auto'>
                         <ScrollArea.Viewport className='h-full w-full pr-2' role='listbox' aria-label='Search results'>
                             <div className='space-y-4 px-2 py-4'>
-
                                 {filteredNavItems.length > 0 && !isLoading && (
                                     <section>
                                         <div className='sticky top-0 z-10 bg-white px-2 py-1 text-xs font-semibold text-gray-400 uppercase'>
