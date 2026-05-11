@@ -1,3 +1,5 @@
+import { CategoryTranslation } from './posts';
+
 interface PostTranslation {
     id: number;
     post_id: number;
@@ -15,7 +17,7 @@ interface Category {
 interface Post {
     id: number;
     category_id: number;
-    category: Category;
+    category?: Category | CategoryTranslation[];
     translations: PostTranslation[];
 }
 

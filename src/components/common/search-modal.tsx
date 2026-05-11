@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
 import { apiRequest } from '@/lib/api-request';
+import { getDisplayCategoryName, getLangText } from '@/lib/utils';
 import { GlobalSearch } from '@/types/global-search';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
@@ -332,6 +333,10 @@ export default function SearchModal() {
                                                             post.translations?.find((t) => t.language === locale) ||
                                                             post.translations?.find((t) => t.language === 'id') ||
                                                             post.translations?.[0];
+
+                                                        const categoryName = Array.isArray(post.category)
+                                                            ? getDisplayCategoryName(getLangText(post.category, locale))
+                                                            : post.category?.name || '';
                                                         const title = postTrans?.title || '';
                                                         return (
                                                             <li key={`post-${post.id}`} role='none'>
@@ -340,7 +345,10 @@ export default function SearchModal() {
                                                                     role='option'
                                                                     aria-selected='false'
                                                                     onClick={() => handleNavigate('post', post)}
-                                                                    className='flex w-full cursor-pointer items-center rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                    className='flex w-full cursor-pointer flex-col items-start rounded-lg px-2 py-2 text-left text-sm text-slate-700 transition-colors select-none hover:bg-slate-100 focus:bg-slate-100 focus:outline-none'>
+                                                                    <span className='text-xs text-slate-400'>
+                                                                        {categoryName}
+                                                                    </span>
                                                                     <span className='line-clamp-1'>
                                                                         {highlightText(title, keyword)}
                                                                     </span>
