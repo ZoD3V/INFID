@@ -98,7 +98,7 @@ export default function SearchModal() {
             } else {
                 setResults(null);
             }
-        }, 300);
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, [keyword, isOpen]);
