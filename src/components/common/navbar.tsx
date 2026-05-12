@@ -228,7 +228,7 @@ export function Navbar({ className = '' }: { className?: string }) {
                                                         key={child.title}
                                                         href={child.href}
                                                         role='menuitem'
-                                                        onClick={handleItemClick}
+                                                        onClick={handleItemClick} 
                                                         className={cn(
                                                             'block px-4 py-2 text-sm font-medium transition-all duration-200 outline-none',
 
@@ -355,7 +355,7 @@ export function Navbar({ className = '' }: { className?: string }) {
                                     {/* Footer Sidebar */}
                                     <div className='border-t p-5'>
                                         <Button asChild className='w-full gap-2' aria-label={t('join_community')}>
-                                            <Link href='/contact-us'>
+                                            <Link href="/contact-us">
                                                 {t('contact')} <ExternalLink className='h-4 w-4' aria-hidden='true' />
                                             </Link>
                                         </Button>
