@@ -11,6 +11,7 @@ import { ArticleShareBar } from '@/components/common/article-share-bar';
 import PageHeader from '@/components/common/background-section';
 import CommentSection from '@/components/common/comment-article';
 import { LatestArticleCard } from '@/components/common/latest-article-card';
+import OptimizedImage from '@/components/common/optimized-image';
 import { Button } from '@/components/ui/button';
 import { Link as Navigate, useRouter } from '@/i18n/navigation';
 import { API_ENDPOINTS } from '@/lib/api-endpoints';
@@ -21,7 +22,6 @@ import { Post, PostTranslation, Tags } from '@/types/posts';
 import { Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import OptimizedImage from '@/components/common/optimized-image';
 
 interface Props {
     initialData: Post | null;
@@ -207,6 +207,7 @@ const DetailNewsClient = ({ initialData, locale, postId }: Props) => {
                             src={initialData?.cover || '/images/placeholder-square.png'}
                             alt={translation?.title || 'Cover'}
                             fill={false}
+                            className='h-auto w-full rounded-lg object-cover'
                         />
 
                         {initialData?.youtube_link && (
