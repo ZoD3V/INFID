@@ -10,14 +10,14 @@ interface PostTranslation {
 
 interface Category {
     id: number;
-    name: string;
+    name: CategoryTranslation[];
     slug: string;
 }
 
 interface Post {
     id: number;
     category_id: number;
-    category?: CategoryTranslation[];
+    category?: Category;
     translations: PostTranslation[];
 }
 

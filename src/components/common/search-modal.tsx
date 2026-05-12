@@ -343,9 +343,11 @@ export default function SearchModal() {
                                                             post.translations?.find((t) => t.language === 'id') ||
                                                             post.translations?.[0];
 
-                                                        const categoryName = Array.isArray(post.category)
-                                                            ? getDisplayCategoryName(getLangText(post.category, locale))
-                                                            : post.category?.name || '';
+                                                        const translatedName = getLangText(
+                                                            post?.category?.name,
+                                                            locale
+                                                        );
+                                                        const categoryName = getDisplayCategoryName(translatedName);
                                                         const title = postTrans?.title || '';
                                                         return (
                                                             <li key={`post-${post.id}`} role='none'>
