@@ -17,7 +17,7 @@ interface Category {
 interface Post {
     id: number;
     category_id: number;
-    category?: Category | CategoryTranslation[];
+    category?: CategoryTranslation[];
     translations: PostTranslation[];
 }
 
