@@ -23,7 +23,7 @@ const RealImpactSection = ({ programData }: { programData: Post[] }) => {
     const b = useTranslations('button');
     const c = useTranslations('card');
     const videoId = '6KJBSilT76k';
-    const startTime = 10;
+    const startTime = 0;
     const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startTime}`;
     const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
     const locale = useLocale();
